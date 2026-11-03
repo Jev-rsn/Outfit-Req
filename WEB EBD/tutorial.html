@@ -2,7 +2,10 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>Outfit Req — Panduan & Tutorial Penggunaan</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -782,7 +785,8 @@
           padding: 8px 14px;
           font-size: 12.5px;
         }
-        .user-pill, .guest-pill {
+        .user-pill,
+        .guest-pill {
           padding: 4px 10px 4px 5px;
           font-size: 12px;
         }
@@ -826,7 +830,7 @@
           transform: translateY(0);
         }
         .tutorial-popup-card::before {
-          content: '';
+          content: "";
           display: block;
           width: 42px;
           height: 4.5px;
@@ -1610,7 +1614,7 @@
         transform: translateY(-1px);
       }
       .mobile-nav-tab-item.active::after {
-        content: '';
+        content: "";
         display: block;
         width: 14px;
         height: 2.5px;
@@ -1625,7 +1629,9 @@
       }
       @media (max-width: 768px) {
         .tutorial-main {
-          padding-bottom: calc(72px + env(safe-area-inset-bottom, 12px)) !important;
+          padding-bottom: calc(
+            72px + env(safe-area-inset-bottom, 12px)
+          ) !important;
         }
       }
     </style>
@@ -1676,14 +1682,26 @@
 
       <div class="nav-right">
         <!-- Keadaan A: Akun Customer Terdaftar (Login) -> Buka Halaman Akun -->
-        <a href="account.html" class="user-pill" id="customerPill" style="text-decoration: none;" title="Buka Halaman Akun Saya">
+        <a
+          href="account.html"
+          class="user-pill"
+          id="customerPill"
+          style="text-decoration: none"
+          title="Buka Halaman Akun Saya"
+        >
           <span class="user-avatar" id="customerAvatar">C</span>
           <span id="customerNavName">Halo, Customer</span>
           <span class="verified-dot" title="Akun Terverifikasi"></span>
         </a>
 
         <!-- Keadaan B: Pengunjung Tamu (Belum Login) -> Klik untuk Masuk Gmail -->
-        <div class="guest-pill" id="guestPill" onclick="triggerGmailLoginTutorial()" style="cursor: pointer;" title="Klik untuk Masuk via Gmail">
+        <div
+          class="guest-pill"
+          id="guestPill"
+          onclick="triggerGmailLoginTutorial()"
+          style="cursor: pointer"
+          title="Klik untuk Masuk via Gmail"
+        >
           <svg
             width="14"
             height="14"
@@ -1699,11 +1717,7 @@
         </div>
 
         <!-- Tombol Masuk / Daftar jika belum login -->
-        <a
-          href="login.html?mode=login"
-          class="btn-nav-auth"
-          id="navAuthBtn"
-        >
+        <a href="login.html?mode=login" class="btn-nav-auth" id="navAuthBtn">
           <span>Masuk / Daftar</span>
         </a>
 
@@ -1744,14 +1758,12 @@
           <circle cx="12" cy="12" r="10" />
           <path d="M12 16v-4M12 8h.01" />
         </svg>
-        <span>PANDUAN SISTEM 2 KOMPONEN UTAMA • UNTUK SEMUA PENGGUNA</span>
+        <span>Tutor dekk???</span>
       </div>
 
       <h1 class="hero-title">Panduan Penggunaan Website</h1>
       <p class="hero-subtitle" id="heroSubtitle">
-        Selamat datang di <strong>Outfit Req</strong>! Platform rekomendasi
-        busana dan analisis gaya kepribadian. Silakan tekan salah satu kartu di
-        bawah untuk membuka panduan tutorial.
+        Selamat datang di <strong>KOPDES</strong> selamat berbelanja.
       </p>
 
       <!-- Informasi Komparasi Akses Akun -->
@@ -1769,10 +1781,7 @@
             <path d="m9 12 2 2 4-4" />
           </svg>
           <span
-            >Akses Tamu (Tanpa Login):
-            <strong
-              >Eksplorasi Beranda, Kuis Personality & Katalog Belanja</strong
-            ></span
+            >Akses untuk fitur biasa <strong>Benefit fitur biasa </strong></span
           >
         </div>
         <div class="matrix-pill">
@@ -1789,7 +1798,7 @@
             />
           </svg>
           <span
-            >Benefit Akun Terdaftar:
+            >Benefit Akun Terdaftar
             <strong
               >10 Kuota Tanya Gaya Gratis Tiap 3 Hari & Simpan Hasil</strong
             ></span
@@ -1829,12 +1838,10 @@
         <div class="choice-body">
           <h3>Cara Menggunakan Fitur Personality</h3>
           <div class="choice-tagline">
-            Panduan Tes Gaya, Input Siluet, & Analisis DNA Gaya
+            fitur apa aja 
           </div>
           <p class="choice-desc">
-            Panduan langkah demi langkah cara membuka menu kuis di web, mengisi
-            preferensi acara & warna, memasukkan postur tubuh secara privat, dan
-            membaca palet gayamu.
+            fungsi fitur atau benefit yang di dapat apa akja 
           </p>
         </div>
         <div class="choice-footer">
@@ -1887,9 +1894,7 @@
             Panduan Filter Acara, Kartu Kipas, & Link Belanja
           </div>
           <p class="choice-desc">
-            Panduan langkah demi langkah cara memfilter tema busana di Beranda,
-            memilih kartu kipas outfit interaktif, memanfaatkan kuota tanya AI,
-            dan belanja produk resmi.
+            Mendapatkan benefit apa aja??
           </p>
         </div>
         <div class="choice-footer">
@@ -1936,7 +1941,7 @@
       <h3 class="prompt-title">Pilih Komponen Tutorial</h3>
       <p class="prompt-text">
         Silakan <strong>tekan salah satu card di atas</strong> untuk memunculkan
-        pop-up panduan langkah demi langkah.
+        pop-up panduan langkah demi langkah. 
       </p>
     </div>
 
@@ -2026,9 +2031,7 @@
               Cara Menggunakan Fitur Personality di Web
             </h2>
             <p class="view-desc">
-              Panduan langkah demi langkah cara membuka menu kuis di web,
-              mengisi preferensi acara & warna, memasukkan postur secara privat,
-              dan membaca palet gayamu.
+             benefit apa aja??
             </p>
           </div>
           <div
@@ -2079,9 +2082,7 @@
               </div>
             </div>
             <p class="popup-step-desc">
-              Pada Beranda Utama (<strong>Main.dc.html</strong>), temukan dan
-              klik tombol emas bertuliskan <strong>"Tes Personality"</strong> di
-              bawah judul utama, atau pilih mode Personality.
+              gatau ngapain lagi klik aja gausah banyak tanya.
             </p>
             <div class="popup-step-action">
               <strong>Aksi di Web:</strong> Klik tombol emas
@@ -2094,16 +2095,14 @@
             <div class="popup-step-header">
               <div class="popup-step-num">2</div>
               <div>
-                <span class="ui-cue-pill">Form Kuis Interaktif</span>
+                <span class="ui-cue-pill">Room chat </span>
                 <h4 class="popup-step-title">
-                  Jawab Kuis Preferensi Acara & Warna
+                  Jawab pertanyaan dasar
                 </h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              Pilih jawaban yang paling mencerminkan gaya harianmu: suasana
-              acara yang sering didatangi (kantor, santai, pesta), warna favorit
-              (monokrom, netral, earthy, bold), dan siluet busana yang disukai.
+              kalo jawaban salah remedial.
             </p>
             <div class="popup-step-action">
               <strong>Aksi di Web:</strong> Klik opsi kartu jawaban yang paling
@@ -2115,14 +2114,12 @@
             <div class="popup-step-header">
               <div class="popup-step-num">3</div>
               <div>
-                <span class="ui-cue-pill">Input Terenkripsi & Privat</span>
-                <h4 class="popup-step-title">Masukkan Postur & Siluet Tubuh</h4>
+                <span class="ui-cue-pill">Room Chat</span>
+                <h4 class="popup-step-title">Sesuaikan dengan kebutuhan</h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              Ketik estimasi tinggi badan (cm) dan berat badan (kg), atau pilih
-              siluet bentuk tubuhmu. Data ini dijamin privat dan hanya diolah
-              algoritma web untuk menentukan proporsi busana.
+             terserah.
             </p>
             <div class="popup-step-action">
               <strong>Aksi di Web:</strong> Isi kolom angka tinggi/berat badan
@@ -2137,15 +2134,12 @@
               <div>
                 <span class="ui-cue-pill">Hasil Analisis Web</span>
                 <h4 class="popup-step-title">
-                  Dapatkan DNA Gaya & Palet Warna
+                  Mendapatkan rekomendasi 
                 </h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              Layar website akan langsung menampilkan rangkuman tipe gaya
-              dominanmu (Classic, Minimalist, Chic, atau Streetwear),
-              rekomendasi potongan siluet pakaian, dan kombinasi palet warna
-              busana.
+              Web akan menampilkan rekomendasi outfit yang diinginkan 
             </p>
             <div class="popup-step-action">
               <strong>Hasil di Web:</strong> Tinjau tipe gaya dominanmu, panduan
@@ -2157,16 +2151,14 @@
             <div class="popup-step-header">
               <div class="popup-step-num">5</div>
               <div>
-                <span class="ui-cue-pill">Asisten AI & Akun Profil</span>
+                <span class="ui-cue-pill">selesai</span>
                 <h4 class="popup-step-title">
-                  Konsultasi AI & Simpan ke Profil
+                  silahkan menikmati sampai batas free habis 
                 </h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              Tanyakan tips mix & match ke asisten tanya gaya AI. Jika kamu
-              masuk (login), hasil analisis gaya ini otomatis tersimpan di menu
-              akun profilmu di pojok kanan atas.
+              kalo free habis langsung aja premium, gausah nunggu lagi. 
             </p>
             <div class="popup-step-action">
               <strong>Aksi di Web:</strong> Klik ikon profil di pojok kanan atas
@@ -2174,202 +2166,6 @@
             </div>
           </div>
         </div>
-
-        <!-- 4 Tipe Gaya Utama Outfit Req -->
-        <div class="popup-section-heading">
-          <span class="popup-section-badge">TIPE GAYA</span>
-          <span>4 Karakter Gaya Dominan Busana</span>
-        </div>
-
-        <div class="popup-style-grid">
-          <div class="popup-style-box">
-            <div class="popup-style-title">
-              <span>Classic Style</span>
-              <span class="popup-style-badge">Timeless & Rapi</span>
-            </div>
-            <p class="popup-style-text">
-              Gaya abadi yang mengutamakan potongan pakaian tailored, bahan
-              berkualitas tinggi, dan siluet profesional yang berwibawa di
-              setiap momen.
-            </p>
-            <div class="popup-palette-row">
-              <span>Palet:</span>
-              <span
-                class="popup-color-dot"
-                style="background: #1b2a47"
-                title="Navy"
-              ></span>
-              <span
-                class="popup-color-dot"
-                style="background: #f4efe6"
-                title="Cream"
-              ></span>
-              <span
-                class="popup-color-dot"
-                style="background: #2b2b2b"
-                title="Charcoal"
-              ></span>
-              <span
-                class="popup-color-dot"
-                style="background: #ffffff"
-                title="Putih"
-              ></span>
-              <span>(Navy, Cream, Charcoal, Putih)</span>
-            </div>
-          </div>
-
-          <div class="popup-style-box">
-            <div class="popup-style-title">
-              <span>Minimalist Style</span>
-              <span class="popup-style-badge">Clean & Fungsional</span>
-            </div>
-            <p class="popup-style-text">
-              Fokus pada kesederhanaan esensial, garis potongan bersih tanpa
-              motif berlebih, kain nyaman, dan kesan effortless yang selalu
-              modern.
-            </p>
-            <div class="popup-palette-row">
-              <span>Palet:</span>
-              <span
-                class="popup-color-dot"
-                style="background: #111111"
-                title="Hitam"
-              ></span>
-              <span
-                class="popup-color-dot"
-                style="background: #e8e4dc"
-                title="Off-White"
-              ></span>
-              <span
-                class="popup-color-dot"
-                style="background: #8f8b82"
-                title="Warm Grey"
-              ></span>
-              <span
-                class="popup-color-dot"
-                style="background: #6d5f53"
-                title="Taupe"
-              ></span>
-              <span>(Monokrom, Warm Grey, Earthy)</span>
-            </div>
-          </div>
-
-          <div class="popup-style-box">
-            <div class="popup-style-title">
-              <span>Chic Style</span>
-              <span class="popup-style-badge">Modis & Statement</span>
-            </div>
-            <p class="popup-style-text">
-              Tampil berani dengan sentuhan fashion-forward, perpaduan tekstur
-              elegan, aksesori standout, dan siluet dinamis yang menarik
-              perhatian positif.
-            </p>
-            <div class="popup-palette-row">
-              <span>Palet:</span>
-              <span
-                class="popup-color-dot"
-                style="background: #6d001a"
-                title="Burgundy"
-              ></span>
-              <span
-                class="popup-color-dot"
-                style="background: #134e4a"
-                title="Emerald"
-              ></span>
-              <span
-                class="popup-color-dot"
-                style="background: #b8860b"
-                title="Gold"
-              ></span>
-              <span
-                class="popup-color-dot"
-                style="background: #c2410c"
-                title="Terracotta"
-              ></span>
-              <span>(Burgundy, Emerald, Gold, Terracotta)</span>
-            </div>
-          </div>
-
-          <div class="popup-style-box">
-            <div class="popup-style-title">
-              <span>Streetwear Style</span>
-              <span class="popup-style-badge">Urban & Ekspresif</span>
-            </div>
-            <p class="popup-style-text">
-              Kenyamanan santai berjiwa muda dengan siluet oversized, paduan
-              sneakers ikonik, outer unik, dan vibe kasual perkotaan yang
-              ekspresif.
-            </p>
-            <div class="popup-palette-row">
-              <span>Palet:</span>
-              <span
-                class="popup-color-dot"
-                style="background: #171717"
-                title="Hitam"
-              ></span>
-              <span
-                class="popup-color-dot"
-                style="background: #556b2f"
-                title="Olive"
-              ></span>
-              <span
-                class="popup-color-dot"
-                style="background: #c3b091"
-                title="Khaki"
-              ></span>
-              <span
-                class="popup-color-dot"
-                style="background: #e11d48"
-                title="Aksen Merah"
-              ></span>
-              <span>(Hitam, Olive, Khaki, Bold Accent)</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tips Siluet Highlight Card -->
-        <div class="tips-highlight-card">
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="var(--burgundy)"
-            stroke-width="2"
-            style="min-width: 22px; margin-top: 1px"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 16v-4M12 8h.01" />
-          </svg>
-          <div>
-            <strong>Tips Kunci Siluet Tubuh:</strong> Jika atasan berpotongan
-            longgar/oversized, seimbangkan dengan celana yang lebih ramping atau
-            berpotongan lurus. Sebaliknya, jika mengenakan celana wide-leg,
-            pilih atasan yang lebih pas di badan (fitted) agar postur tetap
-            proporsional.
-          </div>
-        </div>
-
-        <!-- Takeaway Catatan Penting -->
-        <div class="takeaway-card">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="var(--burgundy)"
-            stroke-width="2"
-            style="min-width: 20px; margin-top: 2px"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 16v-4M12 8h.01" />
-          </svg>
-          <div>
-            <strong>Catatan untuk Pengguna Tamu:</strong> Anda dapat mencoba
-            kuis personality langsung tanpa login. Untuk menyimpan riwayat hasil
-            tes dan membuka fitur lanjutan, Anda dapat mendaftar akun gratis
-            kapan pun.
-          </div>
         </div>
       </section>
 
@@ -2384,34 +2180,39 @@
       >
         <div class="view-header-card">
           <div class="view-header-left">
-            <span class="view-badge">PANDUAN FITUR 2 • REKOMENDASI OUTFIT</span>
+            <span class="view-badge">Tutor dek???</span>
             <h2 class="view-title">
               Cara Menggunakan Fitur Rekomendasi di Web
             </h2>
-            <p class="view-desc">
-              Panduan langkah demi langkah cara memfilter tema busana di
-              Beranda, memilih deretan kartu kipas interaktif, kuota tanya gaya
-              AI, dan belanja via link resmi.
-            </p>
-            <div style="margin-top: 12px;">
-              <a 
-                href="rekomendasi.html" 
+            <p class="view-desc">keterangan ......</p>
+            <div style="margin-top: 12px">
+              <a
+                href="rekomendasi.html"
                 style="
-                  display: inline-flex; 
-                  align-items: center; 
-                  gap: 8px; 
-                  background: #6D001A; 
-                  color: #FFF8E7; 
-                  padding: 8px 18px; 
-                  border-radius: 999px; 
-                  font-size: 12px; 
-                  font-weight: 700; 
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 8px;
+                  background: #6d001a;
+                  color: #fff8e7;
+                  padding: 8px 18px;
+                  border-radius: 999px;
+                  font-size: 12px;
+                  font-weight: 700;
                   text-decoration: none;
-                  box-shadow: 0 4px 12px rgba(109,0,26,0.2);
+                  box-shadow: 0 4px 12px rgba(109, 0, 26, 0.2);
                 "
               >
                 <span>Buka Galeri Rekomendasi</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </a>
             </div>
           </div>
@@ -2465,14 +2266,10 @@
               </div>
             </div>
             <p class="popup-step-desc">
-              Pada Beranda Utama (<strong>Main.dc.html</strong>), klik tombol
-              <strong>"Lihat Rekomendasi"</strong> di bawah judul atau gulir ke
-              bawah ke panggung kartu kipas busana interaktif.
+              Klik aja 
             </p>
             <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik tombol
-              <strong>"Lihat Rekomendasi"</strong> untuk mengaktifkan galeri
-              kurasi outfit berdasarkan tema acara.
+             ada fitur simpan tuh cobain aja 
             </div>
           </div>
 
@@ -2485,16 +2282,10 @@
               </div>
             </div>
             <p class="popup-step-desc">
-              Klik tombol filter kategori di atas panggung busana:
-              <strong>Kasual</strong> (hangout santai),
-              <strong>Kerja</strong> (kantor / profesional),
-              <strong>Pesta / Kondangan</strong> (acara formal), atau
-              <strong>Olahraga</strong> (sporty).
+              sesuaikan aja kamu mau kemana, kalo gaada gausah ngelunjak 
             </p>
             <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Tekan salah satu tombol pill filter
-              acara. Deretan judul dan koleksi kartu busana otomatis berganti
-              seketika.
+              klik aja filter nya nanti auto kok
             </div>
           </div>
 
@@ -2502,21 +2293,17 @@
             <div class="popup-step-header">
               <div class="popup-step-num">3</div>
               <div>
-                <span class="ui-cue-pill">Panggung Kartu Kipas</span>
+                <span class="ui-cue-pill">tampilan katalog</span>
                 <h4 class="popup-step-title">
                   Tekan Kartu Outfit yang Diinginkan
                 </h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              Di layar tengah terdapat 9 kartu busana berbentuk kipas.
-              <strong>Tekan/klik kartu foto outfit mana saja</strong> yang ingin
-              kamu lihat detail tampilannya.
+              udah cuma foto aja, makanya premium biar bisa dapat fitur lainnya 
             </p>
             <div class="popup-step-action">
-              <strong>Respon di Web:</strong> Kartu yang diklik langsung
-              bergeser ke tengah (Featured Look) dengan bingkai burgundy emas
-              dan menampilkan rincian outfit.
+              kepoo, makanya premium dulu 
             </div>
           </div>
 
@@ -2524,21 +2311,17 @@
             <div class="popup-step-header">
               <div class="popup-step-num">4</div>
               <div>
-                <span class="ui-cue-pill">Menu Akun & Chat AI</span>
+                <span class="ui-cue-pill">menu apa ini</span>
                 <h4 class="popup-step-title">
-                  Gunakan Asisten AI Tanya Gaya (Kuota Gratis)
+                  gatau lupa 
                 </h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              Butuh alternatif warna atau saran alas kaki yang cocok? Buka menu
-              akun di pojok kanan atas untuk melihat sisa kuota tanya gaya AI.
-              Pengguna terdaftar mendapat <strong>10 kuota gratis</strong> yang
-              di-reset tiap 3 hari.
+              Belum kepikiran mau ngapain 
             </p>
             <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik menu profil akun di pojok kanan
-              atas &rarr; ajukan pertanyaan gaya seputar outfit yang kamu pilih.
+              <strong>nanti aja dipikirinnya </strong> 
             </div>
           </div>
 
@@ -2546,21 +2329,17 @@
             <div class="popup-step-header">
               <div class="popup-step-num">5</div>
               <div>
-                <span class="ui-cue-pill">Toko Online Resmi</span>
+                <span class="ui-cue-pill">deskripsi</span>
                 <h4 class="popup-step-title">
-                  Beli Outfit via Link Belanja Langsung
+                  Khusus premium ini
                 </h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              Setiap item pakaian (atasan, celana/rok, sepatu, aksesoris)
-              dilengkapi link belanja resmi ke toko e-commerce mitra (Zalora,
-              Tokopedia, Uniqlo, Shopee, dsb).
+              kalo penasaran harus premium dulu
             </p>
             <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik tautan produk pada rincian
-              outfit untuk langsung diarahkan ke halaman checkout toko online
-              resmi.
+              <strong>Aksi di Web:</strong> Klik upgrade akun ke premium di bagian akun
             </div>
           </div>
         </div>
@@ -2732,8 +2511,8 @@
               stroke="currentColor"
               stroke-width="2"
             >
-              <circle cx="11" cy="11" r="8"/>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
             <span>Buka Galeri Rekomendasi</span>
           </a>
@@ -3924,7 +3703,11 @@
             const raw = localStorage.getItem("outfit_req_user");
             if (raw) {
               const parsed = JSON.parse(raw);
-              if (parsed && parsed.isLoggedIn && parsed.email !== 'customer@gmail.com') {
+              if (
+                parsed &&
+                parsed.isLoggedIn &&
+                parsed.email !== "customer@gmail.com"
+              ) {
                 customer = parsed;
               }
             }
@@ -3975,15 +3758,15 @@
       }
 
       // Autoconnect Google Gmail Login untuk Tamu di Halaman Panduan
-      window.triggerGmailLoginTutorial = async function() {
-        if (typeof showToastMessage === 'function') {
+      window.triggerGmailLoginTutorial = async function () {
+        if (typeof showToastMessage === "function") {
           showToastMessage("Menghubungkan Akun Google Gmail...");
         }
         if (window.supabaseClient) {
           try {
             await window.supabaseClient.auth.signInWithOAuth({
-              provider: 'google',
-              options: { redirectTo: window.location.href }
+              provider: "google",
+              options: { redirectTo: window.location.href },
             });
           } catch (e) {}
         }
@@ -3991,31 +3774,35 @@
         let custName = "Customer";
         let custEmail = "customer@outfitreq.id";
         try {
-          const regMap = JSON.parse(localStorage.getItem('outfit_req_registered_customers') || '{}');
+          const regMap = JSON.parse(
+            localStorage.getItem("outfit_req_registered_customers") || "{}",
+          );
           const keys = Object.keys(regMap);
           if (keys.length > 0) {
             custEmail = keys[keys.length - 1];
-            custName = regMap[custEmail]?.name || custEmail.split('@')[0];
+            custName = regMap[custEmail]?.name || custEmail.split("@")[0];
           }
         } catch (e) {}
 
         const user = {
           id: "usr-" + Date.now(),
           name: custName,
-          username: "@" + custName.toLowerCase().replace(/[^a-z0-9_]/g, ''),
+          username: "@" + custName.toLowerCase().replace(/[^a-z0-9_]/g, ""),
           email: custEmail,
           tier: "free",
           isLoggedIn: true,
-          verifiedAt: new Date().toISOString()
+          verifiedAt: new Date().toISOString(),
         };
         try {
           localStorage.setItem("outfit_req_user", JSON.stringify(user));
         } catch (e) {}
-        if (typeof syncUserInfo === 'function') {
+        if (typeof syncUserInfo === "function") {
           syncUserInfo();
         }
-        if (typeof showToastMessage === 'function') {
-          showToastMessage("Berhasil Masuk via Gmail! Status Akun: Free Member.");
+        if (typeof showToastMessage === "function") {
+          showToastMessage(
+            "Berhasil Masuk via Gmail! Status Akun: Free Member.",
+          );
         }
       };
 
@@ -4086,7 +3873,14 @@
        ======================================================== -->
     <nav class="mobile-bottom-nav">
       <a href="index.html" class="mobile-nav-tab-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
           <polyline points="9 22 9 12 15 12 15 22" />
         </svg>
@@ -4094,7 +3888,14 @@
       </a>
 
       <a href="rekomendasi.html" class="mobile-nav-tab-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <circle cx="11" cy="11" r="8" />
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
@@ -4102,7 +3903,14 @@
       </a>
 
       <a href="tutorial.html" class="mobile-nav-tab-item active">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <circle cx="12" cy="12" r="10" />
           <path d="M12 16v-4" />
           <path d="M12 8h.01" />
@@ -4111,7 +3919,14 @@
       </a>
 
       <a href="account.html" class="mobile-nav-tab-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
         </svg>
