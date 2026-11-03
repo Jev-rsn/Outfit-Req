@@ -281,7 +281,7 @@
          ======================================================== */
       .dual-component-grid {
         max-width: 1040px;
-        margin: 0 auto 36px;
+        margin: 0 auto 60px;
         padding: 0 24px;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -388,7 +388,14 @@
       }
 
       /* ========================================================
-         MAIN CONTENT CONTAINER (Muncul Setelah Card Ditekan)
+         MAIN CONTENT CONTAINER (DINONAKTIFKAN: HANYA POP-UP)
+         ======================================================== */
+      .tutorial-select-prompt,
+      .tutorial-main {
+        display: none !important;
+      }
+
+      /*
          ======================================================== */
       .tutorial-select-prompt {
         max-width: 1040px;
@@ -1628,9 +1635,9 @@
         }
       }
       @media (max-width: 768px) {
-        .tutorial-main {
+        .page-footer {
           padding-bottom: calc(
-            72px + env(safe-area-inset-bottom, 12px)
+            80px + env(safe-area-inset-bottom, 12px)
           ) !important;
         }
       }
@@ -1919,6 +1926,7 @@
     <div
       class="tutorial-select-prompt"
       id="tutorialSelectPrompt"
+      style="display: none !important;"
       onclick="openTutorialPopup('personality', event)"
       title="Tekan untuk membuka pop-up tutorial"
       role="button"
@@ -1946,7 +1954,7 @@
     </div>
 
     <!-- Main Content Area: Berisi 2 Komponen Tampilan Awal -->
-    <main class="tutorial-main" id="tutorialMainContainer">
+    <main class="tutorial-main" id="tutorialMainContainer" style="display: none !important;">
       <!-- Segmented Tab Switcher with Close Button -->
       <div class="segmented-control-wrapper">
         <div class="segmented-control" role="tablist">
@@ -3380,10 +3388,7 @@
           if (popupBody) popupBody.scrollTop = 0;
         }
 
-        // Buka juga tampilan tutorial di halaman bawah agar sinkron
-        if (typeof selectTutorialComponent === "function") {
-          selectTutorialComponent(targetComponent, false);
-        }
+        // Tampilan tutorial bawah dinonaktifkan: hanya menggunakan pop-up modal
 
         // Update highlight kartu utama di halaman
         const cardPers = document.getElementById("choiceCardPersonality");
