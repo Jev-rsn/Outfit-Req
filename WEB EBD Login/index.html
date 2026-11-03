@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Outfit Req — Masuk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div id="loader" class="loader">
+      <div class="loader-inner">
+        <div class="loader-brand-wrap">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--burgundy)"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="margin-bottom: 8px"
+          >
+            <path
+              d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
+            ></path>
+          </svg>
+          <div class="loader-logo">outfit req</div>
+        </div>
+        <div class="loader-bar-track">
+          <div class="loader-bar-fill" id="loaderBar"></div>
+        </div>
+        <div class="loader-text">Memuat...</div>
+      </div>
+    </div>
+
+    <!-- Three.js Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <!-- Landing Overlay -->
+    <div id="landing-overlay" class="landing-overlay">
+      <header class="nav-header">
+        <div class="nav-left">
+          <a
+            href="../WEB EBD/index.html"
+            class="nav-link"
+            title="Kembali ke Beranda"
+          >
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="vertical-align: -1px; margin-right: 2px"
+            >
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            <span>BERANDA</span>
+          </a>
+          <a
+            href="../WEB EBD/tutorial.html"
+            class="nav-link"
+            title="Buka Panduan & Tutorial Website"
+            style="margin-left: 14px;"
+          >
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="vertical-align: -1px; margin-right: 2px"
+            >
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 16v-4M12 8h.01"/>
+            </svg>
+            <span>PANDUAN</span>
+          </a>
+        </div>
+        <div class="nav-center">
+          <a
+            href="../WEB EBD/index.html"
+            class="brand-logo"
+            title="Outfit Req — Kembali ke Beranda"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--burgundy)"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="margin-right: 6px; vertical-align: -2px"
+            >
+              <path
+                d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
+              ></path>
+            </svg>
+            <span class="brand-title">outfit req</span>
+          </a>
+        </div>
+        <div class="nav-right">
+          <button
+            class="nav-link nav-cta-btn"
+            aria-label="Account"
+            id="accountBtn"
+          >
+            MASUK / AKUN
+          </button>
+        </div>
+      </header>
+
+      <div class="hero-content">
+        <div class="hero-tagline">
+          <span class="hero-line hero-line-1">Outfit Req</span>
+          <span class="hero-line hero-line-2"
+            >Rekomendasi Gaya & Personality</span
+          >
+          <span class="hero-year">EDISI 2026 </span>
+        </div>
+      </div>
+
+      <div class="scroll-cue" id="scrollCue">
+        <div class="scroll-cue-line"></div>
+        <span class="scroll-cue-text">GULIR KE BAWAH ATAU KLIK MASUK</span>
+      </div>
+
+      <div class="enter-btn-wrap">
+        <button
+          class="enter-btn"
+          id="enterBtn"
+          aria-label="Masuk ke Pengalaman 3D"
+        >
+          <span>JELAJAHI / MASUK</span>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Auth Modal: Double Slider UI (Sign In & Sign Up) -->
+    <div
+      id="login-card"
+      class="login-card"
+      role="dialog"
+      aria-label="Masuk atau Buat Akun"
+      aria-hidden="true"
+    >
+      <div class="double-slider-wrapper">
+        <!-- Top bar navigation -->
+        <div class="login-card-top-nav">
+          <button
+            class="login-back"
+            id="loginBack"
+            aria-label="Kembali ke Ruang 3D"
+            title="Kembali ke Ruang 3D"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            <span>Ruang 3D</span>
+          </button>
+
+          <!-- Mobile Toggle Tabs (Visible on screens <= 768px) -->
+          <div class="mobile-slider-tabs" id="mobileSliderTabs">
+            <button type="button" class="mobile-tab-btn active" id="mobileTabSignIn">
+              MASUK
+            </button>
+            <button type="button" class="mobile-tab-btn" id="mobileTabSignUp">
+              DAFTAR
+            </button>
+          </div>
+
+          <a
+            href="../WEB EBD/index.html"
+            class="login-home-link"
+            title="Kembali ke Beranda Utama Outfit Req"
+          >
+            <span>Beranda Utama</span>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- The Double Slider Container -->
+        <div class="double-slider-container" id="doubleSliderContainer">
+          
+          <!-- SIGN UP / BUAT AKUN (Slides in when right-panel-active is set) -->
+          <div class="form-container sign-up-container">
+            <div class="form-content-inner">
+              <div class="login-header">
+                <div class="login-brand-badge">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--burgundy)"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
+                    ></path>
+                  </svg>
+                  <span class="login-brand">outfit req</span>
+                </div>
+                <h2 class="login-title">Buat Akun Baru</h2>
+                <p class="login-subtitle">
+                  Bergabunglah dengan Outfit Req untuk pengalaman kurasi gaya personal.
+                </p>
+              </div>
+
+              <form id="createForm" class="login-form" novalidate>
+                <div class="form-group" id="createNameGroup">
+                  <label for="createName" class="form-label">Nama Lengkap</label>
+                  <input
+                    type="text"
+                    id="createName"
+                    class="form-input"
+                    placeholder="Nama lengkap Anda"
+                    autocomplete="name"
+                    required
+                  />
+                  <span class="form-error" id="createNameError"></span>
+                </div>
+
+                <div class="form-group" id="createEmailGroup">
+                  <label for="createEmail" class="form-label">Alamat Email</label>
+                  <input
+                    type="email"
+                    id="createEmail"
+                    class="form-input"
+                    placeholder="nama@email.com"
+                    autocomplete="email"
+                    required
+                  />
+                  <span class="form-error" id="createEmailError"></span>
+                </div>
+
+                <div class="form-group" id="createPasswordGroup">
+                  <label for="createPassword" class="form-label">Kata Sandi</label>
+                  <div class="password-wrap">
+                    <input
+                      type="password"
+                      id="createPassword"
+                      class="form-input"
+                      placeholder="Minimal 6 karakter"
+                      autocomplete="new-password"
+                      required
+                      minlength="6"
+                    />
+                    <button
+                      type="button"
+                      class="password-toggle"
+                      id="createPasswordToggle"
+                      aria-label="Tampilkan kata sandi"
+                    >
+                      <svg
+                        class="eye-open"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                      <svg
+                        class="eye-closed"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        style="display: none"
+                      >
+                        <path
+                          d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"
+                        />
+                        <line x1="1" y1="1" x2="23" y2="23" />
+                      </svg>
+                    </button>
+                  </div>
+                  <span class="form-error" id="createPasswordError"></span>
+                </div>
+
+                <button type="submit" class="submit-btn" id="createSubmitBtn">
+                  <span class="submit-text">DAFTAR SEKARANG</span>
+                  <div class="submit-loader" style="display: none">
+                    <div class="spinner"></div>
+                  </div>
+                </button>
+
+                <div
+                  class="form-feedback"
+                  id="createFeedback"
+                  role="alert"
+                  aria-live="polite"
+                ></div>
+              </form>
+
+              <!-- Mobile footer switch -->
+              <div class="mobile-slider-footer">
+                <p>
+                  Sudah memiliki akun?
+                  <button type="button" class="slider-switch-btn" id="backToLogin">
+                    Masuk Sekarang
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SIGN IN / MASUK (Left form slot initially active) -->
+          <div class="form-container sign-in-container">
+            <div class="form-content-inner">
+              <div class="login-header">
+                <div class="login-brand-badge">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--burgundy)"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
+                    ></path>
+                  </svg>
+                  <span class="login-brand">outfit req</span>
+                </div>
+                <h2 class="login-title">Selamat Datang</h2>
+                <p class="login-subtitle">
+                  Masuk untuk menyimpan wishlist dan kurasi gaya personal Anda.
+                </p>
+              </div>
+
+              <form id="loginForm" class="login-form" novalidate>
+                <div class="form-group" id="emailGroup">
+                  <label for="email" class="form-label">Alamat Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    class="form-input"
+                    placeholder="nama@email.com"
+                    autocomplete="email"
+                    required
+                  />
+                  <span class="form-error" id="emailError"></span>
+                </div>
+
+                <div class="form-group" id="passwordGroup">
+                  <label for="password" class="form-label">Kata Sandi</label>
+                  <div class="password-wrap">
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-input"
+                      placeholder="Masukkan kata sandi minimal 6 karakter"
+                      autocomplete="current-password"
+                      required
+                      minlength="6"
+                    />
+                    <button
+                      type="button"
+                      class="password-toggle"
+                      id="passwordToggle"
+                      aria-label="Tampilkan kata sandi"
+                    >
+                      <svg
+                        class="eye-open"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                      <svg
+                        class="eye-closed"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        style="display: none"
+                      >
+                        <path
+                          d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"
+                        />
+                        <line x1="1" y1="1" x2="23" y2="23" />
+                      </svg>
+                    </button>
+                  </div>
+                  <span class="form-error" id="passwordError"></span>
+                </div>
+
+                <div class="form-row">
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      id="remember"
+                      class="checkbox-input"
+                      checked
+                    />
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-text">Ingat saya di perangkat ini</span>
+                  </label>
+                  <a href="#" class="form-link" id="forgotLink">Lupa kata sandi?</a>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                  <span class="submit-text">MASUK SEKARANG</span>
+                  <div class="submit-loader" style="display: none">
+                    <div class="spinner"></div>
+                  </div>
+                </button>
+
+                <div
+                  class="form-feedback"
+                  id="formFeedback"
+                  role="alert"
+                  aria-live="polite"
+                ></div>
+              </form>
+
+              <!-- Mobile footer switch -->
+              <div class="mobile-slider-footer">
+                <p>
+                  Belum memiliki akun?
+                  <button type="button" class="slider-switch-btn" id="createLink">
+                    Daftar Akun Baru
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDING OVERLAY CONTAINER (Desktop Double Slider) -->
+          <div class="overlay-container">
+            <div class="overlay">
+              
+              <!-- Overlay Left: Visible when container has .right-panel-active (Sign Up active) -->
+              <div class="overlay-panel overlay-left">
+                <div class="overlay-brand-icon">
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--cream)"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
+                    ></path>
+                  </svg>
+                </div>
+                <span class="overlay-tag">OUTFIT REQ</span>
+                <h3 class="overlay-title">Sudah Punya Akun?</h3>
+                <p class="overlay-desc">
+                  Masuk kembali untuk melanjutkan eksplorasi gaya, mengelola wishlist, dan melihat kurasi outfit terbaik Anda.
+                </p>
+                <button type="button" class="ghost-btn" id="signInSliderBtn">
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                  </svg>
+                  <span>MASUK SEKARANG</span>
+                </button>
+              </div>
+
+              <!-- Overlay Right: Visible when sign-in is active -->
+              <div class="overlay-panel overlay-right">
+                <div class="overlay-brand-icon">
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--cream)"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
+                    ></path>
+                  </svg>
+                </div>
+                <span class="overlay-tag">OUTFIT REQ</span>
+                <h3 class="overlay-title">Halo, Penggemar Fashion!</h3>
+                <p class="overlay-desc">
+                  Belum memiliki akun? Bergabunglah bersama kami dan temukan rekomendasi padu padan outfit yang dirancang khusus untuk kepribadian Anda.
+                </p>
+                <button type="button" class="ghost-btn" id="signUpSliderBtn">
+                  <span>DAFTAR AKUN BARU</span>
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Forgot Password View -->
+    <div id="forgot-view" class="login-card auth-view" aria-hidden="true">
+      <div class="login-card-inner">
+        <button
+          class="login-back"
+          id="forgotBack"
+          aria-label="Kembali ke formulir masuk"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          <span>Kembali</span>
+        </button>
+        <div class="login-header">
+          <div class="login-brand">outfit req</div>
+          <h2 class="login-title">Atur Ulang Kata Sandi</h2>
+          <p class="login-subtitle">
+            Masukkan email terdaftar Anda dan kami akan mengirimkan tautan
+            pemulihan.
+          </p>
+        </div>
+        <form id="forgotForm" class="login-form" novalidate>
+          <div class="form-group">
+            <label for="forgotEmail" class="form-label">Alamat Email</label>
+            <input
+              type="email"
+              id="forgotEmail"
+              class="form-input"
+              placeholder="nama@email.com"
+              autocomplete="email"
+              required
+            />
+            <span class="form-error" id="forgotEmailError"></span>
+          </div>
+          <button type="submit" class="submit-btn">
+            <span class="submit-text">KIRIM TAUTAN RESET</span>
+            <div class="submit-loader" style="display: none">
+              <div class="spinner"></div>
+            </div>
+          </button>
+          <div
+            class="form-feedback"
+            id="forgotFeedback"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- Email Verification / Check Email View -->
+    <div id="verify-view" class="login-card auth-view" aria-hidden="true">
+      <div class="login-card-inner">
+        <button
+          class="login-back"
+          id="verifyBack"
+          aria-label="Kembali ke formulir pendaftaran"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          <span>Kembali</span>
+        </button>
+
+        <div class="verify-card-header">
+          <div class="verify-icon-wrap">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--burgundy)"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect width="20" height="16" x="2" y="4" rx="3" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+            <span class="verify-icon-ping"></span>
+          </div>
+          <div class="login-brand" style="margin-top: 10px">outfit req</div>
+          <h2 class="login-title" style="margin-top: 4px">Cek Email Anda</h2>
+          <p class="login-subtitle">
+            Tautan konfirmasi verifikasi telah kami kirimkan ke:
+          </p>
+          <div class="verify-email-badge" id="verifyEmailDisplay">
+            email@domain.com
+          </div>
+        </div>
+
+        <div class="verify-instructions-card">
+          <div class="verify-step-item">
+            <span class="verify-step-num">1</span>
+            <span class="verify-step-text"
+              >Buka aplikasi atau tab <strong>email Anda</strong> (periksa juga
+              folder <em>Spam / Promosi</em> jika belum muncul).</span
+            >
+          </div>
+          <div class="verify-step-item">
+            <span class="verify-step-num">2</span>
+            <span class="verify-step-text"
+              >Cari email dari <strong>Outfit Req</strong> dengan judul
+              konfirmasi pendaftaran.</span
+            >
+          </div>
+          <div class="verify-step-item">
+            <span class="verify-step-num">3</span>
+            <span class="verify-step-text"
+              >Klik tautan <strong>"Confirm your mail"</strong> untuk
+              mengaktifkan akun Anda.</span
+            >
+          </div>
+        </div>
+
+        <div class="verify-waiting-pill">
+          <span class="verify-pulse-dot"></span>
+          <span>Menunggu konfirmasi tautan dari email Anda...</span>
+        </div>
+
+        <div class="verify-action-group">
+          <button type="button" class="submit-btn" id="checkVerifiedBtn">
+            <span class="submit-text">SAYA SUDAH KLIK TAUTAN</span>
+            <div class="submit-loader" style="display: none">
+              <div class="spinner"></div>
+            </div>
+          </button>
+
+          <button type="button" class="resend-link-btn" id="resendLinkBtn">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"
+              />
+            </svg>
+            <span>Kirim Ulang Tautan Baru</span>
+          </button>
+        </div>
+
+        <div
+          class="form-feedback"
+          id="verifyFeedback"
+          role="alert"
+          aria-live="polite"
+        ></div>
+
+        <div class="login-footer" style="margin-top: 1.2rem">
+          <p>
+            Salah memasukkan alamat email?
+            <a href="#" class="form-link" id="verifyChangeEmail"
+              >Daftar Ulang</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Verified Success View (Tampilan Khusus saat Klik Link di Email) -->
+    <div id="verified-success-view" class="login-card auth-view" aria-hidden="true">
+      <div class="login-card-inner">
+        <div class="verify-card-header">
+          <div class="verified-icon-wrap">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#15803d"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            <span class="verified-icon-ping"></span>
+          </div>
+          <div class="login-brand" style="margin-top: 10px">outfit req</div>
+          <h2 class="login-title" style="margin-top: 4px">Akun Telah Terverifikasi</h2>
+          <p class="login-subtitle">
+            Akun Anda telah berhasil terdaftar dan aktif. Silakan login kembali dengan kata sandi Anda atau klik tombol di bawah untuk langsung masuk ke akun Anda.
+          </p>
+        </div>
+
+        <div class="verified-customer-card">
+          <div class="verified-customer-avatar" id="verifiedSuccessAvatar">C</div>
+          <div class="verified-customer-info">
+            <div class="verified-customer-name" id="verifiedSuccessName">Customer</div>
+            <div class="verified-customer-email" id="verifiedSuccessEmail">email@domain.com</div>
+          </div>
+          <div class="verified-badge-pill">
+            <span class="verified-status-dot"></span>
+            <span>Terdaftar</span>
+          </div>
+        </div>
+
+        <div class="verify-action-group">
+          <!-- Opsi 1: Langsung Login Masuk ke Akun -->
+          <button type="button" class="submit-btn" id="directLoginBtn">
+            <span class="submit-text">MASUK KE AKUN SAYA</span>
+            <div class="submit-loader" style="display: none">
+              <div class="spinner"></div>
+            </div>
+          </button>
+
+          <!-- Opsi 2: Login Kembali dengan Kata Sandi -->
+          <button type="button" class="resend-link-btn" id="reloginBtn">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" />
+            </svg>
+            <span>Silakan Login Kembali</span>
+          </button>
+        </div>
+
+        <div
+          class="form-feedback"
+          id="verifiedSuccessFeedback"
+          role="alert"
+          aria-live="polite"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Scripts (Three.js via importmap + GSAP via CDN + Supabase) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

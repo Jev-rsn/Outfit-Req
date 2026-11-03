@@ -1,0 +1,652 @@
+{
+    "totalItems":  15,
+    "lastSynced":  "2026-11-02 17:25:09",
+    "source":  "Apify Actor fmKWN5uByUCIy2Sam",
+    "items":  [
+                  {
+                      "id":  "shopee-28751940555",
+                      "savesCount":  63,
+                      "storeUrl":  "https://shopee.com.br/jaqueta-com-capuz-casaco-corta-vento-quente-a-prova-d-agua-para-homens-caminhadas-pesca-outerwear-ja-i.236700327.28751940555",
+                      "rating":  4.8,
+                      "location":  "Internacional",
+                      "event_type":  null,
+                      "desc":  "Hemat 75%! Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 4.8/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[3/4]",
+                      "image":  "https://down-br.img.susercontent.com/file/cn-11134207-7r98o-lw6m33mma1c55c",
+                      "gender":  "unisex",
+                      "title":  "Jaqueta Com Capuz Casaco Corta-Vento Quente À Prova D\u0027água Para Homens Caminhadas Pesca Outerwear Jaquetas Masculinas Do",
+                      "discountPercent":  75,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 56.92 (~ Rp 165.068)",
+                      "category":  "sporty",
+                      "shopId":  236700327,
+                      "priceTotal":  165068,
+                      "originalPrice":  224.7,
+                      "itemId":  28751940555,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 56.92 (~ Rp 165.068)",
+                                        "url":  "https://shopee.com.br/jaqueta-com-capuz-casaco-corta-vento-quente-a-prova-d-agua-para-homens-caminhadas-pesca-outerwear-ja-i.236700327.28751940555",
+                                        "category":  "Outerwear",
+                                        "name":  "Jaqueta Com Capuz Casaco Corta-Vento Quente À Prova D\u0027água Para Homens Caminhadas Pesca Outerwear Jaquetas Masculinas Do",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Athleisure \u0026 Windbreaker"
+                  },
+                  {
+                      "id":  "shopee-53717754452",
+                      "savesCount":  76,
+                      "storeUrl":  "https://shopee.com.br/jaqueta-masculina-folgada-e-versatil-com-capuz-estampa-em-cores-contrastantes-com-ziper-ideal-para-u-i.1930400645.53717754452",
+                      "rating":  4.8,
+                      "location":  "Internacional",
+                      "event_type":  null,
+                      "desc":  "Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 4.8/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[4/5]",
+                      "image":  "https://down-br.img.susercontent.com/file/sg-11134201-8257s-mt1a632dqj29b3",
+                      "gender":  "unisex",
+                      "title":  "Jaqueta masculina folgada e versátil com capuz, estampa em cores contrastantes, com zíper, ideal para usar na primavera",
+                      "discountPercent":  null,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 129.83 (~ Rp 376.507)",
+                      "category":  "kasual",
+                      "shopId":  1930400645,
+                      "priceTotal":  376507,
+                      "originalPrice":  null,
+                      "itemId":  53717754452,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 129.83 (~ Rp 376.507)",
+                                        "url":  "https://shopee.com.br/jaqueta-masculina-folgada-e-versatil-com-capuz-estampa-em-cores-contrastantes-com-ziper-ideal-para-u-i.1930400645.53717754452",
+                                        "category":  "Outerwear",
+                                        "name":  "Jaqueta masculina folgada e versátil com capuz, estampa em cores contrastantes, com zíper, ideal para usar na primavera",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Casual Streetwear"
+                  },
+                  {
+                      "id":  "shopee-29613458326",
+                      "savesCount":  89,
+                      "storeUrl":  "https://shopee.com.br/jaqueta-masculina-com-fecho-de-ziper-completo-classica-para-negocios-e-uso-casual-casaco-macio-elega-i.1356520315.29613458326",
+                      "rating":  4.6,
+                      "location":  "Internacional",
+                      "event_type":  null,
+                      "desc":  "Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 4.6/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[2/3]",
+                      "image":  "https://down-br.img.susercontent.com/file/sg-11134201-7rbkw-lqkdfengj344d7",
+                      "gender":  "unisex",
+                      "title":  "Jaqueta Masculina Com Fecho De Zíper Completo Clássica Para Negócios E Uso Casual Casaco Macio Elegante Primavera Outono",
+                      "discountPercent":  null,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 83.51 (~ Rp 242.179)",
+                      "category":  "formal",
+                      "shopId":  1356520315,
+                      "priceTotal":  242179,
+                      "originalPrice":  null,
+                      "itemId":  29613458326,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 83.51 (~ Rp 242.179)",
+                                        "url":  "https://shopee.com.br/jaqueta-masculina-com-fecho-de-ziper-completo-classica-para-negocios-e-uso-casual-casaco-macio-elega-i.1356520315.29613458326",
+                                        "category":  "Outerwear",
+                                        "name":  "Jaqueta Masculina Com Fecho De Zíper Completo Clássica Para Negócios E Uso Casual Casaco Macio Elegante Primavera Outono",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Classic Business Outerwear"
+                  },
+                  {
+                      "id":  "shopee-22098376587",
+                      "savesCount":  102,
+                      "storeUrl":  "https://shopee.com.br/jaqueta-impermeavel-de-inverno-masculina-bobojaco-a-prova-de-vento-forro-macio-capuz-removivel-frio-i.494356661.22098376587",
+                      "rating":  4.9,
+                      "location":  "São Paulo",
+                      "event_type":  null,
+                      "desc":  "Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 4.9/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[1/1]",
+                      "image":  "https://down-br.img.susercontent.com/file/br-11134207-820me-mqavg52do83m43",
+                      "gender":  "unisex",
+                      "title":  "Jaqueta Impermeável de Inverno Masculina Bobojaco à Prova de Vento Forro Macio Capuz Removível Frio Grosso e Intenso",
+                      "discountPercent":  null,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 285.00 (~ Rp 826.500)",
+                      "category":  "streetwear",
+                      "shopId":  494356661,
+                      "priceTotal":  826500,
+                      "originalPrice":  null,
+                      "itemId":  22098376587,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 285.00 (~ Rp 826.500)",
+                                        "url":  "https://shopee.com.br/jaqueta-impermeavel-de-inverno-masculina-bobojaco-a-prova-de-vento-forro-macio-capuz-removivel-frio-i.494356661.22098376587",
+                                        "category":  "Outerwear",
+                                        "name":  "Jaqueta Impermeável de Inverno Masculina Bobojaco à Prova de Vento Forro Macio Capuz Removível Frio Grosso e Intenso",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Urban Puffer \u0026 Street"
+                  },
+                  {
+                      "id":  "shopee-54962639141",
+                      "savesCount":  115,
+                      "storeUrl":  "https://shopee.com.br/hkitty-novo-estilo-chines-jaqueta-abotoada-com-gola-alta-para-casais-solta-i.1407936623.54962639141",
+                      "rating":  4.7,
+                      "location":  "Internacional",
+                      "event_type":  null,
+                      "desc":  "Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 4.7/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[3/4]",
+                      "image":  "https://down-br.img.susercontent.com/file/sg-11134201-824hf-mpt1asazu0b272",
+                      "gender":  "unisex",
+                      "title":  "Hkitty Novo Estilo Chinês Jaqueta Abotoada Com Gola Alta Para Casais , Solta",
+                      "discountPercent":  null,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 141.55 (~ Rp 410.495)",
+                      "category":  "minimalist",
+                      "shopId":  1407936623,
+                      "priceTotal":  410495,
+                      "originalPrice":  null,
+                      "itemId":  54962639141,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 141.55 (~ Rp 410.495)",
+                                        "url":  "https://shopee.com.br/hkitty-novo-estilo-chines-jaqueta-abotoada-com-gola-alta-para-casais-solta-i.1407936623.54962639141",
+                                        "category":  "Outerwear",
+                                        "name":  "Hkitty Novo Estilo Chinês Jaqueta Abotoada Com Gola Alta Para Casais , Solta",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Clean Minimalist"
+                  },
+                  {
+                      "id":  "shopee-23695178417",
+                      "savesCount":  128,
+                      "storeUrl":  "https://shopee.com.br/kit-3-ou-1-jaquetas-blusas-unissex-com-capuz-de-frio-forrado-i.988560885.23695178417",
+                      "rating":  4.7,
+                      "location":  "São Paulo",
+                      "event_type":  null,
+                      "desc":  "Hemat 55%! Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 4.7/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[4/5]",
+                      "image":  "https://down-br.img.susercontent.com/file/br-11134207-820lp-msk9noxmrsp0be",
+                      "gender":  "unisex",
+                      "title":  "KIT 3 ou 1 JAQUETAS BLUSAS UNISSEX COM CAPUZ DE FRIO FORRADO",
+                      "discountPercent":  55,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 31.46 (~ Rp 91.234)",
+                      "category":  "kasual",
+                      "shopId":  988560885,
+                      "priceTotal":  91234,
+                      "originalPrice":  69.9,
+                      "itemId":  23695178417,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 31.46 (~ Rp 91.234)",
+                                        "url":  "https://shopee.com.br/kit-3-ou-1-jaquetas-blusas-unissex-com-capuz-de-frio-forrado-i.988560885.23695178417",
+                                        "category":  "Outerwear",
+                                        "name":  "KIT 3 ou 1 JAQUETAS BLUSAS UNISSEX COM CAPUZ DE FRIO FORRADO",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Casual Streetwear"
+                  },
+                  {
+                      "id":  "shopee-46069351757",
+                      "savesCount":  141,
+                      "storeUrl":  "https://shopee.com.br/duyonglin111-jaquetas-masculinas-de-hip-hop-corta-vento-quentes-com-ziper-casaco-grande-capuz-casua-i.1934439499.46069351757",
+                      "rating":  4.8,
+                      "location":  "Internacional",
+                      "event_type":  null,
+                      "desc":  "Hemat 52%! Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 4.8/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[2/3]",
+                      "image":  "https://down-br.img.susercontent.com/file/sg-11134201-8258s-mud71ou6zitf0e",
+                      "gender":  "unisex",
+                      "title":  "(duyonglin111) Jaquetas Masculinas De Hip Hop , Corta-Vento Quentes Com Zíper , Casaco Grande Capuz , Casual , Harajuku",
+                      "discountPercent":  52,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 47.22 (~ Rp 136.938)",
+                      "category":  "sporty",
+                      "shopId":  1934439499,
+                      "priceTotal":  136938,
+                      "originalPrice":  98.37,
+                      "itemId":  46069351757,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 47.22 (~ Rp 136.938)",
+                                        "url":  "https://shopee.com.br/duyonglin111-jaquetas-masculinas-de-hip-hop-corta-vento-quentes-com-ziper-casaco-grande-capuz-casua-i.1934439499.46069351757",
+                                        "category":  "Outerwear",
+                                        "name":  "(duyonglin111) Jaquetas Masculinas De Hip Hop , Corta-Vento Quentes Com Zíper , Casaco Grande Capuz , Casual , Harajuku",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Athleisure \u0026 Windbreaker"
+                  },
+                  {
+                      "id":  "shopee-55068636715",
+                      "savesCount":  154,
+                      "storeUrl":  "https://shopee.com.br/jaqueta-corta-vento-com-capuz-de-nylon-com-forro-com-pelinhos-i.1007831167.55068636715",
+                      "rating":  4.8,
+                      "location":  "São Paulo",
+                      "event_type":  null,
+                      "desc":  "Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 4.8/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[1/1]",
+                      "image":  "https://down-br.img.susercontent.com/file/sg-11134201-825a4-mtr4ztijgu803c",
+                      "gender":  "unisex",
+                      "title":  "Jaqueta Corta Vento Com Capuz de Nylon Com Forro Com pelinhos",
+                      "discountPercent":  null,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 85.41 (~ Rp 247.689)",
+                      "category":  "kasual",
+                      "shopId":  1007831167,
+                      "priceTotal":  247689,
+                      "originalPrice":  null,
+                      "itemId":  55068636715,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 85.41 (~ Rp 247.689)",
+                                        "url":  "https://shopee.com.br/jaqueta-corta-vento-com-capuz-de-nylon-com-forro-com-pelinhos-i.1007831167.55068636715",
+                                        "category":  "Outerwear",
+                                        "name":  "Jaqueta Corta Vento Com Capuz de Nylon Com Forro Com pelinhos",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Casual Streetwear"
+                  },
+                  {
+                      "id":  "shopee-52165451813",
+                      "savesCount":  167,
+                      "storeUrl":  "https://shopee.com.br/jaqueta-casual-masculina-a-prova-de-vento-corta-leve-para-exterior-i.1869331491.52165451813",
+                      "rating":  5,
+                      "location":  "Internacional",
+                      "event_type":  null,
+                      "desc":  "Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 5/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[3/4]",
+                      "image":  "https://down-br.img.susercontent.com/file/sg-11134201-825b1-mri95698ucqvc0",
+                      "gender":  "unisex",
+                      "title":  "Jaqueta Casual Masculina À Prova De Vento , Corta-Leve Para Exterior",
+                      "discountPercent":  null,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 126.48 (~ Rp 366.792)",
+                      "category":  "kasual",
+                      "shopId":  1869331491,
+                      "priceTotal":  366792,
+                      "originalPrice":  null,
+                      "itemId":  52165451813,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 126.48 (~ Rp 366.792)",
+                                        "url":  "https://shopee.com.br/jaqueta-casual-masculina-a-prova-de-vento-corta-leve-para-exterior-i.1869331491.52165451813",
+                                        "category":  "Outerwear",
+                                        "name":  "Jaqueta Casual Masculina À Prova De Vento , Corta-Leve Para Exterior",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Casual Streetwear"
+                  },
+                  {
+                      "id":  "shopee-23498705267",
+                      "savesCount":  180,
+                      "storeUrl":  "https://shopee.com.br/jaqueta-em-microfibra-acolchoada-sob-encomenda-i.435515386.23498705267",
+                      "rating":  4.9,
+                      "location":  "Paraná",
+                      "event_type":  null,
+                      "desc":  "Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 4.9/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[4/5]",
+                      "image":  "https://down-br.img.susercontent.com/file/br-11134207-7r98o-mbzjqbnnvsfb91",
+                      "gender":  "unisex",
+                      "title":  "Jaqueta em Microfibra Acolchoada Sob Encomenda",
+                      "discountPercent":  null,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 170.05 (~ Rp 493.145)",
+                      "category":  "kasual",
+                      "shopId":  435515386,
+                      "priceTotal":  493145,
+                      "originalPrice":  null,
+                      "itemId":  23498705267,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 170.05 (~ Rp 493.145)",
+                                        "url":  "https://shopee.com.br/jaqueta-em-microfibra-acolchoada-sob-encomenda-i.435515386.23498705267",
+                                        "category":  "Outerwear",
+                                        "name":  "Jaqueta em Microfibra Acolchoada Sob Encomenda",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Casual Streetwear"
+                  },
+                  {
+                      "id":  "shopee-58218139482",
+                      "savesCount":  193,
+                      "storeUrl":  "https://shopee.com.br/jaqueta-corta-vento-masculino-plus-size-impermeavel-liso-i.1925004781.58218139482",
+                      "rating":  4.7,
+                      "location":  "Paraná",
+                      "event_type":  null,
+                      "desc":  "Hemat 60%! Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 4.7/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[2/3]",
+                      "image":  "https://down-br.img.susercontent.com/file/sg-11134201-825av-mt57xxq3tqtj40",
+                      "gender":  "unisex",
+                      "title":  "Jaqueta Corta Vento Masculino Plus Size Impermeável Liso",
+                      "discountPercent":  60,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 39.90 (~ Rp 115.710)",
+                      "category":  "kasual",
+                      "shopId":  1925004781,
+                      "priceTotal":  115710,
+                      "originalPrice":  99.9,
+                      "itemId":  58218139482,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 39.90 (~ Rp 115.710)",
+                                        "url":  "https://shopee.com.br/jaqueta-corta-vento-masculino-plus-size-impermeavel-liso-i.1925004781.58218139482",
+                                        "category":  "Outerwear",
+                                        "name":  "Jaqueta Corta Vento Masculino Plus Size Impermeável Liso",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Casual Streetwear"
+                  },
+                  {
+                      "id":  "shopee-28178052281",
+                      "savesCount":  206,
+                      "storeUrl":  "https://shopee.com.br/jaqueta-de-inverno-masculina-de-algodao-slim-estilo-sobretudo-casual-i.820984802.28178052281",
+                      "rating":  4.7,
+                      "location":  "Internacional",
+                      "event_type":  null,
+                      "desc":  "Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 4.7/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[1/1]",
+                      "image":  "https://down-br.img.susercontent.com/file/sg-11134201-7rd5w-m6usp5df2crl6c",
+                      "gender":  "unisex",
+                      "title":  "Jaqueta De Inverno Masculina De Algodão Slim Estilo Sobretudo Casual",
+                      "discountPercent":  null,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 133.95 (~ Rp 388.455)",
+                      "category":  "kasual",
+                      "shopId":  820984802,
+                      "priceTotal":  388455,
+                      "originalPrice":  null,
+                      "itemId":  28178052281,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 133.95 (~ Rp 388.455)",
+                                        "url":  "https://shopee.com.br/jaqueta-de-inverno-masculina-de-algodao-slim-estilo-sobretudo-casual-i.820984802.28178052281",
+                                        "category":  "Outerwear",
+                                        "name":  "Jaqueta De Inverno Masculina De Algodão Slim Estilo Sobretudo Casual",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Casual Streetwear"
+                  },
+                  {
+                      "id":  "shopee-18199211255",
+                      "savesCount":  219,
+                      "storeUrl":  "https://shopee.com.br/jaqueta-masculina-estilo-parka-casaco-frio-i.1122402656.18199211255",
+                      "rating":  4.9,
+                      "location":  "São Paulo",
+                      "event_type":  null,
+                      "desc":  "Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 4.9/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[3/4]",
+                      "image":  "https://down-br.img.susercontent.com/file/br-11134207-7r98o-ls38ojpee23oba",
+                      "gender":  "unisex",
+                      "title":  "Jaqueta masculina Estilo Parka Casaco Frio",
+                      "discountPercent":  null,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 188.10 (~ Rp 545.490)",
+                      "category":  "kasual",
+                      "shopId":  1122402656,
+                      "priceTotal":  545490,
+                      "originalPrice":  null,
+                      "itemId":  18199211255,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 188.10 (~ Rp 545.490)",
+                                        "url":  "https://shopee.com.br/jaqueta-masculina-estilo-parka-casaco-frio-i.1122402656.18199211255",
+                                        "category":  "Outerwear",
+                                        "name":  "Jaqueta masculina Estilo Parka Casaco Frio",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Casual Streetwear"
+                  },
+                  {
+                      "id":  "shopee-58270345589",
+                      "savesCount":  232,
+                      "storeUrl":  "https://shopee.com.br/jaqueta-masculina-em-couro-fino-sintetico-premium-outono-inverno-i.442458986.58270345589",
+                      "rating":  5,
+                      "location":  "São Paulo",
+                      "event_type":  null,
+                      "desc":  "Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 5/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[4/5]",
+                      "image":  "https://down-br.img.susercontent.com/file/br-11134201-820l5-mu8nolw79j433e",
+                      "gender":  "unisex",
+                      "title":  "Jaqueta Masculina em Couro Fino Sintético Premium Outono Inverno",
+                      "discountPercent":  null,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 160.55 (~ Rp 465.595)",
+                      "category":  "kasual",
+                      "shopId":  442458986,
+                      "priceTotal":  465595,
+                      "originalPrice":  null,
+                      "itemId":  58270345589,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 160.55 (~ Rp 465.595)",
+                                        "url":  "https://shopee.com.br/jaqueta-masculina-em-couro-fino-sintetico-premium-outono-inverno-i.442458986.58270345589",
+                                        "category":  "Outerwear",
+                                        "name":  "Jaqueta Masculina em Couro Fino Sintético Premium Outono Inverno",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Casual Streetwear"
+                  },
+                  {
+                      "id":  "shopee-58257744897",
+                      "savesCount":  245,
+                      "storeUrl":  "https://shopee.com.br/jaqueta-masculina-sarja-tradicional-i.495311461.58257744897",
+                      "rating":  4.8,
+                      "location":  "São Paulo",
+                      "event_type":  null,
+                      "desc":  "Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating 4.8/5.0.",
+                      "currency":  "BRL",
+                      "aspect":  "aspect-[2/3]",
+                      "image":  "https://down-br.img.susercontent.com/file/br-11134207-820lf-mmb8jhn15e6e1f",
+                      "gender":  "unisex",
+                      "title":  "Jaqueta Masculina Sarja Tradicional",
+                      "discountPercent":  null,
+                      "colors":  [
+                                     {
+                                         "name":  "Onyx Black",
+                                         "hex":  "#1A1A1A"
+                                     },
+                                     {
+                                         "name":  "Slate Grey",
+                                         "hex":  "#4A5568"
+                                     }
+                                 ],
+                      "priceDisplay":  "R$ 126.26 (~ Rp 366.154)",
+                      "category":  "kasual",
+                      "shopId":  495311461,
+                      "priceTotal":  366154,
+                      "originalPrice":  null,
+                      "itemId":  58257744897,
+                      "store":  "Shopee",
+                      "source":  "apify-shopee",
+                      "items":  [
+                                    {
+                                        "price":  "R$ 126.26 (~ Rp 366.154)",
+                                        "url":  "https://shopee.com.br/jaqueta-masculina-sarja-tradicional-i.495311461.58257744897",
+                                        "category":  "Outerwear",
+                                        "name":  "Jaqueta Masculina Sarja Tradicional",
+                                        "store":  "Shopee"
+                                    }
+                                ],
+                      "style":  "Casual Streetwear"
+                  }
+              ]
+}

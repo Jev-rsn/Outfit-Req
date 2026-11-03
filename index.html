@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0; url=WEB%20EBD/index.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Outfit Req — Beranda Utama</title>
+  <script>
+    // Pengalihan instan ke Beranda Utama (WEB EBD/index.html)
+    window.location.replace("WEB EBD/index.html" + window.location.search + window.location.hash);
+  </script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0b0d13;
+      color: #e5e7eb;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-top-color: #6366f1;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    a {
+      color: #818cf8;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 14px;
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px solid rgba(129, 140, 248, 0.3);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      background: rgba(129, 140, 248, 0.15);
+      border-color: #818cf8;
+    }
+  </style>
+</head>
+<body>
+  <div class="spinner"></div>
+  <p>Mengarahkan ke Beranda Utama Outfit Req...</p>
+  <noscript>
+    <p>JavaScript dinonaktifkan. Silakan klik tombol di bawah:</p>
+  </noscript>
+  <a href="WEB%20EBD/index.html">Buka Beranda Outfit Req</a>
+</body>
+</html>

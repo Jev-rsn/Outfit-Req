@@ -1,0 +1,4122 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Outfit Req — Panduan & Tutorial Penggunaan</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #fff8e7;
+        --bg2: #ffffff;
+        --ink: #111111;
+        --ink-dim: rgba(0, 0, 0, 0.62);
+        --line: rgba(109, 0, 26, 0.16);
+        --gold: #6d001a;
+        --burgundy: #6d001a;
+        --burgundy2: #8a0a28;
+        --burgundy-light: rgba(109, 0, 26, 0.05);
+        --on-accent: #fff8e7;
+        --radius: 14px;
+        --shadow: 0 10px 30px rgba(109, 0, 26, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+        background: none;
+      }
+
+      /* ========================================================
+         NAVBAR HEADER
+         ======================================================== */
+      .nav-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 248, 231, 0.94);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--line);
+        padding: 16px 36px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--burgundy);
+        font-family: "Instrument Serif", serif;
+        font-size: 22px;
+        font-weight: 500;
+      }
+
+      .brand-badge {
+        font-size: 11px;
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        background: var(--burgundy-light);
+        color: var(--burgundy);
+        padding: 3px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        letter-spacing: 0.3px;
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      /* Logged In Customer Pill */
+      .user-pill {
+        display: none;
+        align-items: center;
+        gap: 8px;
+        background: #ffffff;
+        border: 1.5px solid rgba(109, 0, 26, 0.22);
+        border-radius: 999px;
+        padding: 5px 14px 5px 6px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--burgundy);
+        box-shadow: 0 2px 8px rgba(109, 0, 26, 0.06);
+      }
+
+      .user-avatar {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--burgundy);
+        color: #fff8e7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .verified-dot {
+        width: 7.5px;
+        height: 7.5px;
+        border-radius: 50%;
+        background: #15803d;
+        box-shadow: 0 0 0 2px rgba(21, 128, 61, 0.2);
+      }
+
+      /* Guest Visitor Pill & Auth Button */
+      .guest-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 5px 12px;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--ink-dim);
+      }
+
+      .btn-nav-auth {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: transparent;
+        color: var(--burgundy);
+        border: 1px solid rgba(109, 0, 26, 0.3);
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+      }
+
+      .btn-nav-auth:hover {
+        background: rgba(109, 0, 26, 0.06);
+        border-color: var(--burgundy);
+      }
+
+      .btn-to-main {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--burgundy);
+        color: var(--on-accent);
+        padding: 9px 18px;
+        border-radius: 999px;
+        font-size: 13.5px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 14px rgba(109, 0, 26, 0.2);
+      }
+
+      .btn-to-main:hover {
+        background: var(--burgundy2);
+        transform: translateY(-1.5px);
+        box-shadow: 0 6px 18px rgba(109, 0, 26, 0.28);
+      }
+
+      /* ========================================================
+         HERO INTRO
+         ======================================================== */
+      .hero-welcome {
+        max-width: 1040px;
+        margin: 36px auto 20px;
+        padding: 0 24px;
+        text-align: center;
+      }
+
+      .hero-badge-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(109, 0, 26, 0.08);
+        border: 1px solid rgba(109, 0, 26, 0.2);
+        color: var(--burgundy);
+        padding: 6px 16px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+
+      .hero-title {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(38px, 5.5vw, 62px);
+        font-weight: 400;
+        color: var(--burgundy);
+        line-height: 1.15;
+        margin-bottom: 12px;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(15px, 1.8vw, 17px);
+        color: var(--ink-dim);
+        max-width: 720px;
+        margin: 0 auto 28px;
+        line-height: 1.65;
+      }
+
+      .customer-highlight {
+        color: var(--burgundy);
+        font-weight: 700;
+        border-bottom: 2px solid rgba(109, 0, 26, 0.35);
+        padding-bottom: 1px;
+      }
+
+      /* Account Compatibility Matrix */
+      .account-matrix-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 32px;
+      }
+
+      .matrix-pill {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 18px;
+        font-size: 13px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      }
+
+      .matrix-pill strong {
+        color: var(--burgundy);
+      }
+
+      /* ========================================================
+         DUAL COMPONENT CARDS (OVERVIEW SELECTOR)
+         ======================================================== */
+      .dual-component-grid {
+        max-width: 1040px;
+        margin: 0 auto 36px;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .component-card-choice {
+        background: #ffffff;
+        border: 2px solid var(--line);
+        border-radius: 20px;
+        padding: 28px 24px;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 18px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .component-card-choice:hover {
+        border-color: var(--burgundy);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(109, 0, 26, 0.12);
+      }
+
+      .component-card-choice.active {
+        border-color: var(--burgundy);
+        background: #fffcf5;
+        box-shadow: 0 12px 32px rgba(109, 0, 26, 0.16);
+      }
+
+      .component-card-choice.active::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--burgundy);
+      }
+
+      .choice-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .choice-icon-wrap {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: var(--burgundy-light);
+        color: var(--burgundy);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(109, 0, 26, 0.08);
+      }
+
+      .choice-status-badge {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(21, 128, 61, 0.1);
+        color: #15803d;
+        border: 1px solid rgba(21, 128, 61, 0.2);
+      }
+
+      .choice-body h3 {
+        font-family: "Instrument Serif", serif;
+        font-size: 28px;
+        font-weight: 400;
+        color: var(--burgundy);
+        line-height: 1.2;
+        margin-bottom: 6px;
+      }
+
+      .choice-tagline {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink);
+        margin-bottom: 8px;
+      }
+
+      .choice-desc {
+        font-size: 13.5px;
+        color: var(--ink-dim);
+        line-height: 1.55;
+      }
+
+      .choice-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+      }
+
+      /* ========================================================
+         MAIN CONTENT CONTAINER (Muncul Setelah Card Ditekan)
+         ======================================================== */
+      .tutorial-select-prompt {
+        max-width: 1040px;
+        width: 100%;
+        margin: 10px auto 45px;
+        padding: 28px 24px;
+        text-align: center;
+        background: #ffffff;
+        border: 2px dashed rgba(109, 0, 26, 0.22);
+        border-radius: 18px;
+        box-shadow: 0 4px 18px rgba(109, 0, 26, 0.04);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.35s ease;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+
+      .tutorial-select-prompt:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(109, 0, 26, 0.08);
+        border-color: var(--burgundy);
+      }
+
+      .prompt-icon-bounce {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--burgundy-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: bounceDown 1.8s infinite;
+      }
+
+      @keyframes bounceDown {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+      }
+
+      .prompt-title {
+        font-family: "Instrument Serif", serif;
+        font-size: 24px;
+        color: var(--burgundy);
+        font-weight: 400;
+        margin-bottom: 2px;
+      }
+
+      .prompt-text {
+        font-size: 14px;
+        color: var(--ink-dim);
+        max-width: 520px;
+        line-height: 1.55;
+      }
+
+      .prompt-text strong {
+        color: var(--burgundy);
+      }
+
+      .tutorial-main {
+        max-width: 1040px;
+        width: 100%;
+        margin: 0 auto 50px;
+        padding: 0 24px;
+        flex: 1;
+        display: none;
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .tutorial-main.visible {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Segmented Toggle Control */
+      .segmented-control-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 30px;
+      }
+
+      .segmented-control {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        background: #ffffff;
+        border: 1.5px solid var(--line);
+        border-radius: 999px;
+        padding: 5px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      }
+
+      .btn-close-tutorial {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 18px;
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink-dim);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .btn-close-tutorial:hover {
+        background: var(--burgundy-light);
+        color: var(--burgundy);
+        border-color: var(--burgundy);
+      }
+
+      .seg-btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 20px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ink-dim);
+        transition: all 0.22s ease;
+      }
+
+      .seg-btn:hover {
+        color: var(--burgundy);
+      }
+
+      .seg-btn.active {
+        background: var(--burgundy);
+        color: var(--on-accent);
+        box-shadow: 0 4px 14px rgba(109, 0, 26, 0.22);
+      }
+
+      /* Component View Panels */
+      .tutorial-component-view {
+        display: none;
+        animation: fadeInView 0.3s ease;
+      }
+
+      .tutorial-component-view.active {
+        display: block;
+      }
+
+      @keyframes fadeInView {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* View Banner */
+      .view-header-card {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 34px 30px;
+        box-shadow: var(--shadow);
+        margin-bottom: 26px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .view-header-left {
+        max-width: 720px;
+      }
+
+      .view-badge {
+        display: inline-block;
+        font-size: 11.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        color: var(--burgundy);
+        background: var(--burgundy-light);
+        padding: 4px 12px;
+        border-radius: 999px;
+        margin-bottom: 12px;
+      }
+
+      .view-title {
+        font-family: "Instrument Serif", serif;
+        font-size: 34px;
+        font-weight: 400;
+        color: var(--burgundy);
+        line-height: 1.18;
+        margin-bottom: 10px;
+      }
+
+      .view-desc {
+        font-size: 14.5px;
+        color: var(--ink-dim);
+        line-height: 1.6;
+      }
+
+      /* Note / General Account Benefit Box */
+      .takeaway-card {
+        background: #fffdf7;
+        border: 1px solid rgba(109, 0, 26, 0.18);
+        border-left: 5px solid var(--burgundy);
+        border-radius: 12px;
+        padding: 16px 20px;
+        font-size: 13.5px;
+        color: var(--ink);
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        line-height: 1.6;
+      }
+
+      .takeaway-card strong {
+        color: var(--burgundy);
+      }
+
+      /* ========================================================
+         FINAL ACTION BANNER
+         ======================================================== */
+      .final-action-card {
+        background: linear-gradient(135deg, var(--burgundy) 0%, #8a0a28 100%);
+        color: #fff8e7;
+        border-radius: 22px;
+        padding: 42px 32px;
+        text-align: center;
+        box-shadow: 0 16px 42px rgba(109, 0, 26, 0.32);
+        margin-top: 36px;
+      }
+
+      .final-title {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(30px, 4.5vw, 44px);
+        font-weight: 400;
+        margin-bottom: 10px;
+      }
+
+      .final-desc {
+        font-size: 15.5px;
+        color: rgba(255, 248, 231, 0.88);
+        max-width: 620px;
+        margin: 0 auto 28px;
+      }
+
+      .final-btn-group {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .btn-final-primary {
+        background: #fff8e7;
+        color: var(--burgundy);
+        padding: 12px 30px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-final-primary:hover {
+        background: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn-final-auth {
+        background: rgba(255, 248, 231, 0.18);
+        border: 1.5px solid rgba(255, 248, 231, 0.45);
+        color: #fff8e7;
+        padding: 12px 24px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+      }
+
+      .btn-final-auth:hover {
+        background: rgba(255, 248, 231, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .btn-final-secondary {
+        background: transparent;
+        border: 1px solid rgba(255, 248, 231, 0.3);
+        color: rgba(255, 248, 231, 0.9);
+        padding: 12px 22px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+      }
+
+      .btn-final-secondary:hover {
+        background: rgba(255, 248, 231, 0.1);
+        transform: translateY(-2px);
+      }
+
+      /* Footer */
+      .page-footer {
+        text-align: center;
+        padding: 24px;
+        font-size: 13px;
+        color: var(--ink-dim);
+        border-top: 1px solid var(--line);
+        margin-top: auto;
+      }
+
+      @media (max-width: 768px) {
+        .nav-header {
+          padding: 12px 16px;
+        }
+        .dual-component-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+          padding: 0 16px;
+        }
+        .view-header-card {
+          flex-direction: column;
+          padding: 22px 18px;
+        }
+        .account-matrix-row {
+          flex-direction: column;
+          gap: 8px;
+        }
+        .segmented-control-wrapper {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+        }
+        .btn-close-tutorial {
+          justify-content: center;
+        }
+        .tutorial-main {
+          padding: 0 16px;
+        }
+        .tutorial-select-prompt {
+          margin: 10px 16px 36px;
+          padding: 22px 16px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav-header {
+          padding: 10px 14px;
+        }
+        .brand-badge {
+          display: none !important;
+        }
+        .btn-to-main span {
+          display: none;
+        }
+        .btn-to-main::after {
+          content: "Beranda";
+        }
+        .btn-to-main {
+          padding: 8px 14px;
+          font-size: 12.5px;
+        }
+        .btn-nav-auth {
+          padding: 8px 14px;
+          font-size: 12.5px;
+        }
+        .user-pill, .guest-pill {
+          padding: 4px 10px 4px 5px;
+          font-size: 12px;
+        }
+        .user-pill span:nth-child(2) {
+          max-width: 80px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .hero-welcome {
+          padding: 0 14px;
+          margin: 18px auto 14px;
+        }
+        .hero-title {
+          font-size: clamp(28px, 8vw, 40px);
+        }
+        .hero-subtitle {
+          font-size: 13.5px;
+          margin-bottom: 20px;
+        }
+        .component-card-choice {
+          padding: 20px 16px;
+          border-radius: 16px;
+        }
+        .choice-body h3 {
+          font-size: 24px;
+        }
+        .tutorial-popup-backdrop {
+          padding: 0;
+          align-items: flex-end;
+        }
+        .tutorial-popup-card {
+          max-height: 92dvh;
+          border-radius: 22px 22px 0 0;
+          width: 100%;
+          max-width: 100%;
+          transform: translateY(100%);
+          transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .tutorial-popup-backdrop.active .tutorial-popup-card {
+          transform: translateY(0);
+        }
+        .tutorial-popup-card::before {
+          content: '';
+          display: block;
+          width: 42px;
+          height: 4.5px;
+          border-radius: 999px;
+          background: rgba(109, 0, 26, 0.2);
+          margin: 10px auto 4px;
+        }
+        .popup-card-header {
+          padding: 14px 16px 12px;
+        }
+        .popup-card-title {
+          font-size: 22px;
+        }
+        .popup-card-subtitle {
+          font-size: 12.5px;
+        }
+        .popup-tabs-bar {
+          overflow-x: auto;
+          white-space: nowrap;
+          flex-wrap: nowrap;
+          padding: 8px 14px;
+          gap: 8px;
+          -webkit-overflow-scrolling: touch;
+          touch-action: pan-x;
+        }
+        .popup-tab-btn {
+          white-space: nowrap;
+          font-size: 12px;
+          padding: 6px 14px;
+          flex-shrink: 0;
+        }
+        .popup-card-body {
+          padding: 16px 14px;
+        }
+        .popup-card-footer {
+          padding: 12px 14px;
+          flex-direction: column;
+          gap: 8px;
+        }
+        .popup-card-footer button,
+        .popup-card-footer a {
+          width: 100%;
+          justify-content: center;
+          text-align: center;
+          box-sizing: border-box;
+        }
+        .final-action-card {
+          padding: 26px 16px;
+          border-radius: 18px;
+        }
+        .final-title {
+          font-size: 26px;
+        }
+        .final-desc {
+          font-size: 13.5px;
+          margin-bottom: 20px;
+        }
+        .final-btn-group {
+          flex-direction: column;
+          width: 100%;
+          gap: 10px;
+        }
+        .final-btn-group a {
+          width: 100%;
+          justify-content: center;
+          box-sizing: border-box;
+        }
+      }
+
+      @media (max-width: 380px) {
+        .nav-header {
+          padding: 8px 10px;
+        }
+        .brand-logo {
+          font-size: 18px;
+        }
+        .hero-title {
+          font-size: 26px;
+        }
+      }
+
+      /* ========================================================
+         TOAST NOTIFIKASI VERIFIKASI AKUN SUKSES
+         ======================================================== */
+      .auth-toast {
+        position: fixed;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: #111111;
+        color: #fff8e7;
+        padding: 14px 24px;
+        border-radius: 999px;
+        font-size: 13.5px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+        border: 1px solid rgba(255, 248, 231, 0.18);
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 0.4s ease;
+      }
+      .auth-toast.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .auth-toast-icon {
+        width: 22px;
+        height: 22px;
+        background: #15803d;
+        color: #ffffff;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      /* Modal Konfirmasi Verifikasi Akun Sukses */
+      .verified-modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(17, 17, 17, 0.65);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        animation: modalFadeIn 0.3s ease;
+      }
+      .verified-modal-box {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 32px 28px;
+        max-width: 440px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(109, 0, 26, 0.2);
+        animation: modalScaleUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes modalScaleUp {
+        from {
+          transform: scale(0.92);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .verified-modal-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: rgba(21, 128, 61, 0.1);
+        border: 1.5px solid rgba(21, 128, 61, 0.25);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 8px;
+      }
+      .verified-modal-title {
+        font-family: "Instrument Serif", serif;
+        font-size: 26px;
+        color: var(--burgundy);
+        font-weight: 400;
+        margin-bottom: 6px;
+      }
+      .verified-modal-desc {
+        font-size: 13.5px;
+        color: var(--ink-dim);
+        line-height: 1.55;
+        margin-bottom: 16px;
+      }
+      .verified-modal-user {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #fffdf7;
+        border: 1px solid rgba(109, 0, 26, 0.14);
+        border-radius: 12px;
+        padding: 10px 14px;
+        margin-bottom: 20px;
+      }
+      .verified-modal-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .btn-modal-primary {
+        width: 100%;
+        padding: 13px;
+        background: var(--burgundy);
+        color: #fff8e7;
+        border-radius: 999px;
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          background 0.2s;
+        border: none;
+      }
+      .btn-modal-primary:hover {
+        background: var(--burgundy2);
+        transform: translateY(-1px);
+      }
+      .btn-modal-secondary {
+        width: 100%;
+        padding: 11px;
+        background: transparent;
+        color: var(--ink);
+        border: 1.5px solid var(--line);
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        display: inline-block;
+        box-sizing: border-box;
+        text-align: center;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .btn-modal-secondary:hover {
+        border-color: var(--burgundy);
+        color: var(--burgundy);
+      }
+
+      /* ========================================================
+         POP-UP CARD TUTORIAL (MODAL POLOSAN ELEGAN)
+         ======================================================== */
+      .tutorial-popup-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(17, 17, 17, 0.72);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 999999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .tutorial-popup-backdrop.active {
+        display: flex !important;
+      }
+
+      .tutorial-popup-card {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        max-width: 860px;
+        width: 100%;
+        max-height: 88vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+        animation: modalScaleUp 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        z-index: 1000000;
+      }
+
+      /* Tombol Action Nyata di Dalam Kartu Overview */
+      .btn-card-action-trigger {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--burgundy);
+        color: #fff8e7;
+        padding: 10px 20px;
+        border-radius: 999px;
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s ease;
+        box-shadow: 0 3px 10px rgba(109, 0, 26, 0.18);
+        width: 100%;
+        justify-content: center;
+      }
+
+      .btn-card-action-trigger:hover {
+        background: var(--burgundy2);
+        transform: translateY(-1.5px);
+        box-shadow: 0 5px 15px rgba(109, 0, 26, 0.26);
+      }
+
+      .btn-card-action-trigger * {
+        pointer-events: none;
+      }
+
+      .popup-card-header {
+        padding: 22px 28px 16px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        background: #fffdfa;
+      }
+
+      .popup-header-info {
+        flex: 1;
+      }
+
+      .popup-tag-badge {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        color: var(--burgundy);
+        background: var(--burgundy-light);
+        padding: 3px 12px;
+        border-radius: 999px;
+        margin-bottom: 8px;
+        border: 1px solid rgba(109, 0, 26, 0.15);
+      }
+
+      .popup-card-title {
+        font-family: "Instrument Serif", serif;
+        font-size: 30px;
+        font-weight: 400;
+        color: var(--burgundy);
+        line-height: 1.2;
+        margin-bottom: 4px;
+      }
+
+      .popup-card-subtitle {
+        font-size: 13.5px;
+        color: var(--ink-dim);
+        line-height: 1.5;
+      }
+
+      .popup-close-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        background: #ffffff;
+        color: var(--ink-dim);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+      }
+
+      .popup-close-btn:hover {
+        background: var(--burgundy);
+        color: #fff8e7;
+        border-color: var(--burgundy);
+        transform: rotate(90deg);
+      }
+
+      .popup-tabs-bar {
+        display: flex;
+        background: #fbf7ee;
+        border-bottom: 1px solid var(--line);
+        padding: 10px 24px;
+        gap: 12px;
+      }
+
+      .popup-tab-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 18px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink-dim);
+        border: 1px solid transparent;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .popup-tab-btn:hover {
+        color: var(--burgundy);
+        background: rgba(109, 0, 26, 0.05);
+      }
+
+      .popup-tab-btn.active {
+        background: var(--burgundy);
+        color: #fff8e7;
+        box-shadow: 0 4px 12px rgba(109, 0, 26, 0.2);
+      }
+
+      .popup-card-body {
+        padding: 24px 28px;
+        overflow-y: auto;
+        flex: 1;
+      }
+
+      .popup-view-panel {
+        display: none;
+        animation: fadeInView 0.25s ease;
+      }
+
+      .popup-view-panel.active {
+        display: block !important;
+      }
+
+      .popup-card-footer {
+        padding: 16px 28px;
+        border-top: 1px solid var(--line);
+        background: #fffdfa;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .btn-popup-close-secondary {
+        padding: 9px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #ffffff;
+        color: var(--ink-dim);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .btn-popup-close-secondary:hover {
+        background: var(--burgundy-light);
+        color: var(--burgundy);
+        border-color: var(--burgundy);
+      }
+
+      .btn-popup-main-action {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 22px;
+        background: var(--burgundy);
+        color: var(--on-accent);
+        border-radius: 999px;
+        font-size: 13.5px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 14px rgba(109, 0, 26, 0.2);
+      }
+
+      .btn-popup-main-action:hover {
+        background: var(--burgundy2);
+        transform: translateY(-1px);
+      }
+
+      /* ========================================================
+         STYLING KONTEN TUTORIAL DI DALAM POP-UP MODAL & INLINE
+         ======================================================== */
+      .popup-guide-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 16px;
+        margin-bottom: 22px;
+      }
+
+      .popup-guide-card {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 20px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: all 0.2s ease;
+        position: relative;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.03);
+      }
+
+      .popup-guide-card:hover {
+        border-color: rgba(109, 0, 26, 0.35);
+        box-shadow: 0 6px 18px rgba(109, 0, 26, 0.08);
+        transform: translateY(-1.5px);
+      }
+
+      .popup-step-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .popup-step-num {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--burgundy);
+        color: #fff8e7;
+        font-size: 13px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .popup-step-title {
+        font-size: 14.5px;
+        font-weight: 700;
+        color: var(--burgundy);
+        line-height: 1.3;
+      }
+
+      .popup-step-desc {
+        font-size: 13px;
+        color: var(--ink-dim);
+        line-height: 1.55;
+      }
+
+      .popup-section-heading {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--burgundy);
+        margin: 22px 0 14px;
+        padding-bottom: 8px;
+        border-bottom: 1px dashed var(--line);
+      }
+
+      .popup-section-badge {
+        font-size: 11px;
+        font-weight: 700;
+        background: var(--burgundy-light);
+        color: var(--burgundy);
+        padding: 2px 10px;
+        border-radius: 999px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .popup-style-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .popup-style-box {
+        background: #fffdfa;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 16px 18px;
+        border-left: 4px solid var(--burgundy);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        transition: all 0.2s ease;
+      }
+
+      .popup-style-box:hover {
+        border-color: rgba(109, 0, 26, 0.4);
+        background: #ffffff;
+      }
+
+      .popup-style-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--burgundy);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .popup-style-badge {
+        font-size: 10px;
+        font-weight: 700;
+        background: rgba(109, 0, 26, 0.08);
+        color: var(--burgundy);
+        padding: 2px 8px;
+        border-radius: 999px;
+      }
+
+      .popup-style-text {
+        font-size: 12.5px;
+        color: var(--ink-dim);
+        line-height: 1.5;
+      }
+
+      .popup-palette-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11.5px;
+        color: var(--ink-dim);
+        margin-top: 4px;
+        flex-wrap: wrap;
+      }
+
+      .popup-color-dot {
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        display: inline-block;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+      }
+
+      .popup-cta-banner {
+        background: linear-gradient(
+          135deg,
+          rgba(109, 0, 26, 0.05),
+          rgba(184, 134, 11, 0.08)
+        );
+        border: 1px solid rgba(109, 0, 26, 0.18);
+        border-radius: 16px;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      .popup-cta-text h4 {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--burgundy);
+        margin: 0 0 2px;
+      }
+
+      .popup-cta-text p {
+        font-size: 12.5px;
+        color: var(--ink-dim);
+        margin: 0;
+      }
+
+      .popup-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--burgundy);
+        color: #fff8e7;
+        padding: 8px 18px;
+        border-radius: 999px;
+        font-size: 12.5px;
+        font-weight: 600;
+        white-space: nowrap;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      .popup-cta-btn:hover {
+        background: var(--burgundy2);
+        transform: translateY(-1px);
+        color: #fff8e7;
+      }
+
+      .tips-highlight-card {
+        background: #fffefb;
+        border: 1px solid rgba(184, 134, 11, 0.3);
+        border-radius: 14px;
+        padding: 14px 18px;
+        margin: 16px 0;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 13px;
+        color: var(--ink-dim);
+        line-height: 1.55;
+      }
+
+      .tips-highlight-card strong {
+        color: var(--burgundy);
+      }
+
+      .ui-cue-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(109, 0, 26, 0.08);
+        border: 1px solid rgba(109, 0, 26, 0.18);
+        color: var(--burgundy);
+        font-size: 11px;
+        font-weight: 700;
+        padding: 2px 10px;
+        border-radius: 999px;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        width: fit-content;
+      }
+
+      .popup-step-action {
+        font-size: 12.5px;
+        color: var(--ink);
+        line-height: 1.55;
+        margin-top: 4px;
+        background: #fdfaf4;
+        padding: 8px 12px;
+        border-radius: 10px;
+        border-left: 3px solid var(--burgundy);
+      }
+
+      .popup-step-action strong {
+        color: var(--burgundy);
+      }
+
+      /* ========================================================
+         MOBILE BOTTOM NAVIGATION BAR
+         ======================================================== */
+      .mobile-bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background: rgba(255, 248, 231, 0.96);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(109, 0, 26, 0.14);
+        padding: 6px 12px max(8px, env(safe-area-inset-bottom, 8px));
+        box-shadow: 0 -4px 20px rgba(109, 0, 26, 0.08);
+      }
+      .mobile-nav-tab-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        flex: 1;
+        max-width: 80px;
+        padding: 5px 2px;
+        text-decoration: none;
+        color: rgba(0, 0, 0, 0.55);
+        font-size: 10.5px;
+        font-weight: 500;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .mobile-nav-tab-item svg {
+        width: 20px;
+        height: 20px;
+        transition: transform 0.2s ease;
+      }
+      .mobile-nav-tab-item:active {
+        transform: scale(0.92);
+      }
+      .mobile-nav-tab-item.active {
+        color: var(--burgundy);
+        font-weight: 700;
+      }
+      .mobile-nav-tab-item.active svg {
+        stroke: var(--burgundy);
+        transform: translateY(-1px);
+      }
+      .mobile-nav-tab-item.active::after {
+        content: '';
+        display: block;
+        width: 14px;
+        height: 2.5px;
+        border-radius: 99px;
+        background: var(--burgundy);
+        margin-top: 1px;
+      }
+      @media (min-width: 769px) {
+        .mobile-bottom-nav {
+          display: none !important;
+        }
+      }
+      @media (max-width: 768px) {
+        .tutorial-main {
+          padding-bottom: calc(72px + env(safe-area-inset-bottom, 12px)) !important;
+        }
+      }
+    </style>
+    <script>
+      // Global stub agar pemanggilan onclick pada kartu langsung siap sejak awal
+      window.openTutorialPopup =
+        window.openTutorialPopup ||
+        function (comp, evt) {
+          if (evt) {
+            try {
+              evt.preventDefault();
+              evt.stopPropagation();
+            } catch (e) {}
+          }
+          window.__pendingOpenPopup = comp;
+        };
+      window.closeTutorialPopup = window.closeTutorialPopup || function () {};
+      window.handleBackdropClick = window.handleBackdropClick || function () {};
+    </script>
+  </head>
+  <body>
+    <!-- Top Header -->
+    <header class="nav-header">
+      <div class="nav-left">
+        <a
+          href="index.html"
+          class="brand-logo"
+          title="Kembali ke Beranda Utama"
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--burgundy)"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
+            ></path>
+          </svg>
+          <span>outfit req</span>
+        </a>
+        <span class="brand-badge">PUSAT PANDUAN</span>
+      </div>
+
+      <div class="nav-right">
+        <!-- Keadaan A: Akun Customer Terdaftar (Login) -> Buka Halaman Akun -->
+        <a href="account.html" class="user-pill" id="customerPill" style="text-decoration: none;" title="Buka Halaman Akun Saya">
+          <span class="user-avatar" id="customerAvatar">C</span>
+          <span id="customerNavName">Halo, Customer</span>
+          <span class="verified-dot" title="Akun Terverifikasi"></span>
+        </a>
+
+        <!-- Keadaan B: Pengunjung Tamu (Belum Login) -> Klik untuk Masuk Gmail -->
+        <div class="guest-pill" id="guestPill" onclick="triggerGmailLoginTutorial()" style="cursor: pointer;" title="Klik untuk Masuk via Gmail">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span>Pengunjung Tamu</span>
+        </div>
+
+        <!-- Tombol Masuk / Daftar jika belum login -->
+        <a
+          href="login.html?mode=login"
+          class="btn-nav-auth"
+          id="navAuthBtn"
+        >
+          <span>Masuk / Daftar</span>
+        </a>
+
+        <!-- Tombol Navigasi Beranda Utama -->
+        <a
+          href="index.html"
+          class="btn-to-main"
+          title="Buka Halaman Utama Outfit Req"
+        >
+          <span>Ke Beranda Utama</span>
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero Introduction (Universal untuk Semua Akun) -->
+    <section class="hero-welcome">
+      <div class="hero-badge-pill">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4M12 8h.01" />
+        </svg>
+        <span>PANDUAN SISTEM 2 KOMPONEN UTAMA • UNTUK SEMUA PENGGUNA</span>
+      </div>
+
+      <h1 class="hero-title">Panduan Penggunaan Website</h1>
+      <p class="hero-subtitle" id="heroSubtitle">
+        Selamat datang di <strong>Outfit Req</strong>! Platform rekomendasi
+        busana dan analisis gaya kepribadian. Silakan tekan salah satu kartu di
+        bawah untuk membuka panduan tutorial.
+      </p>
+
+      <!-- Informasi Komparasi Akses Akun -->
+      <div class="account-matrix-row">
+        <div class="matrix-pill">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--burgundy)"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+          <span
+            >Akses Tamu (Tanpa Login):
+            <strong
+              >Eksplorasi Beranda, Kuis Personality & Katalog Belanja</strong
+            ></span
+          >
+        </div>
+        <div class="matrix-pill">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--burgundy)"
+            stroke-width="2"
+          >
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+            />
+          </svg>
+          <span
+            >Benefit Akun Terdaftar:
+            <strong
+              >10 Kuota Tanya Gaya Gratis Tiap 3 Hari & Simpan Hasil</strong
+            ></span
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 Pilihan Komponen Utama (Dual Overview Cards) -->
+    <section class="dual-component-grid" aria-label="Pilihan Komponen Tutorial">
+      <!-- Card 1: Tutorial Personality -->
+      <div
+        class="component-card-choice"
+        id="choiceCardPersonality"
+        onclick="openTutorialPopup('personality', event)"
+      >
+        <div class="choice-header">
+          <div class="choice-icon-wrap">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </div>
+          <span class="choice-status-badge" id="badgeCardPersonality"
+            >Buka Pop-up Tutorial</span
+          >
+        </div>
+        <div class="choice-body">
+          <h3>Cara Menggunakan Fitur Personality</h3>
+          <div class="choice-tagline">
+            Panduan Tes Gaya, Input Siluet, & Analisis DNA Gaya
+          </div>
+          <p class="choice-desc">
+            Panduan langkah demi langkah cara membuka menu kuis di web, mengisi
+            preferensi acara & warna, memasukkan postur tubuh secara privat, dan
+            membaca palet gayamu.
+          </p>
+        </div>
+        <div class="choice-footer">
+          <button type="button" class="btn-card-action-trigger">
+            <span>Buka Tutorial Fitur Personality</span>
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2: Tutorial Rekomendasi -->
+      <div
+        class="component-card-choice"
+        id="choiceCardRekomendasi"
+        onclick="openTutorialPopup('rekomendasi', event)"
+      >
+        <div class="choice-header">
+          <div class="choice-icon-wrap">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+          </div>
+          <span class="choice-status-badge" id="badgeCardRekomendasi"
+            >Buka Pop-up Tutorial</span
+          >
+        </div>
+        <div class="choice-body">
+          <h3>Cara Menggunakan Fitur Rekomendasi</h3>
+          <div class="choice-tagline">
+            Panduan Filter Acara, Kartu Kipas, & Link Belanja
+          </div>
+          <p class="choice-desc">
+            Panduan langkah demi langkah cara memfilter tema busana di Beranda,
+            memilih kartu kipas outfit interaktif, memanfaatkan kuota tanya AI,
+            dan belanja produk resmi.
+          </p>
+        </div>
+        <div class="choice-footer">
+          <button type="button" class="btn-card-action-trigger">
+            <span>Buka Tutorial Fitur Rekomendasi</span>
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prompt Pemilihan Sebelum Card Ditekan -->
+    <div
+      class="tutorial-select-prompt"
+      id="tutorialSelectPrompt"
+      onclick="openTutorialPopup('personality', event)"
+      title="Tekan untuk membuka pop-up tutorial"
+      role="button"
+      tabindex="0"
+    >
+      <div class="prompt-icon-bounce">
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="var(--burgundy)"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 5v14M19 12l-7 7-7-7" />
+        </svg>
+      </div>
+      <h3 class="prompt-title">Pilih Komponen Tutorial</h3>
+      <p class="prompt-text">
+        Silakan <strong>tekan salah satu card di atas</strong> untuk memunculkan
+        pop-up panduan langkah demi langkah.
+      </p>
+    </div>
+
+    <!-- Main Content Area: Berisi 2 Komponen Tampilan Awal -->
+    <main class="tutorial-main" id="tutorialMainContainer">
+      <!-- Segmented Tab Switcher with Close Button -->
+      <div class="segmented-control-wrapper">
+        <div class="segmented-control" role="tablist">
+          <button
+            class="seg-btn"
+            id="segBtnPersonality"
+            onclick="selectTutorialComponent('personality', true)"
+            role="tab"
+            aria-selected="false"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span>1. Cara Pakai Fitur Personality</span>
+          </button>
+          <button
+            class="seg-btn"
+            id="segBtnRekomendasi"
+            onclick="selectTutorialComponent('rekomendasi', true)"
+            role="tab"
+            aria-selected="false"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+              <path d="M3 6h18" />
+            </svg>
+            <span>2. Cara Pakai Fitur Rekomendasi</span>
+          </button>
+        </div>
+
+        <button
+          type="button"
+          class="btn-close-tutorial"
+          id="btnCloseTutorial"
+          onclick="closeTutorialContent()"
+          title="Tutup tampilan tutorial"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m18 15-6-6-6 6" />
+          </svg>
+          <span>Tutup Tutorial</span>
+        </button>
+      </div>
+
+      <!-- ========================================================
+           KOMPONEN 1: TAMPILAN AWAL TUTORIAL PERSONALITY (GENERAL)
+           ======================================================== -->
+      <section
+        class="tutorial-component-view"
+        id="viewPersonality"
+        role="tabpanel"
+        aria-label="Tutorial Personality"
+      >
+        <div class="view-header-card">
+          <div class="view-header-left">
+            <span class="view-badge">PANDUAN FITUR 1 • PERSONALITY STYLE</span>
+            <h2 class="view-title">
+              Cara Menggunakan Fitur Personality di Web
+            </h2>
+            <p class="view-desc">
+              Panduan langkah demi langkah cara membuka menu kuis di web,
+              mengisi preferensi acara & warna, memasukkan postur secara privat,
+              dan membaca palet gayamu.
+            </p>
+          </div>
+          <div
+            style="
+              background: var(--burgundy-light);
+              border: 1px solid var(--line);
+              border-radius: 14px;
+              padding: 12px 18px;
+              text-align: center;
+            "
+          >
+            <div
+              style="
+                font-size: 11px;
+                font-weight: 700;
+                color: var(--burgundy);
+                text-transform: uppercase;
+              "
+            >
+              Status Modul
+            </div>
+            <div
+              style="
+                font-size: 14px;
+                font-weight: 700;
+                color: #15803d;
+                margin-top: 2px;
+              "
+            >
+              Siap Digunakan
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 Langkah Alur Utama -->
+        <div class="popup-section-heading">
+          <span class="popup-section-badge">LANGKAH 1 - 5</span>
+          <span>Tutorial Cara Menggunakan Fitur Personality di Web</span>
+        </div>
+
+        <div class="popup-guide-grid">
+          <div class="popup-guide-card">
+            <div class="popup-step-header">
+              <div class="popup-step-num">1</div>
+              <div>
+                <span class="ui-cue-pill">Di Beranda Web</span>
+                <h4 class="popup-step-title">Buka Menu "Tes Personality"</h4>
+              </div>
+            </div>
+            <p class="popup-step-desc">
+              Pada Beranda Utama (<strong>Main.dc.html</strong>), temukan dan
+              klik tombol emas bertuliskan <strong>"Tes Personality"</strong> di
+              bawah judul utama, atau pilih mode Personality.
+            </p>
+            <div class="popup-step-action">
+              <strong>Aksi di Web:</strong> Klik tombol emas
+              <strong>"Tes Personality"</strong> untuk masuk ke formulir kuis
+              kepribadian gaya.
+            </div>
+          </div>
+
+          <div class="popup-guide-card">
+            <div class="popup-step-header">
+              <div class="popup-step-num">2</div>
+              <div>
+                <span class="ui-cue-pill">Form Kuis Interaktif</span>
+                <h4 class="popup-step-title">
+                  Jawab Kuis Preferensi Acara & Warna
+                </h4>
+              </div>
+            </div>
+            <p class="popup-step-desc">
+              Pilih jawaban yang paling mencerminkan gaya harianmu: suasana
+              acara yang sering didatangi (kantor, santai, pesta), warna favorit
+              (monokrom, netral, earthy, bold), dan siluet busana yang disukai.
+            </p>
+            <div class="popup-step-action">
+              <strong>Aksi di Web:</strong> Klik opsi kartu jawaban yang paling
+              cocok dengan karakter dan kenyamanan berpakaianmu.
+            </div>
+          </div>
+
+          <div class="popup-guide-card">
+            <div class="popup-step-header">
+              <div class="popup-step-num">3</div>
+              <div>
+                <span class="ui-cue-pill">Input Terenkripsi & Privat</span>
+                <h4 class="popup-step-title">Masukkan Postur & Siluet Tubuh</h4>
+              </div>
+            </div>
+            <p class="popup-step-desc">
+              Ketik estimasi tinggi badan (cm) dan berat badan (kg), atau pilih
+              siluet bentuk tubuhmu. Data ini dijamin privat dan hanya diolah
+              algoritma web untuk menentukan proporsi busana.
+            </p>
+            <div class="popup-step-action">
+              <strong>Aksi di Web:</strong> Isi kolom angka tinggi/berat badan
+              atau pilih siluet postur, lalu tekan tombol
+              <strong>"Analisis Gaya Saya"</strong>.
+            </div>
+          </div>
+
+          <div class="popup-guide-card">
+            <div class="popup-step-header">
+              <div class="popup-step-num">4</div>
+              <div>
+                <span class="ui-cue-pill">Hasil Analisis Web</span>
+                <h4 class="popup-step-title">
+                  Dapatkan DNA Gaya & Palet Warna
+                </h4>
+              </div>
+            </div>
+            <p class="popup-step-desc">
+              Layar website akan langsung menampilkan rangkuman tipe gaya
+              dominanmu (Classic, Minimalist, Chic, atau Streetwear),
+              rekomendasi potongan siluet pakaian, dan kombinasi palet warna
+              busana.
+            </p>
+            <div class="popup-step-action">
+              <strong>Hasil di Web:</strong> Tinjau tipe gaya dominanmu, panduan
+              siluet potongan atasan/bawahan, dan swatch palet warna kain.
+            </div>
+          </div>
+
+          <div class="popup-guide-card">
+            <div class="popup-step-header">
+              <div class="popup-step-num">5</div>
+              <div>
+                <span class="ui-cue-pill">Asisten AI & Akun Profil</span>
+                <h4 class="popup-step-title">
+                  Konsultasi AI & Simpan ke Profil
+                </h4>
+              </div>
+            </div>
+            <p class="popup-step-desc">
+              Tanyakan tips mix & match ke asisten tanya gaya AI. Jika kamu
+              masuk (login), hasil analisis gaya ini otomatis tersimpan di menu
+              akun profilmu di pojok kanan atas.
+            </p>
+            <div class="popup-step-action">
+              <strong>Aksi di Web:</strong> Klik ikon profil di pojok kanan atas
+              untuk melihat hasil yang tersimpan dan sisa kuota tanya gaya AI.
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Tipe Gaya Utama Outfit Req -->
+        <div class="popup-section-heading">
+          <span class="popup-section-badge">TIPE GAYA</span>
+          <span>4 Karakter Gaya Dominan Busana</span>
+        </div>
+
+        <div class="popup-style-grid">
+          <div class="popup-style-box">
+            <div class="popup-style-title">
+              <span>Classic Style</span>
+              <span class="popup-style-badge">Timeless & Rapi</span>
+            </div>
+            <p class="popup-style-text">
+              Gaya abadi yang mengutamakan potongan pakaian tailored, bahan
+              berkualitas tinggi, dan siluet profesional yang berwibawa di
+              setiap momen.
+            </p>
+            <div class="popup-palette-row">
+              <span>Palet:</span>
+              <span
+                class="popup-color-dot"
+                style="background: #1b2a47"
+                title="Navy"
+              ></span>
+              <span
+                class="popup-color-dot"
+                style="background: #f4efe6"
+                title="Cream"
+              ></span>
+              <span
+                class="popup-color-dot"
+                style="background: #2b2b2b"
+                title="Charcoal"
+              ></span>
+              <span
+                class="popup-color-dot"
+                style="background: #ffffff"
+                title="Putih"
+              ></span>
+              <span>(Navy, Cream, Charcoal, Putih)</span>
+            </div>
+          </div>
+
+          <div class="popup-style-box">
+            <div class="popup-style-title">
+              <span>Minimalist Style</span>
+              <span class="popup-style-badge">Clean & Fungsional</span>
+            </div>
+            <p class="popup-style-text">
+              Fokus pada kesederhanaan esensial, garis potongan bersih tanpa
+              motif berlebih, kain nyaman, dan kesan effortless yang selalu
+              modern.
+            </p>
+            <div class="popup-palette-row">
+              <span>Palet:</span>
+              <span
+                class="popup-color-dot"
+                style="background: #111111"
+                title="Hitam"
+              ></span>
+              <span
+                class="popup-color-dot"
+                style="background: #e8e4dc"
+                title="Off-White"
+              ></span>
+              <span
+                class="popup-color-dot"
+                style="background: #8f8b82"
+                title="Warm Grey"
+              ></span>
+              <span
+                class="popup-color-dot"
+                style="background: #6d5f53"
+                title="Taupe"
+              ></span>
+              <span>(Monokrom, Warm Grey, Earthy)</span>
+            </div>
+          </div>
+
+          <div class="popup-style-box">
+            <div class="popup-style-title">
+              <span>Chic Style</span>
+              <span class="popup-style-badge">Modis & Statement</span>
+            </div>
+            <p class="popup-style-text">
+              Tampil berani dengan sentuhan fashion-forward, perpaduan tekstur
+              elegan, aksesori standout, dan siluet dinamis yang menarik
+              perhatian positif.
+            </p>
+            <div class="popup-palette-row">
+              <span>Palet:</span>
+              <span
+                class="popup-color-dot"
+                style="background: #6d001a"
+                title="Burgundy"
+              ></span>
+              <span
+                class="popup-color-dot"
+                style="background: #134e4a"
+                title="Emerald"
+              ></span>
+              <span
+                class="popup-color-dot"
+                style="background: #b8860b"
+                title="Gold"
+              ></span>
+              <span
+                class="popup-color-dot"
+                style="background: #c2410c"
+                title="Terracotta"
+              ></span>
+              <span>(Burgundy, Emerald, Gold, Terracotta)</span>
+            </div>
+          </div>
+
+          <div class="popup-style-box">
+            <div class="popup-style-title">
+              <span>Streetwear Style</span>
+              <span class="popup-style-badge">Urban & Ekspresif</span>
+            </div>
+            <p class="popup-style-text">
+              Kenyamanan santai berjiwa muda dengan siluet oversized, paduan
+              sneakers ikonik, outer unik, dan vibe kasual perkotaan yang
+              ekspresif.
+            </p>
+            <div class="popup-palette-row">
+              <span>Palet:</span>
+              <span
+                class="popup-color-dot"
+                style="background: #171717"
+                title="Hitam"
+              ></span>
+              <span
+                class="popup-color-dot"
+                style="background: #556b2f"
+                title="Olive"
+              ></span>
+              <span
+                class="popup-color-dot"
+                style="background: #c3b091"
+                title="Khaki"
+              ></span>
+              <span
+                class="popup-color-dot"
+                style="background: #e11d48"
+                title="Aksen Merah"
+              ></span>
+              <span>(Hitam, Olive, Khaki, Bold Accent)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tips Siluet Highlight Card -->
+        <div class="tips-highlight-card">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--burgundy)"
+            stroke-width="2"
+            style="min-width: 22px; margin-top: 1px"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4M12 8h.01" />
+          </svg>
+          <div>
+            <strong>Tips Kunci Siluet Tubuh:</strong> Jika atasan berpotongan
+            longgar/oversized, seimbangkan dengan celana yang lebih ramping atau
+            berpotongan lurus. Sebaliknya, jika mengenakan celana wide-leg,
+            pilih atasan yang lebih pas di badan (fitted) agar postur tetap
+            proporsional.
+          </div>
+        </div>
+
+        <!-- Takeaway Catatan Penting -->
+        <div class="takeaway-card">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--burgundy)"
+            stroke-width="2"
+            style="min-width: 20px; margin-top: 2px"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4M12 8h.01" />
+          </svg>
+          <div>
+            <strong>Catatan untuk Pengguna Tamu:</strong> Anda dapat mencoba
+            kuis personality langsung tanpa login. Untuk menyimpan riwayat hasil
+            tes dan membuka fitur lanjutan, Anda dapat mendaftar akun gratis
+            kapan pun.
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================
+           KOMPONEN 2: TAMPILAN AWAL TUTORIAL REKOMENDASI (GENERAL)
+           ======================================================== -->
+      <section
+        class="tutorial-component-view"
+        id="viewRekomendasi"
+        role="tabpanel"
+        aria-label="Tutorial Rekomendasi"
+      >
+        <div class="view-header-card">
+          <div class="view-header-left">
+            <span class="view-badge">PANDUAN FITUR 2 • REKOMENDASI OUTFIT</span>
+            <h2 class="view-title">
+              Cara Menggunakan Fitur Rekomendasi di Web
+            </h2>
+            <p class="view-desc">
+              Panduan langkah demi langkah cara memfilter tema busana di
+              Beranda, memilih deretan kartu kipas interaktif, kuota tanya gaya
+              AI, dan belanja via link resmi.
+            </p>
+            <div style="margin-top: 12px;">
+              <a 
+                href="rekomendasi.html" 
+                style="
+                  display: inline-flex; 
+                  align-items: center; 
+                  gap: 8px; 
+                  background: #6D001A; 
+                  color: #FFF8E7; 
+                  padding: 8px 18px; 
+                  border-radius: 999px; 
+                  font-size: 12px; 
+                  font-weight: 700; 
+                  text-decoration: none;
+                  box-shadow: 0 4px 12px rgba(109,0,26,0.2);
+                "
+              >
+                <span>Buka Galeri Rekomendasi</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+          <div
+            style="
+              background: var(--burgundy-light);
+              border: 1px solid var(--line);
+              border-radius: 14px;
+              padding: 12px 18px;
+              text-align: center;
+            "
+          >
+            <div
+              style="
+                font-size: 11px;
+                font-weight: 700;
+                color: var(--burgundy);
+                text-transform: uppercase;
+              "
+            >
+              Status Modul
+            </div>
+            <div
+              style="
+                font-size: 14px;
+                font-weight: 700;
+                color: #15803d;
+                margin-top: 2px;
+              "
+            >
+              Siap Digunakan
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 Langkah Alur Utama -->
+        <div class="popup-section-heading">
+          <span class="popup-section-badge">LANGKAH 1 - 5</span>
+          <span>Tutorial Cara Menggunakan Fitur Rekomendasi Outfit di Web</span>
+        </div>
+
+        <div class="popup-guide-grid">
+          <div class="popup-guide-card">
+            <div class="popup-step-header">
+              <div class="popup-step-num">1</div>
+              <div>
+                <span class="ui-cue-pill">Di Beranda Web</span>
+                <h4 class="popup-step-title">
+                  Buka Mode Rekomendasi di Beranda
+                </h4>
+              </div>
+            </div>
+            <p class="popup-step-desc">
+              Pada Beranda Utama (<strong>Main.dc.html</strong>), klik tombol
+              <strong>"Lihat Rekomendasi"</strong> di bawah judul atau gulir ke
+              bawah ke panggung kartu kipas busana interaktif.
+            </p>
+            <div class="popup-step-action">
+              <strong>Aksi di Web:</strong> Klik tombol
+              <strong>"Lihat Rekomendasi"</strong> untuk mengaktifkan galeri
+              kurasi outfit berdasarkan tema acara.
+            </div>
+          </div>
+
+          <div class="popup-guide-card">
+            <div class="popup-step-header">
+              <div class="popup-step-num">2</div>
+              <div>
+                <span class="ui-cue-pill">Bilah Filter Acara</span>
+                <h4 class="popup-step-title">Pilih Filter Tema Acara</h4>
+              </div>
+            </div>
+            <p class="popup-step-desc">
+              Klik tombol filter kategori di atas panggung busana:
+              <strong>Kasual</strong> (hangout santai),
+              <strong>Kerja</strong> (kantor / profesional),
+              <strong>Pesta / Kondangan</strong> (acara formal), atau
+              <strong>Olahraga</strong> (sporty).
+            </p>
+            <div class="popup-step-action">
+              <strong>Aksi di Web:</strong> Tekan salah satu tombol pill filter
+              acara. Deretan judul dan koleksi kartu busana otomatis berganti
+              seketika.
+            </div>
+          </div>
+
+          <div class="popup-guide-card">
+            <div class="popup-step-header">
+              <div class="popup-step-num">3</div>
+              <div>
+                <span class="ui-cue-pill">Panggung Kartu Kipas</span>
+                <h4 class="popup-step-title">
+                  Tekan Kartu Outfit yang Diinginkan
+                </h4>
+              </div>
+            </div>
+            <p class="popup-step-desc">
+              Di layar tengah terdapat 9 kartu busana berbentuk kipas.
+              <strong>Tekan/klik kartu foto outfit mana saja</strong> yang ingin
+              kamu lihat detail tampilannya.
+            </p>
+            <div class="popup-step-action">
+              <strong>Respon di Web:</strong> Kartu yang diklik langsung
+              bergeser ke tengah (Featured Look) dengan bingkai burgundy emas
+              dan menampilkan rincian outfit.
+            </div>
+          </div>
+
+          <div class="popup-guide-card">
+            <div class="popup-step-header">
+              <div class="popup-step-num">4</div>
+              <div>
+                <span class="ui-cue-pill">Menu Akun & Chat AI</span>
+                <h4 class="popup-step-title">
+                  Gunakan Asisten AI Tanya Gaya (Kuota Gratis)
+                </h4>
+              </div>
+            </div>
+            <p class="popup-step-desc">
+              Butuh alternatif warna atau saran alas kaki yang cocok? Buka menu
+              akun di pojok kanan atas untuk melihat sisa kuota tanya gaya AI.
+              Pengguna terdaftar mendapat <strong>10 kuota gratis</strong> yang
+              di-reset tiap 3 hari.
+            </p>
+            <div class="popup-step-action">
+              <strong>Aksi di Web:</strong> Klik menu profil akun di pojok kanan
+              atas &rarr; ajukan pertanyaan gaya seputar outfit yang kamu pilih.
+            </div>
+          </div>
+
+          <div class="popup-guide-card">
+            <div class="popup-step-header">
+              <div class="popup-step-num">5</div>
+              <div>
+                <span class="ui-cue-pill">Toko Online Resmi</span>
+                <h4 class="popup-step-title">
+                  Beli Outfit via Link Belanja Langsung
+                </h4>
+              </div>
+            </div>
+            <p class="popup-step-desc">
+              Setiap item pakaian (atasan, celana/rok, sepatu, aksesoris)
+              dilengkapi link belanja resmi ke toko e-commerce mitra (Zalora,
+              Tokopedia, Uniqlo, Shopee, dsb).
+            </p>
+            <div class="popup-step-action">
+              <strong>Aksi di Web:</strong> Klik tautan produk pada rincian
+              outfit untuk langsung diarahkan ke halaman checkout toko online
+              resmi.
+            </div>
+          </div>
+        </div>
+
+        <!-- Panduan Kategori Acara -->
+        <div class="popup-section-heading">
+          <span class="popup-section-badge">KATEGORI ACARA</span>
+          <span>Inspirasi Paduan Busana Sesuai Suasana</span>
+        </div>
+
+        <div class="popup-style-grid">
+          <div class="popup-style-box">
+            <div class="popup-style-title">
+              <span>Kasual / Hangout</span>
+              <span class="popup-style-badge">Santai & Nyaman</span>
+            </div>
+            <p class="popup-style-text">
+              Kombinasi kaos katun berkualitas tinggi, denim berpotongan
+              relaxed, sneakers kasual fleksibel, dan tote bag minimalis untuk
+              aktivitas harian santai.
+            </p>
+            <div class="popup-palette-row">
+              <span>Paduan: Kaos Katun + Relaxed Denim + Sneakers Kasual</span>
+            </div>
+          </div>
+
+          <div class="popup-style-box">
+            <div class="popup-style-title">
+              <span>Kerja / Smart Casual</span>
+              <span class="popup-style-badge">Rapi & Profesional</span>
+            </div>
+            <p class="popup-style-text">
+              Paduan kemeja oxford berstruktur atau polo rajut, blazer unlined
+              semi-formal, celana bahan ankle-cut, dan sepatu loafers kulit
+              elegan.
+            </p>
+            <div class="popup-palette-row">
+              <span>Paduan: Blazer Unlined + Kemeja + Chinos + Loafers</span>
+            </div>
+          </div>
+
+          <div class="popup-style-box">
+            <div class="popup-style-title">
+              <span>Pesta & Kondangan</span>
+              <span class="popup-style-badge">Mewah & Anggun</span>
+            </div>
+            <p class="popup-style-text">
+              Gaun midi satin elegan atau kemeja batik sutra tulis berpadu
+              celana tailored gelap, disempurnakan heels atau pantofel formal
+              dan clutch bag.
+            </p>
+            <div class="popup-palette-row">
+              <span>Paduan: Dress Anggun / Batik Premium + Pantofel/Heels</span>
+            </div>
+          </div>
+
+          <div class="popup-style-box">
+            <div class="popup-style-title">
+              <span>Liburan / Pantai</span>
+              <span class="popup-style-badge">Sejuk & Bernapas</span>
+            </div>
+            <p class="popup-style-text">
+              Kemeja lengan pendek berbahan linen adem, celana pendek santai
+              atau rok flowy bernuansa earthy/pastel, sandal kulit, dan kacamata
+              hitam pelindung.
+            </p>
+            <div class="popup-palette-row">
+              <span>Paduan: Kemeja Linen + Celana Santai + Sandal Kulit</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tips Belanja & Kuota AI -->
+        <div class="tips-highlight-card">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--burgundy)"
+            stroke-width="2"
+            style="min-width: 22px; margin-top: 1px"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4M12 8h.01" />
+          </svg>
+          <div>
+            <strong>Tips Belanja Cerdas:</strong> Cek spesifikasi bahan dan
+            panduan ukuran (<em>size chart</em>) sebelum checkout pada link toko
+            online resmi. Anda juga bisa menanyakan kepada AI asisten kami
+            apakah potongan pakaian tersebut cocok untuk postur tubuh Anda.
+          </div>
+        </div>
+
+        <!-- Takeaway Catatan Penting -->
+        <div class="takeaway-card">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--burgundy)"
+            stroke-width="2"
+            style="min-width: 20px; margin-top: 2px"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4M12 8h.01" />
+          </svg>
+          <div>
+            <strong>Catatan untuk Pengguna Tamu:</strong> Anda bebas menelusuri
+            seluruh galeri kurasi outfit dan link belanja tanpa login. Untuk
+            membuka asisten tanya gaya AI dengan 10 kuota gratis, silakan masuk
+            atau daftar akun.
+          </div>
+        </div>
+      </section>
+
+      <!-- Final Action Banner -->
+      <section class="final-action-card">
+        <h2 class="final-title">Siap Menjelajahi Outfit Req?</h2>
+        <p class="final-desc" id="finalBannerDesc">
+          Anda dapat berpindah antara kedua panduan ini kapan saja. Masuk ke
+          Beranda Utama untuk langsung mulai mencoba fiturnya!
+        </p>
+        <div class="final-btn-group">
+          <a href="index.html" class="btn-final-primary">
+            <span>MASUK KE BERANDA UTAMA</span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+
+          <!-- Tombol Khusus Pengunjung Belum Login -->
+          <a
+            href="login.html?mode=login"
+            class="btn-final-auth"
+            id="finalAuthBtn"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"
+              />
+            </svg>
+            <span>DAFTAR / MASUK (KLAIM 10 KUOTA)</span>
+          </a>
+
+          <a href="rekomendasi.html" class="btn-final-secondary">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <span>Buka Galeri Rekomendasi</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ========================================================
+         POP-UP MODAL CARD POLOSAN TUTORIAL (MUNCUL SAAT CARD DITEKAN)
+         ======================================================== -->
+    <div
+      id="tutorialPopupModal"
+      class="tutorial-popup-backdrop"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="popupTutorialTitle"
+      onclick="handleBackdropClick(event)"
+      style="display: none"
+    >
+      <div class="tutorial-popup-card" onclick="event.stopPropagation()">
+        <!-- Header Pop-up Card Polosan -->
+        <div class="popup-card-header">
+          <div class="popup-header-info">
+            <span class="popup-tag-badge" id="popupTagBadge"
+              >KOMPONEN 1 • PERSONALITY STYLE</span
+            >
+            <h2 class="popup-card-title" id="popupTutorialTitle">
+              Tutorial Personality
+            </h2>
+            <p class="popup-card-subtitle" id="popupTutorialDesc">
+              Panduan analisis kepribadian gaya (Classic, Minimalist, Chic,
+              Streetwear) dan pemahaman siluet ideal untuk semua jenis akun.
+            </p>
+          </div>
+          <button
+            type="button"
+            class="popup-close-btn"
+            onclick="closeTutorialPopup()"
+            title="Tutup pop-up (Esc)"
+            aria-label="Tutup"
+          >
+            &#10005;
+          </button>
+        </div>
+
+        <!-- Tab Switcher di dalam Pop-up Card -->
+        <div class="popup-tabs-bar" role="tablist">
+          <button
+            type="button"
+            class="popup-tab-btn active"
+            id="popupTabPersonality"
+            onclick="switchPopupTutorialTab('personality')"
+            role="tab"
+          >
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span>1. Cara Pakai Fitur Personality</span>
+          </button>
+          <button
+            type="button"
+            class="popup-tab-btn"
+            id="popupTabRekomendasi"
+            onclick="switchPopupTutorialTab('rekomendasi')"
+            role="tab"
+          >
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+              <path d="M3 6h18" />
+            </svg>
+            <span>2. Cara Pakai Fitur Rekomendasi</span>
+          </button>
+        </div>
+
+        <!-- Body Isi Tutorial -->
+        <div class="popup-card-body">
+          <!-- Panel Pop-up 1: Personality -->
+          <div class="popup-view-panel active" id="popupViewPersonality">
+            <div class="popup-section-heading">
+              <span class="popup-section-badge">PANDUAN LANGKAH 1 - 5</span>
+              <span>Tutorial Cara Menggunakan Fitur Personality di Web</span>
+            </div>
+
+            <div class="popup-guide-grid">
+              <div class="popup-guide-card">
+                <div class="popup-step-header">
+                  <div class="popup-step-num">1</div>
+                  <div>
+                    <span class="ui-cue-pill">Di Beranda Web</span>
+                    <h4 class="popup-step-title">
+                      Buka Menu "Tes Personality"
+                    </h4>
+                  </div>
+                </div>
+                <p class="popup-step-desc">
+                  Pada Beranda Utama (<strong>Main.dc.html</strong>), temukan
+                  dan klik tombol emas bertuliskan
+                  <strong>"Tes Personality"</strong> di bawah judul utama, atau
+                  pilih mode Personality.
+                </p>
+                <div class="popup-step-action">
+                  <strong>Aksi di Web:</strong> Klik tombol emas
+                  <strong>"Tes Personality"</strong> untuk masuk ke formulir
+                  kuis kepribadian gaya.
+                </div>
+              </div>
+
+              <div class="popup-guide-card">
+                <div class="popup-step-header">
+                  <div class="popup-step-num">2</div>
+                  <div>
+                    <span class="ui-cue-pill">Form Kuis Interaktif</span>
+                    <h4 class="popup-step-title">
+                      Jawab Kuis Preferensi Acara & Warna
+                    </h4>
+                  </div>
+                </div>
+                <p class="popup-step-desc">
+                  Pilih jawaban yang paling mencerminkan gaya harianmu: suasana
+                  acara yang sering didatangi (kantor, santai, pesta), warna
+                  favorit (monokrom, netral, earthy, bold), dan siluet busana
+                  yang disukai.
+                </p>
+                <div class="popup-step-action">
+                  <strong>Aksi di Web:</strong> Klik opsi kartu jawaban yang
+                  paling cocok dengan karakter dan kenyamanan berpakaianmu.
+                </div>
+              </div>
+
+              <div class="popup-guide-card">
+                <div class="popup-step-header">
+                  <div class="popup-step-num">3</div>
+                  <div>
+                    <span class="ui-cue-pill">Input Terenkripsi & Privat</span>
+                    <h4 class="popup-step-title">
+                      Masukkan Postur & Siluet Tubuh
+                    </h4>
+                  </div>
+                </div>
+                <p class="popup-step-desc">
+                  Ketik estimasi tinggi badan (cm) dan berat badan (kg), atau
+                  pilih siluet bentuk tubuhmu. Data ini dijamin privat dan hanya
+                  diolah algoritma web untuk menentukan proporsi busana.
+                </p>
+                <div class="popup-step-action">
+                  <strong>Aksi di Web:</strong> Isi kolom angka tinggi/berat
+                  badan atau pilih siluet postur, lalu tekan tombol
+                  <strong>"Analisis Gaya Saya"</strong>.
+                </div>
+              </div>
+
+              <div class="popup-guide-card">
+                <div class="popup-step-header">
+                  <div class="popup-step-num">4</div>
+                  <div>
+                    <span class="ui-cue-pill">Hasil Analisis Web</span>
+                    <h4 class="popup-step-title">
+                      Dapatkan DNA Gaya & Palet Warna
+                    </h4>
+                  </div>
+                </div>
+                <p class="popup-step-desc">
+                  Layar website akan langsung menampilkan rangkuman tipe gaya
+                  dominanmu (Classic, Minimalist, Chic, atau Streetwear),
+                  rekomendasi potongan siluet pakaian, dan kombinasi palet warna
+                  busana.
+                </p>
+                <div class="popup-step-action">
+                  <strong>Hasil di Web:</strong> Tinjau tipe gaya dominanmu,
+                  panduan siluet potongan atasan/bawahan, dan swatch palet warna
+                  kain.
+                </div>
+              </div>
+
+              <div class="popup-guide-card">
+                <div class="popup-step-header">
+                  <div class="popup-step-num">5</div>
+                  <div>
+                    <span class="ui-cue-pill">Asisten AI & Akun Profil</span>
+                    <h4 class="popup-step-title">
+                      Konsultasi AI & Simpan ke Profil
+                    </h4>
+                  </div>
+                </div>
+                <p class="popup-step-desc">
+                  Tanyakan tips mix & match ke asisten tanya gaya AI. Jika kamu
+                  masuk (login), hasil analisis gaya ini otomatis tersimpan di
+                  menu akun profilmu di pojok kanan atas.
+                </p>
+                <div class="popup-step-action">
+                  <strong>Aksi di Web:</strong> Klik ikon profil di pojok kanan
+                  atas untuk melihat hasil yang tersimpan dan sisa kuota tanya
+                  gaya AI.
+                </div>
+              </div>
+            </div>
+
+            <!-- Rangkuman 4 Karakter Gaya Dominan -->
+            <div class="popup-section-heading">
+              <span class="popup-section-badge">4 TIPE KARAKTER GAYA</span>
+              <span>Hasil Analisis Gaya yang Dapat Kamu Peroleh di Web</span>
+            </div>
+
+            <div class="popup-style-grid">
+              <div class="popup-style-box">
+                <div class="popup-style-title">
+                  <span>1. Classic Style</span>
+                  <span class="popup-style-badge">Timeless & Rapi</span>
+                </div>
+                <p class="popup-style-text">
+                  Gaya abadi berstruktur tailored, kain berkualitas tinggi, dan
+                  siluet profesional berwibawa di setiap momen.
+                </p>
+                <div class="popup-palette-row">
+                  <span>Palet Web:</span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #1b2a47"
+                    title="Navy"
+                  ></span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #f4efe6"
+                    title="Cream"
+                  ></span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #2b2b2b"
+                    title="Charcoal"
+                  ></span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #ffffff"
+                    title="Putih"
+                  ></span>
+                  <span>(Navy, Cream, Charcoal, Putih)</span>
+                </div>
+              </div>
+
+              <div class="popup-style-box">
+                <div class="popup-style-title">
+                  <span>2. Minimalist Style</span>
+                  <span class="popup-style-badge">Clean & Fungsional</span>
+                </div>
+                <p class="popup-style-text">
+                  Garis potongan bersih tanpa motif ramai, fokus pada kenyamanan
+                  fungsional, dan kesan rapi modern yang praktis.
+                </p>
+                <div class="popup-palette-row">
+                  <span>Palet Web:</span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #111111"
+                    title="Hitam"
+                  ></span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #e8e4dc"
+                    title="Off-White"
+                  ></span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #8f8b82"
+                    title="Warm Grey"
+                  ></span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #6d5f53"
+                    title="Taupe"
+                  ></span>
+                  <span>(Monokrom, Warm Grey, Earthy)</span>
+                </div>
+              </div>
+
+              <div class="popup-style-box">
+                <div class="popup-style-title">
+                  <span>3. Chic Style</span>
+                  <span class="popup-style-badge">Modis & Statement</span>
+                </div>
+                <p class="popup-style-text">
+                  Siluet dinamis dengan perpaduan tekstur mewah, aksesori
+                  standout, dan sentuhan berani yang modis serta up-to-date.
+                </p>
+                <div class="popup-palette-row">
+                  <span>Palet Web:</span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #6d001a"
+                    title="Burgundy"
+                  ></span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #134e4a"
+                    title="Emerald"
+                  ></span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #b8860b"
+                    title="Gold"
+                  ></span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #c2410c"
+                    title="Terracotta"
+                  ></span>
+                  <span>(Burgundy, Emerald, Gold, Terracotta)</span>
+                </div>
+              </div>
+
+              <div class="popup-style-box">
+                <div class="popup-style-title">
+                  <span>4. Streetwear Style</span>
+                  <span class="popup-style-badge">Urban & Ekspresif</span>
+                </div>
+                <p class="popup-style-text">
+                  Kenyamanan santai berjiwa muda dengan potongan oversized,
+                  paduan sneakers ikonik, outer unik, dan vibe perkotaan yang
+                  bebas.
+                </p>
+                <div class="popup-palette-row">
+                  <span>Palet Web:</span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #171717"
+                    title="Hitam"
+                  ></span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #556b2f"
+                    title="Olive"
+                  ></span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #c3b091"
+                    title="Khaki"
+                  ></span>
+                  <span
+                    class="popup-color-dot"
+                    style="background: #e11d48"
+                    title="Merah Aksen"
+                  ></span>
+                  <span>(Hitam, Olive, Khaki, Bold Accent)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tips Siluet Tubuh -->
+            <div class="tips-highlight-card">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--burgundy)"
+                stroke-width="2"
+                style="min-width: 22px; margin-top: 1px"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4M12 8h.01" />
+              </svg>
+              <div>
+                <strong>Tips Menggunakan Hasil Siluet di Web:</strong> Gunakan
+                saran siluet dari hasil tes saat memilih outfit di Beranda. Jika
+                hasil siluetmu menyarankan atasan longgar/oversized, seimbangkan
+                dengan celana yang lebih ramping atau berpotongan lurus (<em
+                  >straight cut</em
+                >).
+              </div>
+            </div>
+
+            <!-- Akses Akun Info -->
+            <div class="takeaway-card" style="margin-top: 14px">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--burgundy)"
+                stroke-width="2"
+                style="min-width: 20px; margin-top: 2px"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="8.5" cy="7" r="4" />
+                <polyline points="17 11 19 13 23 9" />
+              </svg>
+              <div>
+                <strong>Akses Semua Pengguna:</strong> Pengunjung tamu dapat
+                mencoba kuis personality langsung tanpa akun. Pengguna yang
+                masuk atau mendaftar dapat menyimpan riwayat analisis gaya dan
+                membuka 10 kuota tanya asisten AI gratis.
+              </div>
+            </div>
+
+            <!-- Banner Coba Langsung di Web -->
+            <div class="popup-cta-banner">
+              <div class="popup-cta-text">
+                <h4>Siap Mencoba Fitur Personality di Web?</h4>
+                <p>
+                  Klik tombol di bawah untuk langsung menuju Beranda Utama dan
+                  memulai kuis gayamu.
+                </p>
+              </div>
+              <a href="index.html" class="popup-cta-btn">
+                <span>Coba Fitur di Beranda Utama</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Panel Pop-up 2: Rekomendasi -->
+          <div class="popup-view-panel" id="popupViewRekomendasi">
+            <div class="popup-section-heading">
+              <span class="popup-section-badge">PANDUAN LANGKAH 1 - 5</span>
+              <span
+                >Tutorial Cara Menggunakan Fitur Rekomendasi Outfit di Web</span
+              >
+            </div>
+
+            <div class="popup-guide-grid">
+              <div class="popup-guide-card">
+                <div class="popup-step-header">
+                  <div class="popup-step-num">1</div>
+                  <div>
+                    <span class="ui-cue-pill">Di Beranda Web</span>
+                    <h4 class="popup-step-title">
+                      Buka Mode Rekomendasi di Beranda
+                    </h4>
+                  </div>
+                </div>
+                <p class="popup-step-desc">
+                  Pada Beranda Utama (<strong>Main.dc.html</strong>), klik
+                  tombol <strong>"Lihat Rekomendasi"</strong> di bawah judul
+                  atau gulir ke bawah ke panggung kartu kipas busana interaktif.
+                </p>
+                <div class="popup-step-action">
+                  <strong>Aksi di Web:</strong> Klik tombol
+                  <strong>"Lihat Rekomendasi"</strong> untuk mengaktifkan galeri
+                  kurasi outfit berdasarkan tema acara.
+                </div>
+              </div>
+
+              <div class="popup-guide-card">
+                <div class="popup-step-header">
+                  <div class="popup-step-num">2</div>
+                  <div>
+                    <span class="ui-cue-pill">Bilah Filter Acara</span>
+                    <h4 class="popup-step-title">Pilih Filter Tema Acara</h4>
+                  </div>
+                </div>
+                <p class="popup-step-desc">
+                  Klik tombol filter kategori di atas panggung busana:
+                  <strong>Kasual</strong> (hangout santai),
+                  <strong>Kerja</strong> (kantor / profesional),
+                  <strong>Pesta / Kondangan</strong> (acara formal), atau
+                  <strong>Olahraga</strong> (sporty).
+                </p>
+                <div class="popup-step-action">
+                  <strong>Aksi di Web:</strong> Tekan salah satu tombol pill
+                  filter acara. Deretan judul dan koleksi kartu busana otomatis
+                  berganti seketika.
+                </div>
+              </div>
+
+              <div class="popup-guide-card">
+                <div class="popup-step-header">
+                  <div class="popup-step-num">3</div>
+                  <div>
+                    <span class="ui-cue-pill">Panggung Kartu Kipas</span>
+                    <h4 class="popup-step-title">
+                      Tekan Kartu Outfit yang Diinginkan
+                    </h4>
+                  </div>
+                </div>
+                <p class="popup-step-desc">
+                  Di layar tengah terdapat 9 kartu busana berbentuk kipas.
+                  <strong>Tekan/klik kartu foto outfit mana saja</strong> yang
+                  ingin kamu lihat detail tampilannya.
+                </p>
+                <div class="popup-step-action">
+                  <strong>Respon di Web:</strong> Kartu yang diklik langsung
+                  bergeser ke tengah (Featured Look) dengan bingkai burgundy
+                  emas dan menampilkan rincian outfit.
+                </div>
+              </div>
+
+              <div class="popup-guide-card">
+                <div class="popup-step-header">
+                  <div class="popup-step-num">4</div>
+                  <div>
+                    <span class="ui-cue-pill">Menu Akun & Chat AI</span>
+                    <h4 class="popup-step-title">
+                      Gunakan Asisten AI Tanya Gaya (Kuota Gratis)
+                    </h4>
+                  </div>
+                </div>
+                <p class="popup-step-desc">
+                  Butuh alternatif warna atau saran alas kaki yang cocok? Buka
+                  menu akun di pojok kanan atas untuk melihat sisa kuota tanya
+                  gaya AI. Pengguna terdaftar mendapat
+                  <strong>10 kuota gratis</strong> yang di-reset tiap 3 hari.
+                </p>
+                <div class="popup-step-action">
+                  <strong>Aksi di Web:</strong> Klik menu profil akun di pojok
+                  kanan atas &rarr; ajukan pertanyaan gaya seputar outfit yang
+                  kamu pilih.
+                </div>
+              </div>
+
+              <div class="popup-guide-card">
+                <div class="popup-step-header">
+                  <div class="popup-step-num">5</div>
+                  <div>
+                    <span class="ui-cue-pill">Toko Online Resmi</span>
+                    <h4 class="popup-step-title">
+                      Beli Outfit via Link Belanja Langsung
+                    </h4>
+                  </div>
+                </div>
+                <p class="popup-step-desc">
+                  Setiap item pakaian (atasan, celana/rok, sepatu, aksesoris)
+                  dilengkapi link belanja resmi ke toko e-commerce mitra
+                  (Zalora, Tokopedia, Uniqlo, Shopee, dsb).
+                </p>
+                <div class="popup-step-action">
+                  <strong>Aksi di Web:</strong> Klik tautan produk pada rincian
+                  outfit untuk langsung diarahkan ke halaman checkout toko
+                  online resmi.
+                </div>
+              </div>
+            </div>
+
+            <!-- Panduan Memilih Tema Acara di Web -->
+            <div class="popup-section-heading">
+              <span class="popup-section-badge">FILTER ACARA DI WEB</span>
+              <span>Inspirasi Paduan Busana yang Tersedia di Beranda</span>
+            </div>
+
+            <div class="popup-style-grid">
+              <div class="popup-style-box">
+                <div class="popup-style-title">
+                  <span>Kasual / Hangout</span>
+                  <span class="popup-style-badge">Filter: Kasual</span>
+                </div>
+                <p class="popup-style-text">
+                  Kombinasi kaos katun premium, relaxed denim atau chinos
+                  santai, sneakers kasual fleksibel, dan tote bag minimalis
+                  untuk aktivitas harian.
+                </p>
+                <div class="popup-palette-row">
+                  <span
+                    >Rekomendasi Item: Kaos Katun + Relaxed Denim + Sneakers
+                    Kasual</span
+                  >
+                </div>
+              </div>
+
+              <div class="popup-style-box">
+                <div class="popup-style-title">
+                  <span>Kerja / Smart Casual</span>
+                  <span class="popup-style-badge">Filter: Kerja</span>
+                </div>
+                <p class="popup-style-text">
+                  Kemeja oxford berstruktur atau polo rajut, blazer unlined
+                  semi-formal, celana bahan rapi ankle-cut, dan sepatu loafers
+                  kulit berkelas.
+                </p>
+                <div class="popup-palette-row">
+                  <span
+                    >Rekomendasi Item: Blazer Unlined + Kemeja + Chinos +
+                    Loafers</span
+                  >
+                </div>
+              </div>
+
+              <div class="popup-style-box">
+                <div class="popup-style-title">
+                  <span>Pesta & Kondangan</span>
+                  <span class="popup-style-badge">Filter: Pesta</span>
+                </div>
+                <p class="popup-style-text">
+                  Gaun midi satin elegan atau kemeja batik sutra tulis berpadu
+                  celana tailored gelap, disempurnakan heels atau pantofel
+                  formal dan clutch.
+                </p>
+                <div class="popup-palette-row">
+                  <span
+                    >Rekomendasi Item: Dress Anggun / Batik Premium +
+                    Pantofel/Heels</span
+                  >
+                </div>
+              </div>
+
+              <div class="popup-style-box">
+                <div class="popup-style-title">
+                  <span>Liburan / Santai Outdoor</span>
+                  <span class="popup-style-badge"
+                    >Filter: Olahraga / Santai</span
+                  >
+                </div>
+                <p class="popup-style-text">
+                  Kemeja lengan pendek berbahan linen adem, celana pendek santai
+                  atau rok flowy bernuansa earthy/pastel, sandal kulit, dan
+                  kacamata hitam.
+                </p>
+                <div class="popup-palette-row">
+                  <span
+                    >Rekomendasi Item: Kemeja Linen + Celana Santai + Sandal
+                    Kulit</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Tips Belanja & Kuota AI -->
+            <div class="tips-highlight-card">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--burgundy)"
+                stroke-width="2"
+                style="min-width: 22px; margin-top: 1px"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4M12 8h.01" />
+              </svg>
+              <div>
+                <strong>Tips Belanja di Web:</strong> Cek tabel ukuran (<em
+                  >size chart</em
+                >) sebelum membeli di toko online resmi. Anda juga dapat
+                menanyakan kepada asisten AI Outfit Req apakah ukuran dan
+                potongan pakaian tersebut cocok untuk postur tubuh Anda.
+              </div>
+            </div>
+
+            <!-- Akses Akun Info -->
+            <div class="takeaway-card" style="margin-top: 14px">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--burgundy)"
+                stroke-width="2"
+                style="min-width: 20px; margin-top: 2px"
+              >
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                <path d="M3 6h18" />
+              </svg>
+              <div>
+                <strong>Akses untuk Semua Pengguna:</strong> Seluruh pengunjung
+                bebas menelusuri katalog outfit dan link belanja tanpa login.
+                Pengguna yang masuk ke akun akan mendapatkan asisten tanya gaya
+                AI dengan 10 kuota gratis yang di-reset tiap 3 hari.
+              </div>
+            </div>
+
+            <!-- Banner Coba Langsung di Web -->
+            <div class="popup-cta-banner">
+              <div class="popup-cta-text">
+                <h4>Siap Menjelajahi Rekomendasi Outfit di Web?</h4>
+                <p>
+                  Klik tombol di bawah untuk langsung mencoba filter acara dan
+                  kartu kipas interaktif di Beranda.
+                </p>
+              </div>
+              <a href="index.html" class="popup-cta-btn">
+                <span>Buka Galeri Outfit di Beranda</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Pop-up Card -->
+        <div class="popup-card-footer">
+          <button
+            type="button"
+            class="btn-popup-close-secondary"
+            onclick="closeTutorialPopup()"
+          >
+            Tutup Pop-up
+          </button>
+          <a href="index.html" class="btn-popup-main-action">
+            <span>Masuk ke Beranda Utama</span>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Konfirmasi Akun Telah Terverifikasi (saat mendarat dari tautan email) -->
+    <div
+      id="verifiedWelcomeModal"
+      class="verified-modal-backdrop"
+      style="display: none"
+    >
+      <div class="verified-modal-box">
+        <div class="verified-modal-icon">
+          <svg
+            width="34"
+            height="34"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#15803d"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </svg>
+        </div>
+        <div
+          class="brand-badge"
+          style="margin: 4px auto 8px; display: inline-block"
+        >
+          Outfit Req
+        </div>
+        <h3 class="verified-modal-title">Akun Telah Terverifikasi</h3>
+        <p class="verified-modal-desc">
+          Selamat! Akun Anda telah berhasil terdaftar dan aktif. Anda dapat
+          langsung mempelajari panduan ini atau silakan login kembali dengan
+          akun Anda.
+        </p>
+
+        <div class="verified-modal-user" id="verifiedModalUserBox">
+          <div class="user-avatar" id="modalUserAvatar">C</div>
+          <div style="text-align: left; min-width: 0; flex: 1">
+            <div
+              style="font-weight: 600; font-size: 14px; color: var(--burgundy)"
+              id="modalUserName"
+            >
+              Nama Customer
+            </div>
+            <div
+              style="font-size: 12px; color: var(--ink-dim)"
+              id="modalUserEmail"
+            >
+              email@domain.com
+            </div>
+          </div>
+          <span
+            style="
+              font-size: 11px;
+              font-weight: 600;
+              color: #15803d;
+              background: rgba(21, 128, 61, 0.1);
+              padding: 3px 8px;
+              border-radius: 999px;
+            "
+            >✓ Terdaftar</span
+          >
+        </div>
+
+        <div class="verified-modal-actions">
+          <button type="button" class="btn-modal-primary" id="modalExploreBtn">
+            <span>LANGSUNG PELAJARI PANDUAN</span>
+          </button>
+          <a
+            href="login.html?mode=login"
+            class="btn-modal-secondary"
+            id="modalReloginBtn"
+          >
+            <span>Silakan Login Kembali</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <p>
+        &copy; 2026 Outfit Req — Rekomendasi Gaya & Personality. Hak cipta
+        dilindungi undang-undang.
+      </p>
+    </footer>
+
+    <!-- Script Pemilih 2 Komponen Tutorial & Sinkronisasi Sesi Customer/Guest -->
+    <script>
+      // ========================================================
+      // 1. LOGIKA POP-UP CARD POLOSAN TUTORIAL (LANGSUNG TERSEDIA)
+      // ========================================================
+      let lastPopupOpenTime = 0;
+
+      const popupDataMap = {
+        personality: {
+          tag: "TUTORIAL PENGGUNAAN FITUR &bull; PERSONALITY",
+          title: "Cara Menggunakan Fitur Personality",
+          desc: "Panduan langkah demi langkah cara membuka menu kuis di web, mengisi preferensi acara & warna, memasukkan postur secara privat, dan membaca palet gayamu.",
+        },
+        rekomendasi: {
+          tag: "TUTORIAL PENGGUNAAN FITUR &bull; REKOMENDASI OUTFIT",
+          title: "Cara Menggunakan Fitur Rekomendasi",
+          desc: "Panduan langkah demi langkah cara memfilter tema busana di Beranda, memilih deretan kartu kipas interaktif, kuota tanya gaya AI, dan belanja via link resmi.",
+        },
+      };
+
+      window.openTutorialPopup = function (componentName, evt) {
+        if (evt) {
+          try {
+            evt.preventDefault();
+            evt.stopPropagation();
+          } catch (e) {}
+        }
+
+        lastPopupOpenTime = Date.now();
+
+        const targetComponent =
+          componentName === "rekomendasi" ? "rekomendasi" : "personality";
+        const modal = document.getElementById("tutorialPopupModal");
+
+        if (modal) {
+          modal.style.display = "flex";
+          void modal.offsetWidth;
+          modal.classList.add("active");
+          document.body.style.overflow = "hidden";
+
+          window.switchPopupTutorialTab(targetComponent);
+
+          const popupBody = modal.querySelector(".popup-card-body");
+          if (popupBody) popupBody.scrollTop = 0;
+        }
+
+        // Buka juga tampilan tutorial di halaman bawah agar sinkron
+        if (typeof selectTutorialComponent === "function") {
+          selectTutorialComponent(targetComponent, false);
+        }
+
+        // Update highlight kartu utama di halaman
+        const cardPers = document.getElementById("choiceCardPersonality");
+        const cardReko = document.getElementById("choiceCardRekomendasi");
+        if (cardPers)
+          cardPers.classList.toggle(
+            "active",
+            targetComponent === "personality",
+          );
+        if (cardReko)
+          cardReko.classList.toggle(
+            "active",
+            targetComponent === "rekomendasi",
+          );
+      };
+
+      if (window.__pendingOpenPopup) {
+        const pending = window.__pendingOpenPopup;
+        window.__pendingOpenPopup = null;
+        window.openTutorialPopup(pending);
+      }
+
+      window.closeTutorialPopup = function (evt) {
+        if (evt) {
+          try {
+            evt.preventDefault();
+            evt.stopPropagation();
+          } catch (e) {}
+        }
+        if (Date.now() - lastPopupOpenTime < 350) return;
+
+        const modal = document.getElementById("tutorialPopupModal");
+        if (!modal) return;
+        modal.classList.remove("active");
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+
+        const cardPers = document.getElementById("choiceCardPersonality");
+        const cardReko = document.getElementById("choiceCardRekomendasi");
+        if (cardPers) cardPers.classList.remove("active");
+        if (cardReko) cardReko.classList.remove("active");
+      };
+
+      window.switchPopupTutorialTab = function (componentName) {
+        const isPers = componentName === "personality";
+        const meta = popupDataMap[componentName] || popupDataMap.personality;
+
+        const tagEl = document.getElementById("popupTagBadge");
+        const titleEl = document.getElementById("popupTutorialTitle");
+        const descEl = document.getElementById("popupTutorialDesc");
+        if (tagEl) tagEl.innerHTML = meta.tag;
+        if (titleEl) titleEl.textContent = meta.title;
+        if (descEl) descEl.textContent = meta.desc;
+
+        const tabPers = document.getElementById("popupTabPersonality");
+        const tabReko = document.getElementById("popupTabRekomendasi");
+        if (tabPers) tabPers.classList.toggle("active", isPers);
+        if (tabReko) tabReko.classList.toggle("active", !isPers);
+
+        const viewPers = document.getElementById("popupViewPersonality");
+        const viewReko = document.getElementById("popupViewRekomendasi");
+        if (viewPers) viewPers.classList.toggle("active", isPers);
+        if (viewReko) viewReko.classList.toggle("active", !isPers);
+
+        try {
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, "", "#" + componentName);
+          }
+        } catch (e) {}
+      };
+
+      window.handleBackdropClick = function (event) {
+        if (Date.now() - lastPopupOpenTime < 350) return;
+        const modal = document.getElementById("tutorialPopupModal");
+        if (event && event.target === modal) {
+          window.closeTutorialPopup(event);
+        }
+      };
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" || e.key === "Esc") {
+          const modal = document.getElementById("tutorialPopupModal");
+          if (
+            modal &&
+            (modal.classList.contains("active") ||
+              modal.style.display === "flex")
+          ) {
+            window.closeTutorialPopup(e);
+          }
+        }
+      });
+
+      // ========================================================
+      // 2. KONEKSI SUPABASE (BEBAS BENTROK VARIABEL GLOBAL)
+      // ========================================================
+      const SUPABASE_URL = "https://iklhjmmmolulglxirvrc.supabase.co";
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrbGhqbW1tb2x1bGdseGlydnJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyODAzNjQsImV4cCI6MjEwODg1NjM2NH0.NsKrraBp5W2SEDzKXM6GWevYr1g4iwGUei2CSawqNmQ";
+
+      let supabaseClient = null;
+      if (
+        typeof window !== "undefined" &&
+        window.supabase &&
+        typeof window.supabase.createClient === "function"
+      ) {
+        try {
+          supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY,
+          );
+        } catch (e) {
+          console.warn("Gagal memuat client Supabase:", e);
+        }
+      }
+
+      function showAuthToast(msg) {
+        let toast = document.getElementById("authToast");
+        if (!toast) {
+          toast = document.createElement("div");
+          toast.id = "authToast";
+          toast.className = "auth-toast";
+          toast.innerHTML = `<span class="auth-toast-icon">✓</span><span id="authToastMsg"></span>`;
+          document.body.appendChild(toast);
+        }
+        document.getElementById("authToastMsg").textContent = msg;
+        toast.classList.add("show");
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 5000);
+      }
+
+      function processUserSession(user, showToast = false) {
+        if (!user) return;
+        let customerName = user.user_metadata?.full_name;
+        if (!customerName) {
+          try {
+            const regMap = JSON.parse(
+              localStorage.getItem("outfit_req_registered_customers") || "{}",
+            );
+            const found = regMap[user.email?.toLowerCase()];
+            if (found && found.name) customerName = found.name;
+          } catch (e) {}
+        }
+        if (!customerName && user.email) {
+          const raw = user.email.split("@")[0];
+          customerName = raw.charAt(0).toUpperCase() + raw.slice(1);
+        }
+        if (!customerName) customerName = "Customer";
+
+        const userData = {
+          id: user.id || "usr_" + Date.now(),
+          name: customerName,
+          email: user.email,
+          tier: "Free Member",
+          isLoggedIn: true,
+          verifiedAt: user.email_confirmed_at || new Date().toISOString(),
+        };
+
+        try {
+          localStorage.setItem("outfit_req_user", JSON.stringify(userData));
+        } catch (e) {}
+
+        syncUserInfo();
+
+        if (showToast) {
+          showAuthToast(
+            `Email terverifikasi! Selamat datang, ${userData.name}. Akun Anda telah aktif.`,
+          );
+          showVerifiedModal(userData);
+        }
+      }
+
+      function showVerifiedModal(userData) {
+        const modal = document.getElementById("verifiedWelcomeModal");
+        if (!modal) return;
+        const nameEl = document.getElementById("modalUserName");
+        const emailEl = document.getElementById("modalUserEmail");
+        const avatarEl = document.getElementById("modalUserAvatar");
+        if (nameEl) nameEl.textContent = userData.name || "Customer";
+        if (emailEl) emailEl.textContent = userData.email || "";
+        if (avatarEl)
+          avatarEl.textContent = (userData.name || "C").charAt(0).toUpperCase();
+
+        modal.style.display = "flex";
+        modal.onclick = (e) => {
+          if (e.target === modal) modal.style.display = "none";
+        };
+
+        const exploreBtn = document.getElementById("modalExploreBtn");
+        if (exploreBtn) {
+          exploreBtn.onclick = () => {
+            modal.style.display = "none";
+          };
+        }
+      }
+
+      // ========================================================
+      // 3. SWITCHER KOMPONEN INLINE (TAMPILAN BAWAH HALAMAN)
+      // ========================================================
+      function selectTutorialComponent(componentName, shouldScroll = false) {
+        const isPersonality = componentName === "personality";
+        const isRekomendasi = componentName === "rekomendasi";
+
+        const tutorialMain =
+          document.getElementById("tutorialMainContainer") ||
+          document.querySelector(".tutorial-main");
+        const selectPrompt = document.getElementById("tutorialSelectPrompt");
+
+        if (tutorialMain) {
+          tutorialMain.style.display = "block";
+          setTimeout(() => {
+            tutorialMain.classList.add("visible");
+          }, 10);
+        }
+
+        if (selectPrompt) {
+          selectPrompt.style.display = "none";
+        }
+
+        const cardPers = document.getElementById("choiceCardPersonality");
+        const cardReko = document.getElementById("choiceCardRekomendasi");
+        if (cardPers) cardPers.classList.toggle("active", isPersonality);
+        if (cardReko) cardReko.classList.toggle("active", isRekomendasi);
+
+        const badgePers = document.getElementById("badgeCardPersonality");
+        const badgeReko = document.getElementById("badgeCardRekomendasi");
+        if (badgePers) {
+          badgePers.textContent = isPersonality
+            ? "Sedang Dibuka ✓"
+            : "Buka Pop-up Tutorial";
+        }
+        if (badgeReko) {
+          badgeReko.textContent = isRekomendasi
+            ? "Sedang Dibuka ✓"
+            : "Buka Pop-up Tutorial";
+        }
+
+        const segPers = document.getElementById("segBtnPersonality");
+        const segReko = document.getElementById("segBtnRekomendasi");
+        if (segPers) {
+          segPers.classList.toggle("active", isPersonality);
+          segPers.setAttribute(
+            "aria-selected",
+            isPersonality ? "true" : "false",
+          );
+        }
+        if (segReko) {
+          segReko.classList.toggle("active", isRekomendasi);
+          segReko.setAttribute(
+            "aria-selected",
+            isRekomendasi ? "true" : "false",
+          );
+        }
+
+        const viewPers = document.getElementById("viewPersonality");
+        const viewReko = document.getElementById("viewRekomendasi");
+        if (viewPers) viewPers.classList.toggle("active", isPersonality);
+        if (viewReko) viewReko.classList.toggle("active", isRekomendasi);
+
+        if (shouldScroll && tutorialMain) {
+          setTimeout(() => {
+            tutorialMain.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 80);
+        }
+      }
+
+      function closeTutorialContent() {
+        const tutorialMain =
+          document.getElementById("tutorialMainContainer") ||
+          document.querySelector(".tutorial-main");
+        const selectPrompt = document.getElementById("tutorialSelectPrompt");
+
+        if (tutorialMain) {
+          tutorialMain.classList.remove("visible");
+          setTimeout(() => {
+            tutorialMain.style.display = "none";
+          }, 350);
+        }
+
+        if (selectPrompt) {
+          selectPrompt.style.display = "flex";
+        }
+
+        const cardPers = document.getElementById("choiceCardPersonality");
+        const cardReko = document.getElementById("choiceCardRekomendasi");
+        if (cardPers) cardPers.classList.remove("active");
+        if (cardReko) cardReko.classList.remove("active");
+
+        const badgePers = document.getElementById("badgeCardPersonality");
+        const badgeReko = document.getElementById("badgeCardRekomendasi");
+        if (badgePers) badgePers.textContent = "Buka Pop-up Tutorial";
+        if (badgeReko) badgeReko.textContent = "Buka Pop-up Tutorial";
+
+        try {
+          window.history.replaceState(
+            null,
+            document.title,
+            window.location.pathname + window.location.search,
+          );
+        } catch (e) {}
+
+        const grid = document.querySelector(".dual-component-grid");
+        if (grid) {
+          grid.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+
+      // ========================================================
+      // 4. SINKRONISASI DATA SESI (CUSTOMER vs TAMU)
+      // ========================================================
+      function syncUserInfo() {
+        let customer = null;
+        try {
+          if (localStorage.getItem("outfit_req_logged_out") === "true") {
+            customer = null;
+          } else {
+            const raw = localStorage.getItem("outfit_req_user");
+            if (raw) {
+              const parsed = JSON.parse(raw);
+              if (parsed && parsed.isLoggedIn && parsed.email !== 'customer@gmail.com') {
+                customer = parsed;
+              }
+            }
+          }
+        } catch (e) {}
+
+        const customerPill = document.getElementById("customerPill");
+        const guestPill = document.getElementById("guestPill");
+        const navAuthBtn = document.getElementById("navAuthBtn");
+        const finalAuthBtn = document.getElementById("finalAuthBtn");
+        const heroSubtitle = document.getElementById("heroSubtitle");
+
+        if (customer) {
+          const displayName = customer.name || "Customer";
+          const initial = displayName.charAt(0).toUpperCase() || "C";
+
+          if (customerPill) {
+            customerPill.style.display = "inline-flex";
+            const customerNavName = document.getElementById("customerNavName");
+            if (customerNavName)
+              customerNavName.textContent = `Halo, ${displayName}`;
+            const customerAvatar = document.getElementById("customerAvatar");
+            if (customerAvatar) customerAvatar.textContent = initial;
+          }
+
+          if (guestPill) guestPill.style.display = "none";
+          if (navAuthBtn) navAuthBtn.style.display = "none";
+          if (finalAuthBtn) finalAuthBtn.style.display = "none";
+
+          if (heroSubtitle) {
+            heroSubtitle.innerHTML = `Selamat datang kembali, <span class="customer-highlight">${displayName}</span>! 
+              Platform Outfit Req berfokus pada 2 pilar utama: <strong>Personality</strong> dan <strong>Rekomendasi</strong>. 
+              Panduan ini dirancang untuk membantu Anda memaksimalkan seluruh fitur gaya dan kuota konsultasi Anda.`;
+          }
+        } else {
+          if (customerPill) customerPill.style.display = "none";
+          if (guestPill) guestPill.style.display = "inline-flex";
+          if (navAuthBtn) navAuthBtn.style.display = "inline-flex";
+          if (finalAuthBtn) finalAuthBtn.style.display = "inline-flex";
+
+          if (heroSubtitle) {
+            heroSubtitle.innerHTML = `Selamat datang di Outfit Req! Platform rekomendasi busana dan analisis kepribadian gaya ini 
+              terbuka bagi siapa saja. Panduan ini dirancang untuk <strong>semua jenis akun</strong>—baik Anda 
+              <strong>pengunjung tamu</strong> yang baru menjelajah maupun <strong>customer terdaftar</strong>—agar dapat memahami 2 komponen utama kami: 
+              <strong>Personality</strong> dan <strong>Rekomendasi</strong>.`;
+          }
+        }
+      }
+
+      // Autoconnect Google Gmail Login untuk Tamu di Halaman Panduan
+      window.triggerGmailLoginTutorial = async function() {
+        if (typeof showToastMessage === 'function') {
+          showToastMessage("Menghubungkan Akun Google Gmail...");
+        }
+        if (window.supabaseClient) {
+          try {
+            await window.supabaseClient.auth.signInWithOAuth({
+              provider: 'google',
+              options: { redirectTo: window.location.href }
+            });
+          } catch (e) {}
+        }
+        // Ambil data akun yang terdaftar atau sesi aktif
+        let custName = "Customer";
+        let custEmail = "customer@outfitreq.id";
+        try {
+          const regMap = JSON.parse(localStorage.getItem('outfit_req_registered_customers') || '{}');
+          const keys = Object.keys(regMap);
+          if (keys.length > 0) {
+            custEmail = keys[keys.length - 1];
+            custName = regMap[custEmail]?.name || custEmail.split('@')[0];
+          }
+        } catch (e) {}
+
+        const user = {
+          id: "usr-" + Date.now(),
+          name: custName,
+          username: "@" + custName.toLowerCase().replace(/[^a-z0-9_]/g, ''),
+          email: custEmail,
+          tier: "free",
+          isLoggedIn: true,
+          verifiedAt: new Date().toISOString()
+        };
+        try {
+          localStorage.setItem("outfit_req_user", JSON.stringify(user));
+        } catch (e) {}
+        if (typeof syncUserInfo === 'function') {
+          syncUserInfo();
+        }
+        if (typeof showToastMessage === 'function') {
+          showToastMessage("Berhasil Masuk via Gmail! Status Akun: Free Member.");
+        }
+      };
+
+      // ========================================================
+      // 5. INISIALISASI SAAT DOKUMEN SIAP
+      // ========================================================
+      window.addEventListener("DOMContentLoaded", async () => {
+        syncUserInfo();
+
+        const hash = window.location.hash.toLowerCase();
+        if (hash.includes("rekomendasi")) {
+          setTimeout(() => window.openTutorialPopup("rekomendasi"), 100);
+        } else if (hash.includes("personality") || hash.includes("tutorial")) {
+          setTimeout(() => window.openTutorialPopup("personality"), 100);
+        }
+
+        if (supabaseClient) {
+          const isFromAuthLink =
+            window.location.hash.includes("access_token") ||
+            window.location.hash.includes("type=signup") ||
+            window.location.search.includes("token");
+
+          try {
+            const {
+              data: { session },
+            } = await supabaseClient.auth.getSession();
+            if (session?.user) {
+              processUserSession(session.user, isFromAuthLink);
+            }
+          } catch (e) {}
+
+          supabaseClient.auth.onAuthStateChange((event, session) => {
+            if (
+              (event === "SIGNED_IN" || event === "USER_UPDATED") &&
+              session?.user
+            ) {
+              processUserSession(session.user, true);
+
+              if (
+                window.location.hash &&
+                (window.location.hash.includes("access_token") ||
+                  window.location.hash.includes("type="))
+              ) {
+                const isRekoActive = document
+                  .getElementById("popupViewRekomendasi")
+                  ?.classList.contains("active");
+                const currentTab = isRekoActive
+                  ? "#rekomendasi"
+                  : "#personality";
+                try {
+                  window.history.replaceState(
+                    null,
+                    document.title,
+                    window.location.pathname +
+                      window.location.search +
+                      currentTab,
+                  );
+                } catch (e) {}
+              }
+            }
+          });
+        }
+      });
+    </script>
+
+    <!-- ========================================================
+       MOBILE BOTTOM NAVIGATION BAR (Fixed Thumb Reach)
+       ======================================================== -->
+    <nav class="mobile-bottom-nav">
+      <a href="index.html" class="mobile-nav-tab-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+        <span>Beranda</span>
+      </a>
+
+      <a href="rekomendasi.html" class="mobile-nav-tab-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <span>Galeri</span>
+      </a>
+
+      <a href="tutorial.html" class="mobile-nav-tab-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4" />
+          <path d="M12 8h.01" />
+        </svg>
+        <span>Panduan</span>
+      </a>
+
+      <a href="account.html" class="mobile-nav-tab-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+        <span>Akun</span>
+      </a>
+    </nav>
+  </body>
+</html>

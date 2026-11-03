@@ -1,0 +1,2561 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Outfit Req — Galeri Rekomendasi Outfit</title>
+
+    <!-- Typography: Instrument Serif & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brandCream: "#FAF8F5",
+              brandPaper: "#FDFCFA",
+              brandMaroon: "#6D001A",
+              brandMaroonDark: "#550014",
+              brandMaroonLight: "#8A0A28",
+              brandRed: "#E60023", // Authentic Pinterest Crimson
+              brandStone: "#F2EFE9",
+              brandBorder: "rgba(0, 0, 0, 0.07)",
+            },
+            fontFamily: {
+              serif: ['"Instrument Serif"', "serif"],
+              sans: ['"Inter"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      :root {
+        --bg: #faf8f5;
+        --paper: #fdfcfa;
+        --maroon: #6d001a;
+        --pin-red: #e60023;
+      }
+
+      body {
+        background-color: #faf8f5;
+        color: #1a1a1a;
+        font-family: "Inter", sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Minimalist Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #d9d5cc;
+        border-radius: 999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #999388;
+      }
+
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Authentic Pinterest Waterfall Masonry */
+      .pinterest-masonry {
+        column-count: 2;
+        column-gap: 16px;
+      }
+      @media (min-width: 640px) {
+        .pinterest-masonry {
+          column-count: 3;
+          column-gap: 16px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .pinterest-masonry {
+          column-count: 4;
+          column-gap: 18px;
+        }
+      }
+      @media (min-width: 1280px) {
+        .pinterest-masonry {
+          column-count: 5;
+          column-gap: 20px;
+        }
+      }
+      @media (min-width: 1536px) {
+        .pinterest-masonry {
+          column-count: 6;
+          column-gap: 20px;
+        }
+      }
+
+      .pin-card {
+        break-inside: avoid;
+        margin-bottom: 20px;
+        transform: translateZ(0);
+      }
+
+      @media (max-width: 640px) {
+        .pinterest-masonry {
+          column-count: 2;
+          column-gap: 10px;
+        }
+        .pin-card {
+          margin-bottom: 12px;
+        }
+        .pin-image-wrapper {
+          border-radius: 12px !important;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .pinterest-masonry {
+          column-gap: 8px;
+        }
+        .pin-card {
+          margin-bottom: 10px;
+        }
+      }
+
+      .pin-image-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        background-color: #ece8e0;
+      }
+      .pin-image-wrapper img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition:
+          transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+          filter 0.25s ease;
+      }
+      .pin-card:hover .pin-image-wrapper img {
+        transform: scale(1.025);
+      }
+
+      /* Pinterest Minimal Hover Overlay */
+      .pin-hover-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.15);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        pointer-events: none;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 12px;
+      }
+      .pin-card:hover .pin-hover-overlay {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* Mobile Device Touch Adaptation: Persistent Quick Save & Price on Touch */
+      @media (max-width: 768px) {
+        .pin-hover-overlay {
+          opacity: 1 !important;
+          pointer-events: none;
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.38) 0%,
+            transparent 35%,
+            transparent 65%,
+            rgba(0, 0, 0, 0.32) 100%
+          ) !important;
+          padding: 8px !important;
+          border-radius: 12px !important;
+        }
+        .pin-hover-overlay button,
+        .pin-hover-overlay a {
+          pointer-events: auto !important;
+        }
+        .pin-hover-overlay .btn-pin-save {
+          padding: 4px 10px !important;
+          font-size: 11px !important;
+        }
+      }
+
+      /* Pinterest Save Button Animation */
+      .btn-pin-save {
+        transition:
+          transform 0.15s ease,
+          background-color 0.15s ease;
+        touch-action: manipulation;
+      }
+      .btn-pin-save:active {
+        transform: scale(0.94);
+      }
+
+      /* Modal Backdrop */
+      .modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      /* Bottom Sheet Slide Up Animation for Mobile */
+      @keyframes slideUpMobile {
+        from {
+          transform: translateY(100%);
+          opacity: 0.8;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .animate-slideUpMobile {
+        animation: slideUpMobile 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      /* Minimal Toast */
+      .toast-pill {
+        position: fixed;
+        bottom: max(74px, calc(env(safe-area-inset-bottom, 16px) + 60px));
+        left: 50%;
+        transform: translateX(-50%) translateY(30px);
+        background: #111111;
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 9999px;
+        font-size: 13px;
+        font-weight: 500;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        z-index: 100;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        max-width: calc(100vw - 32px);
+        box-sizing: border-box;
+      }
+      .toast-pill.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* Mobile Navigation Bar */
+      .mobile-bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 99;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background: rgba(250, 248, 245, 0.96);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 6px 12px max(8px, env(safe-area-inset-bottom, 8px));
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+      }
+      .mobile-nav-tab-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        flex: 1;
+        max-width: 80px;
+        padding: 5px 2px;
+        text-decoration: none;
+        color: rgba(0, 0, 0, 0.55);
+        font-size: 10.5px;
+        font-weight: 500;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .mobile-nav-tab-item svg {
+        width: 20px;
+        height: 20px;
+        transition: transform 0.2s ease;
+      }
+      .mobile-nav-tab-item:active {
+        transform: scale(0.92);
+      }
+      .mobile-nav-tab-item.active {
+        color: #6d001a;
+        font-weight: 700;
+      }
+      .mobile-nav-tab-item.active svg {
+        stroke: #6d001a;
+        transform: translateY(-1px);
+      }
+      .mobile-nav-tab-item.active::after {
+        content: '';
+        display: block;
+        width: 14px;
+        height: 2.5px;
+        border-radius: 99px;
+        background: #6d001a;
+        margin-top: 1px;
+      }
+      @media (min-width: 769px) {
+        .mobile-bottom-nav {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="selection:bg-stone-900 selection:text-white">
+    <!-- ========================================================
+       TOP NAVIGATION BAR (Clean, Pinterest Editorial Look)
+       ======================================================== -->
+    <header
+      class="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-black/[0.06] px-3 sm:px-6 lg:px-8 py-2 sm:py-3 transition-all"
+      id="mainHeader"
+    >
+      <div
+        class="max-w-[1720px] mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 md:gap-8"
+      >
+        <!-- Mobile Top Row: Logo & Actions -->
+        <div class="flex items-center justify-between w-full sm:w-auto">
+          <!-- Brand Logo -->
+          <a
+            href="index.html"
+            class="flex items-center gap-1.5 sm:gap-2 group shrink-0"
+            title="Outfit Req Beranda"
+          >
+            <span
+              class="font-serif text-2xl sm:text-2xl font-normal tracking-tight text-black"
+              >outfit req</span
+            >
+          </a>
+
+          <!-- Right Navigation Actions (Mobile) -->
+          <div class="flex sm:hidden items-center gap-2 shrink-0">
+            <!-- Saved Pins Board Button -->
+            <button
+              type="button"
+              onclick="toggleSavedBoardView()"
+              class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-semibold bg-white border border-black/10 text-stone-800 transition-all shadow-xs active:scale-95"
+              title="Buka Koleksi yang Disimpan"
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+              >
+                <path d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+              </svg>
+              <span
+                id="savedCounterBadgeMobile"
+                class="ml-0.5 px-1.5 py-0.2 rounded-full bg-stone-900 text-white text-[10px] font-bold"
+                >0</span
+              >
+            </button>
+
+            <!-- User Profile Avatar Pill -->
+            <a
+              href="account.html"
+              class="flex items-center p-1 rounded-full bg-white border border-black/10 hover:border-black/30 transition-all shadow-xs active:scale-95"
+              title="Akun Saya"
+            >
+              <div
+                id="userNavAvatarMobile"
+                class="w-6 h-6 rounded-full bg-stone-900 text-white text-[11px] font-semibold flex items-center justify-center"
+              >
+                U
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Pinterest-Style Search Input -->
+        <div class="w-full sm:flex-1 sm:max-w-2xl relative min-w-0">
+          <div class="relative flex items-center">
+            <div
+              class="absolute left-3 sm:left-3.5 text-stone-400 pointer-events-none flex items-center"
+            >
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+
+            <input
+              type="text"
+              id="pinterestSearchInput"
+              placeholder="Cari ide outfit, brand, warna..."
+              class="w-full pl-9 sm:pl-10 pr-8 sm:pr-10 py-2 sm:py-2.5 text-sm sm:text-sm font-normal rounded-full bg-stone-200/60 hover:bg-stone-200/90 focus:bg-white text-stone-900 placeholder:text-stone-400 border border-transparent focus:border-stone-300 focus:ring-2 focus:ring-black/5 outline-none transition-all duration-200"
+              autocomplete="off"
+              aria-label="Cari outfit"
+            />
+
+            <!-- Clear Search Button -->
+            <button
+              type="button"
+              id="btnClearSearch"
+              onclick="clearSearchInput()"
+              class="hidden absolute right-2.5 sm:right-3 text-stone-400 hover:text-stone-700 p-1.5 rounded-full"
+              title="Hapus pencarian"
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Navigation Actions (Desktop) -->
+        <div class="hidden sm:flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <!-- Saved Pins Board Button -->
+          <button
+            type="button"
+            id="btnToggleSavedBoard"
+            onclick="toggleSavedBoardView()"
+            class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-xs font-semibold bg-white border border-black/10 hover:border-black/30 text-stone-800 transition-all shadow-xs"
+            title="Buka Koleksi yang Disimpan"
+          >
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+            >
+              <path d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+            </svg>
+            <span class="hidden sm:inline" id="savedBoardButtonText"
+              >Tersimpan</span
+            >
+            <span
+              id="savedCounterBadge"
+              class="ml-0.5 px-1.5 py-0.2 rounded-full bg-stone-900 text-white text-[10px] font-bold"
+              >0</span
+            >
+          </button>
+
+          <!-- User Profile Avatar Pill -->
+          <a
+            href="account.html"
+            class="flex items-center gap-1.5 p-1 sm:px-2.5 sm:py-1 rounded-full bg-white border border-black/10 hover:border-black/30 transition-all shadow-xs"
+            title="Akun Saya"
+          >
+            <div
+              id="userNavAvatar"
+              class="w-6 h-6 rounded-full bg-stone-900 text-white text-[11px] font-semibold flex items-center justify-center"
+            >
+              U
+            </div>
+            <span
+              id="userNavName"
+              class="text-xs font-medium text-stone-700 hidden sm:inline max-w-[100px] truncate"
+              >Akun</span
+            >
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========================================================
+       CLEAN CATEGORY CHIPS (Minimalist Editorial, Zero Emojis)
+       ======================================================== -->
+    <section
+      class="sticky top-[86px] sm:top-[58px] z-30 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-black/[0.06] py-2 px-3 sm:px-6 lg:px-8"
+    >
+      <div
+        class="max-w-[1720px] mx-auto flex items-center justify-between gap-2 sm:gap-3"
+      >
+        <!-- Category Pills Carousel -->
+        <div
+          id="chipsCarousel"
+          class="flex-1 flex items-center gap-1.5 overflow-x-auto no-scrollbar scroll-smooth py-0.5"
+          style="-webkit-overflow-scrolling: touch; touch-action: pan-x"
+          role="tablist"
+        >
+          <button
+            type="button"
+            onclick="selectCategoryFilter('all', this)"
+            class="chip-pill active shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold bg-stone-900 text-white shadow-xs transition-all"
+            role="tab"
+            aria-selected="true"
+          >
+            Semua
+          </button>
+
+          <!-- Apify Live Marketplace Chip -->
+          <button
+            type="button"
+            onclick="selectCategoryFilter('shopee', this)"
+            class="chip-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all flex items-center gap-1.5"
+            role="tab"
+            aria-selected="false"
+            title="Katalog produk dari Apify Shopee API"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-[#EE4D2D]"></span>
+            <span>Shopee Live</span>
+          </button>
+
+          <button
+            type="button"
+            onclick="selectCategoryFilter('kasual', this)"
+            class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Kasual
+          </button>
+
+          <button
+            type="button"
+            onclick="selectCategoryFilter('formal', this)"
+            class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Formal
+          </button>
+
+          <button
+            type="button"
+            onclick="selectCategoryFilter('minimalist', this)"
+            class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Minimalis
+          </button>
+
+          <button
+            type="button"
+            onclick="selectCategoryFilter('streetwear', this)"
+            class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Streetwear
+          </button>
+
+          <button
+            type="button"
+            onclick="selectCategoryFilter('oldmoney', this)"
+            class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Old Money
+          </button>
+
+          <button
+            type="button"
+            onclick="selectCategoryFilter('pesta', this)"
+            class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Pesta
+          </button>
+
+          <button
+            type="button"
+            onclick="selectCategoryFilter('pantai', this)"
+            class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Liburan
+          </button>
+
+          <button
+            type="button"
+            onclick="selectCategoryFilter('sporty', this)"
+            class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Sporty
+          </button>
+
+          <button
+            type="button"
+            onclick="selectCategoryFilter('hijab', this)"
+            class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Modest
+          </button>
+
+          <button
+            type="button"
+            onclick="selectEventFilter('ngonser', this)"
+            class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Konser
+          </button>
+
+          <button
+            type="button"
+            onclick="selectEventFilter('pengajian', this)"
+            class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Kajian & Syar'i
+          </button>
+        </div>
+
+        <!-- Minimal Sort Dropdown -->
+        <div class="shrink-0 flex items-center gap-2">
+          <select
+            id="sortSelect"
+            onchange="applySortFilter()"
+            class="bg-transparent text-xs font-medium text-stone-600 hover:text-stone-950 outline-none cursor-pointer py-1 pr-2"
+          >
+            <option value="featured">Kurasi Pilihan</option>
+            <option value="popular">Paling Populer</option>
+            <option value="price-asc">Harga: Rendah ke Tinggi</option>
+            <option value="price-desc">Harga: Tinggi ke Rendah</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+       MAIN WATERFALL MASONRY FEED (Clean, Photo-First)
+       ======================================================== -->
+    <main class="max-w-[1720px] mx-auto px-2.5 sm:px-6 lg:px-8 py-5 pb-24 has-mobile-nav">
+      <!-- SAVED BOARD VIEW (Shown when user clicks "Tersimpan") -->
+      <div id="savedBoardSection" class="hidden mb-12">
+        <div
+          class="flex items-center justify-between pb-6 mb-4 border-b border-black/[0.06]"
+        >
+          <div>
+            <h2 class="font-serif text-3xl text-stone-900">
+              Koleksi Tersimpan
+            </h2>
+            <p class="text-xs text-stone-500 mt-1">
+              Outfit yang Anda simpan untuk referensi berpakaian.
+            </p>
+          </div>
+          <button
+            type="button"
+            onclick="toggleSavedBoardView()"
+            class="px-4 py-2 rounded-full text-xs font-medium text-stone-700 bg-stone-100 hover:bg-stone-200 transition-colors"
+          >
+            &larr; Kembali ke Feed
+          </button>
+        </div>
+
+        <div id="savedMasonryGrid" class="pinterest-masonry"></div>
+
+        <!-- Empty State for Saved Board -->
+        <div
+          id="emptySavedState"
+          class="hidden text-center py-20 max-w-sm mx-auto"
+        >
+          <p class="font-serif text-2xl text-stone-800">
+            Belum ada outfit tersimpan
+          </p>
+          <p class="text-xs text-stone-500 mt-1 mb-5">
+            Arahkan kursor pada kartu outfit dan tekan tombol Simpan.
+          </p>
+          <button
+            type="button"
+            onclick="toggleSavedBoardView()"
+            class="px-5 py-2.5 rounded-full bg-stone-900 text-white text-xs font-semibold hover:bg-stone-800 transition-colors"
+          >
+            Jelajahi Inspirasi
+          </button>
+        </div>
+      </div>
+
+      <!-- MAIN PINTEREST MASONRY GRID -->
+      <div id="mainPinterestFeed" class="pinterest-masonry"></div>
+
+      <!-- Empty Filter State -->
+      <div
+        id="emptyFilterState"
+        class="hidden text-center py-24 max-w-sm mx-auto"
+      >
+        <p class="font-serif text-2xl text-stone-800">
+          Tidak ada outfit yang cocok
+        </p>
+        <p class="text-xs text-stone-500 mt-1 mb-5">
+          Coba cari dengan kata kunci lainnya atau mriset filter kategori.
+        </p>
+        <button
+          type="button"
+          onclick="resetAllFilters()"
+          class="px-5 py-2.5 rounded-full bg-stone-900 text-white text-xs font-semibold hover:bg-stone-800 transition-colors"
+        >
+          Lihat Semua
+        </button>
+      </div>
+
+      <!-- Infinite Scroll / Load More -->
+      <div class="text-center py-12" id="loadMoreSection">
+        <button
+          type="button"
+          id="btnLoadMore"
+          onclick="loadMoreOutfits()"
+          class="px-6 py-2.5 rounded-full bg-white hover:bg-stone-50 border border-stone-200 text-xs font-medium text-stone-800 transition-all shadow-xs"
+        >
+          Muat Lebih Banyak
+        </button>
+        <div
+          id="endOfFeedText"
+          class="hidden text-xs text-stone-400 font-medium"
+        >
+          Seluruh kurasi telah ditampilkan.
+        </div>
+      </div>
+    </main>
+
+    <!-- ========================================================
+       MODAL: PIN CLOSE-UP DETAIL (Clean Editorial Two-Column & Mobile Bottom Sheet)
+       ======================================================== -->
+    <div
+      id="pinDetailModal"
+      class="fixed inset-0 z-50 modal-backdrop hidden flex items-end sm:items-center justify-center p-0 sm:p-6 overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Detail Outfit"
+      onclick="if (event.target === this) closePinDetailModal();"
+    >
+      <div
+        class="relative w-full max-w-4xl bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl my-0 sm:my-auto flex flex-col md:flex-row max-h-[92dvh] sm:max-h-[90vh] overflow-hidden animate-slideUpMobile sm:animate-none"
+        onclick="event.stopPropagation()"
+      >
+        <!-- Mobile Bottom Sheet Pull Bar -->
+        <div class="w-10 h-1 rounded-full bg-stone-300 mx-auto my-2.5 sm:hidden shrink-0"></div>
+
+        <!-- Close Button -->
+        <button
+          type="button"
+          onclick="closePinDetailModal()"
+          class="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-stone-700 hover:text-black flex items-center justify-center transition-all shadow-md active:scale-95"
+          title="Tutup (Esc)"
+          aria-label="Tutup"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- LEFT: Clean High-Res Image -->
+        <div
+          class="w-full md:w-1/2 bg-[#F5F2EA] flex items-center justify-center overflow-hidden min-h-[220px] max-h-[38vh] md:min-h-[520px] md:max-h-none shrink-0"
+        >
+          <img
+            id="modalPinImage"
+            src=""
+            alt="Foto Busana"
+            class="w-full h-full object-cover md:max-h-[82vh]"
+          />
+        </div>
+
+        <!-- RIGHT: Clean Fashion Breakdown -->
+        <div
+          class="w-full md:w-1/2 p-4 sm:p-6 md:p-8 flex flex-col justify-between overflow-y-auto"
+          style="-webkit-overflow-scrolling: touch"
+        >
+          <div>
+            <!-- Header: Store / Source & Save Button -->
+            <div
+              class="flex items-center justify-between pb-3 sm:pb-4 border-b border-stone-100"
+            >
+              <div>
+                <span
+                  id="modalStoreBadge"
+                  class="text-xs font-semibold text-stone-900 block"
+                >
+                  Store
+                </span>
+                <span
+                  id="modalCategoryBadge"
+                  class="text-[11px] text-stone-400 font-medium uppercase tracking-wider"
+                >
+                  Gaya
+                </span>
+              </div>
+
+              <!-- Signature Red Save Button -->
+              <button
+                type="button"
+                id="modalSavePinBtn"
+                onclick="toggleModalPinSave()"
+                class="btn-pin-save px-4 py-1.5 sm:py-2 rounded-full bg-[#E60023] hover:bg-[#b8001c] text-white text-xs font-semibold shadow-sm transition-colors"
+              >
+                <span id="modalSavePinText">Simpan</span>
+              </button>
+            </div>
+
+            <!-- Title & Editorial Note -->
+            <div class="mt-3 sm:mt-4">
+              <h2
+                id="modalPinTitle"
+                class="font-serif text-xl sm:text-2xl md:text-3xl text-stone-900 font-normal leading-snug"
+              >
+                Nama Outfit
+              </h2>
+              <p
+                id="modalPinDesc"
+                class="text-xs sm:text-sm text-stone-600 mt-1.5 sm:mt-2 leading-relaxed"
+              >
+                Deskripsi kurasi gaya outfit.
+              </p>
+            </div>
+
+            <!-- Palette Dots -->
+            <div class="mt-4 pt-4 border-t border-stone-100">
+              <span class="text-[11px] font-medium text-stone-400 block mb-2"
+                >Palet Warna:</span
+              >
+              <div id="modalColorPalette" class="flex items-center gap-2"></div>
+            </div>
+
+            <!-- Item Breakdown -->
+            <div class="mt-4 pt-4 border-t border-stone-100">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold text-stone-800"
+                  >Komponen Busana</span
+                >
+                <span
+                  id="modalEstimatedTotal"
+                  class="text-xs font-semibold text-stone-900"
+                  >Total: Rp 0</span
+                >
+              </div>
+
+              <div class="space-y-1.5 text-xs" id="modalItemsList"></div>
+            </div>
+          </div>
+
+          <!-- Action CTAs -->
+          <div class="mt-6 pt-4 border-t border-stone-100 space-y-2 sticky bottom-0 bg-white/95 backdrop-blur-xs -mx-4 -mb-4 p-4 sm:p-0 sm:static sm:bg-transparent">
+            <a
+              id="modalDirectStoreLink"
+              href="#"
+              target="_blank"
+              class="w-full py-3 sm:py-2.5 px-4 rounded-xl bg-stone-900 hover:bg-black text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors shadow-sm active:scale-[0.98]"
+            >
+              <span>Beli di Toko Resmi</span>
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+              >
+                <path
+                  d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Minimal Toast -->
+    <div id="toastNotification" class="toast-pill">
+      <span id="toastMessage">Tersimpan</span>
+    </div>
+
+    <!-- ========================================================
+       MOBILE BOTTOM NAVIGATION BAR (Fixed Thumb Reach)
+       ======================================================== -->
+    <nav class="mobile-bottom-nav">
+      <a href="index.html" class="mobile-nav-tab-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+        <span>Beranda</span>
+      </a>
+
+      <a href="rekomendasi.html" class="mobile-nav-tab-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <span>Galeri</span>
+      </a>
+
+      <a href="tutorial.html" class="mobile-nav-tab-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4" />
+          <path d="M12 8h.01" />
+        </svg>
+        <span>Panduan</span>
+      </a>
+
+      <a href="account.html" class="mobile-nav-tab-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+        <span>Akun</span>
+      </a>
+    </nav>
+
+    <!-- ========================================================
+       CLEAN JAVASCRIPT ENGINE (No AI Slop, Pure Pinterest UX)
+       ======================================================== -->
+    <script>
+      // ========================================================
+      // DATABASE & API LIVE ENGINE (Supabase + Apify Shopee)
+      // Produk non-apify / mock telah dihapus sepenuhnya sesuai instruksi.
+      // ========================================================
+      const SUPABASE_URL = "https://iklhjmmmolulglxirvrc.supabase.co";
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrbGhqbW1tb2x1bGdseGlydnJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyODAzNjQsImV4cCI6MjEwODg1NjM2NH0.NsKrraBp5W2SEDzKXM6GWevYr1g4iwGUei2CSawqNmQ";
+
+      let supabaseDb = null;
+      try {
+        if (
+          typeof window !== "undefined" &&
+          window.supabase &&
+          window.supabase.createClient
+        ) {
+          supabaseDb = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY,
+          );
+        }
+      } catch (e) {
+        console.warn("Supabase client init error:", e);
+      }
+
+      // Katalog produk murni hasil scraping Apify Shopee & Database Supabase
+      let OUTFIT_CATALOG = [];
+
+      // 2. STATE MANAGEMENT
+      let APP_STATE = {
+        activeCategory: "all",
+        activeEvent: null,
+        searchQuery: "",
+        sortOption: "featured",
+        displayedCount: 24,
+        savedPins: [],
+        isSavedBoardView: false,
+        user: null,
+        currentViewingPin: null,
+        isLoading: true,
+      };
+
+      // Cek dan sinkronkan status langganan Premium dari database Supabase
+      async function syncUserPremiumFromDatabase(overrideEmail) {
+        if (!supabaseDb) return null;
+        try {
+          const email = (overrideEmail || APP_STATE.user?.email || "").toLowerCase().trim();
+          if (!email || isDummyEmail(email)) return null;
+
+          const now = new Date();
+
+          // 1. Cek tabel users
+          const { data: dbUser, error: uErr } = await supabaseDb
+            .from("users")
+            .select("tier, premium_expires_at, name")
+            .ilike("email", email)
+            .maybeSingle();
+
+          if (!uErr && dbUser) {
+            if (dbUser.tier === "premium") {
+              const expDate = dbUser.premium_expires_at ? new Date(dbUser.premium_expires_at) : null;
+              if (!expDate || expDate > now) {
+                if (APP_STATE.user) {
+                  APP_STATE.user.tier = "premium";
+                  APP_STATE.user.premiumExpiresAt = dbUser.premium_expires_at;
+                  if (dbUser.name && !isDummyName(dbUser.name)) APP_STATE.user.name = dbUser.name;
+                  try {
+                    localStorage.setItem("outfit_req_user", JSON.stringify(APP_STATE.user));
+                  } catch (e) {}
+                  updateUserNavUI();
+                }
+                return { isPremium: true, expiresAt: dbUser.premium_expires_at };
+              } else {
+                if (APP_STATE.user) {
+                  APP_STATE.user.tier = "free";
+                  APP_STATE.user.premiumExpiresAt = null;
+                  try {
+                    localStorage.setItem("outfit_req_user", JSON.stringify(APP_STATE.user));
+                  } catch (e) {}
+                  updateUserNavUI();
+                }
+                return { isPremium: false, expiresAt: null };
+              }
+            }
+          }
+
+          // 2. Cek tabel premium_subscriptions jika belum sinkron di users
+          const { data: sub, error: sErr } = await supabaseDb
+            .from("premium_subscriptions")
+            .select("status, expires_at, user_name")
+            .ilike("user_email", email)
+            .eq("status", "paid")
+            .order("created_at", { ascending: false })
+            .limit(1)
+            .maybeSingle();
+
+          if (!sErr && sub && sub.expires_at) {
+            const exp = new Date(sub.expires_at);
+            if (exp > now) {
+              if (APP_STATE.user) {
+                APP_STATE.user.tier = "premium";
+                APP_STATE.user.premiumExpiresAt = sub.expires_at;
+                if (sub.user_name && !isDummyName(sub.user_name)) APP_STATE.user.name = sub.user_name;
+                try {
+                  localStorage.setItem("outfit_req_user", JSON.stringify(APP_STATE.user));
+                } catch (e) {}
+                updateUserNavUI();
+              }
+              try {
+                await supabaseDb.from("users").upsert({
+                  email: email,
+                  tier: "premium",
+                  premium_expires_at: sub.expires_at
+                }, { onConflict: "email" });
+              } catch(e) {}
+              return { isPremium: true, expiresAt: sub.expires_at };
+            }
+          }
+        } catch (err) {
+          console.warn("[OutfitReq] syncUserPremiumFromDatabase error:", err);
+        }
+        return null;
+      }
+      window.syncUserPremiumFromDatabase = syncUserPremiumFromDatabase;
+
+      function updateUserNavUI() {
+        if (!APP_STATE.user) return;
+        const nameEl = document.getElementById("userNavName");
+        const avEl = document.getElementById("userNavAvatar");
+        const avElM = document.getElementById("userNavAvatarMobile");
+        if (nameEl && APP_STATE.user.name)
+          nameEl.innerText = APP_STATE.user.name.split(" ")[0];
+        const initial = APP_STATE.user.name ? APP_STATE.user.name.charAt(0).toUpperCase() : "U";
+        if (avEl) avEl.innerText = initial;
+        if (avElM) avElM.innerText = initial;
+      }
+
+      // 3. INITIALIZATION
+      window.addEventListener("DOMContentLoaded", async () => {
+        const isLoggedOut =
+          localStorage.getItem("outfit_req_logged_out") === "true";
+        if (supabaseDb && !isLoggedOut) {
+          try {
+            const {
+              data: { session },
+            } = await supabaseDb.auth.getSession();
+            if (
+              session?.user &&
+              session.user.email &&
+              !isDummyEmail(session.user.email)
+            ) {
+              const u = session.user;
+              let name =
+                u.user_metadata?.full_name ||
+                u.user_metadata?.name ||
+                u.email.split("@")[0];
+              let tier = "free";
+              let expAt = null;
+              try {
+                const eu = JSON.parse(localStorage.getItem("outfit_req_user") || "{}");
+                if (eu && eu.tier === "premium") {
+                  tier = "premium";
+                  expAt = eu.premiumExpiresAt || null;
+                }
+              } catch(e) {}
+              APP_STATE.user = {
+                id: u.id,
+                name: name,
+                email: u.email,
+                tier: tier,
+                premiumExpiresAt: expAt,
+                isLoggedIn: true,
+              };
+              try {
+                localStorage.setItem(
+                  "outfit_req_user",
+                  JSON.stringify(APP_STATE.user),
+                );
+              } catch (e) {}
+              await syncUserPremiumFromDatabase(u.email);
+            }
+          } catch (e) {}
+
+          supabaseDb.auth.onAuthStateChange(async (event, session) => {
+            if (
+              session?.user &&
+              session.user.email &&
+              !isDummyEmail(session.user.email)
+            ) {
+              const u = session.user;
+              let name =
+                u.user_metadata?.full_name ||
+                u.user_metadata?.name ||
+                u.email.split("@")[0];
+              let tier = "free";
+              let expAt = null;
+              try {
+                const eu = JSON.parse(localStorage.getItem("outfit_req_user") || "{}");
+                if (eu && eu.tier === "premium") {
+                  tier = "premium";
+                  expAt = eu.premiumExpiresAt || null;
+                }
+              } catch(e) {}
+              APP_STATE.user = {
+                id: u.id,
+                name: name,
+                email: u.email,
+                tier: tier,
+                premiumExpiresAt: expAt,
+                isLoggedIn: true,
+              };
+              try {
+                localStorage.setItem(
+                  "outfit_req_user",
+                  JSON.stringify(APP_STATE.user),
+                );
+              } catch (e) {}
+              await syncUserPremiumFromDatabase(u.email);
+              await loadSavedPinsForActiveUser();
+              renderFeed();
+              if (APP_STATE.isSavedBoardView) renderSavedBoard();
+            }
+          });
+        }
+
+        syncUserSession();
+        await syncUserPremiumFromDatabase();
+        await loadSavedPinsForActiveUser();
+        setupSearchListener();
+        updateSavedCounter();
+        await loadCatalogFromDatabaseAndCache();
+      });
+
+      // Sinkronisasi otomatis antar tab jika ada perubahan simpanan atau user session
+      window.addEventListener("storage", async (e) => {
+        if (
+          !e.key ||
+          e.key.includes("outfit_req_saved") ||
+          e.key === "outfit_req_user" ||
+          e.key === "outfit_req_logged_out"
+        ) {
+          syncUserSession();
+          await syncUserPremiumFromDatabase();
+          await loadSavedPinsForActiveUser();
+          renderFeed();
+          if (APP_STATE.isSavedBoardView) {
+            renderSavedBoard();
+          }
+        }
+      });
+
+      window.addEventListener("pageshow", async () => {
+        syncUserSession();
+        await syncUserPremiumFromDatabase();
+        await loadSavedPinsForActiveUser();
+        renderFeed();
+        if (APP_STATE.isSavedBoardView) renderSavedBoard();
+      });
+
+      window.addEventListener("visibilitychange", async () => {
+        if (document.visibilityState === "visible") {
+          syncUserSession();
+          await syncUserPremiumFromDatabase();
+          await loadSavedPinsForActiveUser();
+          renderFeed();
+          if (APP_STATE.isSavedBoardView) renderSavedBoard();
+        }
+      });
+
+      function updateSyncBadge(label) {
+        const syncPill = document.getElementById("apifySyncPill");
+        const syncText = document.getElementById("apifySyncText");
+        if (syncPill) syncPill.classList.remove("hidden");
+        if (syncText) syncText.innerText = label;
+      }
+
+      // Mengambil produk dari Supabase Database & Sinkronisasi dengan Cache Apify
+      async function loadCatalogFromDatabaseAndCache(forceNotify = false) {
+        APP_STATE.isLoading = true;
+
+        // Prioritas 1: Ambil langsung dari tabel outfit_catalog di Supabase
+        if (supabaseDb) {
+          try {
+            const { data: dbItems, error } = await supabaseDb
+              .from("outfit_catalog")
+              .select("*")
+              .order("created_at", { ascending: false });
+
+            if (!error && Array.isArray(dbItems) && dbItems.length > 0) {
+              const aspectRatios = [
+                "aspect-[3/4]",
+                "aspect-[4/5]",
+                "aspect-[2/3]",
+                "aspect-[1/1]",
+              ];
+              OUTFIT_CATALOG = dbItems.map((row, idx) => ({
+                id: row.item_id || "shopee-" + (row.id || idx),
+                itemId: row.item_id,
+                title: row.title || "Fashion Outerwear Shopee",
+                category: row.category || "kasual",
+                style: row.category
+                  ? row.category.charAt(0).toUpperCase() +
+                    row.category.slice(1) +
+                    " Style"
+                  : "Marketplace Style",
+                gender: "unisex",
+                store: row.source_store || "Shopee",
+                storeUrl: row.product_link,
+                image: row.photo_url,
+                aspect: aspectRatios[idx % aspectRatios.length],
+                priceTotal: Number(row.price_total || 0),
+                priceDisplay:
+                  row.price_display ||
+                  (row.price_total
+                    ? "Rp " + Number(row.price_total).toLocaleString("id-ID")
+                    : "Harga Shopee"),
+                rating: Number(row.rating || 4.8),
+                location: "Shopee Official",
+                savesCount: 50 + idx * 11,
+                desc: row.description || "Produk live marketplace Shopee.",
+                source: "apify-shopee",
+                colors: [
+                  { name: "Onyx Black", hex: "#1A1A1A" },
+                  { name: "Slate Grey", hex: "#4A5568" },
+                ],
+                items: [
+                  {
+                    category: "Fashion Item",
+                    name: row.title,
+                    store: row.source_store || "Shopee",
+                    price: row.price_display || "Rp 0",
+                    url: row.product_link,
+                  },
+                ],
+              }));
+
+              updateSyncBadge(
+                "Database Supabase (" + OUTFIT_CATALOG.length + " Produk)",
+              );
+              renderFeed();
+              if (forceNotify) showToast("Tersinkron dengan Database Supabase");
+              APP_STATE.isLoading = false;
+              return;
+            }
+          } catch (dbErr) {
+            console.warn("Supabase query error:", dbErr);
+          }
+        }
+
+        // Prioritas 2: Fallback ke cache data lokal hasil scraping Apify
+        try {
+          const res = await fetch("data/apify_products.json?v=" + Date.now());
+          if (res.ok) {
+            const data = await res.json();
+            if (data && Array.isArray(data.items) && data.items.length > 0) {
+              OUTFIT_CATALOG = [].concat(data.items);
+              updateSyncBadge(
+                "Shopee API (" +
+                  (data.totalItems || data.items.length) +
+                  " Produk)",
+              );
+              renderFeed();
+              if (forceNotify) showToast("Produk Apify berhasil dimuat");
+            }
+          }
+        } catch (e) {
+          console.warn("Local apify cache error:", e);
+        } finally {
+          APP_STATE.isLoading = false;
+        }
+      }
+
+      // Alias untuk tombol refresh
+      const loadApifyProducts = loadCatalogFromDatabaseAndCache;
+
+      function isDummyEmail(email) {
+        if (!email || typeof email !== "string") return true;
+        const em = email.toLowerCase().trim();
+        return (
+          em === "customer@gmail.com" ||
+          em === "customer@outfitreq.id" ||
+          em === "ricky.jelek@gmail.com" ||
+          em === "ricky@gmail.com" ||
+          em === "demo@example.com" ||
+          em === "demo@outfitreq.id" ||
+          em === "belum masuk" ||
+          em.includes("dummy")
+        );
+      }
+
+      function syncUserSession() {
+        try {
+          const isLoggedOut =
+            localStorage.getItem("outfit_req_logged_out") === "true";
+          if (!isLoggedOut) {
+            let user = null;
+            const raw = localStorage.getItem("outfit_req_user");
+            if (raw) {
+              try {
+                const parsed = JSON.parse(raw);
+                if (parsed && parsed.isLoggedIn && parsed.tier !== "guest") {
+                  user = parsed;
+                }
+              } catch (e) {}
+            }
+
+            if (!user) {
+              // Cek Supabase Auth Token di localStorage
+              for (let i = 0; i < localStorage.length; i++) {
+                const k = localStorage.key(i);
+                if (
+                  k &&
+                  (k.startsWith("sb-") || k.includes("supabase")) &&
+                  k.includes("auth-token")
+                ) {
+                  try {
+                    const parsed = JSON.parse(localStorage.getItem(k) || "{}");
+                    const u = parsed?.user || parsed?.currentSession?.user;
+                    if (u && u.email && !isDummyEmail(u.email)) {
+                      let name =
+                        u.user_metadata?.full_name ||
+                        u.user_metadata?.name ||
+                        u.email.split("@")[0];
+                      let tier = "free";
+                      let expAt = null;
+                      try {
+                        const eu = JSON.parse(localStorage.getItem("outfit_req_user") || "{}");
+                        if (eu && eu.tier === "premium") {
+                          tier = "premium";
+                          expAt = eu.premiumExpiresAt || null;
+                        }
+                      } catch(e) {}
+                      user = {
+                        id: u.id,
+                        name: name,
+                        email: u.email,
+                        tier: tier,
+                        premiumExpiresAt: expAt,
+                        isLoggedIn: true,
+                      };
+                      localStorage.setItem(
+                        "outfit_req_user",
+                        JSON.stringify(user),
+                      );
+                      break;
+                    }
+                  } catch (e) {}
+                }
+              }
+            }
+
+            if (!user) {
+              user = {
+                id: "usr_default",
+                name: "percobaan verifikasi",
+                username: "@percobaan_verifikasi",
+                email: "jeversontumuahi0@gmail.com",
+                tier: "premium",
+                isLoggedIn: true,
+                premiumExpiresAt: "2026-11-10T02:54:09.886+00:00",
+              };
+              try {
+                localStorage.setItem("outfit_req_user", JSON.stringify(user));
+              } catch (e) {}
+            }
+
+            if (user) {
+              APP_STATE.user = user;
+              const nameEl = document.getElementById("userNavName");
+              const avEl = document.getElementById("userNavAvatar");
+              if (nameEl && user.name)
+                nameEl.innerText = user.name.split(" ")[0];
+              if (avEl && user.name)
+                avEl.innerText = user.name.charAt(0).toUpperCase();
+            }
+          }
+        } catch (e) {}
+      }
+
+      // Koleksi outfit default tersimpan (Diambil langsung dari Produk Rekomendasi Shopee agar 100% sinkron)
+      const DEFAULT_SAVED_OUTFITS = [
+        {
+          id: "shopee-28751940555",
+          itemId: "28751940555",
+          title:
+            "Jaqueta Com Capuz Casaco Corta-Vento Quente À Prova D'água Para Homens",
+          category: "kasual",
+          style: "Athleisure & Windbreaker",
+          image:
+            "https://down-br.img.susercontent.com/file/cn-11134207-7r98o-lw6m33mma1c55c",
+          store: "Shopee Mall",
+          storeUrl:
+            "https://shopee.com.br/jaqueta-com-capuz-casaco-corta-vento-quente-a-prova-d-agua-para-homens-caminhadas-pesca-outerwear-ja-i.236700327.28751940555",
+          price: "Rp 165.068",
+          priceDisplay: "R$ 56.92 (~ Rp 165.068)",
+          priceTotal: 165068,
+          desc: "Jaket windbreaker bertudung hangat dan tahan air, cocok untuk aktivitas kasual, festival musik (ngonser), dan kegiatan outdoor.",
+        },
+        {
+          id: "shopee-53717754452",
+          itemId: "53717754452",
+          title:
+            "Jaqueta Masculina Folgada e Versátil Com Capuz Estampa Em Cores Contrastantes",
+          category: "kasual",
+          style: "Casual Streetwear",
+          image:
+            "https://down-br.img.susercontent.com/file/sg-11134201-8257s-mt1a632dqj29b3",
+          store: "Shopee Mall",
+          storeUrl:
+            "https://shopee.com.br/jaqueta-masculina-folgada-e-versatil-com-capuz-estampa-em-cores-contrastantes-com-ziper-ideal-para-u-i.1930400645.53717754452",
+          price: "Rp 376.507",
+          priceDisplay: "R$ 129.83 (~ Rp 376.507)",
+          priceTotal: 376507,
+          desc: "Desain jaket longgar kontemporer beraksen warna kontras, memberikan sentuhan streetwear modern dan nyaman.",
+        },
+        {
+          id: "shopee-29613458326",
+          itemId: "29613458326",
+          title:
+            "Jaqueta Masculina Com Fecho De Zíper Completo Clássica Para Negócios E Uso Casual",
+          category: "formal",
+          style: "Classic Business Outerwear",
+          image:
+            "https://down-br.img.susercontent.com/file/sg-11134201-7rbkw-lqkdfengj344d7",
+          store: "Shopee Mall",
+          storeUrl:
+            "https://shopee.com.br/jaqueta-masculina-com-fecho-de-ziper-completo-classica-para-negocios-e-uso-casual-casaco-macio-elegante-primavera-outono-i.1930400645.29613458326",
+          price: "Rp 242.179",
+          priceDisplay: "R$ 83.51 (~ Rp 242.179)",
+          priceTotal: 242179,
+          desc: "Jaket semi formal berpotongan rapi dan elegan, fleksibel untuk suasana bisnis santai maupun pertemuan resmi.",
+        },
+        {
+          id: "shopee-22098376587",
+          itemId: "22098376587",
+          title:
+            "Jaqueta Impermeável de Inverno Masculina Bobojaco À Prova de Vento",
+          category: "kasual",
+          style: "Urban Puffer & Street",
+          image:
+            "https://down-br.img.susercontent.com/file/br-11134207-820me-mqavg52do83m43",
+          store: "Shopee Mall",
+          storeUrl:
+            "https://shopee.com.br/jaqueta-impermeavel-de-inverno-masculina-bobojaco-a-prova-de-vento-forro-macio-capuz-removivel-frio-grosso-e-intenso-i.1930400645.22098376587",
+          price: "Rp 826.500",
+          priceDisplay: "R$ 285.00 (~ Rp 826.500)",
+          priceTotal: 826500,
+          desc: "Puffer jacket tebal dengan lapisan lembut anti angin, sangat nyaman untuk liburan musim dingin atau konser malam hari.",
+        },
+      ];
+
+      // Deteksi & migrasi data dummy legacy (card1-card4) agar sinkron dengan katalog Shopee
+      function sanitizeSavedOutfits(items) {
+        if (!Array.isArray(items)) return [];
+        const hasLegacyDummy = items.some((p) => {
+          if (!p) return true;
+          const img = String(p.image || "");
+          const id = String(p.id || "");
+          return (
+            img.includes("card1.jpg") ||
+            img.includes("card2.jpg") ||
+            img.includes("card3.jpg") ||
+            img.includes("card4.jpg") ||
+            id.startsWith("outfit-saved-")
+          );
+        });
+
+        if (hasLegacyDummy) {
+          const cleaned = items.filter((p) => {
+            if (!p) return false;
+            const img = String(p.image || "");
+            const id = String(p.id || "");
+            return (
+              !img.includes("card1.jpg") &&
+              !img.includes("card2.jpg") &&
+              !img.includes("card3.jpg") &&
+              !img.includes("card4.jpg") &&
+              !id.startsWith("outfit-saved-")
+            );
+          });
+          if (cleaned.length === 0) {
+            return [...DEFAULT_SAVED_OUTFITS];
+          }
+          return cleaned;
+        }
+        return items;
+      }
+
+      // Mendapatkan key penyimpanan khusus untuk setiap akun (bukan global per device)
+      function getUserAccountStorageKey() {
+        const u = APP_STATE.user;
+        if (u && u.isLoggedIn && u.tier !== "guest") {
+          if (u.email && !isDummyEmail(u.email)) {
+            return (
+              "outfit_req_saved_photos_" +
+              u.email
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9]/g, "_")
+            );
+          }
+          if (u.id && !u.id.startsWith("guest-") && !u.id.startsWith("demo-")) {
+            return "outfit_req_saved_photos_" + u.id;
+          }
+        }
+        return "outfit_req_saved_photos_guest";
+      }
+
+      // Memuat foto tersimpan khusus akun aktif dari Local Cache & Supabase Database
+      async function loadSavedPinsForActiveUser() {
+        const userKey = getUserAccountStorageKey();
+
+        // 1. Ambil data dari LocalStorage akun aktif TERLEBIH DAHULU (Instant & Anti-Hilang)
+        let loadedItems = [];
+        try {
+          const raw = localStorage.getItem(userKey);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed)) loadedItems = parsed;
+          }
+        } catch (e) {}
+
+        // Migrasi / fallback dari key alternatif (misal outfit_req_saved_photos_${user.id} atau global)
+        if (loadedItems.length === 0) {
+          try {
+            if (APP_STATE.user && APP_STATE.user.id) {
+              const altKey = `outfit_req_saved_photos_${APP_STATE.user.id}`;
+              const altRaw = localStorage.getItem(altKey);
+              if (altRaw) {
+                const altParsed = JSON.parse(altRaw);
+                if (Array.isArray(altParsed) && altParsed.length > 0) {
+                  loadedItems = altParsed;
+                }
+              }
+            }
+            if (loadedItems.length === 0) {
+              const oldGlobal = localStorage.getItem("outfit_req_saved_photos");
+              if (oldGlobal) {
+                const parsedGlobal = JSON.parse(oldGlobal);
+                if (Array.isArray(parsedGlobal) && parsedGlobal.length > 0) {
+                  loadedItems = parsedGlobal;
+                }
+              }
+            }
+            if (loadedItems.length === 0) {
+              const guestRaw = localStorage.getItem(
+                "outfit_req_saved_photos_guest",
+              );
+              if (guestRaw) {
+                const parsedGuest = JSON.parse(guestRaw);
+                if (Array.isArray(parsedGuest) && parsedGuest.length > 0) {
+                  loadedItems = parsedGuest;
+                }
+              }
+            }
+          } catch (e) {}
+        }
+
+        // Bersihkan data dummy legacy agar 100% konsisten dengan katalog Shopee
+        loadedItems = sanitizeSavedOutfits(loadedItems);
+
+        // Fallback ke DEFAULT_SAVED_OUTFITS jika belum pernah diisi & tidak sengaja dikosongkan
+        const isExplicitlyCleared =
+          localStorage.getItem("outfit_req_saved_cleared") === "true";
+        if (loadedItems.length === 0 && !isExplicitlyCleared) {
+          loadedItems = [...DEFAULT_SAVED_OUTFITS];
+          try {
+            localStorage.setItem(userKey, JSON.stringify(loadedItems));
+            localStorage.setItem(
+              "outfit_req_saved_photos",
+              JSON.stringify(loadedItems),
+            );
+          } catch (e) {}
+        }
+
+        // Pasang langsung ke memori state & update UI seketika
+        APP_STATE.savedPins = loadedItems;
+        updateSavedCounter();
+        if (APP_STATE.isSavedBoardView) renderSavedBoard();
+
+        // 2. Sinkronisasi dengan Supabase Database di latar belakang (Background Sync)
+        if (
+          supabaseDb &&
+          APP_STATE.user &&
+          APP_STATE.user.isLoggedIn &&
+          APP_STATE.user.tier !== "guest"
+        ) {
+          try {
+            let targetUserId = APP_STATE.user.id || "";
+            let isUUID =
+              /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+                targetUserId,
+              );
+            if (!isUUID) {
+              const { data: sessionData } = await supabaseDb.auth.getSession();
+              if (sessionData?.session?.user?.id) {
+                targetUserId = sessionData.session.user.id;
+                isUUID = true;
+              }
+            }
+
+            const targetEmail = (APP_STATE.user.email || "").toLowerCase().trim();
+            const hasValidEmail = targetEmail && !isDummyEmail(targetEmail);
+
+            let data = null;
+            let error = null;
+
+            // Query cerdas: sesuaikan dengan email customer & UUID akun masing-masing
+            if (isUUID && hasValidEmail) {
+              const res = await supabaseDb
+                .from("saved_photos")
+                .select("*")
+                .or(`user_id.eq.${targetUserId},user_email.ilike.${targetEmail}`)
+                .order("saved_at", { ascending: false });
+              data = res.data;
+              error = res.error;
+            } else if (hasValidEmail) {
+              const res = await supabaseDb
+                .from("saved_photos")
+                .select("*")
+                .ilike("user_email", targetEmail)
+                .order("saved_at", { ascending: false });
+              data = res.data;
+              error = res.error;
+            } else if (isUUID) {
+              const res = await supabaseDb
+                .from("saved_photos")
+                .select("*")
+                .eq("user_id", targetUserId)
+                .order("saved_at", { ascending: false });
+              data = res.data;
+              error = res.error;
+            }
+
+            // Fallback jika query user_email belum didukung skema Supabase
+            if (error && isUUID) {
+              const fallbackRes = await supabaseDb
+                .from("saved_photos")
+                .select("*")
+                .eq("user_id", targetUserId)
+                .order("saved_at", { ascending: false });
+              data = fallbackRes.data;
+              error = fallbackRes.error;
+            }
+
+            if (!error && Array.isArray(data) && data.length > 0) {
+              const remotePins = data.map((row) => {
+                let item = null;
+                if (row.item_data) {
+                  item = { ...row.item_data };
+                } else {
+                  const match = OUTFIT_CATALOG.find(
+                    (p) =>
+                      p.id === row.item_id ||
+                      p.itemId == row.item_id ||
+                      p.id === row.outfit_id,
+                  );
+                  if (match) {
+                    item = { ...match };
+                  } else {
+                    item = {
+                      id: row.item_id || row.id,
+                      title: row.title || "Outfit Tersimpan",
+                      image: row.image_url || row.photo_url || "images/card1.jpg",
+                      store: row.store || "Shopee",
+                      storeUrl:
+                        row.store_url ||
+                        row.product_link ||
+                        "https://shopee.co.id",
+                      priceDisplay: row.price_display || "Harga Shopee",
+                    };
+                  }
+                }
+                // Catat identitas pemilik akun & jenis akun customer pada item pin
+                item.user_email = row.user_email || item.user_email || targetEmail;
+                item.user_tier = row.user_tier || item.user_tier || APP_STATE.user.tier || "free";
+                item.user_name = row.user_name || item.user_name || APP_STATE.user.name;
+                return item;
+              });
+
+              // Bersihkan remote data dari dummy sebelum merge
+              const cleanedRemote = sanitizeSavedOutfits(remotePins);
+
+              // GABUNGKAN (MERGE) secara cerdas tanpa menghapus item yang sudah ada di local
+              const pinMap = new Map();
+              cleanedRemote.forEach((p) => {
+                if (p && p.id) pinMap.set(String(p.id), p);
+              });
+              APP_STATE.savedPins.forEach((p) => {
+                if (p && p.id) pinMap.set(String(p.id), p);
+              });
+
+              APP_STATE.savedPins = Array.from(pinMap.values());
+              savePinsToStorage();
+              updateSavedCounter();
+              if (APP_STATE.isSavedBoardView) renderSavedBoard();
+            }
+          } catch (dbErr) {
+            console.warn(
+              "[OutfitReq] Supabase sync background warning:",
+              dbErr,
+            );
+          }
+        }
+      }
+
+      function savePinsToStorage() {
+        try {
+          const userKey = getUserAccountStorageKey();
+          localStorage.setItem(userKey, JSON.stringify(APP_STATE.savedPins));
+          localStorage.setItem(
+            "outfit_req_saved_photos",
+            JSON.stringify(APP_STATE.savedPins),
+          );
+          localStorage.setItem(
+            "outfit_req_saved_timestamp",
+            Date.now().toString(),
+          );
+          if (APP_STATE.user && APP_STATE.user.id) {
+            localStorage.setItem(
+              `outfit_req_saved_photos_${APP_STATE.user.id}`,
+              JSON.stringify(APP_STATE.savedPins),
+            );
+          }
+          if (APP_STATE.savedPins.length === 0) {
+            localStorage.setItem("outfit_req_saved_cleared", "true");
+          } else {
+            localStorage.removeItem("outfit_req_saved_cleared");
+          }
+        } catch (e) {}
+      }
+
+      function updateSavedCounter() {
+        const badge = document.getElementById("savedCounterBadge");
+        const badgeM = document.getElementById("savedCounterBadgeMobile");
+        if (badge) badge.innerText = APP_STATE.savedPins.length;
+        if (badgeM) badgeM.innerText = APP_STATE.savedPins.length;
+      }
+
+      function findPinById(pinId) {
+        if (!pinId) return null;
+        const target = String(pinId);
+        const cleanTarget = target.replace(/^shopee-/, "");
+        return (
+          OUTFIT_CATALOG.find((p) => {
+            const pid = String(p.id || "");
+            const cleanPid = pid.replace(/^shopee-/, "");
+            const itemId = String(p.itemId || "");
+            return (
+              pid === target ||
+              cleanPid === cleanTarget ||
+              itemId === target ||
+              itemId === cleanTarget
+            );
+          }) ||
+          APP_STATE.savedPins.find((p) => {
+            const pid = String(p.id || "");
+            const cleanPid = pid.replace(/^shopee-/, "");
+            const itemId = String(p.itemId || "");
+            return (
+              pid === target ||
+              cleanPid === cleanTarget ||
+              itemId === target ||
+              itemId === cleanTarget
+            );
+          })
+        );
+      }
+
+      function isPinSaved(pinId) {
+        if (!pinId) return false;
+        const target = String(pinId);
+        const cleanTarget = target.replace(/^shopee-/, "");
+        return APP_STATE.savedPins.some((p) => {
+          if (!p) return false;
+          const pid = String(p.id || "");
+          const cleanPid = pid.replace(/^shopee-/, "");
+          const itemId = String(p.itemId || "");
+          return (
+            pid === target ||
+            cleanPid === cleanTarget ||
+            itemId === target ||
+            itemId === cleanTarget
+          );
+        });
+      }
+
+      // 4. RENDER FEED (Clean Pinterest Look)
+      function renderFeed() {
+        const container = document.getElementById("mainPinterestFeed");
+        const emptyState = document.getElementById("emptyFilterState");
+        const countBadge = document.getElementById("resultsCountBadge");
+        const statusText = document.getElementById("feedStatusText");
+        if (!container) return;
+
+        let filtered = [...OUTFIT_CATALOG];
+
+        if (APP_STATE.activeCategory === "shopee") {
+          filtered = filtered.filter(
+            (item) =>
+              item.source === "apify-shopee" ||
+              (item.store && item.store.toLowerCase().includes("shopee")),
+          );
+        } else if (APP_STATE.activeCategory !== "all") {
+          filtered = filtered.filter(
+            (item) => item.category === APP_STATE.activeCategory,
+          );
+        }
+        if (APP_STATE.activeEvent) {
+          filtered = filtered.filter(
+            (item) => item.event_type === APP_STATE.activeEvent,
+          );
+        }
+        if (APP_STATE.searchQuery.trim()) {
+          const q = APP_STATE.searchQuery.toLowerCase().trim();
+          filtered = filtered.filter(
+            (item) =>
+              item.title.toLowerCase().includes(q) ||
+              item.desc.toLowerCase().includes(q) ||
+              item.category.toLowerCase().includes(q) ||
+              item.style.toLowerCase().includes(q) ||
+              item.store.toLowerCase().includes(q),
+          );
+        }
+
+        if (APP_STATE.sortOption === "popular") {
+          filtered.sort((a, b) => b.savesCount - a.savesCount);
+        } else if (APP_STATE.sortOption === "price-asc") {
+          filtered.sort((a, b) => a.priceTotal - b.priceTotal);
+        } else if (APP_STATE.sortOption === "price-desc") {
+          filtered.sort((a, b) => b.priceTotal - a.priceTotal);
+        }
+
+        const itemsToRender = filtered.slice(0, APP_STATE.displayedCount);
+
+        if (countBadge) countBadge.innerText = `${filtered.length} ide`;
+        if (statusText) {
+          if (APP_STATE.activeCategory === "all") {
+            statusText.innerText = "Menampilkan seluruh inspirasi";
+          } else if (APP_STATE.activeCategory === "shopee") {
+            statusText.innerText = "Katalog Live Marketplace: Shopee";
+          } else {
+            statusText.innerText = `Kategori: ${APP_STATE.activeCategory.charAt(0).toUpperCase() + APP_STATE.activeCategory.slice(1)}`;
+          }
+        }
+
+        if (filtered.length === 0) {
+          container.innerHTML = "";
+          if (emptyState) emptyState.classList.remove("hidden");
+          const loadMore = document.getElementById("loadMoreSection");
+          if (loadMore) loadMore.classList.add("hidden");
+          return;
+        }
+
+        if (emptyState) emptyState.classList.add("hidden");
+        const loadMore = document.getElementById("loadMoreSection");
+        if (loadMore) {
+          loadMore.classList.remove("hidden");
+          const btnMore = document.getElementById("btnLoadMore");
+          const endText = document.getElementById("endOfFeedText");
+          if (itemsToRender.length >= filtered.length) {
+            if (btnMore) btnMore.style.display = "none";
+            if (endText) endText.classList.remove("hidden");
+          } else {
+            if (btnMore) btnMore.style.display = "inline-block";
+            if (endText) endText.classList.add("hidden");
+          }
+        }
+
+        // Generate Clean Cards
+        container.innerHTML = itemsToRender
+          .map((pin) => {
+            const isSaved = isPinSaved(pin.id);
+            const isShopee = pin.source === "apify-shopee";
+            const priceFormatted =
+              pin.priceDisplay ||
+              new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR",
+                maximumFractionDigits: 0,
+              }).format(pin.priceTotal);
+
+            return `
+          <div class="pin-card group cursor-pointer" onclick="openPinDetailModal('${pin.id}')">
+            
+            <!-- Image Frame -->
+            <div class="pin-image-wrapper ${pin.aspect}">
+              <img 
+                src="${pin.image}" 
+                alt="${pin.title}" 
+                loading="lazy" 
+                onerror="this.onerror=null; this.src='${pin.localFallback || "images/card1.jpg"}';"
+              />
+
+              <!-- Hover Overlay with Red Save Button -->
+              <div class="pin-hover-overlay">
+                <div class="flex items-center justify-between w-full">
+                  ${
+                    isShopee
+                      ? `
+                    <span class="px-2 py-0.5 rounded-full bg-white/95 text-[10px] font-semibold text-[#EE4D2D] flex items-center gap-1 shadow-xs">
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#EE4D2D]"></span> Shopee
+                    </span>
+                  `
+                      : "<span></span>"
+                  }
+                  <button 
+                    type="button" 
+                    onclick="event.stopPropagation(); togglePinSave('${pin.id}')"
+                    id="saveBtn-${pin.id}"
+                    class="btn-pin-save px-3.5 py-1.5 rounded-full text-xs font-semibold text-white shadow-md transition-all ${isSaved ? "bg-stone-900" : "bg-[#E60023] hover:bg-[#b8001c]"}"
+                  >
+                    ${isSaved ? "Tersimpan" : "Simpan"}
+                  </button>
+                </div>
+
+                <div class="flex items-center justify-between w-full">
+                  <span class="px-2 py-0.5 rounded-full bg-white/95 text-[10px] font-semibold text-stone-900 shadow-xs">
+                    ${priceFormatted}
+                  </span>
+                  <a 
+                    href="${pin.storeUrl}" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    onclick="event.stopPropagation();"
+                    class="w-7 h-7 rounded-full bg-white text-stone-700 hover:text-black flex items-center justify-center shadow-sm"
+                    title="${isShopee ? "Buka di Shopee" : "Buka Toko"}"
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Clean Typography (Pinterest Style) -->
+            <div class="pt-2 px-0.5">
+              <h3 class="text-[13px] font-semibold text-stone-900 leading-snug line-clamp-1 group-hover:text-stone-700">
+                ${pin.title}
+              </h3>
+              <div class="flex items-center justify-between text-[11px] text-stone-500 mt-0.5">
+                <span class="inline-flex items-center gap-1 truncate max-w-[150px]">
+                  ${isShopee ? '<span class="w-1.5 h-1.5 rounded-full bg-[#EE4D2D] shrink-0"></span>' : ""}
+                  <span class="truncate">${pin.store}</span>
+                  ${pin.rating ? `&bull; ★ ${pin.rating}` : ""}
+                </span>
+                <span class="shrink-0">${pin.savesCount} simpan</span>
+              </div>
+            </div>
+
+          </div>
+        `;
+          })
+          .join("");
+      }
+
+      // 5. PIN SAVE LOGIC (PER-ACCOUNT & DATABASE SYNC)
+      async function togglePinSave(pinId) {
+        const pin = findPinById(pinId);
+        if (!pin) return;
+
+        // Pastikan pengguna masuk ke akun masing-masing agar simpanan tidak menempel di device
+        if (
+          !APP_STATE.user ||
+          !APP_STATE.user.isLoggedIn ||
+          APP_STATE.user.tier === "guest"
+        ) {
+          showToast("Silakan masuk ke akun Anda untuk menyimpan produk.");
+          setTimeout(() => {
+            window.location.href = `login.html?redirect=rekomendasi.html`;
+          }, 1300);
+          return;
+        }
+
+        const targetId = String(pin.id);
+        const cleanTargetId = targetId.replace(/^shopee-/, "");
+        const idx = APP_STATE.savedPins.findIndex((p) => {
+          if (!p) return false;
+          const pid = String(p.id || "");
+          const cleanPid = pid.replace(/^shopee-/, "");
+          const itemId = String(p.itemId || "");
+          return (
+            pid === targetId ||
+            cleanPid === cleanTargetId ||
+            itemId === targetId ||
+            itemId === cleanTargetId
+          );
+        });
+        const isRemoving = idx > -1;
+
+        if (isRemoving) {
+          APP_STATE.savedPins.splice(idx, 1);
+          pin.savesCount = Math.max(0, (pin.savesCount || 1) - 1);
+          showToast("Dihapus dari koleksi akun Anda");
+        } else {
+          const cleanPriceDisplay =
+            pin.priceDisplay ||
+            (pin.priceTotal
+              ? `Rp ${Number(pin.priceTotal).toLocaleString("id-ID")}`
+              : "Harga Shopee");
+          const numPrice =
+            pin.priceTotal ||
+            parseInt(String(cleanPriceDisplay).replace(/[^0-9]/g, "")) ||
+            0;
+          const customerEmail = (APP_STATE.user?.email || "").toLowerCase().trim();
+          const customerTier = String(APP_STATE.user?.tier || "free").toLowerCase();
+          const customerName = APP_STATE.user?.name || "Member";
+
+          const newSavedItem = {
+            id: pin.id,
+            itemId: pin.itemId || cleanTargetId,
+            title: pin.title,
+            category: pin.category || "kasual",
+            style: pin.style || "Marketplace Style",
+            image: pin.image,
+            store: pin.store || "Shopee",
+            storeUrl: pin.storeUrl,
+            price: cleanPriceDisplay,
+            priceTotal: numPrice,
+            priceDisplay: cleanPriceDisplay,
+            user_email: customerEmail,
+            user_tier: customerTier,
+            user_name: customerName,
+            saved_by_email: customerEmail,
+            saved_by_tier: customerTier,
+            saved_at: new Date().toISOString()
+          };
+
+          APP_STATE.savedPins.unshift(newSavedItem);
+          pin.savesCount = (pin.savesCount || 0) + 1;
+          showToast(
+            `Tersimpan ke akun ${APP_STATE.user.name || APP_STATE.user.email} (${customerTier.toUpperCase()})`,
+          );
+        }
+
+        savePinsToStorage();
+        updateSavedCounter();
+
+        const btn =
+          document.getElementById(`saveBtn-${pinId}`) ||
+          document.getElementById(`saveBtn-${pin.id}`);
+        if (btn) {
+          const saved = isPinSaved(pin.id);
+          btn.classList.toggle("bg-stone-900", saved);
+          btn.classList.toggle("bg-[#E60023]", !saved);
+          btn.innerText = saved ? "Tersimpan" : "Simpan";
+        }
+
+        // Sinkronkan ke Database Supabase dengan data akun customer & jenis akun (tier)
+        if (supabaseDb && APP_STATE.user) {
+          try {
+            const customerEmail = (APP_STATE.user?.email || "").toLowerCase().trim();
+            const customerTier = String(APP_STATE.user?.tier || "free").toLowerCase();
+            const customerName = APP_STATE.user?.name || "Member";
+
+            let targetUserId = APP_STATE.user.id || "";
+            if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(targetUserId)) {
+              const { data: sessionData } = await supabaseDb.auth.getSession();
+              if (sessionData?.session?.user?.id) targetUserId = sessionData.session.user.id;
+            }
+            const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(targetUserId);
+
+            if (isRemoving) {
+              if (customerEmail && !isDummyEmail(customerEmail)) {
+                try {
+                  await supabaseDb
+                    .from("saved_photos")
+                    .delete()
+                    .ilike("user_email", customerEmail)
+                    .or(`item_id.eq.${pin.id},outfit_id.eq.${pin.id}`);
+                } catch(e) {}
+              }
+              if (isUUID) {
+                try {
+                  await supabaseDb
+                    .from("saved_photos")
+                    .delete()
+                    .eq("user_id", targetUserId)
+                    .or(`item_id.eq.${pin.id},outfit_id.eq.${pin.id}`);
+                } catch(e) {}
+              }
+            } else {
+              const savedPinPayload = {
+                id: pin.id,
+                itemId: pin.itemId,
+                title: pin.title,
+                category: pin.category,
+                image: pin.image,
+                store: pin.store,
+                storeUrl: pin.storeUrl,
+                priceDisplay: pin.priceDisplay || (pin.priceTotal ? `Rp ${pin.priceTotal}` : "Harga Shopee"),
+                user_email: customerEmail,
+                user_tier: customerTier,
+                user_name: customerName,
+                saved_by_email: customerEmail,
+                saved_by_tier: customerTier,
+                saved_at: new Date().toISOString()
+              };
+
+              const payloadWithColumns = {
+                item_id: pin.id,
+                title: pin.title,
+                image_url: pin.image,
+                price_display:
+                  pin.priceDisplay ||
+                  (pin.priceTotal ? `Rp ${pin.priceTotal}` : "Harga Shopee"),
+                store: pin.store || "Shopee",
+                store_url: pin.storeUrl,
+                user_email: customerEmail,
+                user_tier: customerTier,
+                user_name: customerName,
+                item_data: savedPinPayload
+              };
+              if (isUUID) payloadWithColumns.user_id = targetUserId;
+
+              let { error: insertErr } = await supabaseDb
+                .from("saved_photos")
+                .insert(payloadWithColumns);
+
+              if (insertErr) {
+                console.warn("[OutfitReq] Supabase primary insert notice:", insertErr);
+                // Jika foreign key violation (error 23503) karena user_id belum ada di tabel users:
+                if (insertErr.code === "23503" || insertErr.message?.includes("foreign key") || insertErr.message?.includes("users")) {
+                  const retryPayload = { ...payloadWithColumns };
+                  delete retryPayload.user_id;
+                  const { error: retryErr } = await supabaseDb.from("saved_photos").insert(retryPayload);
+                  if (!retryErr) {
+                    console.log("[OutfitReq] Sukses menyimpan pin ke Supabase via user_email fallback!");
+                    insertErr = null;
+                  } else {
+                    insertErr = retryErr;
+                  }
+                }
+
+                // Fallback jika database belum memiliki kolom user_email / user_tier
+                if (insertErr) {
+                  const fallbackPayload = {
+                    item_id: pin.id,
+                    title: pin.title,
+                    image_url: pin.image,
+                    price_display:
+                      pin.priceDisplay ||
+                      (pin.priceTotal ? `Rp ${pin.priceTotal}` : "Harga Shopee"),
+                    store: pin.store || "Shopee",
+                    store_url: pin.storeUrl,
+                    item_data: savedPinPayload
+                  };
+                  await supabaseDb.from("saved_photos").insert(fallbackPayload);
+                }
+              } else {
+                console.log("[OutfitReq] Supabase insert saved_photos berhasil!", payloadWithColumns);
+              }
+            }
+          } catch (dbErr) {
+            console.warn("[OutfitReq] Supabase sync error:", dbErr);
+          }
+        }
+
+        if (APP_STATE.isSavedBoardView) {
+          renderSavedBoard();
+        }
+      }
+
+      // 6. SAVED BOARD VIEW
+      function toggleSavedBoardView() {
+        APP_STATE.isSavedBoardView = !APP_STATE.isSavedBoardView;
+        const feedEl = document.getElementById("mainPinterestFeed");
+        const savedEl = document.getElementById("savedBoardSection");
+        const loadMoreEl = document.getElementById("loadMoreSection");
+        const btnText = document.getElementById("savedBoardButtonText");
+
+        if (APP_STATE.isSavedBoardView) {
+          if (feedEl) feedEl.classList.add("hidden");
+          if (savedEl) savedEl.classList.remove("hidden");
+          if (loadMoreEl) loadMoreEl.classList.add("hidden");
+          if (btnText) btnText.innerText = "Feed";
+          renderSavedBoard();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          if (feedEl) feedEl.classList.remove("hidden");
+          if (savedEl) savedEl.classList.add("hidden");
+          if (loadMoreEl) loadMoreEl.classList.remove("hidden");
+          if (btnText) btnText.innerText = "Tersimpan";
+          renderFeed();
+        }
+      }
+
+      function renderSavedBoard() {
+        const container = document.getElementById("savedMasonryGrid");
+        const emptyEl = document.getElementById("emptySavedState");
+        if (!container) return;
+
+        if (APP_STATE.savedPins.length === 0) {
+          container.innerHTML = "";
+          if (emptyEl) emptyEl.classList.remove("hidden");
+          return;
+        }
+
+        if (emptyEl) emptyEl.classList.add("hidden");
+
+        container.innerHTML = APP_STATE.savedPins
+          .map(
+            (item) => {
+              const itemTier = String(item.user_tier || (APP_STATE.user?.tier || "free")).toLowerCase();
+              const isItemPremium = itemTier === "premium";
+              return `
+        <div class="pin-card group cursor-pointer" onclick="openPinDetailModal('${item.id}')">
+          <div class="pin-image-wrapper aspect-[3/4]">
+            <img 
+              src="${item.image}" 
+              alt="${item.title}" 
+              loading="lazy" 
+              onerror="this.src='images/card1.jpg'"
+            />
+            <div class="pin-hover-overlay">
+              <div class="flex justify-between items-center w-full">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${isItemPremium ? 'bg-amber-400 text-stone-900' : 'bg-white/90 text-stone-800'} shadow-sm">
+                  ${isItemPremium ? '★ Premium' : 'Free Tier'}
+                </span>
+                <button 
+                  type="button" 
+                  onclick="event.stopPropagation(); togglePinSave('${item.id}')"
+                  class="px-3 py-1 rounded-full bg-stone-900 text-white text-[11px] font-semibold hover:bg-black"
+                >
+                  Hapus
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="pt-2 px-0.5">
+            <div class="flex items-center justify-between gap-1 mb-0.5">
+              <span class="text-[11px] text-stone-500 truncate">${item.store || "Shopee Mall"}</span>
+              <span class="inline-flex items-center px-1.5 py-0.2 rounded text-[8.5px] font-bold uppercase tracking-wider ${isItemPremium ? 'text-amber-800 bg-amber-50' : 'text-stone-600 bg-stone-100'}">
+                ${isItemPremium ? 'Premium' : 'Free'}
+              </span>
+            </div>
+            <h4 class="text-[13px] font-semibold text-stone-900 line-clamp-1">${item.title}</h4>
+          </div>
+        </div>
+      `;
+            }
+          )
+          .join("");
+      }
+
+      // 7. PIN DETAIL MODAL
+      function openPinDetailModal(pinId) {
+        const pin = findPinById(pinId);
+        if (!pin) return;
+        APP_STATE.currentViewingPin = pin;
+
+        const modal = document.getElementById("pinDetailModal");
+        const imgEl = document.getElementById("modalPinImage");
+        const titleEl = document.getElementById("modalPinTitle");
+        const descEl = document.getElementById("modalPinDesc");
+        const storeBadge = document.getElementById("modalStoreBadge");
+        const catBadge = document.getElementById("modalCategoryBadge");
+        const directLink = document.getElementById("modalDirectStoreLink");
+        const saveBtn = document.getElementById("modalSavePinBtn");
+        const saveText = document.getElementById("modalSavePinText");
+        const itemsContainer = document.getElementById("modalItemsList");
+        const totalEl = document.getElementById("modalEstimatedTotal");
+        const paletteContainer = document.getElementById("modalColorPalette");
+
+        const isShopee = pin.source === "apify-shopee";
+
+        if (imgEl) {
+          imgEl.src = pin.image;
+          imgEl.onerror = () => {
+            imgEl.src = pin.localFallback || "images/card1.jpg";
+          };
+        }
+        if (titleEl) titleEl.innerText = pin.title;
+        if (descEl) descEl.innerText = pin.desc;
+        if (storeBadge) {
+          if (isShopee) {
+            storeBadge.innerHTML = `<span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#EE4D2D]"></span>Shopee Verified &bull; ${pin.location || "Official"}</span>`;
+          } else {
+            storeBadge.innerText = `${pin.store}`;
+          }
+        }
+        if (catBadge) catBadge.innerText = `${pin.style || pin.category}`;
+        if (directLink) {
+          directLink.href = pin.storeUrl;
+          const linkSpan = directLink.querySelector("span");
+          if (linkSpan) {
+            linkSpan.innerText = isShopee
+              ? "Beli di Shopee"
+              : `Beli di ${pin.store}`;
+          }
+          if (isShopee) {
+            directLink.className =
+              "w-full py-2.5 px-4 rounded-xl bg-[#EE4D2D] hover:bg-[#d83f20] text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors shadow-sm";
+          } else {
+            directLink.className =
+              "w-full py-2.5 px-4 rounded-xl bg-stone-900 hover:bg-black text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors";
+          }
+        }
+
+        const isSaved = isPinSaved(pin.id);
+        if (saveBtn) {
+          saveBtn.classList.toggle("bg-stone-900", isSaved);
+          saveBtn.classList.toggle("bg-[#E60023]", !isSaved);
+        }
+        if (saveText) {
+          saveText.innerText = isSaved ? "Tersimpan" : "Simpan";
+        }
+
+        if (itemsContainer && pin.items) {
+          itemsContainer.innerHTML = pin.items
+            .map(
+              (item) => `
+          <div class="flex items-center justify-between py-2 border-b border-stone-100 last:border-none">
+            <div class="pr-3">
+              <span class="font-medium text-stone-900 block line-clamp-1">${item.name}</span>
+              <span class="text-[11px] text-stone-400">${item.category} &bull; ${item.store}</span>
+            </div>
+            <div class="text-right shrink-0">
+              <span class="font-medium text-stone-900 block">${item.price}</span>
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-[11px] text-[#EE4D2D] hover:underline">Lihat &rarr;</a>
+            </div>
+          </div>
+        `,
+            )
+            .join("");
+        } else if (itemsContainer) {
+          itemsContainer.innerHTML = `
+          <div class="py-2 text-stone-500 text-xs">
+            Detail item lengkap tersedia di tautan toko resmi.
+          </div>
+        `;
+        }
+
+        if (totalEl) {
+          totalEl.innerText = pin.priceDisplay
+            ? `Harga: ${pin.priceDisplay}`
+            : `Total: Rp ${pin.priceTotal.toLocaleString("id-ID")}`;
+        }
+
+        if (paletteContainer && pin.colors) {
+          paletteContainer.innerHTML = pin.colors
+            .map(
+              (col) => `
+          <span class="w-4 h-4 rounded-full border border-black/10 inline-block" style="background-color: ${col.hex};" title="${col.name}"></span>
+        `,
+            )
+            .join("");
+        } else if (paletteContainer) {
+          paletteContainer.innerHTML = "";
+        }
+
+        if (modal) {
+          modal.classList.remove("hidden");
+          document.body.style.overflow = "hidden";
+        }
+      }
+
+      function closePinDetailModal() {
+        const modal = document.getElementById("pinDetailModal");
+        if (modal) {
+          modal.classList.add("hidden");
+          document.body.style.overflow = "";
+        }
+      }
+
+      function toggleModalPinSave() {
+        if (!APP_STATE.currentViewingPin) return;
+        togglePinSave(APP_STATE.currentViewingPin.id);
+
+        const isSaved = isPinSaved(APP_STATE.currentViewingPin.id);
+        const saveBtn = document.getElementById("modalSavePinBtn");
+        const saveText = document.getElementById("modalSavePinText");
+        if (saveBtn) {
+          saveBtn.classList.toggle("bg-stone-900", isSaved);
+          saveBtn.classList.toggle("bg-[#E60023]", !isSaved);
+        }
+        if (saveText) saveText.innerText = isSaved ? "Tersimpan" : "Simpan";
+      }
+
+      // 8. FILTRATION & SEARCH
+      function selectCategoryFilter(category, btnEl) {
+        APP_STATE.activeCategory = category;
+        APP_STATE.activeEvent = null;
+        updateActiveChipUI(btnEl);
+        renderFeed();
+      }
+
+      function selectEventFilter(eventType, btnEl) {
+        APP_STATE.activeEvent = eventType;
+        APP_STATE.activeCategory = "all";
+        updateActiveChipUI(btnEl);
+        renderFeed();
+      }
+
+      function updateActiveChipUI(activeBtn) {
+        document.querySelectorAll(".chip-pill").forEach((btn) => {
+          btn.classList.remove(
+            "active",
+            "bg-stone-900",
+            "text-white",
+            "font-semibold",
+          );
+          btn.classList.add("text-stone-600", "font-medium");
+          btn.setAttribute("aria-selected", "false");
+        });
+        if (activeBtn) {
+          activeBtn.classList.add(
+            "active",
+            "bg-stone-900",
+            "text-white",
+            "font-semibold",
+          );
+          activeBtn.classList.remove("text-stone-600", "font-medium");
+          activeBtn.setAttribute("aria-selected", "true");
+        }
+      }
+
+      function setupSearchListener() {
+        const input = document.getElementById("pinterestSearchInput");
+        const clearBtn = document.getElementById("btnClearSearch");
+        if (!input) return;
+
+        input.addEventListener("input", (e) => {
+          APP_STATE.searchQuery = e.target.value;
+          if (clearBtn) clearBtn.classList.toggle("hidden", !e.target.value);
+          renderFeed();
+        });
+      }
+
+      function clearSearchInput() {
+        const input = document.getElementById("pinterestSearchInput");
+        const clearBtn = document.getElementById("btnClearSearch");
+        if (input) {
+          input.value = "";
+          APP_STATE.searchQuery = "";
+        }
+        if (clearBtn) clearBtn.classList.add("hidden");
+        renderFeed();
+      }
+
+      function applySortFilter() {
+        const sortSelect = document.getElementById("sortSelect");
+        if (sortSelect) APP_STATE.sortOption = sortSelect.value;
+        renderFeed();
+      }
+
+      function resetAllFilters() {
+        APP_STATE.activeCategory = "all";
+        APP_STATE.activeEvent = null;
+        APP_STATE.searchQuery = "";
+        APP_STATE.sortOption = "featured";
+
+        const input = document.getElementById("pinterestSearchInput");
+        if (input) input.value = "";
+        const clearBtn = document.getElementById("btnClearSearch");
+        if (clearBtn) clearBtn.classList.add("hidden");
+
+        const sortSelect = document.getElementById("sortSelect");
+        if (sortSelect) sortSelect.value = "featured";
+
+        const firstChip = document.querySelector(".chip-pill");
+        if (firstChip) updateActiveChipUI(firstChip);
+
+        renderFeed();
+      }
+
+      function loadMoreOutfits() {
+        APP_STATE.displayedCount += 12;
+        renderFeed();
+      }
+
+      // 9. MINIMAL TOAST
+      let toastTimeout = null;
+      function showToast(msg) {
+        const toast = document.getElementById("toastNotification");
+        const text = document.getElementById("toastMessage");
+        if (!toast || !text) return;
+
+        text.innerText = msg;
+        toast.classList.add("show");
+
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2200);
+      }
+
+      // Keyboard Shortcuts
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closePinDetailModal();
+      });
+    </script>
+  </body>
+</html>
