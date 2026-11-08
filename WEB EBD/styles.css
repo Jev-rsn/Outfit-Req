@@ -1461,7 +1461,7 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
 }
 
 /* Mobile Devices (Bottom Sheet Mode for Card) */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   html, body {
     height: 100dvh;
     min-height: -webkit-fill-available;
@@ -1594,48 +1594,93 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
 
   .mobile-slider-tabs {
     display: flex;
+    background: var(--input-bg);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 3px;
+  }
+  .mobile-tab-btn {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .overlay-container {
     display: none !important;
   }
 
+  /* Viewport slider vertikal mobile (Animasi dari Atas ke Bawah) */
   .double-slider-container {
-    min-height: auto;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    max-height: calc(88dvh - 80px);
-  }
-
-  .form-container {
     position: relative;
     width: 100%;
-    height: auto;
+    height: clamp(500px, 76dvh, 620px);
+    min-height: 500px;
+    overflow: hidden;
+    background: var(--white);
+  }
+
+  /* Form container: bertumpuk absolut dengan transisi vertikal halus */
+  .form-container {
+    position: absolute;
+    top: 0;
     left: 0 !important;
-    transform: none !important;
-    animation: none !important;
-    transition: none;
-    display: none;
+    width: 100%;
+    height: 100%;
+    display: block !important;
+    background: var(--white);
+    box-sizing: border-box;
+    will-change: transform, opacity;
+    transition: transform 0.52s cubic-bezier(0.76, 0, 0.24, 1),
+                opacity 0.45s cubic-bezier(0.76, 0, 0.24, 1),
+                visibility 0.52s ease;
   }
 
+  /* Keadaan Default: Form Masuk aktif di viewport, Form Daftar di atas (translateY -100%) */
   .sign-in-container {
-    display: block;
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    z-index: 2;
+    pointer-events: auto !important;
+    visibility: visible !important;
   }
 
+  .sign-up-container {
+    transform: translateY(-100%) !important;
+    opacity: 0 !important;
+    z-index: 1;
+    pointer-events: none !important;
+    visibility: hidden !important;
+    animation: none !important;
+  }
+
+  /* Keadaan Aktif Sign Up (.right-panel-active):
+     - Form Masuk meluncur ke bawah (dari atas ke bawah: translateY 0 -> 100%)
+     - Form Daftar meluncur masuk dari atas ke viewport (dari atas ke bawah: translateY -100% -> 0) */
   .double-slider-container.right-panel-active .sign-in-container {
-    display: none;
+    transform: translateY(100%) !important;
+    opacity: 0 !important;
+    z-index: 1;
+    pointer-events: none !important;
+    visibility: hidden !important;
   }
 
   .double-slider-container.right-panel-active .sign-up-container {
-    display: block;
-    opacity: 1;
-    pointer-events: auto;
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    z-index: 5;
+    pointer-events: auto !important;
+    visibility: visible !important;
+    animation: none !important;
   }
 
   .form-content-inner {
-    padding: 1.1rem 1.3rem max(1.6rem, env(safe-area-inset-bottom, 1.6rem));
-    height: auto;
-    overflow: visible;
+    padding: 1.1rem 1.4rem max(1.8rem, env(safe-area-inset-bottom, 1.8rem));
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
   .mobile-slider-footer {

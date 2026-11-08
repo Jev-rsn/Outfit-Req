@@ -513,9 +513,19 @@ class App {
   _activateSignUpSlider() {
     if (this.doubleSliderContainer) {
       this.doubleSliderContainer.classList.add('right-panel-active');
+      const signUpInner = this.doubleSliderContainer.querySelector('.sign-up-container .form-content-inner');
+      if (signUpInner) {
+        signUpInner.scrollTop = 0;
+      }
     }
-    if (this.mobileTabSignUp) this.mobileTabSignUp.classList.add('active');
-    if (this.mobileTabSignIn) this.mobileTabSignIn.classList.remove('active');
+    if (this.mobileTabSignUp) {
+      this.mobileTabSignUp.classList.add('active');
+      this.mobileTabSignUp.setAttribute('aria-selected', 'true');
+    }
+    if (this.mobileTabSignIn) {
+      this.mobileTabSignIn.classList.remove('active');
+      this.mobileTabSignIn.setAttribute('aria-selected', 'false');
+    }
 
     setTimeout(() => {
       const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window);
@@ -529,9 +539,19 @@ class App {
   _activateSignInSlider() {
     if (this.doubleSliderContainer) {
       this.doubleSliderContainer.classList.remove('right-panel-active');
+      const signInInner = this.doubleSliderContainer.querySelector('.sign-in-container .form-content-inner');
+      if (signInInner) {
+        signInInner.scrollTop = 0;
+      }
     }
-    if (this.mobileTabSignIn) this.mobileTabSignIn.classList.add('active');
-    if (this.mobileTabSignUp) this.mobileTabSignUp.classList.remove('active');
+    if (this.mobileTabSignIn) {
+      this.mobileTabSignIn.classList.add('active');
+      this.mobileTabSignIn.setAttribute('aria-selected', 'true');
+    }
+    if (this.mobileTabSignUp) {
+      this.mobileTabSignUp.classList.remove('active');
+      this.mobileTabSignUp.setAttribute('aria-selected', 'false');
+    }
 
     setTimeout(() => {
       const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window);

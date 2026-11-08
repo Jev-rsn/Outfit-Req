@@ -9,7 +9,8 @@ import {
   resendVerificationEmail,
   resetPasswordForEmail, 
   isSupabaseConfigured,
-  getSupabaseClient
+  getSupabaseClient,
+  getCustomerPremiumStatus
 } from './supabaseClient.js';
 
 // ─── State Machine ────────────────────────────
@@ -46,7 +47,6 @@ class App {
     this.verifiedSuccessView = document.getElementById('verified-success-view');
     this.verifiedCustomerData = null;
     this.pendingRegistration = null;
-    this.clothingRail = null;
 
     // Double Slider references
     this.doubleSliderContainer = document.getElementById('doubleSliderContainer');
@@ -114,7 +114,7 @@ class App {
           this._triggerZoomIn();
         }, 350);
 
-        const handleEmailVerifiedSession = (user) => {
+        const handleEmailVerifiedSession = async (user) => {
           if (!user) return;
           console.log('[OutfitReq] Akun berhasil terverifikasi via link email:', user);
           let customerName = user.user_metadata?.full_name;
@@ -131,13 +131,27 @@ class App {
           }
           if (!customerName) customerName = 'Customer';
 
+          let activeTier = 'free';
+          let activeExpiry = null;
+          try {
+            if (user.email) {
+              const premCheck = await getCustomerPremiumStatus(user.email);
+              if (premCheck.isPremium) {
+                activeTier = 'premium';
+                activeExpiry = premCheck.expiresAt;
+                console.log('[OutfitReq] Verified user terdeteksi Premium aktif:', activeExpiry);
+              }
+            }
+          } catch (e) {}
+
           const cleanUname = customerName.toLowerCase().replace(/[^a-z0-9_]/g, '') || (user.email ? user.email.split('@')[0].toLowerCase().replace(/[^a-z0-9_]/g, '') : 'customer');
           const userData = {
             id: user.id || 'usr_' + Date.now(),
             name: customerName,
             username: '@' + cleanUname,
             email: user.email,
-            tier: 'free',
+            tier: activeTier,
+            premiumExpiresAt: activeExpiry,
             isLoggedIn: true,
             verifiedAt: user.email_confirmed_at || new Date().toISOString()
           };
@@ -499,9 +513,19 @@ class App {
   _activateSignUpSlider() {
     if (this.doubleSliderContainer) {
       this.doubleSliderContainer.classList.add('right-panel-active');
+      const signUpInner = this.doubleSliderContainer.querySelector('.sign-up-container .form-content-inner');
+      if (signUpInner) {
+        signUpInner.scrollTop = 0;
+      }
     }
-    if (this.mobileTabSignUp) this.mobileTabSignUp.classList.add('active');
-    if (this.mobileTabSignIn) this.mobileTabSignIn.classList.remove('active');
+    if (this.mobileTabSignUp) {
+      this.mobileTabSignUp.classList.add('active');
+      this.mobileTabSignUp.setAttribute('aria-selected', 'true');
+    }
+    if (this.mobileTabSignIn) {
+      this.mobileTabSignIn.classList.remove('active');
+      this.mobileTabSignIn.setAttribute('aria-selected', 'false');
+    }
 
     setTimeout(() => {
       const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window);
@@ -515,9 +539,19 @@ class App {
   _activateSignInSlider() {
     if (this.doubleSliderContainer) {
       this.doubleSliderContainer.classList.remove('right-panel-active');
+      const signInInner = this.doubleSliderContainer.querySelector('.sign-in-container .form-content-inner');
+      if (signInInner) {
+        signInInner.scrollTop = 0;
+      }
     }
-    if (this.mobileTabSignIn) this.mobileTabSignIn.classList.add('active');
-    if (this.mobileTabSignUp) this.mobileTabSignUp.classList.remove('active');
+    if (this.mobileTabSignIn) {
+      this.mobileTabSignIn.classList.add('active');
+      this.mobileTabSignIn.setAttribute('aria-selected', 'true');
+    }
+    if (this.mobileTabSignUp) {
+      this.mobileTabSignUp.classList.remove('active');
+      this.mobileTabSignUp.setAttribute('aria-selected', 'false');
+    }
 
     setTimeout(() => {
       const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window);
@@ -763,11 +797,22 @@ class App {
               customerName = raw.charAt(0).toUpperCase() + raw.slice(1);
             }
 
+            let activeTier = 'free';
+            let activeExpiry = null;
+            try {
+              const premCheck = await getCustomerPremiumStatus(email);
+              if (premCheck.isPremium) {
+                activeTier = 'premium';
+                activeExpiry = premCheck.expiresAt;
+              }
+            } catch (e) {}
+
             const userData = {
               id: verifiedUser?.id || 'usr_' + Date.now(),
               name: customerName,
               email: email,
-              tier: 'Free Member',
+              tier: activeTier,
+              premiumExpiresAt: activeExpiry,
               isLoggedIn: true,
               verifiedAt: new Date().toISOString()
             };
@@ -807,7 +852,7 @@ class App {
     // Direct Login dari Tampilan Akun Terverifikasi
     const directLoginBtn = document.getElementById('directLoginBtn');
     if (directLoginBtn) {
-      directLoginBtn.addEventListener('click', () => {
+      directLoginBtn.addEventListener('click', async () => {
         this._showButtonLoading(directLoginBtn);
         directLoginBtn.disabled = true;
 
@@ -820,6 +865,13 @@ class App {
 
         if (this.verifiedCustomerData) {
           try {
+            if (this.verifiedCustomerData.email) {
+              const premCheck = await getCustomerPremiumStatus(this.verifiedCustomerData.email);
+              if (premCheck.isPremium) {
+                this.verifiedCustomerData.tier = 'premium';
+                this.verifiedCustomerData.premiumExpiresAt = premCheck.expiresAt;
+              }
+            }
             localStorage.removeItem('outfit_req_logged_out');
             localStorage.setItem('outfit_req_user', JSON.stringify(this.verifiedCustomerData));
           } catch (e) {}
@@ -1176,13 +1228,28 @@ class App {
           customerName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
         }
 
+        // Cek status Premium langsung dari database Supabase
+        let activeTier = 'free';
+        let activeExpiry = null;
+        try {
+          const premCheck = await getCustomerPremiumStatus(email.value.trim());
+          if (premCheck.isPremium) {
+            activeTier = 'premium';
+            activeExpiry = premCheck.expiresAt;
+            console.log('[OutfitReq Login] Akun terdeteksi sebagai Premium aktif dari Supabase:', activeExpiry);
+          }
+        } catch (e) {
+          console.warn('[OutfitReq Login] Gagal query status premium database:', e);
+        }
+
         const cleanUname = customerName.toLowerCase().replace(/[^a-z0-9_]/g, '') || email.value.split('@')[0].toLowerCase().replace(/[^a-z0-9_]/g, '');
         const userData = {
           id: data?.user?.id || 'usr_' + Date.now(),
           email: email.value.trim(),
           name: customerName,
           username: '@' + cleanUname,
-          tier: 'free',
+          tier: activeTier,
+          premiumExpiresAt: activeExpiry,
           isLoggedIn: true,
           loginAt: new Date().toISOString()
         };

@@ -1,2457 +1,883 @@
 <!doctype html>
 <html lang="id">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Outfit Req — Hero</title>
-    <script src="theme.js"></script>
-    <script src="./vendor/react.js"></script>
-    <script src="./vendor/react-dom.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="./support.js"></script>
+    <title>Outfit Req — Halaman Utama & Masuk</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap"
     />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="theme.js"></script>
   </head>
   <body>
-    <x-dc>
-      <helmet>
-        <style>
-          :root {
-            --bg: #fff8e7;
-            --bg2: #ffffff;
-            --ink: #000000;
-            --ink-dim: rgba(0, 0, 0, 0.62);
-            --line: rgba(109, 0, 26, 0.18);
-            --gold: #6d001a;
-            --burgundy: #6d001a;
-            --burgundy2: #8a0a28;
-            --on-accent: #fff8e7;
-
-            /* Variabel Pergeseran Layar (Parallax Mouse/Trackpad) */
-            --mx: 0;
-            --my: 0;
-            --cx: 50%;
-            --cy: 50%;
-          }
-
-          /* ========================================================
-             DARK MODE PALETTE (Luxury Velvet Noir)
-             ======================================================== */
-          :root.dark, html.dark, [data-theme="dark"] {
-            --bg: #0d0b0c;
-            --bg2: #191417;
-            --ink: #f7f3ee;
-            --ink-dim: rgba(247, 243, 238, 0.72);
-            --line: rgba(247, 243, 238, 0.14);
-            --gold: #e5a968;
-            --burgundy: #c93b5f;
-            --burgundy2: #e05377;
-            --on-accent: #ffffff;
-          }
-
-          body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--ink);
-            font-family: "Inter", sans-serif;
-            overflow-x: hidden;
-          }
-
-          /* --- Browser Surfaces (Craft Floor) --- */
-          ::selection {
-            background: var(--burgundy);
-            color: var(--on-accent);
-          }
-          ::-moz-selection {
-            background: var(--burgundy);
-            color: var(--on-accent);
-          }
-          * {
-            caret-color: var(--burgundy);
-          }
-
-          /* Custom Scrollbar */
-          ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-          }
-          ::-webkit-scrollbar-track {
-            background: var(--bg);
-          }
-          ::-webkit-scrollbar-thumb {
-            background: rgba(109, 0, 26, 0.22);
-            border-radius: 4px;
-            border: 2px solid var(--bg);
-          }
-          ::-webkit-scrollbar-thumb:hover {
-            background: rgba(109, 0, 26, 0.4);
-          }
-
-          a {
-            color: inherit;
-            text-decoration: none;
-          }
-
-          button {
-            font-family: inherit;
-            cursor: pointer;
-          }
-
-          /* ==========================================
-   ANIMASI PERGESERAN TAMPILAN (PARALLAX)
-   ========================================== */
-          .hero-wrap {
-            width: 100%;
-            min-height: 980px;
-            background:
-              radial-gradient(
-                650px circle at var(--cx) var(--cy),
-                rgba(109, 0, 26, 0.045),
-                transparent 70%
-              ),
-              var(--bg);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            position: relative;
-          }
-
-          .nav-bar {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 24px 48px;
-            border-bottom: 1px solid var(--line);
-            gap: 20px;
-          }
-
-          .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-          }
-
-          .nav-link {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--ink-dim);
-            text-decoration: none;
-            padding: 6px 0;
-            position: relative;
-            transition: color 0.2s ease;
-          }
-
-          .nav-link:hover {
-            color: var(--gold);
-          }
-
-          .nav-link.active {
-            color: var(--gold);
-            font-weight: 600;
-          }
-
-          .nav-link.active::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 2px;
-            background: var(--gold);
-            border-radius: 2px;
-          }
-
-          .hero-cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            border-radius: 999px;
-            padding: 12px 26px;
-            text-decoration: none;
-            transition:
-              transform 0.2s ease,
-              box-shadow 0.2s ease,
-              background 0.2s ease,
-              color 0.2s ease;
-            box-sizing: border-box;
-          }
-
-          .hero-cta-btn:hover {
-            transform: translateY(-2px);
-          }
-
-          .hero-cta-secondary:hover {
-            background: rgba(109, 0, 26, 0.06) !important;
-            color: var(--gold) !important;
-            border-color: var(--gold) !important;
-          }
-
-          .header-shift {
-            position: relative;
-            z-index: 5;
-            text-align: center;
-            padding: 56px 24px 12px;
-            transform: translate3d(
-              calc(var(--mx) * -20px),
-              calc(var(--my) * -12px),
-              0
-            );
-            will-change: transform;
-          }
-
-          .subtitle-shift {
-            margin: 18px auto 0;
-            max-width: 440px;
-            font-size: 15px;
-            color: var(--ink-dim);
-            transform: translate3d(
-              calc(var(--mx) * -8px),
-              calc(var(--my) * -5px),
-              0
-            );
-            will-change: transform;
-          }
-
-          /* Area Kartu Kipas yang Bergeser Mengikuti Kursor */
-          .cards-stage {
-            position: relative;
-            z-index: 5;
-            flex: 1;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding: 60px 20px 88px;
-            overflow-x: auto;
-            perspective: 1100px;
-          }
-
-          .cards-track {
-            display: flex;
-            align-items: flex-end;
-            transform-style: preserve-3d;
-            transform: translate3d(
-                calc(var(--mx) * 42px),
-                calc(var(--my) * 18px),
-                0
-              )
-              rotateY(calc(var(--mx) * 7deg)) rotateX(calc(var(--my) * -5deg));
-            will-change: transform;
-          }
-
-          /* Styling Dasar & Transisi Kartu */
-          .card-item {
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            box-sizing: border-box;
-            transform-origin: bottom center;
-            cursor: pointer;
-            user-select: none;
-            background: #efe9db;
-            transition:
-              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.32s ease,
-              border-color 0.28s ease;
-            will-change: transform;
-          }
-
-          .card-photo {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            pointer-events: none;
-            transition: transform 0.4s ease;
-          }
-
-          .card-item:hover .card-photo,
-          .card-item.is-selected .card-photo {
-            transform: scale(1.08);
-          }
-
-          .card-overlay {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            padding: 8px 6px;
-            background: linear-gradient(
-              to top,
-              rgba(0, 0, 0, 0.72) 0%,
-              rgba(0, 0, 0, 0.2) 60%,
-              transparent 100%
-            );
-            color: #ffffff;
-            font-size: 11px;
-            font-weight: 500;
-            text-align: center;
-            line-height: 1.25;
-            letter-spacing: 0.02em;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-            box-sizing: border-box;
-            pointer-events: none;
-          }
-
-          .card-overlay * {
-            pointer-events: none;
-          }
-
-          .card-overlay-center {
-            padding: 12px 8px;
-            font-family: "Instrument Serif", serif;
-            font-size: 18px;
-            letter-spacing: 0.03em;
-            background: linear-gradient(
-              to top,
-              rgba(109, 0, 26, 0.88) 0%,
-              rgba(0, 0, 0, 0.3) 60%,
-              transparent 100%
-            );
-            pointer-events: none;
-          }
-
-          /* Posisi Kipas Dinamis Mengikuti Pergeseran Kursor */
-          .card-1 {
-            transform: rotate(calc(-26deg + (var(--mx) * -4.5deg)))
-              translateY(calc(0px + (var(--my) * 8px)));
-          }
-          .card-2 {
-            transform: rotate(calc(-19deg + (var(--mx) * -3.2deg)))
-              translateY(calc(-12px + (var(--my) * 6px)));
-          }
-          .card-3 {
-            transform: rotate(calc(-12deg + (var(--mx) * -2deg)))
-              translateY(calc(-24px + (var(--my) * 4px)));
-          }
-          .card-4 {
-            transform: rotate(calc(-5deg + (var(--mx) * -1deg)))
-              translateY(calc(-34px + (var(--my) * 2px)));
-          }
-          .card-5 {
-            transform: rotate(calc(0deg + (var(--mx) * 1.2deg)))
-              translateY(calc(-42px + (var(--my) * -4px)));
-          }
-          .card-6 {
-            transform: rotate(calc(7deg + (var(--mx) * 1deg)))
-              translateY(calc(-34px + (var(--my) * 2px)));
-          }
-          .card-7 {
-            transform: rotate(calc(14deg + (var(--mx) * 2deg)))
-              translateY(calc(-24px + (var(--my) * 4px)));
-          }
-          .card-8 {
-            transform: rotate(calc(21deg + (var(--mx) * 3.2deg)))
-              translateY(calc(-12px + (var(--my) * 6px)));
-          }
-          .card-9 {
-            transform: rotate(calc(28deg + (var(--mx) * 4.5deg)))
-              translateY(calc(0px + (var(--my) * 8px)));
-          }
-
-          /* Efek Hover & Efek Saat Kartu Ditekan/Aktif (Shadow Merah Burgundy) */
-          .card-item {
-            touch-action: manipulation;
-          }
-
-          .card-item:hover,
-          .card-item.is-selected {
-            border-color: var(--burgundy) !important;
-            box-shadow:
-              0 18px 40px rgba(109, 0, 26, 0.45),
-              0 0 20px rgba(109, 0, 26, 0.3) !important;
-            z-index: 50 !important;
-          }
-
-          .card-1:hover,
-          .card-1.is-selected {
-            transform: rotate(calc(-26deg + (var(--mx) * -4.5deg)))
-              translateY(calc(-22px + (var(--my) * 8px))) translateZ(40px)
-              scale(1.05);
-          }
-          .card-2:hover,
-          .card-2.is-selected {
-            transform: rotate(calc(-19deg + (var(--mx) * -3.2deg)))
-              translateY(calc(-34px + (var(--my) * 6px))) translateZ(40px)
-              scale(1.05);
-          }
-          .card-3:hover,
-          .card-3.is-selected {
-            transform: rotate(calc(-12deg + (var(--mx) * -2deg)))
-              translateY(calc(-46px + (var(--my) * 4px))) translateZ(40px)
-              scale(1.05);
-          }
-          .card-4:hover,
-          .card-4.is-selected {
-            transform: rotate(calc(-5deg + (var(--mx) * -1deg)))
-              translateY(calc(-56px + (var(--my) * 2px))) translateZ(40px)
-              scale(1.05);
-          }
-          .card-5:hover,
-          .card-5.is-selected {
-            transform: rotate(calc(0deg + (var(--mx) * 1.2deg)))
-              translateY(calc(-64px + (var(--my) * -4px))) translateZ(40px)
-              scale(1.06);
-          }
-          .card-6:hover,
-          .card-6.is-selected {
-            transform: rotate(calc(7deg + (var(--mx) * 1deg)))
-              translateY(calc(-56px + (var(--my) * 2px))) translateZ(40px)
-              scale(1.05);
-          }
-          .card-7:hover,
-          .card-7.is-selected {
-            transform: rotate(calc(14deg + (var(--mx) * 2deg)))
-              translateY(calc(-46px + (var(--my) * 4px))) translateZ(40px)
-              scale(1.05);
-          }
-          .card-8:hover,
-          .card-8.is-selected {
-            transform: rotate(calc(21deg + (var(--mx) * 3.2deg)))
-              translateY(calc(-34px + (var(--my) * 6px))) translateZ(40px)
-              scale(1.05);
-          }
-          .card-9:hover,
-          .card-9.is-selected {
-            transform: rotate(calc(28deg + (var(--mx) * 4.5deg)))
-              translateY(calc(-22px + (var(--my) * 8px))) translateZ(40px)
-              scale(1.05);
-          }
-
-          /* Efek Saat Kartu Sedang Ditekan (Active Press) */
-          .card-item:active {
-            border-color: var(--burgundy) !important;
-            box-shadow:
-              0 22px 48px rgba(109, 0, 26, 0.58),
-              0 0 24px rgba(109, 0, 26, 0.4) !important;
-            transform: scale(0.99);
-            z-index: 60 !important;
-          }
-
-          /* ==========================================
-             RESPONSIVE UNTUK DEVICE MOBILE
-             ========================================== */
-          .mobile-nav-toggle {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            min-width: 38px;
-            border-radius: 50%;
-            background: #ffffff;
-            border: 1.5px solid rgba(109, 0, 26, 0.22);
-            color: var(--burgundy);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(109, 0, 26, 0.08);
-          }
-          .mobile-nav-toggle:hover {
-            border-color: var(--burgundy);
-            transform: scale(1.05);
-          }
-          .mobile-nav-drawer {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: rgba(255, 248, 231, 0.98);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--line);
-            padding: 14px 18px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            box-shadow: 0 16px 36px rgba(109, 0, 26, 0.14);
-            z-index: 999;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-8px);
-            transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
-          }
-          .mobile-nav-drawer.open {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-          }
-          .mobile-nav-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 11px 14px;
-            border-radius: 12px;
-            background: #ffffff;
-            border: 1px solid rgba(109, 0, 26, 0.12);
-            font-size: 13.5px;
-            font-weight: 600;
-            color: var(--ink);
-            text-decoration: none;
-            transition: all 0.18s ease;
-          }
-          .mobile-nav-item:active {
-            background: rgba(109, 0, 26, 0.06);
-          }
-          .mobile-nav-item.highlight {
-            background: var(--burgundy);
-            color: #fff8e7;
-            border-color: var(--burgundy);
-          }
-
-          @media (max-width: 900px) {
-            .cards-track {
-              transform-origin: center bottom;
-            }
-          }
-
-          @media (max-width: 768px) {
-            .nav-bar {
-              padding: 14px 18px;
-              gap: 12px;
-            }
-            .desktop-nav-link {
-              display: none !important;
-            }
-            .mobile-nav-toggle {
-              display: inline-flex !important;
-            }
-            .hero-wrap {
-              min-height: auto;
-              padding-bottom: calc(84px + env(safe-area-inset-bottom, 16px)) !important;
-            }
-            .header-shift {
-              padding: 24px 16px 8px;
-              transform: none !important;
-            }
-            .header-shift h1 {
-              font-size: clamp(38px, 11vw, 68px) !important;
-              letter-spacing: -0.01em;
-              line-height: 1.05 !important;
-            }
-            .subtitle-shift {
-              font-size: 14px;
-              max-width: 340px;
-              line-height: 1.5;
-              margin: 12px auto 0;
-              transform: none !important;
-            }
-            .hero-cta-group {
-              margin-top: 20px !important;
-              padding: 4px !important;
-              gap: 8px !important;
-              display: inline-flex !important;
-              flex-direction: row !important;
-              max-width: 92vw;
-            }
-            .hero-cta-btn {
-              padding: 10px 18px !important;
-              font-size: 13px !important;
-              white-space: nowrap;
-            }
-            /* MOBILE TOUCH-SWIPE CAROUSEL (CLEAN, NO WEIRD FAN CLIPPING) */
-            .cards-stage {
-              display: flex !important;
-              justify-content: flex-start !important;
-              align-items: center !important;
-              padding: 20px 20px 44px !important;
-              overflow-x: auto !important;
-              overflow-y: hidden !important;
-              scroll-snap-type: x mandatory !important;
-              -webkit-overflow-scrolling: touch !important;
-              scrollbar-width: none !important;
-              perspective: none !important;
-              width: 100% !important;
-              box-sizing: border-box !important;
-            }
-            .cards-stage::-webkit-scrollbar {
-              display: none !important;
-            }
-            .cards-track {
-              display: flex !important;
-              align-items: center !important;
-              gap: 14px !important;
-              transform: none !important;
-              padding: 8px 12px 16px !important;
-              margin: 0 auto !important;
-              width: max-content !important;
-            }
-            .card-item {
-              transform: none !important;
-              flex-shrink: 0 !important;
-              scroll-snap-align: center !important;
-              width: 175px !important;
-              height: 275px !important;
-              margin-right: 0 !important;
-              border-radius: 16px !important;
-              box-shadow: 0 8px 24px rgba(109, 0, 26, 0.12) !important;
-              transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
-            }
-            .card-1:hover, .card-2:hover, .card-3:hover, .card-4:hover,
-            .card-5:hover, .card-6:hover, .card-7:hover, .card-8:hover, .card-9:hover {
-              transform: none !important;
-            }
-            .card-item.is-selected,
-            .card-1.is-selected, .card-2.is-selected, .card-3.is-selected,
-            .card-4.is-selected, .card-5.is-selected, .card-6.is-selected,
-            .card-7.is-selected, .card-8.is-selected, .card-9.is-selected {
-              transform: scale(1.04) !important;
-              border-color: var(--burgundy) !important;
-              box-shadow: 0 14px 32px rgba(109, 0, 26, 0.32) !important;
-            }
-            .card-overlay {
-              padding: 12px 10px !important;
-              font-size: 13px !important;
-              font-weight: 600 !important;
-              background: linear-gradient(
-                to top,
-                rgba(0, 0, 0, 0.82) 0%,
-                rgba(0, 0, 0, 0.3) 60%,
-                transparent 100%
-              ) !important;
-            }
-            .card-overlay-center {
-              padding: 14px 10px !important;
-              font-size: 16px !important;
-              background: linear-gradient(
-                to top,
-                rgba(109, 0, 26, 0.92) 0%,
-                rgba(0, 0, 0, 0.35) 60%,
-                transparent 100%
-              ) !important;
-            }
-            .user-profile-dropdown {
-              max-width: calc(100vw - 32px);
-              width: 290px;
-              right: 0;
-            }
-          }
-
-          @media (max-width: 480px) {
-            .nav-bar {
-              padding: 10px 14px;
-            }
-            .nav-coba-btn {
-              display: none !important;
-            }
-            #authNavWrap {
-              gap: 6px !important;
-            }
-            .header-shift h1 {
-              font-size: clamp(34px, 11vw, 50px) !important;
-            }
-            .hero-cta-group {
-              flex-direction: row !important;
-              border-radius: 999px !important;
-              padding: 4px !important;
-              gap: 6px !important;
-              width: auto !important;
-            }
-            .hero-cta-btn {
-              padding: 9px 15px !important;
-              font-size: 12.5px !important;
-            }
-            .card-item {
-              width: 160px !important;
-              height: 255px !important;
-            }
-            .user-name-text {
-              max-width: 90px !important;
-              font-size: 12px !important;
-            }
-            .user-profile-pill {
-              padding: 3px 10px 3px 4px !important;
-            }
-            .user-avatar-circle {
-              width: 26px !important;
-              height: 26px !important;
-              font-size: 12px !important;
-            }
-            .user-profile-dropdown {
-              width: calc(100vw - 24px) !important;
-              right: -4px !important;
-              padding: 14px !important;
-              border-radius: 14px !important;
-            }
-          }
-
-          @media (max-width: 360px) {
-            .header-shift h1 {
-              font-size: 30px !important;
-            }
-            .hero-cta-group {
-              flex-direction: column !important;
-              border-radius: 16px !important;
-              width: 100% !important;
-              max-width: 260px !important;
-            }
-            .card-item {
-              width: 145px !important;
-              height: 235px !important;
-            }
-          }
-
-          /* ========================================================
-             MOBILE BOTTOM NAVIGATION BAR
-             ======================================================== */
-          .mobile-bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            background: rgba(255, 248, 231, 0.96);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-top: 1px solid rgba(109, 0, 26, 0.14);
-            padding: 6px 12px max(8px, env(safe-area-inset-bottom, 8px));
-            box-shadow: 0 -4px 20px rgba(109, 0, 26, 0.08);
-          }
-          .mobile-nav-tab-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 3px;
-            flex: 1;
-            max-width: 80px;
-            padding: 5px 2px;
-            text-decoration: none;
-            color: rgba(0, 0, 0, 0.55);
-            font-size: 10.5px;
-            font-weight: 500;
-            border-radius: 12px;
-            transition: all 0.2s ease;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-          }
-          .mobile-nav-tab-item svg {
-            width: 20px;
-            height: 20px;
-            transition: transform 0.2s ease;
-          }
-          .mobile-nav-tab-item:active {
-            transform: scale(0.92);
-          }
-          .mobile-nav-tab-item.active {
-            color: var(--burgundy);
-            font-weight: 700;
-          }
-          .mobile-nav-tab-item.active svg {
-            stroke: var(--burgundy);
-            transform: translateY(-1px);
-          }
-          .mobile-nav-tab-item.active::after {
-            content: '';
-            display: block;
-            width: 14px;
-            height: 2.5px;
-            border-radius: 99px;
-            background: var(--burgundy);
-            margin-top: 1px;
-          }
-          @media (min-width: 769px) {
-            .mobile-bottom-nav {
-              display: none !important;
-            }
-          }
-
-          /* ========================================================
-             USER PROFILE BADGE & DROPDOWN (LOGGED IN STATE)
-             ======================================================== */
-          .user-account-menu-wrap {
-            position: relative;
-            display: inline-block;
-          }
-          .user-profile-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #ffffff;
-            border: 1.5px solid rgba(109, 0, 26, 0.24);
-            border-radius: 999px;
-            padding: 4px 14px 4px 5px;
-            cursor: pointer;
-            transition: all 0.22s ease;
-            box-shadow: 0 2px 10px rgba(109, 0, 26, 0.06);
-            font-family: inherit;
-          }
-          .user-profile-pill:hover {
-            border-color: var(--burgundy);
-            background: #fffdf9;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(109, 0, 26, 0.14);
-          }
-          .user-avatar-circle {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: var(--burgundy);
-            color: #fff8e7;
-            font-weight: 700;
-            font-size: 13.5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-transform: uppercase;
-            box-shadow: 0 2px 6px rgba(109, 0, 26, 0.2);
-          }
-          .user-name-text {
-            font-size: 13.5px;
-            font-weight: 600;
-            color: var(--burgundy);
-            max-width: 140px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-          .user-status-dot {
-            width: 7.5px;
-            height: 7.5px;
-            min-width: 7.5px;
-            border-radius: 50%;
-            background: #15803d;
-            box-shadow: 0 0 0 2px rgba(21, 128, 61, 0.2);
-          }
-          .user-profile-dropdown {
-            position: absolute;
-            top: calc(100% + 10px);
-            right: 0;
-            width: 300px;
-            background: #ffffff;
-            border: 1px solid rgba(109, 0, 26, 0.18);
-            border-radius: 18px;
-            padding: 18px;
-            box-shadow:
-              0 16px 42px rgba(109, 0, 26, 0.16),
-              0 2px 10px rgba(0, 0, 0, 0.04);
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(10px) scale(0.96);
-            transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
-            text-align: left;
-          }
-          .user-profile-dropdown.open {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0) scale(1);
-          }
-          .dropdown-header-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid rgba(109, 0, 26, 0.1);
-          }
-          .dropdown-avatar-lg {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-            border-radius: 50%;
-            background: linear-gradient(
-              135deg,
-              var(--burgundy) 0%,
-              #8a0a28 100%
-            );
-            color: #fff8e7;
-            font-family: "Instrument Serif", serif;
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(109, 0, 26, 0.2);
-          }
-          .dropdown-user-name {
-            font-weight: 600;
-            font-size: 15.5px;
-            color: #000;
-            margin-bottom: 2px;
-          }
-          .dropdown-user-email {
-            font-size: 12px;
-            color: rgba(0, 0, 0, 0.55);
-            word-break: break-all;
-          }
-          .dropdown-badge-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 12px 0 10px;
-            background: rgba(21, 128, 61, 0.07);
-            border: 1px solid rgba(21, 128, 61, 0.2);
-            border-radius: 8px;
-            padding: 6px 10px;
-          }
-          .dropdown-badge-label {
-            font-size: 11.5px;
-            font-weight: 600;
-            color: #15803d;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-          }
-          .dropdown-quota-card {
-            background: #fff8e7;
-            border: 1px solid rgba(109, 0, 26, 0.16);
-            border-radius: 12px;
-            padding: 10px 12px;
-            margin-bottom: 14px;
-          }
-          .dropdown-quota-title {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--burgundy);
-            font-weight: 700;
-            margin-bottom: 3px;
-          }
-          .dropdown-quota-val {
-            font-size: 14px;
-            font-weight: 700;
-            color: #000;
-          }
-          .dropdown-quota-sub {
-            font-size: 11px;
-            color: rgba(0, 0, 0, 0.55);
-            margin-top: 2px;
-          }
-          .dropdown-action-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 10px 14px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            box-sizing: border-box;
-            transition: all 0.2s ease;
-            margin-bottom: 8px;
-            font-family: inherit;
-          }
-          .btn-primary-action {
-            background: var(--burgundy);
-            color: #fff8e7 !important;
-          }
-          .btn-primary-action:hover {
-            background: var(--burgundy2);
-            transform: translateY(-1px);
-          }
-          .btn-secondary-action {
-            background: transparent;
-            color: var(--ink) !important;
-            border: 1px solid var(--line);
-          }
-          .btn-secondary-action:hover {
-            border-color: var(--burgundy);
-            color: var(--burgundy) !important;
-            background: rgba(109, 0, 26, 0.04);
-          }
-          .btn-logout-action {
-            background: transparent;
-            color: #b91c1c !important;
-            border: 1px solid rgba(185, 28, 28, 0.22);
-            margin-bottom: 0;
-            margin-top: 4px;
-          }
-          .btn-logout-action:hover {
-            background: rgba(185, 28, 28, 0.07);
-            border-color: #b91c1c;
-          }
-          /* Toast Notification */
-          .auth-toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(30px);
-            background: #1c1917;
-            color: #fff8e7;
-            padding: 12px 22px;
-            border-radius: 999px;
-            font-size: 13.5px;
-            font-weight: 500;
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.32);
-            z-index: 9999;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-          }
-          .auth-toast.show {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateX(-50%) translateY(0);
-          }
-
-          /* ========================================================
-             DARK MODE OVERRIDES & SURFACES (Craft Floor)
-             ======================================================== */
-          html.dark ::selection, [data-theme="dark"] ::selection {
-            background: var(--burgundy);
-            color: #ffffff;
-          }
-          html.dark ::-moz-selection, [data-theme="dark"] ::-moz-selection {
-            background: var(--burgundy);
-            color: #ffffff;
-          }
-          html.dark ::-webkit-scrollbar-track, [data-theme="dark"] ::-webkit-scrollbar-track {
-            background: var(--bg);
-          }
-          html.dark ::-webkit-scrollbar-thumb, [data-theme="dark"] ::-webkit-scrollbar-thumb {
-            background: rgba(201, 59, 95, 0.35);
-            border: 2px solid var(--bg);
-          }
-          html.dark ::-webkit-scrollbar-thumb:hover, [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
-            background: rgba(201, 59, 95, 0.55);
-          }
-
-          /* Parallax Glow in Dark Mode */
-          html.dark .hero-wrap, [data-theme="dark"] .hero-wrap {
-            background:
-              radial-gradient(
-                650px circle at var(--cx) var(--cy),
-                rgba(201, 59, 95, 0.08),
-                transparent 70%
-              ),
-              var(--bg);
-          }
-
-          /* Theme Toggle Button */
-          .theme-toggle-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            min-width: 38px;
-            border-radius: 50%;
-            background: #ffffff;
-            border: 1px solid rgba(109, 0, 26, 0.2);
-            color: var(--burgundy);
-            cursor: pointer;
-            transition: all 0.22s ease;
-            box-shadow: 0 2px 8px rgba(109, 0, 26, 0.06);
-            padding: 0;
-            touch-action: manipulation;
-          }
-          .theme-toggle-btn:hover {
-            border-color: var(--burgundy);
-            transform: scale(1.06);
-            box-shadow: 0 4px 14px rgba(109, 0, 26, 0.16);
-          }
-          .theme-toggle-btn:active {
-            transform: scale(0.94);
-          }
-          html.dark .theme-toggle-btn, [data-theme="dark"] .theme-toggle-btn {
-            background: #191417 !important;
-            border-color: rgba(247, 243, 238, 0.18) !important;
-            color: var(--gold) !important;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
-          }
-          html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
-            border-color: var(--burgundy) !important;
-            color: #ffffff !important;
-            box-shadow: 0 4px 16px rgba(201, 59, 95, 0.25) !important;
-          }
-
-          /* Guest Profile Icon in Dark Mode */
-          html.dark #guestProfileIconBtn, [data-theme="dark"] #guestProfileIconBtn {
-            background: #191417 !important;
-            border-color: rgba(247, 243, 238, 0.2) !important;
-            color: #f7f3ee !important;
-          }
-          html.dark #guestProfileIconBtn svg, [data-theme="dark"] #guestProfileIconBtn svg {
-            stroke: #f7f3ee !important;
-          }
-
-          /* Mobile Nav in Dark Mode */
-          html.dark .mobile-nav-toggle, [data-theme="dark"] .mobile-nav-toggle {
-            background: #191417 !important;
-            border-color: rgba(201, 59, 95, 0.35) !important;
-            color: var(--burgundy) !important;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
-          }
-          html.dark .mobile-nav-drawer, [data-theme="dark"] .mobile-nav-drawer {
-            background: rgba(15, 13, 14, 0.98) !important;
-            border-bottom: 1px solid var(--line) !important;
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6) !important;
-          }
-          html.dark .mobile-nav-item, [data-theme="dark"] .mobile-nav-item {
-            background: #191417 !important;
-            border-color: rgba(247, 243, 238, 0.12) !important;
-            color: var(--ink) !important;
-          }
-          html.dark .mobile-nav-item:active, [data-theme="dark"] .mobile-nav-item:active {
-            background: rgba(201, 59, 95, 0.15) !important;
-          }
-          html.dark .mobile-nav-item.highlight, [data-theme="dark"] .mobile-nav-item.highlight {
-            background: var(--burgundy) !important;
-            color: #ffffff !important;
-            border-color: var(--burgundy) !important;
-          }
-
-          /* Mobile Bottom Nav in Dark Mode */
-          html.dark .mobile-bottom-nav, [data-theme="dark"] .mobile-bottom-nav {
-            background: rgba(15, 13, 14, 0.96) !important;
-            border-top-color: rgba(247, 243, 238, 0.12) !important;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.45) !important;
-          }
-          html.dark .mobile-nav-tab-item, [data-theme="dark"] .mobile-nav-tab-item {
-            color: rgba(247, 243, 238, 0.55) !important;
-          }
-          html.dark .mobile-nav-tab-item.active, [data-theme="dark"] .mobile-nav-tab-item.active {
-            color: var(--burgundy) !important;
-          }
-          html.dark .mobile-nav-tab-item.active svg, [data-theme="dark"] .mobile-nav-tab-item.active svg {
-            stroke: var(--burgundy) !important;
-          }
-          html.dark .mobile-nav-tab-item.active::after, [data-theme="dark"] .mobile-nav-tab-item.active::after {
-            background: var(--burgundy) !important;
-          }
-
-          /* User Profile Pill & Dropdown in Dark Mode */
-          html.dark .user-profile-pill, [data-theme="dark"] .user-profile-pill {
-            background: #191417 !important;
-            border-color: rgba(201, 59, 95, 0.35) !important;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35) !important;
-          }
-          html.dark .user-profile-pill:hover, [data-theme="dark"] .user-profile-pill:hover {
-            background: #231d21 !important;
-            border-color: var(--burgundy) !important;
-          }
-          html.dark .user-profile-dropdown, [data-theme="dark"] .user-profile-dropdown {
-            background: #191417 !important;
-            border-color: rgba(247, 243, 238, 0.15) !important;
-            box-shadow: 0 16px 42px rgba(0, 0, 0, 0.65) !important;
-          }
-          html.dark .dropdown-header-info, [data-theme="dark"] .dropdown-header-info {
-            border-bottom-color: rgba(247, 243, 238, 0.1) !important;
-          }
-          html.dark .dropdown-user-name, [data-theme="dark"] .dropdown-user-name {
-            color: #f7f3ee !important;
-          }
-          html.dark .dropdown-user-email, [data-theme="dark"] .dropdown-user-email {
-            color: rgba(247, 243, 238, 0.6) !important;
-          }
-          html.dark .dropdown-badge-row, [data-theme="dark"] .dropdown-badge-row {
-            background: rgba(21, 128, 61, 0.15) !important;
-            border-color: rgba(21, 128, 61, 0.3) !important;
-          }
-          html.dark .dropdown-quota-card, [data-theme="dark"] .dropdown-quota-card {
-            background: #120e10 !important;
-            border-color: rgba(201, 59, 95, 0.25) !important;
-          }
-          html.dark .dropdown-quota-val, [data-theme="dark"] .dropdown-quota-val {
-            color: #f7f3ee !important;
-          }
-          html.dark .dropdown-quota-sub, [data-theme="dark"] .dropdown-quota-sub {
-            color: rgba(247, 243, 238, 0.6) !important;
-          }
-          html.dark .btn-secondary-action, [data-theme="dark"] .btn-secondary-action {
-            border-color: rgba(247, 243, 238, 0.15) !important;
-            color: #f7f3ee !important;
-          }
-          html.dark .btn-secondary-action:hover, [data-theme="dark"] .btn-secondary-action:hover {
-            background: rgba(201, 59, 95, 0.15) !important;
-            color: var(--burgundy) !important;
-            border-color: var(--burgundy) !important;
-          }
-
-          /* Card Items in Dark Mode */
-          html.dark .card-item, [data-theme="dark"] .card-item {
-            background: #1e181c !important;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
-          }
-        </style>
-      </helmet>
-
-      <div class="hero-wrap">
-        <!-- NAV -->
-        <nav class="nav-bar">
-          <div style="display: flex; align-items: center; gap: 10px">
-            <a
-              href="index.html"
-              style="
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                text-decoration: none;
-                color: inherit;
-              "
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--gold)"
-                stroke-width="1.6"
-                aria-hidden="true"
-              >
-                <path
-                  d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
-                ></path>
-              </svg>
-              <span
-                style="
-                  font-family: &quot;Instrument Serif&quot;, serif;
-                  font-size: 20px;
-                "
-                >outfit req</span
-              >
-            </a>
-          </div>
-
-          <div
-            id="authNavWrap"
-            style="display: flex; align-items: center; gap: 14px"
+    <!-- Loading Screen -->
+    <div id="loader" class="loader">
+      <div class="loader-inner">
+        <div class="loader-brand-wrap">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--burgundy)"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="margin-bottom: 8px"
           >
-            <sc-if value="{{!isLoggedIn}}">
-              <a
-                href="rekomendasi.html"
-                class="desktop-nav-link"
-                style="
-                  font-size: 14px;
-                  color: var(--gold);
-                  font-weight: 600;
-                  transition: color 0.2s;
-                "
-                title="Buka Galeri Rekomendasi Outfit"
-                >Rekomendasi</a
-              >
-              <a
-                href="tutorial.html#personality"
-                class="desktop-nav-link"
-                style="
-                  font-size: 14px;
-                  color: var(--ink-dim);
-                  transition: color 0.2s;
-                "
-                onmouseover="this.style.color = 'var(--burgundy)'"
-                onmouseout="this.style.color = 'var(--ink-dim)'"
-                >Panduan & Tutorial</a
-              >
-              <a
-                id="navLoginBtn"
-                href="login.html?mode=login"
-                class="desktop-nav-link"
-                style="
-                  font-size: 14px;
-                  color: var(--ink-dim);
-                  transition: color 0.2s;
-                "
-                onmouseover="this.style.color = 'var(--burgundy)'"
-                onmouseout="this.style.color = 'var(--ink-dim)'"
-                >Masuk</a
-              >
-              <a
-                href="tutorial.html"
-                class="nav-coba-btn"
-                style="
-                  font-size: 14px;
-                  background: var(--gold);
-                  color: var(--on-accent);
-                  padding: 10px 20px;
-                  border-radius: 999px;
-                  font-weight: 600;
-                "
-                >Coba Gratis</a
-              >
-              <!-- Theme Toggle Button (Mode Gelap / Terang) -->
-              <button
-                type="button"
-                id="themeToggleBtn"
-                class="theme-toggle-btn"
-                onclick="window.toggleTheme && window.toggleTheme()"
-                title="Ubah Mode (Gelap / Terang)"
-                aria-label="Ubah Mode Gelap atau Terang"
-              ></button>
-              <!-- Profile Icon Trigger for Guest (Autoconnect Gmail) -->
-              <button
-                type="button"
-                id="guestProfileIconBtn"
-                onclick="triggerGuestGmailLogin()"
-                title="Ikon Profil (Masuk via Gmail)"
-                style="
-                  display: inline-flex;
-                  align-items: center;
-                  justify-content: center;
-                  width: 38px;
-                  height: 38px;
-                  border-radius: 50%;
-                  background: #ffffff;
-                  border: 1px solid rgba(0, 0, 0, 0.2);
-                  color: #000000;
-                  cursor: pointer;
-                  transition: all 0.2s;
-                "
-                onmouseover="this.style.borderColor = '#000000'; this.style.transform = 'scale(1.05)'"
-                onmouseout="this.style.borderColor = 'rgba(0, 0, 0, 0.2)'; this.style.transform = 'scale(1)'"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-              </button>
-
-              <!-- Tombol Hamburger Menu Mobile -->
-              <button
-                type="button"
-                id="mobileNavToggleBtn"
-                class="mobile-nav-toggle"
-                onclick="toggleMobileNavDrawer()"
-                aria-label="Buka Menu Navigasi Mobile"
-                title="Menu Navigasi"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="3" y1="12" x2="21" y2="12"></line>
-                  <line x1="3" y1="6" x2="21" y2="6"></line>
-                  <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-              </button>
-            </sc-if>
-            <sc-if value="{{isLoggedIn}}">
-              <!-- Theme Toggle Button saat Login -->
-              <button
-                type="button"
-                id="themeToggleBtnLoggedIn"
-                class="theme-toggle-btn"
-                onclick="window.toggleTheme && window.toggleTheme()"
-                title="Ubah Mode (Gelap / Terang)"
-                aria-label="Ubah Mode Gelap atau Terang"
-              ></button>
-              <div id="userMenuWrap" class="user-menu-wrap" style="position: relative;">
-                <button
-                  type="button"
-                  class="user-profile-pill"
-                  id="userProfileBtn"
-                  title="Menu Profil Pengguna"
-                  onclick="{{toggleUserDropdown}}"
-                  aria-expanded="{{userDropdownExpanded}}"
-                  style="cursor: pointer;"
-                >
-                  <span class="user-avatar-circle">{{userInitial}}</span>
-                  <span class="user-name-text">Halo, {{userName}}</span>
-                  <span
-                    class="user-status-dot"
-                    title="Akun Terverifikasi"
-                  ></span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left: 2px; opacity: 0.7;">
-                    <path d="m6 9 6 6 6-6"/>
-                  </svg>
-                </button>
-
-                <div class="{{userDropdownClass}}" id="userProfileDropdown">
-                  <div class="dropdown-header-info">
-                    <div class="dropdown-avatar-lg">{{userInitial}}</div>
-                    <div style="overflow: hidden;">
-                      <div class="dropdown-user-name">{{userName}}</div>
-                      <div class="dropdown-user-email">{{userEmail}}</div>
-                    </div>
-                  </div>
-
-                  <div class="dropdown-badge-row">
-                    <span class="dropdown-badge-label">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2.5">
-                        <polyline points="20 6 9 17 4 12"/>
-                      </svg>
-                      Akun Terverifikasi
-                    </span>
-                    <span style="font-size: 11px; font-weight: 700; color: var(--burgundy); background: rgba(109, 0, 26, 0.08); padding: 2px 7px; border-radius: 6px;">{{userTier}}</span>
-                  </div>
-
-                  <div class="dropdown-quota-card">
-                    <div class="dropdown-quota-title">Status Keanggotaan</div>
-                    <div class="dropdown-quota-val">{{quotaValue}}</div>
-                    <div class="dropdown-quota-sub">{{quotaSub}}</div>
-                  </div>
-
-                  <sc-if value="{{!isPremium}}">
-                    <a href="account.html?upgrade=1" class="dropdown-action-btn" style="background: #6D001A; color: #ffffff; font-weight: 700; border: none; margin-bottom: 6px; justify-content: center; text-decoration: none;">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                      </svg>
-                      Upgrade ke Premium Member
-                    </a>
-                  </sc-if>
-
-                  <a href="rekomendasi.html" class="dropdown-action-btn btn-primary-action" style="background: rgba(109, 0, 26, 0.08); color: var(--burgundy); font-weight: 700;">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <circle cx="11" cy="11" r="8"/>
-                      <path d="m21 21-4.3-4.3"/>
-                    </svg>
-                    Galeri Rekomendasi Outfit
-                  </a>
-
-                  <a href="account.html" class="dropdown-action-btn btn-primary-action">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                      <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                    Buka Halaman Akun Saya
-                  </a>
-
-                  <a href="tutorial.html" class="dropdown-action-btn btn-secondary-action">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <circle cx="12" cy="12" r="10"/>
-                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                      <line x1="12" y1="17" x2="12.01" y2="17"/>
-                    </svg>
-                    Panduan & Tutorial Website
-                  </a>
-
-                  <button
-                    type="button"
-                    onclick="window.toggleTheme && window.toggleTheme()"
-                    class="dropdown-action-btn btn-secondary-action"
-                    style="display: flex; align-items: center; justify-content: flex-start; gap: 8px;"
-                    title="Ubah Mode Tampilan"
-                  >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
-                    </svg>
-                    <span id="dropdownThemeText">Mode Gelap / Terang</span>
-                  </button>
-
-                  <button type="button" onclick="{{logoutUser}}" id="btnDropdownLogout" class="dropdown-action-btn btn-logout-action">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                      <polyline points="16 17 21 12 16 7"/>
-                      <line x1="21" y1="12" x2="9" y2="12"/>
-                    </svg>
-                    Keluar (Logout)
-                  </button>
-                </div>
-              </div>
-
-              <!-- Tombol Hamburger Menu Mobile saat Login -->
-              <button
-                type="button"
-                id="mobileNavToggleBtnLoggedIn"
-                class="mobile-nav-toggle"
-                onclick="toggleMobileNavDrawer()"
-                aria-label="Buka Menu Navigasi Mobile"
-                title="Menu Navigasi"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="3" y1="12" x2="21" y2="12"></line>
-                  <line x1="3" y1="6" x2="21" y2="6"></line>
-                  <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-              </button>
-            </sc-if>
-          </div>
-
-          <!-- Drawer Menu Mobile (Dropdown Menu Navigasi di Layar HP) -->
-          <div id="mobileNavDrawer" class="mobile-nav-drawer">
-            <a href="index.html" class="mobile-nav-item">
-              <span>Beranda Utama</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-            <a href="rekomendasi.html" class="mobile-nav-item">
-              <span style="color: var(--burgundy); font-weight: 700;">Galeri Rekomendasi Outfit</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-            <a href="tutorial.html#personality" class="mobile-nav-item">
-              <span>Tes Style Personality</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-            <a href="tutorial.html" class="mobile-nav-item">
-              <span>Panduan & Tutorial Fitur</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-            <a href="account.html" class="mobile-nav-item">
-              <span>Halaman Akun Saya</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-            <button
-              type="button"
-              class="mobile-nav-item"
-              onclick="window.toggleTheme && window.toggleTheme()"
-              style="width: 100%; border: 1px solid var(--line); cursor: pointer; text-align: left; background: var(--bg2);"
-            >
-              <span style="display: flex; align-items: center; gap: 8px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
-                </svg>
-                <span>Mode Tampilan</span>
-              </span>
-              <span id="mobileThemeStatus" style="font-size: 11px; font-weight: 700; color: var(--burgundy); background: rgba(109, 0, 26, 0.08); padding: 2px 8px; border-radius: 6px;">Mode Gelap</span>
-            </button>
-            <a href="login.html?mode=login" class="mobile-nav-item highlight">
-              <span>Masuk / Daftar Akun 3D</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-          </div>
-        </nav>
-
-        <!-- WORDMARK -->
-        <header class="header-shift">
-          <h1
-            style="
-              margin: 0;
-              font-family: &quot;Instrument Serif&quot;, serif;
-              font-weight: 400;
-              font-size: clamp(56px, 10vw, 128px);
-              line-height: 1;
-            "
-          >
-            Outfit Req
-          </h1>
-          <p class="subtitle-shift">{{subtitleText}}</p>
-          <div
-            role="group"
-            aria-label="Pilih halaman"
-            class="hero-cta-group"
-            style="
-              display: inline-flex;
-              gap: 12px;
-              margin-top: 28px;
-              padding: 6px;
-              border: 1px solid var(--line);
-              border-radius: 999px;
-              background: var(--bg2);
-            "
-          >
-            <a
-              href="tutorial.html#personality"
-              class="hero-cta-btn"
-              style="
-                background: var(--gold);
-                color: var(--on-accent);
-                font-weight: 600;
-                box-shadow: 0 4px 14px rgba(109, 0, 26, 0.22);
-              "
-              title="Ikuti Tes Style Personality"
-            >
-              <span>Tes Personality</span>
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
-            <a
-              href="rekomendasi.html"
-              class="hero-cta-btn hero-cta-secondary"
-              style="
-                background: transparent;
-                color: var(--ink);
-                font-weight: 500;
-                border: 1px solid var(--line);
-              "
-              title="Lihat Galeri Rekomendasi Outfit (Pinterest Style)"
-            >
-              <span>Lihat Rekomendasi</span>
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </header>
-
-        <!-- FANNED CARDS (IMAGE BASED) -->
-        <div class="cards-stage">
-          <div class="cards-track">
-            <!-- card 1: Minimalist -->
-            <div
-              onclick="{{selectCard1}}"
-              class="{{card1Class}}"
-              style="{{card1Style}}"
-              title="Gaya Minimalist"
-            >
-              <img
-                src="./images/card1.jpg"
-                alt="Minimalist Look"
-                class="card-photo"
-                onerror="
-                  this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=80';
-                "
-              />
-              <div class="card-overlay">
-                <span>Minimalist</span>
-              </div>
-            </div>
-
-            <!-- card 2: Smart Casual -->
-            <div
-              onclick="{{selectCard2}}"
-              class="{{card2Class}}"
-              style="{{card2Style}}"
-              title="Gaya Smart Casual"
-            >
-              <img
-                src="./images/card2.jpg"
-                alt="Smart Casual Look"
-                class="card-photo"
-                onerror="
-                  this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=80';
-                "
-              />
-              <div class="card-overlay">
-                <span>Smart Casual</span>
-              </div>
-            </div>
-
-            <!-- card 3: Classic Heritage -->
-            <div
-              onclick="{{selectCard3}}"
-              class="{{card3Class}}"
-              style="{{card3Style}}"
-              title="Gaya Classic Heritage"
-            >
-              <img
-                src="./images/card3.jpg"
-                alt="Classic Heritage Look"
-                class="card-photo"
-                onerror="
-                  this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&auto=format&fit=crop&q=80';
-                "
-              />
-              <div class="card-overlay">
-                <span>Classic Heritage</span>
-              </div>
-            </div>
-
-            <!-- card 4: Urban Chic -->
-            <div
-              onclick="{{selectCard4}}"
-              class="{{card4Class}}"
-              style="{{card4Style}}"
-              title="Gaya Urban Chic"
-            >
-              <img
-                src="./images/card4.jpg"
-                alt="Urban Chic Look"
-                class="card-photo"
-                onerror="
-                  this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=600&auto=format&fit=crop&q=80';
-                "
-              />
-              <div class="card-overlay">
-                <span>Urban Chic</span>
-              </div>
-            </div>
-
-            <!-- highlight card: Featured Look (card 5) -->
-            <div
-              onclick="{{selectCard5}}"
-              class="{{card5Class}}"
-              style="{{card5Style}}"
-              title="Outfit Utama: Featured Look Karakter"
-            >
-              <img
-                src="./images/card5.jpg"
-                alt="Featured Outfit"
-                class="card-photo"
-                onerror="
-                  this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=700&auto=format&fit=crop&q=80';
-                "
-              />
-              <div class="card-overlay card-overlay-center">
-                <span>Featured Look</span>
-              </div>
-            </div>
-
-            <!-- card 6: Editorial Elegance -->
-            <div
-              onclick="{{selectCard6}}"
-              class="{{card6Class}}"
-              style="{{card6Style}}"
-              title="Gaya Editorial Elegance"
-            >
-              <img
-                src="./images/card6.jpg"
-                alt="Editorial Look"
-                class="card-photo"
-                onerror="
-                  this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&auto=format&fit=crop&q=80';
-                "
-              />
-              <div class="card-overlay">
-                <span>Editorial Chic</span>
-              </div>
-            </div>
-
-            <!-- card 7: Artsy Bohemian -->
-            <div
-              onclick="{{selectCard7}}"
-              class="{{card7Class}}"
-              style="{{card7Style}}"
-              title="Gaya Artsy Bohemian"
-            >
-              <img
-                src="./images/card7.jpg"
-                alt="Artsy Bohemian Look"
-                class="card-photo"
-                onerror="
-                  this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&auto=format&fit=crop&q=80';
-                "
-              />
-              <div class="card-overlay">
-                <span>Bohemian</span>
-              </div>
-            </div>
-
-            <!-- card 8: Modern Street -->
-            <div
-              onclick="{{selectCard8}}"
-              class="{{card8Class}}"
-              style="{{card8Style}}"
-              title="Gaya Modern Street"
-            >
-              <img
-                src="./images/card8.jpg"
-                alt="Modern Street Look"
-                class="card-photo"
-                onerror="
-                  this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?w=600&auto=format&fit=crop&q=80';
-                "
-              />
-              <div class="card-overlay">
-                <span>Streetwear</span>
-              </div>
-            </div>
-
-            <!-- card 9: Evening Glam -->
-            <div
-              onclick="{{selectCard9}}"
-              class="{{card9Class}}"
-              style="{{card9Style}}"
-              title="Gaya Evening Glam"
-            >
-              <img
-                src="./images/card9.jpg"
-                alt="Evening Glam Look"
-                class="card-photo"
-                onerror="
-                  this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&auto=format&fit=crop&q=80';
-                "
-              />
-              <div class="card-overlay">
-                <span>Evening Glam</span>
-              </div>
-            </div>
-          </div>
+            <path
+              d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
+            ></path>
+          </svg>
+          <div class="loader-logo">outfit req</div>
         </div>
+        <div class="loader-bar-track">
+          <div class="loader-bar-fill" id="loaderBar"></div>
+        </div>
+        <div class="loader-text">Memuat...</div>
+      </div>
+    </div>
 
-        <!-- MOBILE BOTTOM NAVIGATION BAR -->
-        <nav class="mobile-bottom-nav">
-          <a href="index.html" class="mobile-nav-tab-item active">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
-            <span>Beranda</span>
-          </a>
+    <!-- Three.js Canvas Container -->
+    <div id="canvas-container"></div>
 
-          <a href="rekomendasi.html" class="mobile-nav-tab-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Landing Overlay -->
+    <div id="landing-overlay" class="landing-overlay">
+      <header class="nav-header">
+        <div class="nav-left">
+          <a
+            href="rekomendasi.html"
+            class="nav-link"
+            title="Katalog Rekomendasi Outfit"
+          >
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="vertical-align: -1px; margin-right: 2px"
+            >
               <circle cx="11" cy="11" r="8" />
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
-            <span>Galeri</span>
+            <span>REKOMENDASI</span>
           </a>
-
-          <a href="tutorial.html" class="mobile-nav-tab-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M12 16v-4" />
-              <path d="M12 8h.01" />
+          <a
+            href="tutorial.html"
+            class="nav-link"
+            title="Buka Panduan & Tutorial Website"
+            style="margin-left: 14px;"
+          >
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="vertical-align: -1px; margin-right: 2px"
+            >
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 16v-4M12 8h.01"/>
             </svg>
-            <span>Panduan</span>
+            <span>PANDUAN</span>
           </a>
-
-          <a href="account.html" class="mobile-nav-tab-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
+          <a
+            href="showcase.html"
+            class="nav-link"
+            title="Jelajahi Galeri Lookbook Outfit"
+            style="margin-left: 14px;"
+          >
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="vertical-align: -1px; margin-right: 2px"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
             </svg>
-            <span>Akun</span>
+            <span>GALERI</span>
           </a>
-        </nav>
+        </div>
+        <div class="nav-center">
+          <a
+            href="index.html"
+            class="brand-logo"
+            title="Outfit Req — Halaman Utama"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--burgundy)"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="margin-right: 6px; vertical-align: -2px"
+            >
+              <path
+                d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
+              ></path>
+            </svg>
+            <span class="brand-title">outfit req</span>
+          </a>
+        </div>
+        <div class="nav-right">
+          <button
+            type="button"
+            id="themeToggleBtn"
+            class="theme-toggle-btn"
+            onclick="window.toggleTheme && window.toggleTheme()"
+            title="Ubah Mode (Gelap / Terang)"
+            aria-label="Ubah Mode (Gelap / Terang)"
+            style="margin-right: 8px;"
+          ></button>
+          <button
+            class="nav-link nav-cta-btn"
+            aria-label="Account"
+            id="accountBtn"
+          >
+            MASUK / AKUN
+          </button>
+        </div>
+      </header>
+
+      <div class="hero-content">
+        <div class="hero-tagline">
+          <span class="hero-line hero-line-1">Outfit Req</span>
+          <span class="hero-line hero-line-2"
+            >Rekomendasi Gaya & Personality</span
+          >
+          <span class="hero-year">EDISI 2026 </span>
+        </div>
       </div>
-    </x-dc>
-    <script
-      type="text/x-dc"
-      data-dc-script
-      data-props='{"$preview":{"width":1440,"height":980}}'
-    >
-      class Component extends DCLogic {
-        constructor(props) {
-          super(props);
-          let initialUser = null;
-          try {
-            function _isDummy(em) {
-              if (!em || typeof em !== 'string') return true;
-              const s = em.toLowerCase().trim();
-              return s === 'customer' || s === 'belum masuk' || s.startsWith('demo') || s.startsWith('test') || s.includes('example.com');
-            }
-            const isLoggedOut = localStorage.getItem('outfit_req_logged_out') === 'true';
-            if (!isLoggedOut) {
-              const raw = localStorage.getItem('outfit_req_user');
-              if (raw) {
-                const parsed = JSON.parse(raw);
-                if (parsed && parsed.isLoggedIn && !_isDummy(parsed.email) && !_isDummy(parsed.name)) {
-                  initialUser = parsed;
-                }
-              }
-            }
-          } catch (e) {}
 
-          this.state = {
-            mode: 'Personality',
-            activeFilter: 'Semua',
-            selectedCard: 5,
-            user: initialUser,
-            userDropdownOpen: false
-          };
-          this.rafId = null;
-          window.__mainComponent = this;
-        }
+      <div class="scroll-cue" id="scrollCue">
+        <div class="scroll-cue-line"></div>
+        <span class="scroll-cue-text">GULIR KE BAWAH ATAU KLIK MASUK</span>
+      </div>
 
-        componentDidMount() {
-          let targetMX = 0;
-          let targetMY = 0;
-          let currentMX = 0;
-          let currentMY = 0;
-
-          let targetCX = window.innerWidth ? window.innerWidth / 2 : 720;
-          let targetCY = window.innerHeight ? window.innerHeight / 2 : 490;
-          let currentCX = targetCX;
-          let currentCY = targetCY;
-
-          const root = document.documentElement;
-
-          this.onMove = (e) => {
-            const w = window.innerWidth || 1440;
-            const h = window.innerHeight || 980;
-
-            targetMX = ((e.clientX / w) - 0.5) * 2;
-            targetMY = ((e.clientY / h) - 0.5) * 2;
-            targetCX = e.clientX;
-            targetCY = e.clientY;
-          };
-
-          this.onLeave = () => {
-            targetMX = 0;
-            targetMY = 0;
-          };
-
-          const tick = () => {
-            currentMX += (targetMX - currentMX) * 0.08;
-            currentMY += (targetMY - currentMY) * 0.08;
-            currentCX += (targetCX - currentCX) * 0.15;
-            currentCY += (targetCY - currentCY) * 0.15;
-
-            root.style.setProperty('--mx', currentMX.toFixed(4));
-            root.style.setProperty('--my', currentMY.toFixed(4));
-            root.style.setProperty('--cx', currentCX.toFixed(1) + 'px');
-            root.style.setProperty('--cy', currentCY.toFixed(1) + 'px');
-
-            this.rafId = requestAnimationFrame(tick);
-          };
-
-          this.onTouchMove = (e) => {
-            if (e.touches && e.touches.length > 0) {
-              const t = e.touches[0];
-              const w = window.innerWidth || 360;
-              const h = window.innerHeight || 640;
-              targetMX = ((t.clientX / w) - 0.5) * 1.5;
-              targetMY = ((t.clientY / h) - 0.5) * 1.5;
-              targetCX = t.clientX;
-              targetCY = t.clientY;
-            }
-          };
-
-          window.addEventListener('mousemove', this.onMove, { passive: true });
-          window.addEventListener('touchmove', this.onTouchMove, { passive: true });
-          document.addEventListener('mouseleave', this.onLeave);
-          this.rafId = requestAnimationFrame(tick);
-
-          // Cek kembali sesi pengguna saat mount
-          try {
-            if (localStorage.getItem('outfit_req_logged_out') === 'true') {
-              this.setState({ user: null });
-            } else {
-              const raw = localStorage.getItem('outfit_req_user');
-              if (raw) {
-                const parsed = JSON.parse(raw);
-                if (parsed && parsed.isLoggedIn) {
-                  this.setState({ user: parsed });
-                }
-              }
-            }
-          } catch (e) {}
-
-          // Dengarkan sinkronisasi sesi antar tab / window
-          this.onStorageChange = (e) => {
-            if (e.key === 'outfit_req_user') {
-              try {
-                const u = e.newValue ? JSON.parse(e.newValue) : null;
-                this.setState({ user: u && u.isLoggedIn ? u : null, userDropdownOpen: false });
-              } catch (err) {}
-            }
-          };
-          window.addEventListener('storage', this.onStorageChange);
-
-          // Method logout terpusat
-          this.logout = async (e) => {
-            if (e && e.stopPropagation) e.stopPropagation();
-            try {
-              if (window.supabaseClient) await window.supabaseClient.auth.signOut();
-              else if (typeof supabase !== 'undefined' && supabase) await supabase.auth.signOut();
-            } catch (err) {}
-            try {
-              for (let i = localStorage.length - 1; i >= 0; i--) {
-                const k = localStorage.key(i);
-                if (k && (k.startsWith('sb-') || k.includes('supabase')) && k.includes('auth-token')) {
-                  localStorage.removeItem(k);
-                }
-              }
-            } catch (err) {}
-            localStorage.setItem('outfit_req_logged_out', 'true');
-            localStorage.removeItem('outfit_req_user');
-            this.setState({ user: null, userDropdownOpen: false });
-            if (typeof showAuthToast === 'function') {
-              showAuthToast('Anda telah berhasil keluar dari akun.');
-            }
-          };
-          window.__mainLogout = (e) => this.logout(e);
-
-          // Tutup dropdown jika klik di luar area akun, atau proses aksi klik tombol
-          this.onDocClick = (e) => {
-            const logoutTarget = e.target.closest('#btnDropdownLogout');
-            if (logoutTarget) {
-              e.preventDefault();
-              e.stopPropagation();
-              this.logout(e);
-              return;
-            }
-            const profileBtn = e.target.closest('#userProfileBtn');
-            if (profileBtn) {
-              e.preventDefault();
-              e.stopPropagation();
-              this.setState({ userDropdownOpen: !this.state.userDropdownOpen });
-              return;
-            }
-            if (this.state.userDropdownOpen && !e.target.closest('#userMenuWrap')) {
-              this.setState({ userDropdownOpen: false });
-            }
-          };
-          document.addEventListener('click', this.onDocClick);
-        }
-
-        componentWillUnmount() {
-          window.removeEventListener('mousemove', this.onMove);
-          if (this.onTouchMove) window.removeEventListener('touchmove', this.onTouchMove);
-          document.removeEventListener('mouseleave', this.onLeave);
-          window.removeEventListener('storage', this.onStorageChange);
-          document.removeEventListener('click', this.onDocClick);
-          if (this.rafId) cancelAnimationFrame(this.rafId);
-        }
-
-        renderVals() {
-          const user = this.state.user;
-          const isUserLoggedIn = !!(user && user.isLoggedIn);
-          const isPremiumUser = isUserLoggedIn && !!(user?.tier && user.tier.toLowerCase().includes('premium'));
-          const userName = user?.name || (user?.email ? user.email.split('@')[0] : 'Customer');
-          const userEmail = user?.email || '';
-          const userInitial = (userName || userEmail || 'C').charAt(0).toUpperCase();
-          const userTier = isPremiumUser ? 'PREMIUM MEMBER' : (user?.tier || 'Free Member');
-          const quotaVal = isPremiumUser ? 'Premium Member' : 'Member Terdaftar';
-          const quotaSub = isPremiumUser ? 'Status Premium Aktif • Akses Penuh' : 'Akses Galeri & Koleksi Busana Tersimpan';
-
-          const isP = this.state.mode === 'Personality';
-          const f = this.state.activeFilter;
-          const sel = this.state.selectedCard;
-
-          const activeBtn = 'font-size:14px; font-weight:600; color:var(--on-accent); background:var(--gold); border:none; border-radius:999px; padding:12px 26px;';
-          const idleBtn = 'font-size:14px; font-weight:500; color:var(--ink-dim); background:transparent; border:none; border-radius:999px; padding:12px 26px;';
-
-          const activePill = 'font-size:13px; color:var(--on-accent); background:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:8px 18px; font-weight:600;';
-          const idlePill = 'font-size:13px; color:var(--ink-dim); border:1px solid var(--line); border-radius:999px; padding:8px 18px;';
-
-          const titleMap = {
-            'Semua': ['Temukan', 'Gayamu'],
-            'Kasual': ['Gaya', 'Kasual'],
-            'Kerja': ['Gaya', 'Kerja'],
-            'Pesta': ['Gaya', 'Pesta'],
-            'Olahraga': ['Gaya', 'Sporty'],
-            'Kondangan': ['Gaya', 'Formal']
-          };
-          const titles = titleMap[f] || titleMap['Semua'];
-
-          // Fungsi pembuat style kartu gambar: berbingkai rapi dan interaktif saat dipilih
-          const makeCardStyle = (idx, w, h, z, isLast) => {
-            const isSelected = sel === idx;
-            const bg = isSelected ? 'var(--bg2)' : 'var(--bg)';
-            const border = isSelected
-              ? '2.5px solid var(--burgundy)'
-              : '1px solid var(--line)';
-            const shadow = isSelected
-              ? '0 20px 42px rgba(109, 0, 26, 0.48), 0 0 22px rgba(109, 0, 26, 0.32)'
-              : '0 4px 16px rgba(0, 0, 0, 0.12)';
-            const mr = isLast ? '0px' : '-16px';
-            const zIdx = isSelected ? 50 : z;
-
-            return `width:${w}px; height:${h}px; margin-right:${mr}; z-index:${zIdx}; border:${border}; box-shadow:${shadow}; padding:0; background:${bg}; border-radius:12px; overflow:hidden;`;
-          };
-
-          const makeClass = (idx) => `card-item card-${idx}${sel === idx ? ' is-selected' : ''}`;
-
-          return {
-            isLoggedIn: isUserLoggedIn,
-            isPremium: isPremiumUser,
-            userName: userName,
-            userEmail: userEmail,
-            userInitial: userInitial,
-            userTier: userTier,
-            quotaValue: quotaVal,
-            quotaSub: quotaSub,
-            userDropdownExpanded: this.state.userDropdownOpen ? 'true' : 'false',
-            userDropdownClass: 'user-profile-dropdown' + (this.state.userDropdownOpen ? ' open' : ''),
-            toggleUserDropdown: (e) => {
-              if (e && e.stopPropagation) e.stopPropagation();
-              this.setState({ userDropdownOpen: !this.state.userDropdownOpen });
-            },
-            logoutUser: async (e) => {
-              if (e && e.stopPropagation) e.stopPropagation();
-              try {
-                if (window.supabaseClient) await window.supabaseClient.auth.signOut();
-                else if (typeof supabase !== 'undefined' && supabase) await supabase.auth.signOut();
-              } catch (err) {}
-              try {
-                for (let i = localStorage.length - 1; i >= 0; i--) {
-                  const k = localStorage.key(i);
-                  if (k && (k.startsWith('sb-') || k.includes('supabase')) && k.includes('auth-token')) {
-                    localStorage.removeItem(k);
-                  }
-                }
-              } catch (err) {}
-              localStorage.setItem('outfit_req_logged_out', 'true');
-              localStorage.removeItem('outfit_req_user');
-              this.setState({ user: null, userDropdownOpen: false });
-              if (typeof showAuthToast === 'function') {
-                showAuthToast('Anda telah berhasil keluar dari akun.');
-              }
-            },
-            subtitleText:
-              'Ceritakan acaramu, temukan karakter personality gayamu, dan dapatkan kurasi outfit terbaik dengan link belanja langsung.',
-            btnPersonalityStyle: isP ? activeBtn : idleBtn,
-            btnRekomendasiStyle: !isP ? activeBtn : idleBtn,
-            centerCardTitle1: titles[0],
-            centerCardTitle2: titles[1],
-
-            card1Class: makeClass(1),
-            card1Style: makeCardStyle(1, 104, 258, 1, false),
-            selectCard1: () => this.setState({ selectedCard: 1 }),
-
-            card2Class: makeClass(2),
-            card2Style: makeCardStyle(2, 110, 276, 2, false),
-            selectCard2: () => this.setState({ selectedCard: 2 }),
-
-            card3Class: makeClass(3),
-            card3Style: makeCardStyle(3, 116, 296, 3, false),
-            selectCard3: () => this.setState({ selectedCard: 3 }),
-
-            card4Class: makeClass(4),
-            card4Style: makeCardStyle(4, 120, 310, 4, false),
-            selectCard4: () => this.setState({ selectedCard: 4 }),
-
-            card5Class: makeClass(5),
-            card5Style: makeCardStyle(5, 168, 338, 5, false),
-            selectCard5: () => this.setState({ selectedCard: 5 }),
-
-            card6Class: makeClass(6),
-            card6Style: makeCardStyle(6, 120, 310, 4, false),
-            selectCard6: () => this.setState({ selectedCard: 6 }),
-
-            card7Class: makeClass(7),
-            card7Style: makeCardStyle(7, 116, 296, 3, false),
-            selectCard7: () => this.setState({ selectedCard: 7 }),
-
-            card8Class: makeClass(8),
-            card8Style: makeCardStyle(8, 110, 276, 2, false),
-            selectCard8: () => this.setState({ selectedCard: 8 }),
-
-            card9Class: makeClass(9),
-            card9Style: makeCardStyle(9, 104, 258, 1, true),
-            selectCard9: () => this.setState({ selectedCard: 9 }),
-
-            selectPersonality: () => this.setState({ mode: 'Personality', selectedCard: 5 }),
-            selectRekomendasi: () => this.setState({ mode: 'Rekomendasi', selectedCard: 3 })
-          };
-        }
-      }
-    </script>
-    <script>
-      // ==============================================================================
-      // SINKRONISASI AUTENTIKASI SUPABASE & TAMPILAN PROFIL AKUN PENGGUNA
-      // ==============================================================================
-      const SUPABASE_URL = "https://iklhjmmmolulglxirvrc.supabase.co";
-      const SUPABASE_ANON_KEY =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrbGhqbW1tb2x1bGdseGlydnJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyODAzNjQsImV4cCI6MjEwODg1NjM2NH0.NsKrraBp5W2SEDzKXM6GWevYr1g4iwGUei2CSawqNmQ";
-
-      let supabase = null;
-      try {
-        if (window.supabase && window.supabase.createClient) {
-          supabase = window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY,
-          );
-          window.supabaseClient = supabase;
-        }
-      } catch (err) {
-        console.warn("[OutfitReq] Gagal inisialisasi Supabase di Main:", err);
-      }
-
-      // Fungsi Notifikasi Toast
-      function showAuthToast(message) {
-        let toast = document.getElementById("authToast");
-        if (!toast) {
-          toast = document.createElement("div");
-          toast.id = "authToast";
-          toast.className = "auth-toast";
-          document.body.appendChild(toast);
-        }
-        toast.innerHTML = `
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/>
+      <div class="enter-btn-wrap">
+        <button
+          class="enter-btn"
+          id="enterBtn"
+          aria-label="Masuk ke Pengalaman 3D"
+        >
+          <span>JELAJAHI / MASUK</span>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M12 5v14M5 12l7 7 7-7" />
           </svg>
-          <span>${message}</span>
-        `;
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 4200);
+        </button>
+      </div>
+    </div>
+
+    <!-- Auth Modal: Double Slider UI (Sign In & Sign Up) -->
+    <div
+      id="login-card"
+      class="login-card"
+      role="dialog"
+      aria-label="Masuk atau Buat Akun"
+      aria-hidden="true"
+    >
+      <div class="double-slider-wrapper">
+        <!-- Top bar navigation -->
+        <div class="login-card-top-nav">
+          <button
+            class="login-back"
+            id="loginBack"
+            aria-label="Kembali ke Ruang 3D"
+            title="Kembali ke Ruang 3D"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            <span>Ruang 3D</span>
+          </button>
+
+          <!-- Mobile Toggle Tabs (Visible on screens <= 768px) -->
+          <div class="mobile-slider-tabs" id="mobileSliderTabs">
+            <button type="button" class="mobile-tab-btn active" id="mobileTabSignIn">
+              MASUK
+            </button>
+            <button type="button" class="mobile-tab-btn" id="mobileTabSignUp">
+              DAFTAR
+            </button>
+          </div>
+
+          <a
+            href="rekomendasi.html"
+            class="login-home-link"
+            title="Jelajahi Rekomendasi Outfit"
+          >
+            <span>Rekomendasi</span>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- The Double Slider Container -->
+        <div class="double-slider-container" id="doubleSliderContainer">
+          
+          <!-- SIGN UP / BUAT AKUN (Slides in when right-panel-active is set) -->
+          <div class="form-container sign-up-container">
+            <div class="form-content-inner">
+              <div class="login-header">
+                <div class="login-brand-badge">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--burgundy)"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
+                    ></path>
+                  </svg>
+                  <span class="login-brand">outfit req</span>
+                </div>
+                <h2 class="login-title">Buat Akun Baru</h2>
+                <p class="login-subtitle">
+                  Bergabunglah dengan Outfit Req untuk pengalaman kurasi gaya personal.
+                </p>
+              </div>
+
+              <form id="createForm" class="login-form" novalidate>
+                <div class="form-group" id="createNameGroup">
+                  <label for="createName" class="form-label">Nama Lengkap</label>
+                  <input
+                    type="text"
+                    id="createName"
+                    class="form-input"
+                    placeholder="Nama lengkap Anda"
+                    autocomplete="name"
+                    required
+                  />
+                  <span class="form-error" id="createNameError"></span>
+                </div>
+
+                <div class="form-group" id="createEmailGroup">
+                  <label for="createEmail" class="form-label">Alamat Email</label>
+                  <input
+                    type="email"
+                    id="createEmail"
+                    class="form-input"
+                    placeholder="nama@email.com"
+                    autocomplete="email"
+                    required
+                  />
+                  <span class="form-error" id="createEmailError"></span>
+                </div>
+
+                <div class="form-group" id="createPasswordGroup">
+                  <label for="createPassword" class="form-label">Kata Sandi</label>
+                  <div class="password-wrap">
+                    <input
+                      type="password"
+                      id="createPassword"
+                      class="form-input"
+                      placeholder="Minimal 6 karakter"
+                      autocomplete="new-password"
+                      required
+                      minlength="6"
+                    />
+                    <button
+                      type="button"
+                      class="password-toggle"
+                      id="createPasswordToggle"
+                      aria-label="Tampilkan kata sandi"
+                    >
+                      <svg
+                        class="eye-open"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                      <svg
+                        class="eye-closed"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        style="display: none"
+                      >
+                        <path
+                          d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"
+                        />
+                        <line x1="1" y1="1" x2="23" y2="23" />
+                      </svg>
+                    </button>
+                  </div>
+                  <span class="form-error" id="createPasswordError"></span>
+                </div>
+
+                <button type="submit" class="submit-btn" id="createSubmitBtn">
+                  <span class="submit-text">DAFTAR SEKARANG</span>
+                  <div class="submit-loader" style="display: none">
+                    <div class="spinner"></div>
+                  </div>
+                </button>
+
+                <div
+                  class="form-feedback"
+                  id="createFeedback"
+                  role="alert"
+                  aria-live="polite"
+                ></div>
+              </form>
+
+              <!-- Mobile footer switch -->
+              <div class="mobile-slider-footer">
+                <p>
+                  Sudah memiliki akun?
+                  <button type="button" class="slider-switch-btn" id="backToLogin">
+                    Masuk Sekarang
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SIGN IN / MASUK (Left form slot initially active) -->
+          <div class="form-container sign-in-container">
+            <div class="form-content-inner">
+              <div class="login-header">
+                <div class="login-brand-badge">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--burgundy)"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
+                    ></path>
+                  </svg>
+                  <span class="login-brand">outfit req</span>
+                </div>
+                <h2 class="login-title">Selamat Datang</h2>
+                <p class="login-subtitle">
+                  Masuk untuk menyimpan wishlist dan kurasi gaya personal Anda.
+                </p>
+              </div>
+
+              <form id="loginForm" class="login-form" novalidate>
+                <div class="form-group" id="emailGroup">
+                  <label for="email" class="form-label">Alamat Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    class="form-input"
+                    placeholder="nama@email.com"
+                    autocomplete="email"
+                    required
+                  />
+                  <span class="form-error" id="emailError"></span>
+                </div>
+
+                <div class="form-group" id="passwordGroup">
+                  <label for="password" class="form-label">Kata Sandi</label>
+                  <div class="password-wrap">
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-input"
+                      placeholder="Masukkan kata sandi minimal 6 karakter"
+                      autocomplete="current-password"
+                      required
+                      minlength="6"
+                    />
+                    <button
+                      type="button"
+                      class="password-toggle"
+                      id="passwordToggle"
+                      aria-label="Tampilkan kata sandi"
+                    >
+                      <svg
+                        class="eye-open"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                      <svg
+                        class="eye-closed"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        style="display: none"
+                      >
+                        <path
+                          d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"
+                        />
+                        <line x1="1" y1="1" x2="23" y2="23" />
+                      </svg>
+                    </button>
+                  </div>
+                  <span class="form-error" id="passwordError"></span>
+                </div>
+
+                <div class="form-row">
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      id="remember"
+                      class="checkbox-input"
+                      checked
+                    />
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-text">Ingat saya di perangkat ini</span>
+                  </label>
+                  <a href="#" class="form-link" id="forgotLink">Lupa kata sandi?</a>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                  <span class="submit-text">MASUK SEKARANG</span>
+                  <div class="submit-loader" style="display: none">
+                    <div class="spinner"></div>
+                  </div>
+                </button>
+
+                <div
+                  class="form-feedback"
+                  id="formFeedback"
+                  role="alert"
+                  aria-live="polite"
+                ></div>
+              </form>
+
+              <!-- Mobile footer switch -->
+              <div class="mobile-slider-footer">
+                <p>
+                  Belum memiliki akun?
+                  <button type="button" class="slider-switch-btn" id="createLink">
+                    Daftar Akun Baru
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDING OVERLAY CONTAINER (Desktop Double Slider) -->
+          <div class="overlay-container">
+            <div class="overlay">
+              
+              <!-- Overlay Left: Visible when container has .right-panel-active (Sign Up active) -->
+              <div class="overlay-panel overlay-left">
+                <div class="overlay-brand-icon">
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--cream)"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
+                    ></path>
+                  </svg>
+                </div>
+                <span class="overlay-tag">OUTFIT REQ</span>
+                <h3 class="overlay-title">Sudah Punya Akun?</h3>
+                <p class="overlay-desc">
+                  Masuk kembali untuk melanjutkan eksplorasi gaya, mengelola wishlist, dan melihat kurasi outfit terbaik Anda.
+                </p>
+                <button type="button" class="ghost-btn" id="signInSliderBtn">
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                  </svg>
+                  <span>MASUK SEKARANG</span>
+                </button>
+              </div>
+
+              <!-- Overlay Right: Visible when sign-in is active -->
+              <div class="overlay-panel overlay-right">
+                <div class="overlay-brand-icon">
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--cream)"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"
+                    ></path>
+                  </svg>
+                </div>
+                <span class="overlay-tag">OUTFIT REQ</span>
+                <h3 class="overlay-title">Halo, Penggemar Fashion!</h3>
+                <p class="overlay-desc">
+                  Belum memiliki akun? Bergabunglah bersama kami dan temukan rekomendasi padu padan outfit yang dirancang khusus untuk kepribadian Anda.
+                </p>
+                <button type="button" class="ghost-btn" id="signUpSliderBtn">
+                  <span>DAFTAR AKUN BARU</span>
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Forgot Password View -->
+    <div id="forgot-view" class="login-card auth-view" aria-hidden="true">
+      <div class="login-card-inner">
+        <button
+          class="login-back"
+          id="forgotBack"
+          aria-label="Kembali ke formulir masuk"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          <span>Kembali</span>
+        </button>
+        <div class="login-header">
+          <div class="login-brand">outfit req</div>
+          <h2 class="login-title">Atur Ulang Kata Sandi</h2>
+          <p class="login-subtitle">
+            Masukkan email terdaftar Anda dan kami akan mengirimkan tautan
+            pemulihan.
+          </p>
+        </div>
+        <form id="forgotForm" class="login-form" novalidate>
+          <div class="form-group">
+            <label for="forgotEmail" class="form-label">Alamat Email</label>
+            <input
+              type="email"
+              id="forgotEmail"
+              class="form-input"
+              placeholder="nama@email.com"
+              autocomplete="email"
+              required
+            />
+            <span class="form-error" id="forgotEmailError"></span>
+          </div>
+          <button type="submit" class="submit-btn">
+            <span class="submit-text">KIRIM TAUTAN RESET</span>
+            <div class="submit-loader" style="display: none">
+              <div class="spinner"></div>
+            </div>
+          </button>
+          <div
+            class="form-feedback"
+            id="forgotFeedback"
+            role="alert"
+            aria-live="polite"
+          ></div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- Email Verification / Check Email View -->
+    <div id="verify-view" class="login-card auth-view" aria-hidden="true">
+      <div class="login-card-inner">
+        <button
+          class="login-back"
+          id="verifyBack"
+          aria-label="Kembali ke formulir pendaftaran"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          <span>Kembali</span>
+        </button>
+
+        <div class="verify-card-header">
+          <div class="verify-icon-wrap">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--burgundy)"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect width="20" height="16" x="2" y="4" rx="3" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+            <span class="verify-icon-ping"></span>
+          </div>
+          <div class="login-brand" style="margin-top: 10px">outfit req</div>
+          <h2 class="login-title" style="margin-top: 4px">Cek Email Anda</h2>
+          <p class="login-subtitle">
+            Tautan konfirmasi verifikasi telah kami kirimkan ke:
+          </p>
+          <div class="verify-email-badge" id="verifyEmailDisplay">
+            email@domain.com
+          </div>
+        </div>
+
+        <div class="verify-instructions-card">
+          <div class="verify-step-item">
+            <span class="verify-step-num">1</span>
+            <span class="verify-step-text"
+              >Buka aplikasi atau tab <strong>email Anda</strong> (periksa juga
+              folder <em>Spam / Promosi</em> jika belum muncul).</span
+            >
+          </div>
+          <div class="verify-step-item">
+            <span class="verify-step-num">2</span>
+            <span class="verify-step-text"
+              >Cari email dari <strong>Outfit Req</strong> dengan judul
+              konfirmasi pendaftaran.</span
+            >
+          </div>
+          <div class="verify-step-item">
+            <span class="verify-step-num">3</span>
+            <span class="verify-step-text"
+              >Klik tautan <strong>"Confirm your mail"</strong> untuk
+              mengaktifkan akun Anda.</span
+            >
+          </div>
+        </div>
+
+        <div class="verify-waiting-pill">
+          <span class="verify-pulse-dot"></span>
+          <span>Menunggu konfirmasi tautan dari email Anda...</span>
+        </div>
+
+        <div class="verify-action-group">
+          <button type="button" class="submit-btn" id="checkVerifiedBtn">
+            <span class="submit-text">SAYA SUDAH KLIK TAUTAN</span>
+            <div class="submit-loader" style="display: none">
+              <div class="spinner"></div>
+            </div>
+          </button>
+
+          <button type="button" class="resend-link-btn" id="resendLinkBtn">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"
+              />
+            </svg>
+            <span>Kirim Ulang Tautan Baru</span>
+          </button>
+        </div>
+
+        <div
+          class="form-feedback"
+          id="verifyFeedback"
+          role="alert"
+          aria-live="polite"
+        ></div>
+
+        <div class="login-footer" style="margin-top: 1.2rem">
+          <p>
+            Salah memasukkan alamat email?
+            <a href="#" class="form-link" id="verifyChangeEmail"
+              >Daftar Ulang</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Verified Success View (Tampilan Khusus saat Klik Link di Email) -->
+    <div id="verified-success-view" class="login-card auth-view" aria-hidden="true">
+      <div class="login-card-inner">
+        <div class="verify-card-header">
+          <div class="verified-icon-wrap">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#15803d"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            <span class="verified-icon-ping"></span>
+          </div>
+          <div class="login-brand" style="margin-top: 10px">outfit req</div>
+          <h2 class="login-title" style="margin-top: 4px">Akun Telah Terverifikasi</h2>
+          <p class="login-subtitle">
+            Akun Anda telah berhasil terdaftar dan aktif. Silakan login kembali dengan kata sandi Anda atau klik tombol di bawah untuk langsung masuk ke akun Anda.
+          </p>
+        </div>
+
+        <div class="verified-customer-card">
+          <div class="verified-customer-avatar" id="verifiedSuccessAvatar">C</div>
+          <div class="verified-customer-info">
+            <div class="verified-customer-name" id="verifiedSuccessName">Customer</div>
+            <div class="verified-customer-email" id="verifiedSuccessEmail">email@domain.com</div>
+          </div>
+          <div class="verified-badge-pill">
+            <span class="verified-status-dot"></span>
+            <span>Terdaftar</span>
+          </div>
+        </div>
+
+        <div class="verify-action-group">
+          <!-- Opsi 1: Langsung Login Masuk ke Akun -->
+          <button type="button" class="submit-btn" id="directLoginBtn">
+            <span class="submit-text">MASUK KE AKUN SAYA</span>
+            <div class="submit-loader" style="display: none">
+              <div class="spinner"></div>
+            </div>
+          </button>
+
+          <!-- Opsi 2: Login Kembali dengan Kata Sandi -->
+          <button type="button" class="resend-link-btn" id="reloginBtn">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" />
+            </svg>
+            <span>Silakan Login Kembali</span>
+          </button>
+        </div>
+
+        <div
+          class="form-feedback"
+          id="verifiedSuccessFeedback"
+          role="alert"
+          aria-live="polite"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Scripts (Three.js via importmap + GSAP via CDN + Supabase) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"
+        }
       }
-      window.showAuthToast = showAuthToast;
-
-      // Fungsi Drawer Navigasi Mobile
-      function toggleMobileNavDrawer() {
-        const d = document.getElementById("mobileNavDrawer");
-        if (d) d.classList.toggle("open");
-      }
-      window.toggleMobileNavDrawer = toggleMobileNavDrawer;
-
-      document.addEventListener("click", (e) => {
-        const d = document.getElementById("mobileNavDrawer");
-        const btn = e.target.closest(".mobile-nav-toggle");
-        if (d && d.classList.contains("open") && !d.contains(e.target) && !btn) {
-          d.classList.remove("open");
-        }
-      });
-
-      // Trigger Login Gmail (autoconnect Google) untuk Guest -> Langsung connect dengan Akun Customer yang login
-      async function triggerGuestGmailLogin() {
-        try {
-          localStorage.removeItem("outfit_req_logged_out");
-        } catch (e) {}
-        showAuthToast("Menghubungkan ke Akun Customer...");
-
-        // Cek sesi aktif Supabase jika ada
-        if (supabase) {
-          try {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session?.user) {
-              const u = session.user;
-              let customerName = u.user_metadata?.full_name || u.user_metadata?.name || u.email.split('@')[0];
-              customerName = customerName.charAt(0).toUpperCase() + customerName.slice(1);
-              let userTier = "free";
-              let expAt = null;
-              try {
-                const stored = JSON.parse(localStorage.getItem("outfit_req_user") || "null");
-                if (stored && stored.email && stored.email.toLowerCase() === u.email.toLowerCase() && stored.tier === "premium") {
-                  userTier = "premium";
-                  expAt = stored.premiumExpiresAt || null;
-                }
-              } catch (e) {}
-
-              try {
-                const { data: dbU } = await supabase
-                  .from("users")
-                  .select("tier, premium_expires_at")
-                  .ilike("email", u.email)
-                  .maybeSingle();
-                if (dbU && dbU.tier === "premium") {
-                  const expDate = dbU.premium_expires_at ? new Date(dbU.premium_expires_at) : null;
-                  if (!expDate || expDate > new Date()) {
-                    userTier = "premium";
-                    expAt = dbU.premium_expires_at || expAt;
-                  }
-                }
-              } catch(e) {}
-
-              const activeUser = {
-                id: u.id,
-                name: customerName,
-                username: "@" + customerName.toLowerCase().replace(/[^a-z0-9_]/g, ''),
-                email: u.email,
-                tier: userTier,
-                premiumExpiresAt: expAt,
-                isLoggedIn: true,
-                verifiedAt: new Date().toISOString()
-              };
-              try {
-                localStorage.setItem("outfit_req_user", JSON.stringify(activeUser));
-              } catch (e) {}
-              if (window.__mainComponent) {
-                window.__mainComponent.setState({ user: activeUser });
-              }
-              window.location.href = "account.html";
-              return;
-            }
-          } catch (e) {}
-        }
-
-        // Jika belum ada akun yang login, arahkan ke halaman login
-        window.location.href = "login.html";
-      }
-      window.triggerGuestGmailLogin = triggerGuestGmailLogin;
-
-      // Fungsi render fallback tampilan profil akun pengguna jika runtime belum me-render
-      function renderUserAccount(user) {
-        if (!user || !user.isLoggedIn) return;
-        if (window.__mainComponent) {
-          window.__mainComponent.setState({ user: user });
-          return;
-        }
-      }
-
-      // Eksekusi saat dokumen siap
-      window.addEventListener("DOMContentLoaded", async () => {
-        // Cek parameter ?logout=1 atau flag logout tersimpan
-        const hasLogoutParam = new URLSearchParams(window.location.search).has("logout");
-        if (hasLogoutParam || localStorage.getItem('outfit_req_logged_out') === 'true') {
-          if (window.__mainComponent) {
-            window.__mainComponent.setState({ user: null, userDropdownOpen: false });
-          }
-          if (hasLogoutParam && typeof showAuthToast === 'function') {
-            showAuthToast('Anda telah berhasil keluar dari akun.');
-            try {
-              window.history.replaceState(null, document.title, window.location.pathname);
-            } catch (e) {}
-          }
-          return;
-        }
-
-        // Cek sesi lokal tersimpan untuk update komponen
-        try {
-          const raw = localStorage.getItem("outfit_req_user");
-          if (raw) {
-            const localUser = JSON.parse(raw);
-            if (localUser && localUser.isLoggedIn && window.__mainComponent) {
-              window.__mainComponent.setState({ user: localUser });
-            }
-          }
-        } catch (e) {}
-
-        // Deteksi otomatis sesi dari Supabase (misal via link email konfirmasi)
-        if (supabase) {
-          try {
-            const {
-              data: { session },
-            } = await supabase.auth.getSession();
-            if (session?.user) {
-              const u = session.user;
-              let customerName = u.user_metadata?.full_name;
-              if (!customerName) {
-                try {
-                  const regMap = JSON.parse(
-                    localStorage.getItem("outfit_req_registered_customers") ||
-                      "{}",
-                  );
-                  const found = regMap[u.email.toLowerCase()];
-                  if (found && found.name) customerName = found.name;
-                } catch (e) {}
-              }
-              if (!customerName) customerName = u.email.split("@")[0];
-              const formattedName =
-                customerName.charAt(0).toUpperCase() + customerName.slice(1);
-              let userTier = "Free Member";
-              let expAt = null;
-              try {
-                const stored = JSON.parse(localStorage.getItem("outfit_req_user") || "null");
-                if (stored && stored.email && stored.email.toLowerCase() === u.email.toLowerCase()) {
-                  if (stored.tier && (stored.tier.toLowerCase().includes("premium") || stored.tier === "premium")) {
-                    userTier = "Premium Member";
-                    expAt = stored.premiumExpiresAt || null;
-                  }
-                }
-              } catch (e) {}
-
-              try {
-                const { data: dbU } = await supabase
-                  .from("users")
-                  .select("tier, premium_expires_at")
-                  .ilike("email", u.email)
-                  .maybeSingle();
-                if (dbU && dbU.tier === "premium") {
-                  const expDate = dbU.premium_expires_at ? new Date(dbU.premium_expires_at) : null;
-                  if (!expDate || expDate > new Date()) {
-                    userTier = "Premium Member";
-                    expAt = dbU.premium_expires_at || expAt;
-                  }
-                }
-              } catch(e) {}
-
-              const userData = {
-                id: u.id,
-                name: formattedName,
-                email: u.email,
-                tier: userTier,
-                premiumExpiresAt: expAt,
-                isLoggedIn: true,
-                verifiedAt: new Date().toISOString(),
-              };
-
-              try {
-                localStorage.setItem(
-                  "outfit_req_user",
-                  JSON.stringify(userData),
-                );
-              } catch (e) {}
-
-              if (window.__mainComponent) {
-                window.__mainComponent.setState({ user: userData });
-              }
-            }
-          } catch (e) {}
-
-          // Tangkap event jika pengguna baru saja mengklik tautan konfirmasi email
-          supabase.auth.onAuthStateChange(async (event, session) => {
-            if (
-              (event === "SIGNED_IN" || event === "USER_UPDATED") &&
-              session?.user
-            ) {
-              const u = session.user;
-              let customerName = u.user_metadata?.full_name;
-              if (!customerName) {
-                try {
-                  const regMap = JSON.parse(
-                    localStorage.getItem("outfit_req_registered_customers") ||
-                      "{}",
-                  );
-                  const found = regMap[u.email.toLowerCase()];
-                  if (found && found.name) customerName = found.name;
-                } catch (e) {}
-              }
-              if (!customerName) customerName = u.email.split("@")[0];
-              const formattedName =
-                customerName.charAt(0).toUpperCase() + customerName.slice(1);
-              let userTier = "Free Member";
-              let expAt = null;
-              try {
-                const stored = JSON.parse(localStorage.getItem("outfit_req_user") || "null");
-                if (stored && stored.email && stored.email.toLowerCase() === u.email.toLowerCase()) {
-                  if (stored.tier && (stored.tier.toLowerCase().includes("premium") || stored.tier === "premium")) {
-                    userTier = "Premium Member";
-                    expAt = stored.premiumExpiresAt || null;
-                  }
-                }
-              } catch (e) {}
-
-              try {
-                const { data: dbU } = await supabase
-                  .from("users")
-                  .select("tier, premium_expires_at")
-                  .ilike("email", u.email)
-                  .maybeSingle();
-                if (dbU && dbU.tier === "premium") {
-                  const expDate = dbU.premium_expires_at ? new Date(dbU.premium_expires_at) : null;
-                  if (!expDate || expDate > new Date()) {
-                    userTier = "Premium Member";
-                    expAt = dbU.premium_expires_at || expAt;
-                  }
-                }
-              } catch(e) {}
-
-              const userData = {
-                id: u.id,
-                name: formattedName,
-                email: u.email,
-                tier: userTier,
-                premiumExpiresAt: expAt,
-                isLoggedIn: true,
-                verifiedAt: new Date().toISOString(),
-              };
-
-              try {
-                localStorage.setItem(
-                  "outfit_req_user",
-                  JSON.stringify(userData),
-                );
-              } catch (e) {}
-
-              if (window.__mainComponent) {
-                window.__mainComponent.setState({ user: userData });
-              }
-
-              // Bersihkan hash token dari address bar agar URL rapi
-              if (
-                window.location.hash &&
-                (window.location.hash.includes("access_token") ||
-                  window.location.hash.includes("type="))
-              ) {
-                window.history.replaceState(
-                  null,
-                  document.title,
-                  window.location.pathname,
-                );
-              }
-
-              showAuthToast(
-                `Selamat datang, ${userData.name}! Akun Anda telah berhasil masuk.`,
-              );
-            }
-          });
-        }
-      });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script type="module" src="app.js"></script>
   </body>
 </html>

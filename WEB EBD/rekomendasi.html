@@ -204,6 +204,37 @@
         pointer-events: auto;
       }
 
+      /* Dynamic Palette Swatch Buttons & Transitions */
+      .palette-swatch-btn {
+        position: relative;
+        cursor: pointer;
+        outline: none;
+        transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+      }
+      .palette-swatch-btn:hover {
+        transform: scale(1.18);
+      }
+      .palette-swatch-btn.is-active {
+        transform: scale(1.16);
+        box-shadow: 0 0 0 2.5px #ffffff, 0 0 0 4.5px #1c1917, 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+      html.dark .palette-swatch-btn.is-active {
+        box-shadow: 0 0 0 2.5px #191417, 0 0 0 4.5px #f7f3ee, 0 4px 12px rgba(0, 0, 0, 0.6);
+      }
+      #modalImageContainer {
+        transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #pinDetailModal {
+        transition: background 0.5s ease;
+      }
+      #modalDialogCard {
+        transition: box-shadow 0.5s ease, border-color 0.5s ease;
+      }
+      .pin-card:active .pin-image-wrapper {
+        transform: scale(0.98);
+        box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.25);
+      }
+
       /* Mobile Device Touch Adaptation: Clean Photo-First Feed & Touch Targets */
       @media (max-width: 768px) {
         input, select, textarea {
@@ -1054,7 +1085,8 @@
       onclick="if (event.target === this) closePinDetailModal();"
     >
       <div
-        class="relative w-full max-w-4xl bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl my-0 sm:my-auto flex flex-col md:flex-row max-h-[92dvh] sm:max-h-[90vh] overflow-hidden animate-slideUpMobile sm:animate-none"
+        id="modalDialogCard"
+        class="relative w-full max-w-4xl bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl my-0 sm:my-auto flex flex-col md:flex-row max-h-[92dvh] sm:max-h-[90vh] overflow-hidden animate-slideUpMobile sm:animate-none transition-all duration-500 border border-transparent"
         onclick="event.stopPropagation()"
       >
         <!-- Mobile Bottom Sheet Pull Bar -->
@@ -1081,27 +1113,30 @@
           </svg>
         </button>
 
-        <!-- LEFT: Clean High-Res Image -->
+        <!-- LEFT: Clean High-Res Image with Dynamic Palette Background -->
         <div
-          class="w-full md:w-1/2 bg-[#F5F2EA] flex items-center justify-center overflow-hidden min-h-[220px] max-h-[38vh] md:min-h-[520px] md:max-h-none shrink-0"
+          id="modalImageContainer"
+          class="w-full md:w-1/2 flex items-center justify-center overflow-hidden min-h-[220px] max-h-[38vh] md:min-h-[520px] md:max-h-none shrink-0 transition-all duration-500 ease-out relative p-2 sm:p-4"
+          style="background-color: #F5F2EA;"
         >
           <img
             id="modalPinImage"
             src=""
             alt="Foto Busana"
-            class="w-full h-full object-cover md:max-h-[82vh]"
+            class="w-full h-full object-cover md:max-h-[82vh] rounded-2xl shadow-sm transition-all duration-300"
           />
         </div>
 
         <!-- RIGHT: Clean Fashion Breakdown -->
         <div
-          class="w-full md:w-1/2 p-4 sm:p-6 md:p-8 flex flex-col justify-between overflow-y-auto"
+          id="modalContentSide"
+          class="w-full md:w-1/2 p-4 sm:p-6 md:p-8 flex flex-col justify-between overflow-y-auto transition-colors duration-500"
           style="-webkit-overflow-scrolling: touch"
         >
           <div>
             <!-- Header: Store / Source & Save Button -->
             <div
-              class="flex items-center justify-between pb-3 sm:pb-4 border-b border-stone-100"
+              class="flex items-center justify-between pb-3 sm:pb-4 border-b border-stone-100 dark:border-stone-800"
             >
               <div>
                 <span
@@ -1145,12 +1180,18 @@
               </p>
             </div>
 
-            <!-- Palette Dots -->
-            <div class="mt-4 pt-4 border-t border-stone-100">
-              <span class="text-[11px] font-medium text-stone-400 block mb-2"
-                >Palet Warna:</span
-              >
-              <div id="modalColorPalette" class="flex items-center gap-2"></div>
+            <!-- Palette Dots & Interactive Background Trigger -->
+            <div class="mt-4 pt-4 border-t border-stone-100 dark:border-stone-800">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider"
+                  >Palet Warna:</span
+                >
+                <span id="modalActiveColorName" class="text-xs font-semibold text-stone-800 dark:text-stone-200 transition-colors"></span>
+              </div>
+              <div id="modalColorPalette" class="flex items-center gap-2.5 flex-wrap"></div>
+              <p class="text-[10px] text-stone-400 dark:text-stone-500 mt-1.5">
+                Klik salah satu warna di atas untuk menyesuaikan warna latar busana.
+              </p>
             </div>
 
             <!-- Item Breakdown -->
@@ -1746,6 +1787,11 @@
           priceDisplay: "R$ 56.92 (~ Rp 165.068)",
           priceTotal: 165068,
           desc: "Jaket windbreaker bertudung hangat dan tahan air, cocok untuk aktivitas kasual, festival musik (ngonser), dan kegiatan outdoor.",
+          colors: [
+            { name: "Onyx Black", hex: "#1A1A1A" },
+            { name: "Slate Grey", hex: "#4A5568" },
+            { name: "Electric Cyan", hex: "#0284C7" }
+          ],
         },
         {
           id: "shopee-53717754452",
@@ -1763,6 +1809,11 @@
           priceDisplay: "R$ 129.83 (~ Rp 376.507)",
           priceTotal: 376507,
           desc: "Desain jaket longgar kontemporer beraksen warna kontras, memberikan sentuhan streetwear modern dan nyaman.",
+          colors: [
+            { name: "Pitch Black", hex: "#111827" },
+            { name: "Cool Grey", hex: "#6B7280" },
+            { name: "Crisp White", hex: "#F3F4F6" }
+          ],
         },
         {
           id: "shopee-29613458326",
@@ -1780,6 +1831,11 @@
           priceDisplay: "R$ 83.51 (~ Rp 242.179)",
           priceTotal: 242179,
           desc: "Jaket semi formal berpotongan rapi dan elegan, fleksibel untuk suasana bisnis santai maupun pertemuan resmi.",
+          colors: [
+            { name: "Oxford Navy", hex: "#1B2A4A" },
+            { name: "Camel Tan", hex: "#C19A6B" },
+            { name: "Slate Charcoal", hex: "#334155" }
+          ],
         },
         {
           id: "shopee-22098376587",
@@ -1797,6 +1853,11 @@
           priceDisplay: "R$ 285.00 (~ Rp 826.500)",
           priceTotal: 826500,
           desc: "Puffer jacket tebal dengan lapisan lembut anti angin, sangat nyaman untuk liburan musim dingin atau konser malam hari.",
+          colors: [
+            { name: "Midnight Noir", hex: "#0F172A" },
+            { name: "Steel Grey", hex: "#475569" },
+            { name: "Deep Amethyst", hex: "#3B0764" }
+          ],
         },
       ];
 
@@ -2232,6 +2293,9 @@
             const isSaved = isPinSaved(pin.id);
             const isShopee = pin.source === "apify-shopee" || (pin.store && pin.store.toLowerCase().includes("shopee"));
             const isUniqlo = pin.source === "apify-uniqlo" || (pin.store && pin.store.toLowerCase().includes("uniqlo"));
+            const colors = getPinColors(pin);
+            pin.colors = colors;
+            const primaryColor = colors[0] || { hex: "#ece8e0", name: "Default" };
             const priceFormatted =
               pin.priceDisplay ||
               new Intl.NumberFormat("id-ID", {
@@ -2243,8 +2307,8 @@
             return `
           <div class="pin-card group cursor-pointer" onclick="openPinDetailModal('${pin.id}')">
             
-            <!-- Image Frame -->
-            <div class="pin-image-wrapper ${pin.aspect}">
+            <!-- Image Frame with Palette Tint -->
+            <div class="pin-image-wrapper ${pin.aspect}" style="background-color: ${primaryColor.hex}18;">
               <img 
                 src="${pin.image}" 
                 alt="${pin.title}" 
@@ -2310,6 +2374,16 @@
                   ${pin.rating ? `&bull; ★ ${pin.rating}` : ""}
                 </span>
                 <span class="shrink-0">${pin.savesCount} simpan</span>
+              </div>
+              
+              <!-- Palet Warna Ringkas pada Kartu -->
+              <div class="flex items-center gap-1.5 mt-1.5 pt-1 border-t border-black/[0.04] dark:border-white/[0.06]">
+                <div class="flex items-center gap-1">
+                  ${colors.slice(0, 4).map(c => `
+                    <span class="w-2.5 h-2.5 rounded-full border border-black/15 dark:border-white/20 inline-block shadow-2xs transition-transform group-hover:scale-115" style="background-color: ${c.hex};" title="${c.name}"></span>
+                  `).join('')}
+                </div>
+                <span class="text-[10px] text-stone-400 dark:text-stone-500 ml-auto font-medium truncate max-w-[110px]">${colors[0]?.name || ''}</span>
               </div>
             </div>
 
@@ -2568,9 +2642,12 @@
             (item) => {
               const itemTier = String(item.user_tier || (APP_STATE.user?.tier || "free")).toLowerCase();
               const isItemPremium = itemTier === "premium";
+              const colors = getPinColors(item);
+              item.colors = colors;
+              const primaryColor = colors[0] || { hex: "#ece8e0", name: "Default" };
               return `
         <div class="pin-card group cursor-pointer" onclick="openPinDetailModal('${item.id}')">
-          <div class="pin-image-wrapper aspect-[3/4]">
+          <div class="pin-image-wrapper aspect-[3/4]" style="background-color: ${primaryColor.hex}18;">
             <img 
               src="${item.image}" 
               alt="${item.title}" 
@@ -2600,12 +2677,112 @@
               </span>
             </div>
             <h4 class="text-[13px] font-semibold text-stone-900 line-clamp-1">${item.title}</h4>
+            <div class="flex items-center gap-1.5 mt-1.5 pt-1 border-t border-black/[0.04] dark:border-white/[0.06]">
+              <div class="flex items-center gap-1">
+                ${colors.slice(0, 4).map(c => `
+                  <span class="w-2.5 h-2.5 rounded-full border border-black/15 dark:border-white/20 inline-block shadow-2xs transition-transform group-hover:scale-115" style="background-color: ${c.hex};" title="${c.name}"></span>
+                `).join('')}
+              </div>
+              <span class="text-[10px] text-stone-400 dark:text-stone-500 ml-auto font-medium truncate max-w-[110px]">${colors[0]?.name || ''}</span>
+            </div>
           </div>
         </div>
       `;
             }
           )
           .join("");
+      }
+
+      // 6.5 PALET WARNA INTERAKTIF & PERUBAHAN LATAR MODAL
+      function getPinColors(pin) {
+        if (pin && Array.isArray(pin.colors) && pin.colors.length > 0) {
+          return pin.colors;
+        }
+        const text = ((pin?.title || "") + " " + (pin?.category || "") + " " + (pin?.style || "")).toLowerCase();
+        if (text.includes("sport") || text.includes("corta-vento") || text.includes("windbreaker") || text.includes("running")) {
+          return [
+            { name: "Onyx Black", hex: "#1A1A1A" },
+            { name: "Slate Grey", hex: "#4A5568" },
+            { name: "Electric Cyan", hex: "#0284C7" }
+          ];
+        }
+        if (text.includes("formal") || text.includes("bisnis") || text.includes("negocios") || text.includes("suit") || text.includes("classic")) {
+          return [
+            { name: "Midnight Navy", hex: "#1B2A4A" },
+            { name: "Camel Tan", hex: "#C19A6B" },
+            { name: "Slate Charcoal", hex: "#334155" }
+          ];
+        }
+        if (text.includes("pesta") || text.includes("kondangan") || text.includes("glam") || text.includes("velvet")) {
+          return [
+            { name: "Royal Burgundy", hex: "#6D001A" },
+            { name: "Champagne Gold", hex: "#D4AF37" },
+            { name: "Velvet Crimson", hex: "#8A0A28" }
+          ];
+        }
+        if (text.includes("inverno") || text.includes("bobojaco") || text.includes("puffer") || text.includes("winter")) {
+          return [
+            { name: "Midnight Noir", hex: "#0F172A" },
+            { name: "Steel Grey", hex: "#475569" },
+            { name: "Deep Amethyst", hex: "#3B0764" }
+          ];
+        }
+        if (text.includes("pantai") || text.includes("liburan") || text.includes("summer")) {
+          return [
+            { name: "Sky Azure", hex: "#0284C7" },
+            { name: "Sand Beige", hex: "#D4A373" },
+            { name: "Crisp Linen", hex: "#FAEDCD" }
+          ];
+        }
+        return [
+          { name: "Royal Burgundy", hex: "#6D001A" },
+          { name: "Warm Cream", hex: "#FFF8E7" },
+          { name: "Onyx Noir", hex: "#1A1A1A" }
+        ];
+      }
+
+      function setModalActivePaletteColor(hex, name) {
+        const imgContainer = document.getElementById("modalImageContainer");
+        const modalBackdrop = document.getElementById("pinDetailModal");
+        const modalDialog = document.getElementById("modalDialogCard");
+        const nameEl = document.getElementById("modalActiveColorName");
+
+        if (nameEl) {
+          nameEl.textContent = name ? `${name} (${hex})` : hex;
+        }
+
+        // 1. Ubah background container foto busana sesuai palet warna
+        if (imgContainer) {
+          imgContainer.style.backgroundColor = hex;
+          imgContainer.style.backgroundImage = `radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.22) 0%, rgba(0, 0, 0, 0.3) 100%)`;
+        }
+
+        // 2. Berikan semburat ambient glow pada latar modal backdrop
+        if (modalBackdrop) {
+          modalBackdrop.style.background = `radial-gradient(circle at 50% 35%, ${hex}45 0%, rgba(13, 11, 12, 0.9) 100%)`;
+        }
+
+        // 3. Berikan aksen bayangan mewah pada kartu modal
+        if (modalDialog) {
+          modalDialog.style.boxShadow = `0 25px 60px -15px ${hex}66, 0 0 35px ${hex}30`;
+          modalDialog.style.borderColor = `${hex}55`;
+        }
+
+        // 4. Update status aktif tombol palet warna
+        const paletteContainer = document.getElementById("modalColorPalette");
+        if (paletteContainer) {
+          const swatches = paletteContainer.querySelectorAll(".palette-swatch-btn");
+          swatches.forEach((btn) => {
+            const btnHex = btn.getAttribute("data-hex");
+            if (btnHex && btnHex.toLowerCase() === hex.toLowerCase()) {
+              btn.classList.add("is-active");
+              btn.setAttribute("aria-selected", "true");
+            } else {
+              btn.classList.remove("is-active");
+              btn.setAttribute("aria-selected", "false");
+            }
+          });
+        }
       }
 
       // 7. PIN DETAIL MODAL
@@ -2702,16 +2879,39 @@
             : `Total: Rp ${pin.priceTotal.toLocaleString("id-ID")}`;
         }
 
-        if (paletteContainer && pin.colors) {
-          paletteContainer.innerHTML = pin.colors
+        // Ambil palet warna untuk kartu yang sedang ditekan
+        const colors = getPinColors(pin);
+        pin.colors = colors;
+
+        if (paletteContainer && colors && colors.length > 0) {
+          paletteContainer.innerHTML = colors
             .map(
-              (col) => `
-          <span class="w-4 h-4 rounded-full border border-black/10 inline-block" style="background-color: ${col.hex};" title="${col.name}"></span>
+              (col, idx) => `
+          <button
+            type="button"
+            class="palette-swatch-btn relative w-8 h-8 rounded-full border-2 border-white dark:border-stone-800 shadow-sm transition-all duration-200 flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 ${idx === 0 ? 'is-active' : ''}"
+            style="background-color: ${col.hex};"
+            data-hex="${col.hex}"
+            data-name="${col.name}"
+            title="${col.name} (${col.hex}) — Klik untuk ubah background"
+            aria-label="Pilih palet warna ${col.name}"
+            onclick="event.stopPropagation(); setModalActivePaletteColor('${col.hex}', '${col.name.replace(/'/g, "\\'")}')"
+          >
+            <span class="sr-only">${col.name}</span>
+          </button>
         `,
             )
             .join("");
+
+          // Langsung ubah background modal sesuai warna yang ada di palet warna kartu
+          setModalActivePaletteColor(colors[0].hex, colors[0].name);
         } else if (paletteContainer) {
           paletteContainer.innerHTML = "";
+          const imgContainer = document.getElementById("modalImageContainer");
+          if (imgContainer) {
+            imgContainer.style.backgroundColor = "#F5F2EA";
+            imgContainer.style.backgroundImage = "none";
+          }
         }
 
         if (modal) {
@@ -2724,7 +2924,18 @@
         const modal = document.getElementById("pinDetailModal");
         if (modal) {
           modal.classList.add("hidden");
+          modal.style.background = "";
           document.body.style.overflow = "";
+        }
+        const imgContainer = document.getElementById("modalImageContainer");
+        if (imgContainer) {
+          imgContainer.style.backgroundColor = "";
+          imgContainer.style.backgroundImage = "";
+        }
+        const modalDialog = document.getElementById("modalDialogCard");
+        if (modalDialog) {
+          modalDialog.style.boxShadow = "";
+          modalDialog.style.borderColor = "";
         }
       }
 

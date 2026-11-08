@@ -117,6 +117,7 @@
             flex-direction: column;
             overflow: hidden;
             position: relative;
+            transition: background 0.65s cubic-bezier(0.16, 1, 0.3, 1);
           }
 
           .nav-bar {
@@ -1184,7 +1185,7 @@
         </style>
       </helmet>
 
-      <div class="hero-wrap">
+      <div class="hero-wrap" style="{{heroWrapStyle}}">
         <!-- NAV -->
         <nav class="nav-bar">
           <div style="display: flex; align-items: center; gap: 10px">
@@ -1849,6 +1850,8 @@
             mode: 'Personality',
             activeFilter: 'Semua',
             selectedCard: 5,
+            selectedColorIdx: 0,
+            customBgHex: null,
             user: initialUser,
             userDropdownOpen: false
           };
@@ -2028,25 +2031,136 @@
           };
           const titles = titleMap[f] || titleMap['Semua'];
 
+          const CARD_PALETTES = {
+            1: {
+              name: 'Minimalist',
+              bg: '#F5EFE6',
+              bgDark: '#161413',
+              colors: [
+                { name: 'Warm Cream', hex: '#FFF8E7' },
+                { name: 'Oatmeal Taupe', hex: '#E2DAC8' },
+                { name: 'Muted Sand', hex: '#B8AD98' },
+                { name: 'Espresso Noir', hex: '#2A2421' }
+              ]
+            },
+            2: {
+              name: 'Smart Casual',
+              bg: '#EAF0F8',
+              bgDark: '#111722',
+              colors: [
+                { name: 'Oxford Navy', hex: '#1B2A4A' },
+                { name: 'Sky Slate', hex: '#94B4D8' },
+                { name: 'Camel Tan', hex: '#C19A6B' },
+                { name: 'Crisp White', hex: '#F8FAFC' }
+              ]
+            },
+            3: {
+              name: 'Classic Heritage',
+              bg: '#EFECE4',
+              bgDark: '#171612',
+              colors: [
+                { name: 'Olive Drab', hex: '#4B5320' },
+                { name: 'Warm Leather', hex: '#8B5A2B' },
+                { name: 'Vintage Khaki', hex: '#C3B091' },
+                { name: 'Dark Mahogany', hex: '#3E2723' }
+              ]
+            },
+            4: {
+              name: 'Urban Chic',
+              bg: '#EAECEF',
+              bgDark: '#131518',
+              colors: [
+                { name: 'Slate Charcoal', hex: '#2D3748' },
+                { name: 'Cool Grey', hex: '#718096' },
+                { name: 'Silver Mist', hex: '#CBD5E1' },
+                { name: 'Noir Black', hex: '#111827' }
+              ]
+            },
+            5: {
+              name: 'Featured Look',
+              bg: '#F9ECEF',
+              bgDark: '#1C0D12',
+              colors: [
+                { name: 'Royal Burgundy', hex: '#6D001A' },
+                { name: 'Velvet Crimson', hex: '#8A0A28' },
+                { name: 'Soft Rose Cream', hex: '#FFF0F3' },
+                { name: 'Champagne Gold', hex: '#E5A968' }
+              ]
+            },
+            6: {
+              name: 'Editorial Chic',
+              bg: '#ECECEC',
+              bgDark: '#121212',
+              colors: [
+                { name: 'High Fashion Black', hex: '#171717' },
+                { name: 'Bone Ivory', hex: '#F5F5F0' },
+                { name: 'Cashmere Grey', hex: '#71717A' },
+                { name: 'Smoky Ash', hex: '#3F3F46' }
+              ]
+            },
+            7: {
+              name: 'Artsy Bohemian',
+              bg: '#F7EDE4',
+              bgDark: '#1C130D',
+              colors: [
+                { name: 'Terracotta', hex: '#C86446' },
+                { name: 'Mustard Ochre', hex: '#D49B35' },
+                { name: 'Sage Green', hex: '#7A8B7B' },
+                { name: 'Warm Linen', hex: '#F7EDE2' }
+              ]
+            },
+            8: {
+              name: 'Modern Street',
+              bg: '#E8EFF5',
+              bgDark: '#0D141E',
+              colors: [
+                { name: 'Pitch Black', hex: '#0B0F19' },
+                { name: 'Industrial Slate', hex: '#334155' },
+                { name: 'Electric Cyan', hex: '#0284C7' },
+                { name: 'Concrete White', hex: '#F1F5F9' }
+              ]
+            },
+            9: {
+              name: 'Evening Glam',
+              bg: '#F0EAF8',
+              bgDark: '#140E20',
+              colors: [
+                { name: 'Midnight Violet', hex: '#1E1435' },
+                { name: 'Deep Amethyst', hex: '#4338CA' },
+                { name: 'Metallic Gold', hex: '#D4AF37' },
+                { name: 'Obsidian Noir', hex: '#0A0713' }
+              ]
+            }
+          };
+
+          const activePal = CARD_PALETTES[sel] || CARD_PALETTES[5];
+          const activeColorObj = activePal.colors[this.state.selectedColorIdx] || activePal.colors[0];
+          const activeColorHex = this.state.customBgHex || activeColorObj.hex;
+          const isDark = (typeof document !== 'undefined') && (document.documentElement.classList.contains('dark') || (localStorage.getItem('outfit_req_theme') === 'dark'));
+          const baseBg = isDark ? activePal.bgDark : activePal.bg;
+          const heroWrapStyle = `background: radial-gradient(850px circle at var(--cx) var(--cy), ${activeColorHex}35 0%, transparent 72%), ${baseBg}; transition: background 0.65s cubic-bezier(0.16, 1, 0.3, 1);`;
+
           // Fungsi pembuat style kartu gambar: berbingkai rapi dan interaktif saat dipilih
           const makeCardStyle = (idx, w, h, z, isLast) => {
             const isSelected = sel === idx;
             const bg = isSelected ? 'var(--bg2)' : 'var(--bg)';
             const border = isSelected
-              ? '2.5px solid var(--burgundy)'
+              ? `2.5px solid ${activeColorHex}`
               : '1px solid var(--line)';
             const shadow = isSelected
-              ? '0 20px 42px rgba(109, 0, 26, 0.48), 0 0 22px rgba(109, 0, 26, 0.32)'
+              ? `0 20px 42px ${activeColorHex}66, 0 0 25px ${activeColorHex}44`
               : '0 4px 16px rgba(0, 0, 0, 0.12)';
             const mr = isLast ? '0px' : '-16px';
             const zIdx = isSelected ? 50 : z;
 
-            return `width:${w}px; height:${h}px; margin-right:${mr}; z-index:${zIdx}; border:${border}; box-shadow:${shadow}; padding:0; background:${bg}; border-radius:12px; overflow:hidden;`;
+            return `width:${w}px; height:${h}px; margin-right:${mr}; z-index:${zIdx}; border:${border}; box-shadow:${shadow}; padding:0; background:${bg}; border-radius:12px; overflow:hidden; transition: all 0.3s ease;`;
           };
 
           const makeClass = (idx) => `card-item card-${idx}${sel === idx ? ' is-selected' : ''}`;
 
           return {
+            heroWrapStyle: heroWrapStyle,
+
             isLoggedIn: isUserLoggedIn,
             isPremium: isPremiumUser,
             userName: userName,
@@ -2091,42 +2205,42 @@
 
             card1Class: makeClass(1),
             card1Style: makeCardStyle(1, 104, 258, 1, false),
-            selectCard1: () => this.setState({ selectedCard: 1 }),
+            selectCard1: () => this.setState({ selectedCard: 1, selectedColorIdx: 0, customBgHex: null }),
 
             card2Class: makeClass(2),
             card2Style: makeCardStyle(2, 110, 276, 2, false),
-            selectCard2: () => this.setState({ selectedCard: 2 }),
+            selectCard2: () => this.setState({ selectedCard: 2, selectedColorIdx: 0, customBgHex: null }),
 
             card3Class: makeClass(3),
             card3Style: makeCardStyle(3, 116, 296, 3, false),
-            selectCard3: () => this.setState({ selectedCard: 3 }),
+            selectCard3: () => this.setState({ selectedCard: 3, selectedColorIdx: 0, customBgHex: null }),
 
             card4Class: makeClass(4),
             card4Style: makeCardStyle(4, 120, 310, 4, false),
-            selectCard4: () => this.setState({ selectedCard: 4 }),
+            selectCard4: () => this.setState({ selectedCard: 4, selectedColorIdx: 0, customBgHex: null }),
 
             card5Class: makeClass(5),
             card5Style: makeCardStyle(5, 168, 338, 5, false),
-            selectCard5: () => this.setState({ selectedCard: 5 }),
+            selectCard5: () => this.setState({ selectedCard: 5, selectedColorIdx: 0, customBgHex: null }),
 
             card6Class: makeClass(6),
             card6Style: makeCardStyle(6, 120, 310, 4, false),
-            selectCard6: () => this.setState({ selectedCard: 6 }),
+            selectCard6: () => this.setState({ selectedCard: 6, selectedColorIdx: 0, customBgHex: null }),
 
             card7Class: makeClass(7),
             card7Style: makeCardStyle(7, 116, 296, 3, false),
-            selectCard7: () => this.setState({ selectedCard: 7 }),
+            selectCard7: () => this.setState({ selectedCard: 7, selectedColorIdx: 0, customBgHex: null }),
 
             card8Class: makeClass(8),
             card8Style: makeCardStyle(8, 110, 276, 2, false),
-            selectCard8: () => this.setState({ selectedCard: 8 }),
+            selectCard8: () => this.setState({ selectedCard: 8, selectedColorIdx: 0, customBgHex: null }),
 
             card9Class: makeClass(9),
             card9Style: makeCardStyle(9, 104, 258, 1, true),
-            selectCard9: () => this.setState({ selectedCard: 9 }),
+            selectCard9: () => this.setState({ selectedCard: 9, selectedColorIdx: 0, customBgHex: null }),
 
-            selectPersonality: () => this.setState({ mode: 'Personality', selectedCard: 5 }),
-            selectRekomendasi: () => this.setState({ mode: 'Rekomendasi', selectedCard: 3 })
+            selectPersonality: () => this.setState({ mode: 'Personality', selectedCard: 5, selectedColorIdx: 0, customBgHex: null }),
+            selectRekomendasi: () => this.setState({ mode: 'Rekomendasi', selectedCard: 3, selectedColorIdx: 0, customBgHex: null })
           };
         }
       }
