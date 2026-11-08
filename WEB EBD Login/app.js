@@ -215,8 +215,8 @@ class App {
 
       // Check URL params: if mode=login, mode=signup, mode=register, #login, #signup
       const urlParams = new URLSearchParams(window.location.search);
-      const isSignUpMode = urlParams.get('mode') === 'signup' || urlParams.get('mode') === 'register' || window.location.hash === '#signup' || window.location.hash === '#register';
-      const isLoginMode = urlParams.get('mode') === 'login' || window.location.hash === '#login';
+      const isSignUpMode = urlParams.get('mode') === 'signup' || urlParams.get('mode') === 'register' || urlParams.get('mode') === 'daftar' || window.location.hash === '#signup' || window.location.hash === '#register' || window.location.hash === '#daftar';
+      const isLoginMode = urlParams.get('mode') === 'login' || urlParams.get('mode') === 'masuk' || window.location.hash === '#login' || window.location.hash === '#masuk';
 
       if (isSignUpMode) {
         this._activateSignUpSlider();
@@ -518,6 +518,10 @@ class App {
         signUpInner.scrollTop = 0;
       }
     }
+    const mobileTabs = document.getElementById('mobileSliderTabs');
+    if (mobileTabs) {
+      mobileTabs.classList.add('active-signup');
+    }
     if (this.mobileTabSignUp) {
       this.mobileTabSignUp.classList.add('active');
       this.mobileTabSignUp.setAttribute('aria-selected', 'true');
@@ -530,10 +534,10 @@ class App {
     setTimeout(() => {
       const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window);
       const nameInput = document.getElementById('createName');
-      if (nameInput && !isMobile && this.loginCard.classList.contains('visible')) {
+      if (nameInput && !isMobile && this.loginCard && this.loginCard.classList.contains('visible') && this.doubleSliderContainer?.classList.contains('right-panel-active')) {
         nameInput.focus();
       }
-    }, 280);
+    }, 720);
   }
 
   _activateSignInSlider() {
@@ -543,6 +547,10 @@ class App {
       if (signInInner) {
         signInInner.scrollTop = 0;
       }
+    }
+    const mobileTabs = document.getElementById('mobileSliderTabs');
+    if (mobileTabs) {
+      mobileTabs.classList.remove('active-signup');
     }
     if (this.mobileTabSignIn) {
       this.mobileTabSignIn.classList.add('active');
@@ -556,10 +564,10 @@ class App {
     setTimeout(() => {
       const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window);
       const emailInput = document.getElementById('email');
-      if (emailInput && !isMobile && this.loginCard.classList.contains('visible')) {
+      if (emailInput && !isMobile && this.loginCard && this.loginCard.classList.contains('visible') && !this.doubleSliderContainer?.classList.contains('right-panel-active')) {
         emailInput.focus();
       }
-    }, 280);
+    }, 720);
   }
 
   _showVerifiedSuccessCard() {

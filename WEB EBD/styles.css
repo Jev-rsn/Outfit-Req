@@ -586,6 +586,7 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
   min-height: 530px;
   overflow: hidden;
   background: var(--white);
+  will-change: transform;
 }
 
 /* Form Containers */
@@ -593,8 +594,11 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
   position: absolute;
   top: 0;
   height: 100%;
-  transition: all 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+  width: 50%;
   background: var(--white);
+  will-change: transform, opacity;
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1),
+              opacity 0.6s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .form-content-inner {
@@ -605,6 +609,7 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Sign In Container */
@@ -613,12 +618,14 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
   width: 50%;
   z-index: 2;
   opacity: 1;
+  transform: translateX(0);
   pointer-events: auto;
 }
 .double-slider-container.right-panel-active .sign-in-container {
   transform: translateX(100%);
   opacity: 0;
   pointer-events: none;
+  z-index: 1;
 }
 
 /* Sign Up Container */
@@ -627,6 +634,7 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
   width: 50%;
   opacity: 0;
   z-index: 1;
+  transform: translateX(0);
   pointer-events: none;
 }
 .double-slider-container.right-panel-active .sign-up-container {
@@ -634,7 +642,7 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
   opacity: 1;
   z-index: 5;
   pointer-events: auto;
-  animation: showSignUpPanel 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+  animation: showSignUpPanel 0.7s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 @keyframes showSignUpPanel {
@@ -656,8 +664,9 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
   width: 50%;
   height: 100%;
   overflow: hidden;
-  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
   z-index: 100;
+  will-change: transform;
 }
 .double-slider-container.right-panel-active .overlay-container {
   transform: translateX(-100%);
@@ -672,7 +681,11 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
   height: 100%;
   width: 200%;
   transform: translateX(0);
-  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform;
+}
+html.dark .overlay, [data-theme="dark"] .overlay {
+  background: linear-gradient(145deg, #2A040E 0%, #4D0A1C 45%, #73132B 100%);
 }
 .overlay::before {
   content: '';
@@ -699,24 +712,34 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
   top: 0;
   height: 100%;
   width: 50%;
-  transform: translateX(0);
-  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
   box-sizing: border-box;
+  will-change: transform, opacity;
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1),
+              opacity 0.6s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .overlay-left {
+  left: 0;
   transform: translateX(-20%);
+  opacity: 0;
+  pointer-events: none;
 }
 .double-slider-container.right-panel-active .overlay-left {
   transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .overlay-right {
   right: 0;
   transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 .double-slider-container.right-panel-active .overlay-right {
   transform: translateX(20%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .overlay-brand-icon {
@@ -1563,7 +1586,7 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
     width: 100%;
     max-width: 100%;
     border-radius: 22px 22px 0 0;
-    max-height: 88dvh;
+    max-height: 90dvh;
     margin: 0;
     border-left: none;
     border-right: none;
@@ -1586,57 +1609,104 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
     border-radius: 999px;
     background: rgba(109, 0, 26, 0.18);
     margin: 10px auto 4px;
+    flex-shrink: 0;
+  }
+  html.dark .double-slider-wrapper::before, [data-theme="dark"] .double-slider-wrapper::before {
+    background: rgba(247, 243, 238, 0.22);
   }
 
   .double-slider-wrapper .login-card-top-nav {
-    padding: 0.6rem 1.2rem;
+    padding: 0.6rem 1.1rem;
+    flex-shrink: 0;
   }
 
+  /* Segmented Toggle Tabs Mobile with Sliding Pill */
   .mobile-slider-tabs {
+    position: relative;
     display: flex;
     background: var(--input-bg);
     border: 1px solid var(--line);
     border-radius: 999px;
     padding: 3px;
-    gap: 3px;
+    gap: 0;
+    isolation: isolate;
   }
+  .mobile-slider-tabs::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    left: 3px;
+    width: calc(50% - 3px);
+    background: var(--burgundy);
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(109, 0, 26, 0.25);
+    transition: transform 0.65s cubic-bezier(0.65, 0, 0.35, 1);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .mobile-slider-tabs.active-signup::before {
+    transform: translateX(100%);
+  }
+
   .mobile-tab-btn {
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    background: transparent !important;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--ink-dim);
+    padding: 6px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 0.35s ease;
+    text-align: center;
+    box-shadow: none !important;
+  }
+  .mobile-tab-btn.active {
+    color: var(--on-accent) !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
   .overlay-container {
     display: none !important;
   }
 
-  /* Viewport slider vertikal mobile (Animasi dari Atas ke Bawah) */
+  /* Viewport slider horizontal mobile (Animasi Horizontal Mulus) */
   .double-slider-container {
     position: relative;
     width: 100%;
-    height: clamp(500px, 76dvh, 620px);
-    min-height: 500px;
+    height: clamp(480px, 75dvh, 580px);
+    min-height: 480px;
     overflow: hidden;
     background: var(--white);
+    flex: 1;
   }
 
-  /* Form container: bertumpuk absolut dengan transisi vertikal halus */
+  /* Form container: full width, horizontal slide with cubic-bezier & opacity crossfade */
   .form-container {
     position: absolute;
     top: 0;
     left: 0 !important;
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     display: block !important;
     background: var(--white);
     box-sizing: border-box;
     will-change: transform, opacity;
-    transition: transform 0.52s cubic-bezier(0.76, 0, 0.24, 1),
-                opacity 0.45s cubic-bezier(0.76, 0, 0.24, 1),
-                visibility 0.52s ease;
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1),
+                opacity 0.55s cubic-bezier(0.65, 0, 0.35, 1),
+                visibility 0.7s;
   }
 
-  /* Keadaan Default: Form Masuk aktif di viewport, Form Daftar di atas (translateY -100%) */
+  /* Keadaan Default: Form Masuk aktif di viewport, Form Daftar di kanan (translateX 100%) */
   .sign-in-container {
-    transform: translateY(0) !important;
+    transform: translateX(0) !important;
     opacity: 1 !important;
     z-index: 2;
     pointer-events: auto !important;
@@ -1644,7 +1714,7 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
   }
 
   .sign-up-container {
-    transform: translateY(-100%) !important;
+    transform: translateX(100%) !important;
     opacity: 0 !important;
     z-index: 1;
     pointer-events: none !important;
@@ -1653,10 +1723,10 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
   }
 
   /* Keadaan Aktif Sign Up (.right-panel-active):
-     - Form Masuk meluncur ke bawah (dari atas ke bawah: translateY 0 -> 100%)
-     - Form Daftar meluncur masuk dari atas ke viewport (dari atas ke bawah: translateY -100% -> 0) */
+     - Form Masuk meluncur halus ke kiri (translateX -100%)
+     - Form Daftar meluncur halus masuk dari kanan ke viewport (translateX 0) */
   .double-slider-container.right-panel-active .sign-in-container {
-    transform: translateY(100%) !important;
+    transform: translateX(-100%) !important;
     opacity: 0 !important;
     z-index: 1;
     pointer-events: none !important;
@@ -1664,7 +1734,7 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
   }
 
   .double-slider-container.right-panel-active .sign-up-container {
-    transform: translateY(0) !important;
+    transform: translateX(0) !important;
     opacity: 1 !important;
     z-index: 5;
     pointer-events: auto !important;
@@ -1677,6 +1747,7 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
     height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -1798,6 +1869,13 @@ html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
   .login-card-inner {
     max-height: 94dvh;
     padding-top: 0.6rem;
+  }
+  .double-slider-wrapper {
+    max-height: 96dvh;
+  }
+  .double-slider-container {
+    height: clamp(380px, 78dvh, 520px);
+    min-height: 380px;
   }
 }
 
