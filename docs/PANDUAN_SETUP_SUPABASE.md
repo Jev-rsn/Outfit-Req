@@ -100,7 +100,7 @@ Simpan file (`Ctrl + S`).
 
 Aplikasi web ini menggunakan standar browser modern ES Modules (`type="module"`), sehingga paling optimal dijalankan melalui local web server:
 
-1. Buka terminal PowerShell di folder workspace Anda (`c:\Users\Jeverson\OneDrive\Documents\Semester 5\EBD`).
+1. Buka terminal PowerShell di folder root workspace proyek Anda.
 2. Jalankan server lokal:
    ```powershell
    python server.py

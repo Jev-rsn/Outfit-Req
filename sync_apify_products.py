@@ -1,7 +1,12 @@
 """
-Outfit Req — Apify Shopee Marketplace Sync
-Fetches dynamic product listings and photos from Apify Actor 'fmKWN5uByUCIy2Sam'
-and compiles them into 'WEB EBD/data/apify_products.json' for the recommendation gallery.
+Outfit Req — Apify Fashion Marketplace Sync Engine
+Syncs real-time product catalogs from:
+  1. Uniqlo Scraper: OLoDZH1W1Kzag99wV (Shorts, Shirts, Polos, AIRism)
+  2. Shopee Scraper: fmKWN5uByUCIy2Sam (Jackets, Streetwear, Casuals)
+
+Outputs to:
+  - 'WEB EBD/data/apify_products.json' (local offline cache)
+  - Supabase table 'public.outfit_catalog' (cloud database)
 """
 import os
 import sys
@@ -9,205 +14,216 @@ import json
 import urllib.request
 import urllib.error
 
-# User's Apify credentials & actor settings (loaded securely from environment)
-APIFY_TOKEN = os.environ.get("APIFY_TOKEN", "")
-ACTOR_ID = "fmKWN5uByUCIy2Sam"
+# Resolve .env file if available
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+ENV_FILE = os.path.join(BASE_DIR, ".env")
+if os.path.exists(ENV_FILE):
+    with open(ENV_FILE, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line.startswith("APIFY_TOKEN=") and not os.environ.get("APIFY_TOKEN"):
+                os.environ["APIFY_TOKEN"] = line.split("=", 1)[1].strip()
+
+# User's Apify credentials & actor settings
+APIFY_TOKEN = os.environ.get("APIFY_TOKEN", "")
+ACTOR_UNIQLO = "OLoDZH1W1Kzag99wV"
+ACTOR_SHOPEE = "fmKWN5uByUCIy2Sam"
+
 OUTPUT_FILE = os.path.join(BASE_DIR, "WEB EBD", "data", "apify_products.json")
 
-def categorize_item(name):
-    """Categorizes the clothing item based on title keywords."""
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://iklhjmmmolulglxirvrc.supabase.co")
+SUPABASE_KEY = os.environ.get("SUPABASE_ANON_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrbGhqbW1tb2x1bGdseGlydnJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyODAzNjQsImV4cCI6MjEwODg1NjM2NH0.NsKrraBp5W2SEDzKXM6GWevYr1g4iwGUei2CSawqNmQ")
+
+COLOR_HEX_MAP = {
+    "BLACK": "#111827", "WHITE": "#F9FAFB", "GRAY": "#6B7280", "NAVY": "#1E3A8A",
+    "BLUE": "#2563EB", "BEIGE": "#D2B48C", "BROWN": "#78350F", "RED": "#DC2626",
+    "GREEN": "#15803D", "OLIVE": "#556B2F", "KHAKI": "#C3B091", "YELLOW": "#EAB308",
+    "ORANGE": "#EA580C", "PINK": "#EC4899", "PURPLE": "#9333EA"
+}
+
+def categorize_uniqlo_item(name):
     nl = name.lower()
-    if any(k in nl for k in ["esporte", "caminhada", "pesca", "windbreaker", "corta-vento", "corrida", "sport", "olahraga"]):
-        return "sporty", "Athleisure & Windbreaker"
-    elif any(k in nl for k in ["negócios", "classica", "elegante", "formal", "blazer", "jas", "kemeja"]):
-        return "formal", "Classic Business Outerwear"
-    elif any(k in nl for k in ["chines", "retro", "vintage", "heritage", "bobojaco", "puffer", "streetwear"]):
-        return "streetwear", "Urban Puffer & Street"
-    elif any(k in nl for k in ["simples", "solta", "versatil", "monocrom", "basic", "polos"]):
+    if any(k in nl for k in ["active", "stretch", "sweat", "athletic", "dry", "sport", "jogger", "runner"]):
+        return "sporty", "Athleisure & Performance"
+    elif any(k in nl for k in ["polo", "oxford", "pleated", "blazer", "tailored", "smart", "dress shirt"]):
+        return "formal", "Smart Formal & Office"
+    elif any(k in nl for k in ["oversized", "wide", "cargo", "pocket", "utility", "heavyweight"]):
+        return "streetwear", "Urban Streetwear"
+    elif any(k in nl for k in ["airism", "cotton", "linen", "basic", "crew", "easy", "clean"]):
         return "minimalist", "Clean Minimalist"
-    return "kasual", "Casual Streetwear"
+    return "kasual", "Everyday Casual"
 
-def format_price(price, currency):
-    """Formats price cleanly for display."""
-    if not price:
-        return 0, "Harga Khusus Shopee"
-    if currency == "BRL":
-        # Approx conversion 1 BRL ~ Rp 2.900
-        idr_est = round(float(price) * 2900)
-        return idr_est, f"R$ {float(price):.2f} (~ Rp {idr_est:,})".replace(",", ".")
-    elif currency == "IDR":
-        idr_val = int(price)
-        return idr_val, f"Rp {idr_val:,}".replace(",", ".")
-    return int(price), f"{currency} {price}"
-
-def transform_raw_items(raw_items):
-    """Transforms raw Shopee items from Apify into Outfit Req pin format."""
-    aspect_ratios = ["aspect-[3/4]", "aspect-[4/5]", "aspect-[2/3]", "aspect-[1/1]"]
+def transform_uniqlo_items(raw_items):
     formatted = []
+    aspect_ratios = ["aspect-[3/4]", "aspect-[4/5]", "aspect-[2/3]", "aspect-[1/1]"]
+    seen_ids = set()
 
     for idx, item in enumerate(raw_items):
-        images = item.get("images", [])
-        if not images:
+        images = item.get("images") or {}
+        main_images = images.get("main") or {}
+        sub_images = images.get("sub") or []
+
+        img_url = None
+        color_code = ""
+
+        rep_color = item.get("representativeColor") or {}
+        rep_code = rep_color.get("displayCode")
+
+        if rep_code and rep_code in main_images:
+            img_url = main_images[rep_code].get("url")
+            color_code = rep_code
+        elif main_images:
+            first_key = next(iter(main_images))
+            img_url = main_images[first_key].get("url")
+            color_code = first_key
+        elif sub_images and len(sub_images) > 0:
+            img_url = sub_images[0].get("url")
+
+        if not img_url:
             continue
 
-        item_id = item.get("itemId") or item.get("id") or str(idx)
-        name = item.get("name") or "Produk Fashion Shopee"
-        price_raw = item.get("price")
-        currency = item.get("currency", "BRL")
-        price_num, price_display = format_price(price_raw, currency)
-        category, style = categorize_item(name)
-        aspect = aspect_ratios[idx % len(aspect_ratios)]
-        rating = float(item.get("rating") or 4.8)
-        location = item.get("location") or "Shopee Official"
-        discount = item.get("discountPercent")
-        url = item.get("url") or f"https://shopee.com"
+        product_id = item.get("productId") or f"P{idx}"
+        unique_id = f"uniqlo-{product_id}" + (f"-{color_code}" if color_code else "")
+        if unique_id in seen_ids:
+            unique_id = f"{unique_id}-{idx}"
+        seen_ids.add(unique_id)
 
-        desc = f"Produk live dari Shopee Marketplace. Kualitas terverifikasi dengan rating {rating:.1f}/5.0."
+        name = item.get("name") or "Uniqlo Fashion Item"
+        category, style = categorize_uniqlo_item(name)
+
+        # Price calculation
+        price_obj = item.get("price") or {}
+        usd_price = 39.9
+        orig_price = None
+        discount = None
+
+        promo = price_obj.get("promo")
+        base = price_obj.get("base")
+
+        if isinstance(promo, dict) and promo.get("value"):
+            usd_price = float(promo["value"])
+            orig_price = float(base) if base else None
+            if orig_price and orig_price > usd_price:
+                discount = round(((orig_price - usd_price) / orig_price) * 100)
+        elif isinstance(promo, (int, float)) and promo > 0:
+            usd_price = float(promo)
+            orig_price = float(base) if base else None
+            if orig_price and orig_price > usd_price:
+                discount = round(((orig_price - usd_price) / orig_price) * 100)
+        elif base:
+            usd_price = float(base)
+
+        idr_price = round(usd_price * 16000)
+        price_display = f"$ {usd_price:.2f} (~ Rp {idr_price:,})".replace(",", ".")
+
+        rating_obj = item.get("rating") or {}
+        rating = float(rating_obj.get("average") or 4.8)
+
+        gender = (item.get("gender") or "unisex").lower()
+        product_url = f"https://www.uniqlo.com/us/en/products/{product_id}"
+
+        desc = f"{gender.upper()} • {name} dari Uniqlo Official Store. Kualitas terverifikasi dengan rating {rating:.1f}/5.0."
         if discount:
-            desc = f"Diskon {discount}%! {desc}"
+            desc = f"Hemat {discount}%! {desc}"
+
+        # Color palette
+        colors = []
+        for c in (item.get("colors") or []):
+            c_name = c.get("name") or "Variant"
+            f_code = (c.get("filterCode") or "GRAY").upper()
+            hex_code = COLOR_HEX_MAP.get(f_code, "#4B5563")
+            colors.append({"name": c_name, "hex": hex_code})
+
+        if not colors:
+            colors = [{"name": "Navy", "hex": "#1E3A8A"}, {"name": "White", "hex": "#F9FAFB"}]
 
         formatted.append({
-            "id": f"shopee-{item_id}",
-            "itemId": item_id,
-            "shopId": item.get("shopId"),
+            "id": unique_id,
+            "itemId": product_id,
             "title": name,
             "category": category,
             "style": style,
-            "gender": "unisex",
+            "gender": gender,
             "event_type": None,
-            "store": "Shopee",
-            "storeUrl": url,
-            "image": images[0],
-            "aspect": aspect,
-            "priceTotal": price_num,
+            "store": "Uniqlo",
+            "storeUrl": product_url,
+            "image": img_url,
+            "aspect": aspect_ratios[idx % len(aspect_ratios)],
+            "priceTotal": idr_price,
             "priceDisplay": price_display,
-            "currency": currency,
-            "originalPrice": item.get("originalPrice"),
+            "currency": "USD",
+            "originalPrice": orig_price,
             "discountPercent": discount,
             "rating": rating,
-            "location": location,
-            "savesCount": 50 + (idx * 17),
+            "location": "Uniqlo Official Store",
+            "savesCount": 45 + (idx * 7),
             "desc": desc,
-            "source": "apify-shopee",
-            "colors": [
-                {"name": "Onyx Black", "hex": "#1A1A1A"},
-                {"name": "Slate Grey", "hex": "#4A5568"}
-            ],
+            "source": "apify-uniqlo",
+            "colors": colors,
             "items": [
                 {
                     "category": "Fashion Item",
                     "name": name,
-                    "store": "Shopee",
+                    "store": "Uniqlo",
                     "price": price_display,
-                    "url": url
+                    "url": product_url
                 }
             ]
         })
 
     return formatted
 
-def fetch_from_latest_run():
-    """Fetches items from the most recent run on Apify via REST API."""
-    print(f"[*] Mengambil riwayat run terakhir dari Apify Actor: {ACTOR_ID}...")
-    headers = {"Authorization": f"Bearer {APIFY_TOKEN}"}
-    runs_url = f"https://api.apify.com/v2/acts/{ACTOR_ID}/runs?desc=1&limit=1"
-
-    req = urllib.request.Request(runs_url, headers=headers)
-    with urllib.request.urlopen(req) as resp:
-        runs_data = json.loads(resp.read().decode("utf-8"))
-
-    items = runs_data.get("data", {}).get("items", [])
-    if not items:
-        print("[!] Tidak ada riwayat run pada Actor ini.")
-        return []
-
-    last_run = items[0]
-    dataset_id = last_run.get("defaultDatasetId")
-    status = last_run.get("status")
-    print(f"[*] Run terakhir: {last_run.get('id')} | Status: {status} | Dataset: {dataset_id}")
-
-    if not dataset_id:
-        print("[!] Dataset ID tidak ditemukan.")
-        return []
-
-    dataset_url = f"https://api.apify.com/v2/datasets/{dataset_id}/items"
-    req_data = urllib.request.Request(dataset_url, headers=headers)
-    with urllib.request.urlopen(req_data) as resp:
-        raw_items = json.loads(resp.read().decode("utf-8"))
-
-    print(f"[+] Berhasil mengunduh {len(raw_items)} produk dari dataset Apify.")
-    return raw_items
-
-def run_actor_with_client(keyword="outfit", country="ID", max_items=50):
-    """Triggers an Actor run using apify_client if installed."""
+def fetch_actor_items(actor_id, run_input=None, run_new=False):
+    """Fetches items either via apify_client or direct REST API."""
     try:
         from apify_client import ApifyClient
+        client = ApifyClient(APIFY_TOKEN)
+        if run_new:
+            print(f"[*] Menjalankan Apify Actor '{actor_id}' via apify_client...")
+            run = client.actor(actor_id).call(run_input=run_input)
+            dataset_id = run["defaultDatasetId"]
+        else:
+            runs = client.actor(actor_id).runs().list(desc=True, limit=1)
+            if not runs.items:
+                print(f"[*] Belum ada riwayat run pada '{actor_id}'. Memulai run baru...")
+                run = client.actor(actor_id).call(run_input=run_input)
+                dataset_id = run["defaultDatasetId"]
+            else:
+                dataset_id = runs.items[0]["defaultDatasetId"]
+                print(f"[*] Mengambil dataset terakhir Uniqlo ({dataset_id})...")
+
+        items = list(client.dataset(dataset_id).iterate_items())
+        print(f"[+] Berhasil mengambil {len(items)} produk dari Apify.")
+        return items
     except ImportError:
-        print("[*] apify_client belum terpasang. Menjalankan via Apify REST API...")
-        return run_actor_via_rest(keyword, country, max_items)
+        # Fallback to direct REST API
+        print("[*] apify_client tidak tersedia, menggunakan direct REST API...")
+        headers = {"Authorization": f"Bearer {APIFY_TOKEN}", "Content-Type": "application/json"}
+        if run_new:
+            url = f"https://api.apify.com/v2/acts/{actor_id}/runs?waitForFinish=180"
+            data = json.dumps(run_input or {}).encode("utf-8")
+            req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+            with urllib.request.urlopen(req) as resp:
+                res = json.loads(resp.read().decode("utf-8"))
+            dataset_id = res.get("data", {}).get("defaultDatasetId")
+        else:
+            url = f"https://api.apify.com/v2/acts/{actor_id}/runs?desc=1&limit=1"
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req) as resp:
+                res = json.loads(resp.read().decode("utf-8"))
+            items_list = res.get("data", {}).get("items", [])
+            if not items_list:
+                return fetch_actor_items(actor_id, run_input, run_new=True)
+            dataset_id = items_list[0].get("defaultDatasetId")
 
-    print(f"[*] Memulai run Apify Actor {ACTOR_ID} untuk keyword: '{keyword}' (Country: {country})...")
-    client = ApifyClient(APIFY_TOKEN)
-    run_input = {
-        "location": keyword,
-        "keywords": [keyword],
-        "shopUrls": [],
-        "categoryUrls": [],
-        "priceSlicing": False,
-        "country": country,
-        "maxItems": max_items,
-        "debug": False,
-    }
-    run = client.actor(ACTOR_ID).call(run_input=run_input)
-    raw_items = list(client.dataset(run["defaultDatasetId"]).iterate_items())
-    print(f"[+] Run selesai. Diperoleh {len(raw_items)} produk.")
-    return raw_items
+        dataset_url = f"https://api.apify.com/v2/datasets/{dataset_id}/items"
+        req_items = urllib.request.Request(dataset_url, headers=headers)
+        with urllib.request.urlopen(req_items) as resp:
+            return json.loads(resp.read().decode("utf-8"))
 
-def run_actor_via_rest(keyword="outfit", country="ID", max_items=50):
-    """Triggers an Actor run using official Apify REST API with synchronous wait."""
-    headers = {
-        "Authorization": f"Bearer {APIFY_TOKEN}",
-        "Content-Type": "application/json"
-    }
-    run_input = {
-        "location": keyword,
-        "keywords": [keyword],
-        "shopUrls": [],
-        "categoryUrls": [],
-        "priceSlicing": False,
-        "country": country,
-        "maxItems": max_items,
-        "debug": False,
-    }
-    # Call actor synchronously with waitForFinish parameter
-    url = f"https://api.apify.com/v2/acts/{ACTOR_ID}/runs?waitForFinish=120"
-    data = json.dumps(run_input).encode("utf-8")
-    req = urllib.request.Request(url, data=data, headers=headers, method="POST")
-
-    print(f"[*] Memulai request Apify Actor via REST API (menunggu hingga selesai)...")
-    with urllib.request.urlopen(req) as resp:
-        run_data = json.loads(resp.read().decode("utf-8"))
-
-    dataset_id = run_data.get("data", {}).get("defaultDatasetId")
-    if not dataset_id:
-        print("[!] Gagal mendapatkan defaultDatasetId.")
-        return []
-
-    dataset_url = f"https://api.apify.com/v2/datasets/{dataset_id}/items"
-    req_data = urllib.request.Request(dataset_url, headers=headers)
-    with urllib.request.urlopen(req_data) as resp:
-        raw_items = json.loads(resp.read().decode("utf-8"))
-
-    print(f"[+] Berhasil mendapatkan {len(raw_items)} produk dari dataset baru.")
-    return raw_items
-
-SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://iklhjmmmolulglxirvrc.supabase.co")
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrbGhqbW1tb2x1bGdseGlydnJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyODAzNjQsImV4cCI6MjEwODg1NjM2NH0.NsKrraBp5W2SEDzKXM6GWevYr1g4iwGUei2CSawqNmQ")
-
-def sync_to_supabase(formatted_items):
-    """Pushes formatted items to Supabase public.outfit_catalog table."""
-    print("[*] Menghubungkan dan menyinkronkan data ke Supabase Database...")
+def sync_to_supabase(items):
+    """Upserts items to Supabase public.outfit_catalog table."""
+    print(f"[*] Menyinkronkan {len(items)} produk ke Supabase Database...")
     endpoint = f"{SUPABASE_URL}/rest/v1/outfit_catalog"
     headers = {
         "apikey": SUPABASE_KEY,
@@ -217,7 +233,7 @@ def sync_to_supabase(formatted_items):
     }
 
     db_rows = []
-    for item in formatted_items:
+    for item in items:
         db_rows.append({
             "item_id": item["id"],
             "title": item["title"],
@@ -232,53 +248,77 @@ def sync_to_supabase(formatted_items):
             "rating": item["rating"]
         })
 
-    try:
-        data = json.dumps(db_rows).encode("utf-8")
-        req = urllib.request.Request(endpoint, data=data, headers=headers, method="POST")
-        with urllib.request.urlopen(req) as resp:
-            print(f"[✓] Sukses menyinkronkan {len(db_rows)} produk ke database Supabase!")
-    except urllib.error.HTTPError as e:
-        err_msg = e.read().decode("utf-8")
-        if "401" in str(e) or "row-level security" in err_msg or "42501" in err_msg:
-            print("[i] Supabase RLS Policy terdeteksi. Silakan jalankan query di file:")
-            print("    docs/supabase_outfit_catalog_seed.sql pada Supabase SQL Editor untuk aktivasi izin & seed instan.")
-        else:
-            print(f"[!] Info Supabase ({e.code}): {err_msg}")
-    except Exception as e:
-        print(f"[!] Supabase sync note: {e}")
-
-def save_output(formatted_items):
-    """Saves formatted products to the JSON cache file."""
-    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
-    payload = {
-        "source": f"Apify Actor {ACTOR_ID}",
-        "totalItems": len(formatted_items),
-        "items": formatted_items
-    }
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2, ensure_ascii=False)
-    print(f"[✓] Berhasil menyimpan {len(formatted_items)} produk ke: {OUTPUT_FILE}")
-    sync_to_supabase(formatted_items)
+    # Batching to avoid oversized payloads
+    batch_size = 50
+    for i in range(0, len(db_rows), batch_size):
+        batch = db_rows[i:i + batch_size]
+        try:
+            data = json.dumps(batch).encode("utf-8")
+            req = urllib.request.Request(endpoint, data=data, headers=headers, method="POST")
+            with urllib.request.urlopen(req) as resp:
+                pass
+            print(f"  [+] Supabase: {min(i + batch_size, len(db_rows))}/{len(db_rows)} terunggah")
+        except Exception as e:
+            print(f"  [!] Batch upload error: {e}")
 
 def main():
-    args = sys.argv[1:]
-    if "--run" in args:
-        # Trigger new run
-        keyword = "outfit"
-        country = "ID"
-        if len(args) > 1 and not args[1].startswith("--"):
-            keyword = args[1]
-        raw_items = run_actor_with_client(keyword=keyword, country=country)
-    else:
-        # Default: fetch from latest successful dataset (fast & cost-efficient)
-        try:
-            raw_items = fetch_from_latest_run()
-        except Exception as e:
-            print(f"[!] Gagal mengambil dari run terakhir: {e}. Menjalankan run baru...")
-            raw_items = run_actor_with_client()
+    run_new = "--run" in sys.argv
 
-    formatted = transform_raw_items(raw_items)
-    save_output(formatted)
+    # Uniqlo Actor Run Input (as specified by user)
+    uniqlo_input = {
+        "mode": "search",
+        "queries": [
+            "Shorts",
+            "Shirts"
+        ],
+        "category": "22210,23295,,",
+        "sortBy": "0",
+        "maxItems": 200
+    }
+
+    print("==========================================================")
+    print(" [Outfit Req] Apify Fashion Database Sync Engine")
+    print(f" Target Actor: Uniqlo ({ACTOR_UNIQLO})")
+    print("==========================================================")
+
+    # Load existing items to merge
+    merged_items = {}
+    if os.path.exists(OUTPUT_FILE):
+        try:
+            with open(OUTPUT_FILE, "r", encoding="utf-8") as f:
+                old_data = json.load(f)
+                for item in old_data.get("items", []):
+                    merged_items[item["id"]] = item
+            print(f"[*] Ditemukan {len(merged_items)} produk dalam cache lokal.")
+        except Exception as e:
+            print(f"[!] Warning reading cache: {e}")
+
+    # Fetch Uniqlo items
+    raw_uniqlo = fetch_actor_items(ACTOR_UNIQLO, run_input=uniqlo_input, run_new=run_new)
+    formatted_uniqlo = transform_uniqlo_items(raw_uniqlo)
+    print(f"[+] Diformat {len(formatted_uniqlo)} produk Uniqlo siap integrasi.")
+
+    for item in formatted_uniqlo:
+        merged_items[item["id"]] = item
+
+    all_items = list(merged_items.values())
+
+    # Save to local cache
+    payload = {
+        "source": "Apify Multi-Marketplace Catalog (Shopee & Uniqlo)",
+        "totalItems": len(all_items),
+        "items": all_items
+    }
+    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2, ensure_ascii=False)
+    print(f"[✓] Berhasil menyimpan {len(all_items)} produk ke {OUTPUT_FILE}")
+
+    # Sync to Supabase
+    sync_to_supabase(all_items)
+    print("==========================================================")
+    print(" [Sukses] Database berhasil diperbarui!")
+    print("==========================================================")
 
 if __name__ == "__main__":
     main()

@@ -44,6 +44,36 @@
             overflow-x: hidden;
           }
 
+          /* --- Browser Surfaces (Craft Floor) --- */
+          ::selection {
+            background: var(--burgundy);
+            color: var(--on-accent);
+          }
+          ::-moz-selection {
+            background: var(--burgundy);
+            color: var(--on-accent);
+          }
+          * {
+            caret-color: var(--burgundy);
+          }
+
+          /* Custom Scrollbar */
+          ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+          }
+          ::-webkit-scrollbar-track {
+            background: var(--bg);
+          }
+          ::-webkit-scrollbar-thumb {
+            background: rgba(109, 0, 26, 0.22);
+            border-radius: 4px;
+            border: 2px solid var(--bg);
+          }
+          ::-webkit-scrollbar-thumb:hover {
+            background: rgba(109, 0, 26, 0.4);
+          }
+
           a {
             color: inherit;
             text-decoration: none;
@@ -480,39 +510,107 @@
             }
             .hero-wrap {
               min-height: auto;
-              padding-bottom: calc(76px + env(safe-area-inset-bottom, 12px)) !important;
+              padding-bottom: calc(84px + env(safe-area-inset-bottom, 16px)) !important;
             }
             .header-shift {
               padding: 24px 16px 8px;
               transform: none !important;
             }
+            .header-shift h1 {
+              font-size: clamp(38px, 11vw, 68px) !important;
+              letter-spacing: -0.01em;
+              line-height: 1.05 !important;
+            }
             .subtitle-shift {
               font-size: 14px;
-              max-width: 90%;
-              margin-top: 12px;
+              max-width: 340px;
+              line-height: 1.5;
+              margin: 12px auto 0;
               transform: none !important;
             }
             .hero-cta-group {
               margin-top: 20px !important;
               padding: 4px !important;
               gap: 8px !important;
+              display: inline-flex !important;
+              flex-direction: row !important;
+              max-width: 92vw;
             }
             .hero-cta-btn {
               padding: 10px 18px !important;
               font-size: 13px !important;
+              white-space: nowrap;
             }
+            /* MOBILE TOUCH-SWIPE CAROUSEL (CLEAN, NO WEIRD FAN CLIPPING) */
             .cards-stage {
-              padding: 20px 8px 36px;
-              touch-action: pan-x pan-y;
-              -webkit-overflow-scrolling: touch;
-              scrollbar-width: none;
+              display: flex !important;
+              justify-content: flex-start !important;
+              align-items: center !important;
+              padding: 20px 20px 44px !important;
+              overflow-x: auto !important;
+              overflow-y: hidden !important;
+              scroll-snap-type: x mandatory !important;
+              -webkit-overflow-scrolling: touch !important;
+              scrollbar-width: none !important;
+              perspective: none !important;
+              width: 100% !important;
+              box-sizing: border-box !important;
             }
             .cards-stage::-webkit-scrollbar {
-              display: none;
+              display: none !important;
             }
             .cards-track {
-              transform: scale(0.74);
-              transform-origin: center bottom;
+              display: flex !important;
+              align-items: center !important;
+              gap: 14px !important;
+              transform: none !important;
+              padding: 8px 12px 16px !important;
+              margin: 0 auto !important;
+              width: max-content !important;
+            }
+            .card-item {
+              transform: none !important;
+              flex-shrink: 0 !important;
+              scroll-snap-align: center !important;
+              width: 175px !important;
+              height: 275px !important;
+              margin-right: 0 !important;
+              border-radius: 16px !important;
+              box-shadow: 0 8px 24px rgba(109, 0, 26, 0.12) !important;
+              transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+            }
+            .card-1:hover, .card-2:hover, .card-3:hover, .card-4:hover,
+            .card-5:hover, .card-6:hover, .card-7:hover, .card-8:hover, .card-9:hover {
+              transform: none !important;
+            }
+            .card-item.is-selected,
+            .card-1.is-selected, .card-2.is-selected, .card-3.is-selected,
+            .card-4.is-selected, .card-5.is-selected, .card-6.is-selected,
+            .card-7.is-selected, .card-8.is-selected, .card-9.is-selected {
+              transform: scale(1.04) !important;
+              border-color: var(--burgundy) !important;
+              box-shadow: 0 14px 32px rgba(109, 0, 26, 0.32) !important;
+            }
+            .card-overlay {
+              padding: 12px 10px !important;
+              font-size: 13px !important;
+              font-weight: 600 !important;
+              background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.82) 0%,
+                rgba(0, 0, 0, 0.3) 60%,
+                transparent 100%
+              ) !important;
+            }
+            .card-overlay-center {
+              padding: 14px 10px !important;
+              font-size: 16px !important;
+              background: linear-gradient(
+                to top,
+                rgba(109, 0, 26, 0.92) 0%,
+                rgba(0, 0, 0, 0.35) 60%,
+                transparent 100%
+              ) !important;
             }
             .user-profile-dropdown {
               max-width: calc(100vw - 32px);
@@ -532,28 +630,22 @@
               gap: 6px !important;
             }
             .header-shift h1 {
-              font-size: clamp(38px, 13vw, 56px) !important;
+              font-size: clamp(34px, 11vw, 50px) !important;
             }
             .hero-cta-group {
-              flex-direction: column !important;
-              border-radius: 18px !important;
-              width: 100% !important;
-              max-width: 290px !important;
-              box-sizing: border-box !important;
-              padding: 6px !important;
+              flex-direction: row !important;
+              border-radius: 999px !important;
+              padding: 4px !important;
+              gap: 6px !important;
+              width: auto !important;
             }
             .hero-cta-btn {
-              width: 100% !important;
-              justify-content: center !important;
-              padding: 10px 14px !important;
+              padding: 9px 15px !important;
+              font-size: 12.5px !important;
             }
-            .cards-stage {
-              padding: 16px 4px 30px;
-              touch-action: pan-x pan-y;
-            }
-            .cards-track {
-              transform: scale(0.65);
-              transform-origin: center bottom;
+            .card-item {
+              width: 160px !important;
+              height: 255px !important;
             }
             .user-name-text {
               max-width: 90px !important;
@@ -576,15 +668,18 @@
           }
 
           @media (max-width: 360px) {
-            .cards-track {
-              transform: scale(0.55);
-              transform-origin: center bottom;
-            }
             .header-shift h1 {
-              font-size: 34px !important;
+              font-size: 30px !important;
             }
             .hero-cta-group {
+              flex-direction: column !important;
+              border-radius: 16px !important;
+              width: 100% !important;
               max-width: 260px !important;
+            }
+            .card-item {
+              width: 145px !important;
+              height: 235px !important;
             }
           }
 
@@ -1071,7 +1166,7 @@
                   </div>
 
                   <div class="dropdown-quota-card">
-                    <div class="dropdown-quota-title">Sisa Kuota Tanya Gaya</div>
+                    <div class="dropdown-quota-title">Status Keanggotaan</div>
                     <div class="dropdown-quota-val">{{quotaValue}}</div>
                     <div class="dropdown-quota-sub">{{quotaSub}}</div>
                   </div>
@@ -1495,7 +1590,7 @@
             function _isDummy(em) {
               if (!em || typeof em !== 'string') return true;
               const s = em.toLowerCase().trim();
-              return s === 'customer@gmail.com' || s === 'customer@outfitreq.id' || s === 'ricky.jelek@gmail.com' || s === 'customer' || s === 'ricky';
+              return s === 'customer' || s === 'belum masuk' || s.startsWith('demo') || s.startsWith('test') || s.includes('example.com');
             }
             const isLoggedOut = localStorage.getItem('outfit_req_logged_out') === 'true';
             if (!isLoggedOut) {
@@ -1669,8 +1764,8 @@
           const userEmail = user?.email || '';
           const userInitial = (userName || userEmail || 'C').charAt(0).toUpperCase();
           const userTier = isPremiumUser ? 'PREMIUM MEMBER' : (user?.tier || 'Free Member');
-          const quotaVal = isPremiumUser ? 'Unlimited (Tanpa Batas)' : '10 / 10 Pertanyaan';
-          const quotaSub = isPremiumUser ? 'Status Premium Aktif • Bebas Konsultasi' : 'Konsultasi kurasi AI outfit gratis';
+          const quotaVal = isPremiumUser ? 'Premium Member' : 'Member Terdaftar';
+          const quotaSub = isPremiumUser ? 'Status Premium Aktif • Akses Penuh' : 'Akses Galeri & Koleksi Busana Tersimpan';
 
           const isP = this.state.mode === 'Personality';
           const f = this.state.activeFilter;
@@ -1913,61 +2008,8 @@
           } catch (e) {}
         }
 
-        // Cek apakah ada riwayat akun yang pernah login sebelumnya
-        let existingUser = null;
-        function _isDummyEmail(em) {
-          if (!em || typeof em !== 'string') return true;
-          const s = em.toLowerCase().trim();
-          return s === 'customer@gmail.com' || s === 'customer@outfitreq.id' || s === 'ricky.jelek@gmail.com' || s === 'customer' || s === 'ricky';
-        }
-        try {
-          const raw = localStorage.getItem("outfit_req_user");
-          if (raw) {
-            const p = JSON.parse(raw);
-            if (p && p.email && !_isDummyEmail(p.email)) existingUser = p;
-          }
-        } catch (e) {}
-
-        if (!existingUser || !existingUser.email) {
-          try {
-            const regMap = JSON.parse(localStorage.getItem('outfit_req_registered_customers') || '{}');
-            const keys = Object.keys(regMap).filter(k => !_isDummyEmail(k));
-            if (keys.length > 0) {
-              const latestEmail = keys[keys.length - 1];
-              const registered = regMap[latestEmail];
-              existingUser = {
-                id: registered?.id || ("usr-" + Date.now()),
-                name: registered?.name || latestEmail.split('@')[0],
-                email: latestEmail,
-                tier: "free",
-                isLoggedIn: true,
-                verifiedAt: new Date().toISOString()
-              };
-            }
-          } catch (e) {}
-        }
-
-        const finalName = existingUser?.name || "Pengunjung";
-        const finalEmail = existingUser?.email || "user@outfitreq.id";
-        const finalUsername = existingUser?.username || ("@" + finalName.toLowerCase().trim().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, ''));
-
-        const customerUser = {
-          id: existingUser?.id || ("usr-" + Date.now()),
-          name: finalName,
-          username: finalUsername,
-          email: finalEmail,
-          tier: "free",
-          isLoggedIn: true,
-          verifiedAt: new Date().toISOString()
-        };
-        try {
-          localStorage.setItem("outfit_req_user", JSON.stringify(customerUser));
-        } catch (e) {}
-
-        if (window.__mainComponent) {
-          window.__mainComponent.setState({ user: customerUser });
-        }
-        window.location.href = "account.html";
+        // Jika belum ada akun yang login, arahkan ke halaman login
+        window.location.href = "login.html";
       }
       window.triggerGuestGmailLogin = triggerGuestGmailLogin;
 

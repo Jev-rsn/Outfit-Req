@@ -59,6 +59,36 @@
         -webkit-tap-highlight-color: transparent;
       }
 
+      /* --- Browser Surfaces (Craft Floor) --- */
+      ::selection {
+        background: #6d001a;
+        color: #fff8e7;
+      }
+      ::-moz-selection {
+        background: #6d001a;
+        color: #fff8e7;
+      }
+      * {
+        caret-color: #6d001a;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #fafaf7;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(109, 0, 26, 0.22);
+        border-radius: 4px;
+        border: 2px solid #fafaf7;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(109, 0, 26, 0.4);
+      }
+
       /* Prevent iOS Safari auto-zoom on input focus */
       @media (max-width: 768px) {
         input, select, textarea {
@@ -542,7 +572,7 @@
                   </span>
                 </div>
                 <p id="userEmailDisplay" class="text-xs sm:text-sm text-black/60 mt-0.5 truncate max-w-[220px] sm:max-w-none">
-                  jeversontumuahi0@gmail.com
+                  Memuat data akun...
                 </p>
               </div>
             </div>
@@ -552,11 +582,11 @@
               id="accountQuotaPill"
               class="flex sm:flex-col items-center sm:items-end justify-between bg-white/70 px-3.5 py-2 sm:py-1.5 rounded-2xl border border-black/10 text-xs w-full sm:w-auto mt-1 sm:mt-0"
             >
-              <span class="text-black/60">Sisa Kuota Tanya AI:</span>
+              <span class="text-black/60">Status Keanggotaan:</span>
               <span
                 id="userQuotaDisplay"
                 class="font-bold text-black text-sm sm:text-base ml-2 sm:ml-0"
-                >10 / 10 Pertanyaan</span
+                >Member Terdaftar</span
               >
             </div>
           </div>
@@ -582,12 +612,12 @@
                   if (!val || typeof val !== "string") return true;
                   const s = val.toLowerCase().trim();
                   return (
-                    s === "customer@gmail.com" ||
-                    s === "customer@outfitreq.id" ||
                     s === "customer" ||
-                    s === "ricky.jelek@gmail.com" ||
-                    s === "ricky" ||
-                    s === "belum masuk"
+                    s === "belum masuk" ||
+                    s === "-" ||
+                    s === "" ||
+                    s.startsWith("demo") ||
+                    s.startsWith("test")
                   );
                 }
                 let activeAcc = null;
@@ -668,14 +698,12 @@
               <h2
                 class="font-serif text-2xl sm:text-3xl text-black font-normal tracking-tight mb-2"
               >
-                Tingkatkan Gaya Busana Tanpa Batas
+                Eksplorasi Gaya Tanpa Batas
               </h2>
               <p
                 class="text-xs sm:text-sm text-black/60 max-w-sm mx-auto mb-6 leading-relaxed"
               >
-                Dapatkan konsultasi AI tanpa batas, filter acara eksklusif
-                (Ngonser, Pengajian), dan simulasi visualisasi postur tubuh
-                360°.
+                Akses kurasi outfit tanpa batas, filter acara tematik eksklusif (Konser, Acara Syar'i), simpan koleksi tak terbatas, dan kelola multi-profil ukuran tubuh personal.
               </p>
 
               <!-- Pill Button Mencolok: Merah Marun (#6D001A) & Teks Putih (#FFFFFF) -->
@@ -683,9 +711,9 @@
                 id="btnClickForPremium"
                 type="button"
                 onclick="startUpgradeFlow(event)"
-                class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-[#6D001A] hover:bg-[#520013] text-white font-bold text-sm tracking-wider uppercase transition-all shadow-sm active:scale-[0.99] cursor-pointer"
+                class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-[#6D001A] hover:bg-[#520013] text-white font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-[0.99] cursor-pointer"
               >
-                <span>KLIK DISINI UNTUK PREMIUM</span>
+                <span>UPGRADE KE PREMIUM</span>
                 <svg
                   width="18"
                   height="18"
@@ -730,12 +758,12 @@
                 </p>
               </div>
 
-              <!-- Simulasi Auto Downgrade Button -->
+              <!-- Simulasi Auto Downgrade Button (Hidden by default) -->
               <button
                 type="button"
                 onclick="simulateSubscriptionExpiration()"
                 title="Klik untuk menguji aturan auto-downgrade saat masa aktif habis"
-                class="text-xs bg-white border border-black/20 hover:border-black text-black px-3 py-1.5 rounded-xl font-medium transition-all flex items-center gap-1.5 shadow-sm"
+                class="hidden text-xs bg-white border border-black/20 hover:border-black text-black px-3 py-1.5 rounded-xl font-medium transition-all items-center gap-1.5 shadow-sm"
               >
                 <svg
                   class="w-3.5 h-3.5 text-amber-700"
@@ -1089,8 +1117,7 @@
                 Belum ada foto outfit yang disimpan.
               </p>
               <p class="text-xs text-black/60 mt-1">
-                Simpan outfit favorit Anda dari menu Rekomendasi atau Chat
-                Personality.
+                Simpan outfit favorit Anda dari katalog Rekomendasi atau Beranda.
               </p>
             </div>
           </div>
@@ -1135,9 +1162,9 @@
       </section>
 
       <!-- ========================================================================= -->
-      <!-- VIEW 3: UJI GLOBAL RIGHTS - PERSONALITY (CHAT AI) VIEW                    -->
+      <!-- VIEW 3: UJI GLOBAL RIGHTS - PERSONALITY (CHAT AI) VIEW (HIDDEN) -->
       <!-- ========================================================================= -->
-      <section id="viewPersonality" class="view-panel view-hidden">
+      <section id="viewPersonality" class="view-panel view-hidden" style="display: none !important;">
         <div
           class="bg-white border border-black/15 rounded-3xl p-6 md:p-8 shadow-sm"
         >
@@ -1222,9 +1249,9 @@
       </section>
 
       <!-- ========================================================================= -->
-      <!-- VIEW 4: UJI GLOBAL RIGHTS - REKOMENDASI OUTFIT & 360° VIEW                -->
+      <!-- VIEW 4: UJI GLOBAL RIGHTS - REKOMENDASI OUTFIT & 360° VIEW (HIDDEN) -->
       <!-- ========================================================================= -->
-      <section id="viewRecommendation" class="view-panel view-hidden">
+      <section id="viewRecommendation" class="view-panel view-hidden" style="display: none !important;">
         <div
           class="bg-white border border-black/15 rounded-3xl p-6 md:p-8 shadow-sm"
         >
@@ -1847,8 +1874,8 @@
                   type="text"
                   id="inputNama"
                   required
-                  value="Ricky"
-                  placeholder="Contoh: Ricky"
+                  value=""
+                  placeholder="Contoh: Alex"
                   class="w-full px-3.5 py-2.5 rounded-xl border border-black/20 focus:border-[#6D001A] focus:ring-1 focus:ring-[#6D001A] outline-none text-sm text-black bg-white"
                 />
               </div>
@@ -2409,15 +2436,12 @@
         if (!email || typeof email !== "string") return true;
         const em = email.toLowerCase().trim();
         return (
-          em === "customer@gmail.com" ||
-          em === "customer@outfitreq.id" ||
-          em === "ricky.jelek@gmail.com" ||
-          em === "ricky@gmail.com" ||
-          em === "demo@example.com" ||
-          em === "demo@outfitreq.id" ||
           em === "belum masuk" ||
           em === "-" ||
-          em === ""
+          em === "" ||
+          em.startsWith("demo@") ||
+          em.startsWith("test@") ||
+          em.includes("example.com")
         );
       }
 
@@ -2425,10 +2449,10 @@
         if (!name || typeof name !== "string") return true;
         const n = name.toLowerCase().trim();
         return (
-          n === "customer" ||
-          n === "ricky" ||
-          n === "ricky jelek" ||
-          n === "demo user"
+          n === "tamu" ||
+          n === "guest" ||
+          n === "demo user" ||
+          n === "pengunjung tamu"
         );
       }
 
@@ -2478,7 +2502,7 @@
                 email:
                   u.email && !isDummyEmail(u.email)
                     ? u.email
-                    : "jeversontumuahi0@gmail.com",
+                    : "",
                 username: u.username || formatUsernameFrom(u.name, u.email),
                 tier: "premium",
                 isLoggedIn: true,
@@ -2560,15 +2584,15 @@
           }
         } catch (e) {}
 
-        // Default fallback ke akun aktif jika belum ada di storage sama sekali
+        // Default fallback ke mode tamu jika belum login di database/session
         return {
-          id: "usr_default",
-          name: "percobaan verifikasi",
-          username: "@percobaan_verifikasi",
-          email: "jeversontumuahi0@gmail.com",
-          tier: "premium",
-          isLoggedIn: true,
-          premiumExpiresAt: "2026-11-10T02:54:09.886+00:00",
+          id: "guest",
+          name: "Pengunjung Tamu",
+          username: "@tamu",
+          email: "Belum masuk",
+          tier: "guest",
+          isLoggedIn: false,
+          premiumExpiresAt: null,
         };
       }
 
@@ -3217,39 +3241,31 @@
         );
 
         if (isPremium) {
-          if (quotaDisplay) quotaDisplay.innerText = "Tanpa Batas (Unlimited)";
+          if (quotaDisplay) quotaDisplay.innerText = "Member Premium (Aktif)";
           if (tabChatQuotaBadge) {
-            tabChatQuotaBadge.innerText = "Unlimited";
+            tabChatQuotaBadge.innerText = "Premium";
             tabChatQuotaBadge.className =
               "ml-1 px-1.5 py-0.5 rounded-full text-[10px] bg-[#6D001A] text-white font-bold";
           }
           if (chatQuotaStatusBadge) {
             chatQuotaStatusBadge.innerText =
-              "Kuota: Tanpa Batas (Premium Aktif)";
+              "Status: Member Premium";
             chatQuotaStatusBadge.className =
               "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800";
           }
         } else if (isGuest) {
-          const remaining = Math.max(
-            0,
-            APP_STATE.chatQuota.maxGuest - APP_STATE.chatQuota.used,
-          );
           if (quotaDisplay)
-            quotaDisplay.innerText = `${remaining} / ${APP_STATE.chatQuota.maxGuest} Tanya`;
-          if (tabChatQuotaBadge) tabChatQuotaBadge.innerText = `${remaining}/3`;
+            quotaDisplay.innerText = "Mode Tamu (Guest)";
+          if (tabChatQuotaBadge) tabChatQuotaBadge.innerText = "Tamu";
           if (chatQuotaStatusBadge)
-            chatQuotaStatusBadge.innerText = `${remaining} / 3 Pertanyaan (Guest)`;
+            chatQuotaStatusBadge.innerText = "Status: Pengunjung Tamu";
         } else {
-          const remaining = Math.max(
-            0,
-            APP_STATE.chatQuota.maxFree - APP_STATE.chatQuota.used,
-          );
           if (quotaDisplay)
-            quotaDisplay.innerText = `${remaining} / ${APP_STATE.chatQuota.maxFree} Tanya`;
+            quotaDisplay.innerText = "Member Terdaftar (Aktif)";
           if (tabChatQuotaBadge)
-            tabChatQuotaBadge.innerText = `${remaining}/10`;
+            tabChatQuotaBadge.innerText = "Free";
           if (chatQuotaStatusBadge)
-            chatQuotaStatusBadge.innerText = `${remaining} / 10 Pertanyaan (Reset 3 Hari)`;
+            chatQuotaStatusBadge.innerText = "Status: Member Free";
         }
 
         const sectionFreeCta = document.getElementById("sectionFreeCta");
@@ -4198,7 +4214,11 @@
             if (sessionData?.session?.user?.id) targetUserId = sessionData.session.user.id;
           }
           const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(targetUserId);
-          const targetEmail = (APP_STATE.user.email || "jeversontumuahi0@gmail.com").toLowerCase().trim();
+          const targetEmail = (APP_STATE.user.email || "").toLowerCase().trim();
+          if (!targetEmail || targetEmail === "belum masuk" || isDummyEmail(targetEmail)) {
+            console.warn("[OutfitReq] Email pengguna tidak valid untuk sinkronisasi database.");
+            return;
+          }
           const targetName = APP_STATE.user.name || "Member Outfit Req";
           const expiryIso = APP_STATE.user.premiumExpiresAt || new Date(Date.now() + 30 * 24 * 3600 * 1000).toISOString();
 
@@ -4309,7 +4329,7 @@
         const nama = (
           document.getElementById("inputNama")?.value ||
           APP_STATE.user.name ||
-          "percobaan verifikasi"
+          "Member Outfit Req"
         ).trim();
         const tb = parseFloat(document.getElementById("inputTB")?.value) || 175;
         const bb = parseFloat(document.getElementById("inputBB")?.value) || 68;
@@ -4805,10 +4825,7 @@
           APP_STATE.user.isLoggedIn = true;
           APP_STATE.user.premiumExpiresAt = null;
           APP_STATE.chatQuota.used = 0;
-          if (!APP_STATE.user.email || isDummyEmail(APP_STATE.user.email)) {
-            APP_STATE.user.email = "jeversontumuahi0@gmail.com";
-          }
-          if (supabaseClient && APP_STATE.user.email) {
+          if (supabaseClient && APP_STATE.user.email && !isDummyEmail(APP_STATE.user.email)) {
             try {
               await supabaseClient.from("users").update({ tier: "free", premium_expires_at: null }).ilike("email", APP_STATE.user.email);
               await supabaseClient.from("saved_photos").update({ user_tier: "free" }).ilike("user_email", APP_STATE.user.email);
@@ -4820,13 +4837,12 @@
           } catch (e) {}
           APP_STATE.user.tier = "premium";
           APP_STATE.user.isLoggedIn = true;
-          if (!APP_STATE.user.email || isDummyEmail(APP_STATE.user.email)) {
-            APP_STATE.user.email = "jeversontumuahi0@gmail.com";
-          }
           const exp = new Date();
           exp.setDate(exp.getDate() + 30);
           APP_STATE.user.premiumExpiresAt = exp.toISOString();
-          await syncPremiumStatusToSupabase();
+          if (APP_STATE.user.email && !isDummyEmail(APP_STATE.user.email)) {
+            await syncPremiumStatusToSupabase();
+          }
         }
 
         saveSession();

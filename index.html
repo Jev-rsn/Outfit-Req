@@ -5,59 +5,85 @@
   <meta http-equiv="refresh" content="0; url=WEB%20EBD/index.html">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Outfit Req — Beranda Utama</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script>
     // Pengalihan instan ke Beranda Utama (WEB EBD/index.html)
     window.location.replace("WEB EBD/index.html" + window.location.search + window.location.hash);
   </script>
   <style>
+    :root {
+      --bg: #FFF8E7;
+      --burgundy: #6D001A;
+      --burgundy-light: rgba(109, 0, 26, 0.12);
+      --ink: #111111;
+    }
     body {
       margin: 0;
       padding: 0;
-      background-color: #0b0d13;
-      color: #e5e7eb;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .brand-mark {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 32px;
+      margin-bottom: 24px;
+      color: var(--burgundy);
+      letter-spacing: -0.01em;
     }
     .spinner {
-      width: 44px;
-      height: 44px;
-      border: 3px solid rgba(255, 255, 255, 0.1);
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--burgundy-light);
       border-radius: 50%;
-      border-top-color: #6366f1;
-      animation: spin 0.8s linear infinite;
+      border-top-color: var(--burgundy);
+      animation: spin 0.8s cubic-bezier(0.6, 0.2, 0.4, 0.8) infinite;
       margin-bottom: 20px;
     }
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+    p {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.65);
+      margin: 0;
+    }
     a {
-      color: #818cf8;
+      color: #FFF8E7;
+      background: var(--burgundy);
       text-decoration: none;
-      font-weight: 500;
-      margin-top: 14px;
+      font-weight: 600;
+      font-size: 13px;
+      margin-top: 18px;
       display: inline-block;
-      padding: 8px 16px;
-      border: 1px solid rgba(129, 140, 248, 0.3);
-      border-radius: 8px;
+      padding: 10px 22px;
+      border-radius: 999px;
       transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(109, 0, 26, 0.2);
     }
     a:hover {
-      background: rgba(129, 140, 248, 0.15);
-      border-color: #818cf8;
+      background: #8A0A28;
+      transform: translateY(-1px);
     }
   </style>
 </head>
 <body>
+  <div class="brand-mark">outfit req</div>
   <div class="spinner"></div>
-  <p>Mengarahkan ke Beranda Utama Outfit Req...</p>
+  <p>Membuka Beranda Outfit Req...</p>
   <noscript>
     <p>JavaScript dinonaktifkan. Silakan klik tombol di bawah:</p>
   </noscript>
-  <a href="WEB%20EBD/index.html">Buka Beranda Outfit Req</a>
+  <a href="WEB%20EBD/index.html">Buka Beranda Outfit Req &rarr;</a>
 </body>
 </html>

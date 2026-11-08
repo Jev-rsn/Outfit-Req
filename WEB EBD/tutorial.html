@@ -46,6 +46,37 @@
         flex-direction: column;
       }
 
+      /* --- Browser Surfaces (Craft Floor) --- */
+      ::selection {
+        background: var(--burgundy);
+        color: var(--on-accent);
+      }
+
+      ::-moz-selection {
+        background: var(--burgundy);
+        color: var(--on-accent);
+      }
+
+      * {
+        caret-color: var(--burgundy);
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(109, 0, 26, 0.22);
+        border-radius: 4px;
+        border: 2px solid var(--bg);
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(109, 0, 26, 0.4);
+      }
+
       a {
         color: inherit;
         text-decoration: none;
@@ -617,9 +648,8 @@
 
       /* Note / General Account Benefit Box */
       .takeaway-card {
-        background: #fffdf7;
+        background: rgba(109, 0, 26, 0.03);
         border: 1px solid rgba(109, 0, 26, 0.18);
-        border-left: 5px solid var(--burgundy);
         border-radius: 12px;
         padding: 16px 20px;
         font-size: 13.5px;
@@ -871,6 +901,17 @@
         }
         .popup-card-body {
           padding: 16px 14px;
+        }
+        .popup-guide-grid {
+          grid-template-columns: 1fr !important;
+          gap: 12px !important;
+        }
+        .popup-style-grid {
+          grid-template-columns: 1fr !important;
+          gap: 12px !important;
+        }
+        .popup-guide-card {
+          padding: 16px 14px !important;
         }
         .popup-card-footer {
           padding: 12px 14px;
@@ -1413,7 +1454,6 @@
         border: 1px solid var(--line);
         border-radius: 14px;
         padding: 16px 18px;
-        border-left: 4px solid var(--burgundy);
         display: flex;
         flex-direction: column;
         gap: 6px;
@@ -1560,7 +1600,7 @@
         background: #fdfaf4;
         padding: 8px 12px;
         border-radius: 10px;
-        border-left: 3px solid var(--burgundy);
+        border: 1px solid rgba(109, 0, 26, 0.12);
       }
 
       .popup-step-action strong {
@@ -1765,12 +1805,12 @@
           <circle cx="12" cy="12" r="10" />
           <path d="M12 16v-4M12 8h.01" />
         </svg>
-        <span>Tutor dekk???</span>
+        <span>PANDUAN &amp; KURASI GAYA</span>
       </div>
 
       <h1 class="hero-title">Panduan Penggunaan Website</h1>
       <p class="hero-subtitle" id="heroSubtitle">
-        Selamat datang di <strong>KOPDES</strong> selamat berbelanja.
+        Pelajari cara menemukan karakter gaya busana, menelusuri katalog outfit terkurasi, dan berbelanja di toko resmi.
       </p>
 
       <!-- Informasi Komparasi Akses Akun -->
@@ -1788,7 +1828,7 @@
             <path d="m9 12 2 2 4-4" />
           </svg>
           <span
-            >Akses untuk fitur biasa <strong>Benefit fitur biasa </strong></span
+            >Akses Tamu: <strong>Bebas eksplorasi katalog busana, filter acara, &amp; tautan toko resmi</strong></span
           >
         </div>
         <div class="matrix-pill">
@@ -1805,9 +1845,9 @@
             />
           </svg>
           <span
-            >Benefit Akun Terdaftar
+            >Akun Terdaftar:
             <strong
-              >10 Kuota Tanya Gaya Gratis Tiap 3 Hari & Simpan Hasil</strong
+              >Simpan outfit favorit, analisis profil tubuh, &amp; kurasi personal</strong
             ></span
           >
         </div>
@@ -1839,21 +1879,21 @@
             </svg>
           </div>
           <span class="choice-status-badge" id="badgeCardPersonality"
-            >Buka Pop-up Tutorial</span
+            >Buka Panduan</span
           >
         </div>
         <div class="choice-body">
-          <h3>Cara Menggunakan Fitur Personality</h3>
+          <h3>Fitur Style Personality</h3>
           <div class="choice-tagline">
-            fitur apa aja 
+            Analisis Karakter Gaya &amp; Siluet Ideal
           </div>
           <p class="choice-desc">
-            fungsi fitur atau benefit yang di dapat apa akja 
+            Kenali 4 karakter gaya dominan (Classic, Minimalist, Chic, Streetwear), panduan siluet potongan pakaian, dan palet warna busana yang serasi.
           </p>
         </div>
         <div class="choice-footer">
           <button type="button" class="btn-card-action-trigger">
-            <span>Buka Tutorial Fitur Personality</span>
+            <span>Buka Panduan Personality</span>
             <svg
               width="15"
               height="15"
@@ -1892,21 +1932,21 @@
             </svg>
           </div>
           <span class="choice-status-badge" id="badgeCardRekomendasi"
-            >Buka Pop-up Tutorial</span
+            >Buka Panduan</span
           >
         </div>
         <div class="choice-body">
-          <h3>Cara Menggunakan Fitur Rekomendasi</h3>
+          <h3>Fitur Rekomendasi Outfit</h3>
           <div class="choice-tagline">
-            Panduan Filter Acara, Kartu Kipas, & Link Belanja
+            Filter Tema Acara, Kartu Editorial, &amp; Belanja
           </div>
           <p class="choice-desc">
-            Mendapatkan benefit apa aja??
+            Panduan menelusuri katalog foto outfit editorial, menyaring berdasarkan suasana acara (Kasual, Formal, Pesta, Liburan), dan membeli di toko resmi.
           </p>
         </div>
         <div class="choice-footer">
           <button type="button" class="btn-card-action-trigger">
-            <span>Buka Tutorial Fitur Rekomendasi</span>
+            <span>Buka Panduan Rekomendasi</span>
             <svg
               width="15"
               height="15"
@@ -2034,12 +2074,12 @@
       >
         <div class="view-header-card">
           <div class="view-header-left">
-            <span class="view-badge">PANDUAN FITUR 1 • PERSONALITY STYLE</span>
+            <span class="view-badge">PANDUAN FITUR 1 &bull; STYLE PERSONALITY</span>
             <h2 class="view-title">
-              Cara Menggunakan Fitur Personality di Web
+              Cara Menggunakan Fitur Style Personality
             </h2>
             <p class="view-desc">
-             benefit apa aja??
+              Panduan memahami karakter kepribadian gaya, komposisi palet warna kain, dan rasio siluet ideal tubuh Anda.
             </p>
           </div>
           <div
@@ -2059,7 +2099,7 @@
                 text-transform: uppercase;
               "
             >
-              Status Modul
+              Status Panduan
             </div>
             <div
               style="
@@ -2069,7 +2109,7 @@
                 margin-top: 2px;
               "
             >
-              Siap Digunakan
+              Tersedia Lengkap
             </div>
           </div>
         </div>
@@ -2077,7 +2117,7 @@
         <!-- 5 Langkah Alur Utama -->
         <div class="popup-section-heading">
           <span class="popup-section-badge">LANGKAH 1 - 5</span>
-          <span>Tutorial Cara Menggunakan Fitur Personality di Web</span>
+          <span>Tahapan Menemukan Karakter Gaya &amp; Siluet Ideal</span>
         </div>
 
         <div class="popup-guide-grid">
@@ -2086,16 +2126,14 @@
               <div class="popup-step-num">1</div>
               <div>
                 <span class="ui-cue-pill">Di Beranda Web</span>
-                <h4 class="popup-step-title">Buka Menu "Tes Personality"</h4>
+                <h4 class="popup-step-title">Pilih Mode "Tes Personality"</h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              gatau ngapain lagi klik aja gausah banyak tanya.
+              Pada Beranda Utama, klik tombol <strong>"Tes Personality"</strong> di bawah judul utama atau eksplorasi kartu gaya busana.
             </p>
             <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik tombol emas
-              <strong>"Tes Personality"</strong> untuk masuk ke formulir kuis
-              kepribadian gaya.
+              <strong>Aksi di Web:</strong> Klik tombol <strong>"Tes Personality"</strong> untuk membuka formulir preferensi gaya busana.
             </div>
           </div>
 
@@ -2103,18 +2141,17 @@
             <div class="popup-step-header">
               <div class="popup-step-num">2</div>
               <div>
-                <span class="ui-cue-pill">Room chat </span>
+                <span class="ui-cue-pill">Preferensi Acara</span>
                 <h4 class="popup-step-title">
-                  Jawab pertanyaan dasar
+                  Tentukan Acara &amp; Suasana
                 </h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              kalo jawaban salah remedial.
+              Pilih suasana acara yang paling sering Anda hadiri: lingkungan kantor formal, hangout santai di kafe, pesta perayaan, atau liburan luar ruangan.
             </p>
             <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik opsi kartu jawaban yang paling
-              cocok dengan karakter dan kenyamanan berpakaianmu.
+              <strong>Aksi di Web:</strong> Klik kartu preferensi suasana yang paling mewakili kenyamanan dan kebutuhan berpakaian Anda.
             </div>
           </div>
 
@@ -2122,17 +2159,15 @@
             <div class="popup-step-header">
               <div class="popup-step-num">3</div>
               <div>
-                <span class="ui-cue-pill">Room Chat</span>
-                <h4 class="popup-step-title">Sesuaikan dengan kebutuhan</h4>
+                <span class="ui-cue-pill">Karakter Siluet</span>
+                <h4 class="popup-step-title">Sesuaikan Postur &amp; Ukuran</h4>
               </div>
             </div>
             <p class="popup-step-desc">
-             terserah.
+              Masukkan estimasi tinggi dan berat badan atau pilih profil tubuh Anda di menu Akun untuk mencocokkan rasio potongan pakaian.
             </p>
             <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Isi kolom angka tinggi/berat badan
-              atau pilih siluet postur, lalu tekan tombol
-              <strong>"Analisis Gaya Saya"</strong>.
+              <strong>Aksi di Web:</strong> Lengkapi data postur tubuh untuk mendapatkan saran siluet atasan dan bawahan yang seimbang.
             </div>
           </div>
 
@@ -2140,18 +2175,17 @@
             <div class="popup-step-header">
               <div class="popup-step-num">4</div>
               <div>
-                <span class="ui-cue-pill">Hasil Analisis Web</span>
+                <span class="ui-cue-pill">Rangkuman Gaya</span>
                 <h4 class="popup-step-title">
-                  Mendapatkan rekomendasi 
+                  Dapatkan DNA Gaya &amp; Palet Warna
                 </h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              Web akan menampilkan rekomendasi outfit yang diinginkan 
+              Layar akan menampilkan rangkuman tipe gaya dominan Anda (Classic, Minimalist, Chic, atau Streetwear) beserta panduan palet warna kain.
             </p>
             <div class="popup-step-action">
-              <strong>Hasil di Web:</strong> Tinjau tipe gaya dominanmu, panduan
-              siluet potongan atasan/bawahan, dan swatch palet warna kain.
+              <strong>Hasil di Web:</strong> Tinjau tipe gaya dominan, panduan potongan atasan/bawahan, dan rekomendasi swatch palet warna.
             </div>
           </div>
 
@@ -2159,21 +2193,19 @@
             <div class="popup-step-header">
               <div class="popup-step-num">5</div>
               <div>
-                <span class="ui-cue-pill">selesai</span>
+                <span class="ui-cue-pill">Koleksi Profil</span>
                 <h4 class="popup-step-title">
-                  silahkan menikmati sampai batas free habis 
+                  Simpan Inspirasi ke Profil Akun
                 </h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              kalo free habis langsung aja premium, gausah nunggu lagi. 
+              Simpan rangkuman gaya dan foto outfit favorit ke akun profil Anda agar selalu dapat diakses saat berbelanja atau memilih busana harian.
             </p>
             <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik ikon profil di pojok kanan atas
-              untuk melihat hasil yang tersimpan dan sisa kuota tanya gaya AI.
+              <strong>Aksi di Web:</strong> Klik menu profil di pojok kanan atas untuk melihat riwayat analisis gaya dan foto yang tersimpan.
             </div>
           </div>
-        </div>
         </div>
       </section>
 
@@ -2188,11 +2220,13 @@
       >
         <div class="view-header-card">
           <div class="view-header-left">
-            <span class="view-badge">Tutor dek???</span>
+            <span class="view-badge">PANDUAN FITUR 2 &bull; REKOMENDASI OUTFIT</span>
             <h2 class="view-title">
-              Cara Menggunakan Fitur Rekomendasi di Web
+              Cara Menggunakan Galeri Rekomendasi Outfit
             </h2>
-            <p class="view-desc">keterangan ......</p>
+            <p class="view-desc">
+              Panduan menelusuri katalog foto outfit editorial, memfilter tema suasana acara, serta mengecek tautan toko resmi.
+            </p>
             <div style="margin-top: 12px">
               <a
                 href="rekomendasi.html"
@@ -2241,7 +2275,7 @@
                 text-transform: uppercase;
               "
             >
-              Status Modul
+              Status Panduan
             </div>
             <div
               style="
@@ -2251,7 +2285,7 @@
                 margin-top: 2px;
               "
             >
-              Siap Digunakan
+              Tersedia Lengkap
             </div>
           </div>
         </div>
@@ -2259,7 +2293,7 @@
         <!-- 5 Langkah Alur Utama -->
         <div class="popup-section-heading">
           <span class="popup-section-badge">LANGKAH 1 - 5</span>
-          <span>Tutorial Cara Menggunakan Fitur Rekomendasi Outfit di Web</span>
+          <span>Tahapan Menjelajahi Kurasi Busana &amp; Berbelanja</span>
         </div>
 
         <div class="popup-guide-grid">
@@ -2269,15 +2303,15 @@
               <div>
                 <span class="ui-cue-pill">Di Beranda Web</span>
                 <h4 class="popup-step-title">
-                  Buka Mode Rekomendasi di Beranda
+                  Buka Galeri Rekomendasi
                 </h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              Klik aja 
+              Pilih menu <strong>"Lihat Rekomendasi"</strong> pada Beranda Utama atau langsung buka halaman Galeri untuk melihat feed foto busana.
             </p>
             <div class="popup-step-action">
-             ada fitur simpan tuh cobain aja 
+              <strong>Aksi di Web:</strong> Klik tombol <strong>"Lihat Rekomendasi"</strong> untuk menjelajahi katalog foto Pinterest waterfall.
             </div>
           </div>
 
@@ -2286,14 +2320,14 @@
               <div class="popup-step-num">2</div>
               <div>
                 <span class="ui-cue-pill">Bilah Filter Acara</span>
-                <h4 class="popup-step-title">Pilih Filter Tema Acara</h4>
+                <h4 class="popup-step-title">Pilih Tema Acara &amp; Kategori</h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              sesuaikan aja kamu mau kemana, kalo gaada gausah ngelunjak 
+              Gunakan bilah filter chip di atas galeri: Kasual, Formal, Minimalis, Streetwear, Pesta, Liburan, hingga filter eksklusif Konser atau Kajian Syar'i.
             </p>
             <div class="popup-step-action">
-              klik aja filter nya nanti auto kok
+              <strong>Aksi di Web:</strong> Klik salah satu chip kategori. Seluruh feed foto outfit akan terfilter secara instan.
             </div>
           </div>
 
@@ -2301,17 +2335,17 @@
             <div class="popup-step-header">
               <div class="popup-step-num">3</div>
               <div>
-                <span class="ui-cue-pill">tampilan katalog</span>
+                <span class="ui-cue-pill">Katalog Visual</span>
                 <h4 class="popup-step-title">
-                  Tekan Kartu Outfit yang Diinginkan
+                  Pilih Kartu Outfit yang Diinginkan
                 </h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              udah cuma foto aja, makanya premium biar bisa dapat fitur lainnya 
+              Klik pada kartu foto busana yang menarik perhatian Anda untuk membuka jendela rincian busana lengkap dengan palet warna dan komponen pakaian.
             </p>
             <div class="popup-step-action">
-              kepoo, makanya premium dulu 
+              <strong>Aksi di Web:</strong> Klik foto outfit untuk membuka lembar rincian gaya, brand toko, dan estimasi total harga.
             </div>
           </div>
 
@@ -2319,17 +2353,17 @@
             <div class="popup-step-header">
               <div class="popup-step-num">4</div>
               <div>
-                <span class="ui-cue-pill">menu apa ini</span>
+                <span class="ui-cue-pill">Koleksi Favorit</span>
                 <h4 class="popup-step-title">
-                  gatau lupa 
+                  Simpan Outfit ke Akun Anda
                 </h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              Belum kepikiran mau ngapain 
+              Gunakan tombol <strong>"Simpan"</strong> berwarna merah di kartu atau jendela rincian untuk menyimpan outfit ke koleksi akun pribadi Anda.
             </p>
             <div class="popup-step-action">
-              <strong>nanti aja dipikirinnya </strong> 
+              <strong>Aksi di Web:</strong> Klik tombol <strong>"Simpan"</strong> untuk menambahkan outfit ke menu 'Foto yang Disimpan' di akun Anda.
             </div>
           </div>
 
@@ -2337,17 +2371,17 @@
             <div class="popup-step-header">
               <div class="popup-step-num">5</div>
               <div>
-                <span class="ui-cue-pill">deskripsi</span>
+                <span class="ui-cue-pill">Toko Mitra Resmi</span>
                 <h4 class="popup-step-title">
-                  Khusus premium ini
+                  Beli Produk di Toko Resmi
                 </h4>
               </div>
             </div>
             <p class="popup-step-desc">
-              kalo penasaran harus premium dulu
+              Setiap outfit terhubung langsung ke katalog toko e-commerce resmi mitra (Uniqlo Official, Shopee Live) untuk kemudahan pembelian.
             </p>
             <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik upgrade akun ke premium di bagian akun
+              <strong>Aksi di Web:</strong> Tekan tombol <strong>"Beli di Toko Resmi"</strong> untuk langsung menuju halaman produk original.
             </div>
           </div>
         </div>
@@ -2420,7 +2454,7 @@
           </div>
         </div>
 
-        <!-- Tips Belanja & Kuota AI -->
+        <!-- Tips Belanja Cerdas -->
         <div class="tips-highlight-card">
           <svg
             width="22"
@@ -2437,8 +2471,7 @@
           <div>
             <strong>Tips Belanja Cerdas:</strong> Cek spesifikasi bahan dan
             panduan ukuran (<em>size chart</em>) sebelum checkout pada link toko
-            online resmi. Anda juga bisa menanyakan kepada AI asisten kami
-            apakah potongan pakaian tersebut cocok untuk postur tubuh Anda.
+            online resmi. Anda juga bisa mencocokkan potongan busana dengan data ukuran tubuh Anda di menu Akun.
           </div>
         </div>
 
@@ -2459,7 +2492,7 @@
           <div>
             <strong>Catatan untuk Pengguna Tamu:</strong> Anda bebas menelusuri
             seluruh galeri kurasi outfit dan link belanja tanpa login. Untuk
-            membuka asisten tanya gaya AI dengan 10 kuota gratis, silakan masuk
+            menyimpan outfit favorit dan mengelola profil ukuran tubuh, silakan masuk
             atau daftar akun.
           </div>
         </div>
@@ -2507,7 +2540,7 @@
                 d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"
               />
             </svg>
-            <span>DAFTAR / MASUK (KLAIM 10 KUOTA)</span>
+            <span>DAFTAR / MASUK KE AKUN</span>
           </a>
 
           <a href="rekomendasi.html" class="btn-final-secondary">
@@ -2714,21 +2747,18 @@
                 <div class="popup-step-header">
                   <div class="popup-step-num">5</div>
                   <div>
-                    <span class="ui-cue-pill">Asisten AI & Akun Profil</span>
+                    <span class="ui-cue-pill">Koleksi Profil</span>
                     <h4 class="popup-step-title">
-                      Konsultasi AI & Simpan ke Profil
+                      Simpan Inspirasi ke Profil Akun
                     </h4>
                   </div>
                 </div>
                 <p class="popup-step-desc">
-                  Tanyakan tips mix & match ke asisten tanya gaya AI. Jika kamu
-                  masuk (login), hasil analisis gaya ini otomatis tersimpan di
-                  menu akun profilmu di pojok kanan atas.
+                  Simpan rangkuman preferensi gaya dan foto busana favorit langsung ke akun profil Anda. Anda dapat mengaksesnya kembali kapan saja lewat menu Akun.
                 </p>
                 <div class="popup-step-action">
                   <strong>Aksi di Web:</strong> Klik ikon profil di pojok kanan
-                  atas untuk melihat hasil yang tersimpan dan sisa kuota tanya
-                  gaya AI.
+                  atas untuk melihat koleksi outfit yang tersimpan dan data ukuran tubuh.
                 </div>
               </div>
             </div>
@@ -2923,9 +2953,9 @@
               </svg>
               <div>
                 <strong>Akses Semua Pengguna:</strong> Pengunjung tamu dapat
-                mencoba kuis personality langsung tanpa akun. Pengguna yang
+                mencoba panduan kepribadian gaya secara bebas. Pengguna yang
                 masuk atau mendaftar dapat menyimpan riwayat analisis gaya dan
-                membuka 10 kuota tanya asisten AI gratis.
+                koleksi foto outfit tanpa batas.
               </div>
             </div>
 
@@ -3034,22 +3064,17 @@
                 <div class="popup-step-header">
                   <div class="popup-step-num">4</div>
                   <div>
-                    <span class="ui-cue-pill">Menu Akun & Chat AI</span>
+                    <span class="ui-cue-pill">Koleksi &amp; Simpan</span>
                     <h4 class="popup-step-title">
-                      Gunakan Asisten AI Tanya Gaya (Kuota Gratis)
+                      Simpan Outfit Favorit ke Akun
                     </h4>
                   </div>
                 </div>
                 <p class="popup-step-desc">
-                  Butuh alternatif warna atau saran alas kaki yang cocok? Buka
-                  menu akun di pojok kanan atas untuk melihat sisa kuota tanya
-                  gaya AI. Pengguna terdaftar mendapat
-                  <strong>10 kuota gratis</strong> yang di-reset tiap 3 hari.
+                  Temukan inspirasi busana yang pas? Tekan tombol Simpan berwarna merah untuk menyimpan outfit ke koleksi profil akun Anda.
                 </p>
                 <div class="popup-step-action">
-                  <strong>Aksi di Web:</strong> Klik menu profil akun di pojok
-                  kanan atas &rarr; ajukan pertanyaan gaya seputar outfit yang
-                  kamu pilih.
+                  <strong>Aksi di Web:</strong> Klik tombol Simpan pada kartu atau rincian outfit untuk menyimpannya ke menu 'Foto yang Disimpan'.
                 </div>
               </div>
 
@@ -3158,7 +3183,7 @@
               </div>
             </div>
 
-            <!-- Tips Belanja & Kuota AI -->
+            <!-- Tips Belanja Cerdas -->
             <div class="tips-highlight-card">
               <svg
                 width="22"
@@ -3176,8 +3201,7 @@
                 <strong>Tips Belanja di Web:</strong> Cek tabel ukuran (<em
                   >size chart</em
                 >) sebelum membeli di toko online resmi. Anda juga dapat
-                menanyakan kepada asisten AI Outfit Req apakah ukuran dan
-                potongan pakaian tersebut cocok untuk postur tubuh Anda.
+                mencocokkan ukuran busana dengan data ukuran tubuh yang tersimpan pada profil akun Anda.
               </div>
             </div>
 
@@ -3197,9 +3221,8 @@
               </svg>
               <div>
                 <strong>Akses untuk Semua Pengguna:</strong> Seluruh pengunjung
-                bebas menelusuri katalog outfit dan link belanja tanpa login.
-                Pengguna yang masuk ke akun akan mendapatkan asisten tanya gaya
-                AI dengan 10 kuota gratis yang di-reset tiap 3 hari.
+                bebas menelusuri katalog outfit dan tautan belanja tanpa batas.
+                Pengguna yang masuk ke akun dapat menyimpan foto busana favorit dan mengelola multi-profil ukuran tubuh.
               </div>
             </div>
 
@@ -3358,7 +3381,7 @@
         rekomendasi: {
           tag: "TUTORIAL PENGGUNAAN FITUR &bull; REKOMENDASI OUTFIT",
           title: "Cara Menggunakan Fitur Rekomendasi",
-          desc: "Panduan langkah demi langkah cara memfilter tema busana di Beranda, memilih deretan kartu kipas interaktif, kuota tanya gaya AI, dan belanja via link resmi.",
+          desc: "Panduan langkah demi langkah cara memfilter tema busana di Beranda, memilih deretan kartu kipas interaktif, eksplorasi detail busana, dan belanja via link resmi kurasi.",
         },
       };
 
@@ -3711,7 +3734,7 @@
               if (
                 parsed &&
                 parsed.isLoggedIn &&
-                parsed.email !== "customer@gmail.com"
+                parsed.email !== "Belum masuk"
               ) {
                 customer = parsed;
               }
@@ -3744,8 +3767,8 @@
 
           if (heroSubtitle) {
             heroSubtitle.innerHTML = `Selamat datang kembali, <span class="customer-highlight">${displayName}</span>! 
-              Platform Outfit Req berfokus pada 2 pilar utama: <strong>Personality</strong> dan <strong>Rekomendasi</strong>. 
-              Panduan ini dirancang untuk membantu Anda memaksimalkan seluruh fitur gaya dan kuota konsultasi Anda.`;
+              Platform Outfit Req berfokus pada 2 pilar kurasi: <strong>Personality</strong> dan <strong>Rekomendasi</strong>. 
+              Panduan editorial ini membantu Anda memaksimalkan seluruh fitur paduan gaya dan profil busana Anda.`;
           }
         } else {
           if (customerPill) customerPill.style.display = "none";
@@ -3754,7 +3777,7 @@
           if (finalAuthBtn) finalAuthBtn.style.display = "inline-flex";
 
           if (heroSubtitle) {
-            heroSubtitle.innerHTML = `cara nya cek sendiri`;
+            heroSubtitle.innerHTML = `Selamat datang di <strong>Outfit Req</strong>. Panduan editorial ini merangkum langkah demi langkah menemukan paduan busana ideal melalui analisis kuis Personality dan katalog kurasi Rekomendasi.`;
           }
         }
       }
@@ -3762,7 +3785,7 @@
       // Autoconnect Google Gmail Login untuk Tamu di Halaman Panduan
       window.triggerGmailLoginTutorial = async function () {
         if (typeof showToastMessage === "function") {
-          showToastMessage("Menghubungkan Akun Google Gmail...");
+          showToastMessage("Menghubungkan ke Halaman Login...");
         }
         if (window.supabaseClient) {
           try {
@@ -3770,42 +3793,10 @@
               provider: "google",
               options: { redirectTo: window.location.href },
             });
+            return;
           } catch (e) {}
         }
-        // Ambil data akun yang terdaftar atau sesi aktif
-        let custName = "Customer";
-        let custEmail = "customer@outfitreq.id";
-        try {
-          const regMap = JSON.parse(
-            localStorage.getItem("outfit_req_registered_customers") || "{}",
-          );
-          const keys = Object.keys(regMap);
-          if (keys.length > 0) {
-            custEmail = keys[keys.length - 1];
-            custName = regMap[custEmail]?.name || custEmail.split("@")[0];
-          }
-        } catch (e) {}
-
-        const user = {
-          id: "usr-" + Date.now(),
-          name: custName,
-          username: "@" + custName.toLowerCase().replace(/[^a-z0-9_]/g, ""),
-          email: custEmail,
-          tier: "free",
-          isLoggedIn: true,
-          verifiedAt: new Date().toISOString(),
-        };
-        try {
-          localStorage.setItem("outfit_req_user", JSON.stringify(user));
-        } catch (e) {}
-        if (typeof syncUserInfo === "function") {
-          syncUserInfo();
-        }
-        if (typeof showToastMessage === "function") {
-          showToastMessage(
-            "Berhasil Masuk via Gmail! Status Akun: Free Member.",
-          );
-        }
+        window.location.href = "login.html";
       };
 
       // ========================================================
