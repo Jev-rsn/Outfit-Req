@@ -7,6 +7,7 @@ import * as THREE from 'three';
 
 // Brand colors
 const CREAM = 0xFFF8E7;
+const DARK_BG = 0x0F0D0E;
 const WHITE = 0xFFFFFF;
 const BURGUNDY = 0x6D001A;
 const BLACK = 0x000000;
@@ -43,6 +44,11 @@ export class MaisonScene {
     this.startAutoplay();
     this._onResize = this._handleResize.bind(this);
     window.addEventListener('resize', this._onResize);
+
+    // Sinkronisasi tema Gelap / Terang untuk background 3D
+    this._onThemeChange = (e) => this.setTheme(e && e.detail && e.detail.theme);
+    window.addEventListener('themechange', this._onThemeChange);
+    this.setTheme();
   }
 
   // ─── Renderer ──────────────────────────────
@@ -68,6 +74,20 @@ export class MaisonScene {
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(CREAM);
     this.scene.fog = new THREE.Fog(CREAM, 12, 35);
+  }
+
+  setTheme(theme) {
+    const isDark = theme ? theme === 'dark' : (typeof document !== 'undefined' && document.documentElement.classList.contains('dark'));
+    const targetBg = isDark ? DARK_BG : CREAM;
+    if (this.renderer) {
+      this.renderer.setClearColor(targetBg, 1);
+    }
+    if (this.scene) {
+      this.scene.background = new THREE.Color(targetBg);
+      if (this.scene.fog) {
+        this.scene.fog.color.setHex(targetBg);
+      }
+    }
   }
 
   // ─── Camera ────────────────────────────────
@@ -1774,6 +1794,7 @@ export class MaisonScene {
     if (this._onPointerMove) window.removeEventListener('pointermove', this._onPointerMove);
     if (this._onPointerDown) window.removeEventListener('pointerdown', this._onPointerDown);
     if (this._onPointerUp) window.removeEventListener('pointerup', this._onPointerUp);
+    if (this._onThemeChange) window.removeEventListener('themechange', this._onThemeChange);
     window.removeEventListener('resize', this._onResize);
     this.renderer.dispose();
     this.scene.traverse(obj => {

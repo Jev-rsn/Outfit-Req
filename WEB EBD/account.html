@@ -13,6 +13,9 @@
       rel="stylesheet"
     />
 
+    <!-- Theme Controller (Zero-FOUC) -->
+    <script src="theme.js"></script>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -21,6 +24,7 @@
 
     <script>
       tailwind.config = {
+        darkMode: "class",
         theme: {
           extend: {
             colors: {
@@ -273,6 +277,167 @@
       .pulse-dot {
         animation: pulse-dot 2s infinite ease-in-out;
       }
+
+      /* ========================================================
+         DARK MODE OVERRIDES (account.html)
+         ======================================================== */
+      :root.dark, html.dark, [data-theme="dark"] {
+        --bg-cream: #191417;
+        --accent-maroon: #c93b5f;
+        --surface-white: #211b1e;
+        --text-black: #f7f3ee;
+      }
+      html.dark body, body.dark {
+        background-color: #0d0b0c !important;
+        color: #f7f3ee !important;
+      }
+      html.dark ::selection, [data-theme="dark"] ::selection {
+        background: #c93b5f;
+        color: #ffffff;
+      }
+      html.dark ::-moz-selection, [data-theme="dark"] ::-moz-selection {
+        background: #c93b5f;
+        color: #ffffff;
+      }
+      html.dark header {
+        background-color: rgba(15, 13, 14, 0.95) !important;
+        border-bottom-color: rgba(247, 243, 238, 0.1) !important;
+      }
+      html.dark header a span.font-serif {
+        color: #f7f3ee !important;
+      }
+      html.dark #btnBackToMain,
+      html.dark #topTierBadge,
+      html.dark #btnGoogleAuth,
+      html.dark #btnNavLogin {
+        background-color: #191417 !important;
+        border-color: rgba(247, 243, 238, 0.16) !important;
+        color: #f7f3ee !important;
+      }
+      html.dark #btnBackToMain:hover {
+        border-color: #c93b5f !important;
+      }
+
+      /* Secondary Tab Navigation */
+      html.dark .bg-white.border-b {
+        background-color: #151113 !important;
+        border-bottom-color: rgba(247, 243, 238, 0.1) !important;
+      }
+      html.dark .tab-pill-inactive {
+        color: rgba(247, 243, 238, 0.7) !important;
+      }
+
+      /* Main Card & Containers */
+      html.dark .bg-\[\#FFF8E7\] {
+        background-color: #191417 !important;
+        border-color: rgba(247, 243, 238, 0.12) !important;
+      }
+      html.dark .bg-white {
+        background-color: #211b1e !important;
+        border-color: rgba(247, 243, 238, 0.12) !important;
+      }
+      html.dark .bg-\[\#F8F6F0\],
+      html.dark .bg-stone-50,
+      html.dark .bg-stone-100 {
+        background-color: #151113 !important;
+      }
+      html.dark .text-black,
+      html.dark .text-stone-900,
+      html.dark #userUsernameDisplay {
+        color: #f7f3ee !important;
+      }
+      html.dark .text-black\/60,
+      html.dark .text-black\/70,
+      html.dark .text-black\/80,
+      html.dark .text-stone-500,
+      html.dark .text-stone-600 {
+        color: rgba(247, 243, 238, 0.65) !important;
+      }
+      html.dark .border-black\/10,
+      html.dark .border-black\/15,
+      html.dark .border-black\/20,
+      html.dark .border-stone-200 {
+        border-color: rgba(247, 243, 238, 0.12) !important;
+      }
+
+      /* Theme Toggle Button */
+      .theme-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        color: #6d001a;
+        cursor: pointer;
+        transition: all 0.22s ease;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        padding: 0;
+        touch-action: manipulation;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.06);
+        border-color: #6d001a;
+        box-shadow: 0 4px 12px rgba(109, 0, 26, 0.16);
+      }
+      .theme-toggle-btn:active {
+        transform: scale(0.94);
+      }
+      html.dark .theme-toggle-btn {
+        background: #191417 !important;
+        border-color: rgba(247, 243, 238, 0.16) !important;
+        color: #e5a968 !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+      }
+      html.dark .theme-toggle-btn:hover {
+        border-color: #c93b5f !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(201, 59, 95, 0.3) !important;
+      }
+
+      /* Form inputs & Modals in Dark Mode */
+      html.dark input,
+      html.dark select,
+      html.dark textarea {
+        background-color: #141113 !important;
+        color: #f7f3ee !important;
+        border-color: rgba(247, 243, 238, 0.18) !important;
+      }
+      html.dark input:focus,
+      html.dark select:focus,
+      html.dark textarea:focus {
+        border-color: #c93b5f !important;
+        box-shadow: 0 0 0 3px rgba(201, 59, 95, 0.2) !important;
+      }
+      html.dark #upgradeModalOverlay > div,
+      html.dark #modalEditProfile > div,
+      html.dark #modalVisualizer360 > div {
+        background-color: #191417 !important;
+        border: 1px solid rgba(247, 243, 238, 0.15) !important;
+        color: #f7f3ee !important;
+      }
+
+      /* Mobile Bottom Nav in Dark Mode */
+      html.dark .mobile-bottom-nav {
+        background: rgba(15, 13, 14, 0.96) !important;
+        border-top-color: rgba(247, 243, 238, 0.12) !important;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.45) !important;
+      }
+      html.dark .mobile-nav-tab-item {
+        color: rgba(247, 243, 238, 0.55) !important;
+      }
+      html.dark .mobile-nav-tab-item.active {
+        color: #c93b5f !important;
+      }
+      html.dark .mobile-nav-tab-item.active svg {
+        stroke: #c93b5f !important;
+      }
+      html.dark .mobile-nav-tab-item.active::after {
+        background: #c93b5f !important;
+      }
     </style>
   </head>
   <body
@@ -327,6 +492,16 @@
 
         <!-- Top Right Status Badge & Google Auth Handler -->
         <div class="flex items-center gap-1.5 sm:gap-3">
+          <!-- Theme Toggle Button -->
+          <button
+            type="button"
+            id="themeToggleBtn"
+            class="theme-toggle-btn"
+            onclick="window.toggleTheme && window.toggleTheme()"
+            title="Ubah Mode (Gelap / Terang)"
+            aria-label="Ubah Mode Gelap atau Terang"
+          ></button>
+
           <!-- Live Tier Badge -->
           <div
             id="topTierBadge"

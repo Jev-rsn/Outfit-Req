@@ -13,6 +13,9 @@
       rel="stylesheet"
     />
 
+    <!-- Theme Controller (Zero-FOUC) -->
+    <script src="theme.js"></script>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -21,6 +24,7 @@
 
     <script>
       tailwind.config = {
+        darkMode: "class",
         theme: {
           extend: {
             colors: {
@@ -47,6 +51,13 @@
         --bg: #faf8f5;
         --paper: #fdfcfa;
         --maroon: #6d001a;
+        --pin-red: #e60023;
+      }
+
+      :root.dark, html.dark, [data-theme="dark"] {
+        --bg: #0d0b0c;
+        --paper: #191417;
+        --maroon: #c93b5f;
         --pin-red: #e60023;
       }
 
@@ -343,6 +354,230 @@
           display: none !important;
         }
       }
+
+      /* ========================================================
+         DARK MODE OVERRIDES & SURFACES (rekomendasi.html)
+         ======================================================== */
+      html.dark body, body.dark {
+        background-color: #0d0b0c !important;
+        color: #f7f3ee !important;
+      }
+      html.dark ::selection, [data-theme="dark"] ::selection {
+        background: #c93b5f;
+        color: #ffffff;
+      }
+      html.dark ::-moz-selection, [data-theme="dark"] ::-moz-selection {
+        background: #c93b5f;
+        color: #ffffff;
+      }
+      html.dark ::-webkit-scrollbar-thumb {
+        background: #3a2e34;
+      }
+      html.dark ::-webkit-scrollbar-thumb:hover {
+        background: #5a4852;
+      }
+
+      /* Header in Dark Mode */
+      html.dark #mainHeader {
+        background-color: rgba(13, 11, 12, 0.95) !important;
+        border-bottom-color: rgba(247, 243, 238, 0.1) !important;
+      }
+      html.dark #mainHeader a span {
+        color: #f7f3ee !important;
+      }
+      html.dark #pinterestSearchInput {
+        background-color: #191417 !important;
+        color: #f7f3ee !important;
+        border-color: rgba(247, 243, 238, 0.14) !important;
+      }
+      html.dark #pinterestSearchInput::placeholder {
+        color: rgba(247, 243, 238, 0.45) !important;
+      }
+      html.dark #pinterestSearchInput:focus {
+        border-color: #c93b5f !important;
+        background-color: #211b1f !important;
+        box-shadow: 0 0 0 3px rgba(201, 59, 95, 0.2) !important;
+      }
+
+      /* Theme Toggle Button */
+      .theme-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        color: #6d001a;
+        cursor: pointer;
+        transition: all 0.22s ease;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        padding: 0;
+        touch-action: manipulation;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.06);
+        border-color: #6d001a;
+        box-shadow: 0 4px 12px rgba(109, 0, 26, 0.16);
+      }
+      .theme-toggle-btn:active {
+        transform: scale(0.94);
+      }
+      html.dark .theme-toggle-btn {
+        background: #191417 !important;
+        border-color: rgba(247, 243, 238, 0.16) !important;
+        color: #e5a968 !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+      }
+      html.dark .theme-toggle-btn:hover {
+        border-color: #c93b5f !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(201, 59, 95, 0.3) !important;
+      }
+
+      /* Action Buttons in Header */
+      html.dark #btnToggleSavedBoard,
+      html.dark a[href="account.html"].shadow-xs {
+        background-color: #191417 !important;
+        border-color: rgba(247, 243, 238, 0.15) !important;
+        color: #f7f3ee !important;
+      }
+      html.dark #btnToggleSavedBoard:hover,
+      html.dark a[href="account.html"].shadow-xs:hover {
+        border-color: rgba(247, 243, 238, 0.35) !important;
+      }
+      html.dark #userNavName {
+        color: #f7f3ee !important;
+      }
+      html.dark #savedCounterBadge,
+      html.dark #savedCounterBadgeMobile {
+        background-color: #c93b5f !important;
+        color: #ffffff !important;
+      }
+      html.dark #userNavAvatar,
+      html.dark #userNavAvatarMobile {
+        background-color: #c93b5f !important;
+        color: #ffffff !important;
+      }
+
+      /* Chips in Dark Mode */
+      html.dark .chip-pill.active {
+        background-color: #c93b5f !important;
+        color: #ffffff !important;
+      }
+      html.dark .chip-pill:not(.active) {
+        background-color: #191417 !important;
+        color: rgba(247, 243, 238, 0.75) !important;
+        border: 1px solid rgba(247, 243, 238, 0.12) !important;
+      }
+      html.dark .chip-pill:not(.active):hover {
+        background-color: #241d21 !important;
+        color: #ffffff !important;
+      }
+      html.dark #sortSelect {
+        background-color: #191417 !important;
+        color: #f7f3ee !important;
+        border: 1px solid rgba(247, 243, 238, 0.12) !important;
+        border-radius: 999px;
+        padding-left: 10px;
+      }
+      html.dark #sortSelect option {
+        background-color: #191417;
+        color: #f7f3ee;
+      }
+
+      /* Pin Cards & Typography in Dark Mode */
+      html.dark .pin-image-wrapper {
+        background-color: #1e181c !important;
+      }
+      html.dark .pin-card h3 {
+        color: #f7f3ee !important;
+      }
+      html.dark .pin-card .text-stone-500 {
+        color: rgba(247, 243, 238, 0.65) !important;
+      }
+      html.dark .pin-hover-overlay .bg-white\/95 {
+        background-color: rgba(26, 21, 24, 0.95) !important;
+        color: #f7f3ee !important;
+      }
+      html.dark .pin-hover-overlay a.bg-white {
+        background-color: rgba(26, 21, 24, 0.95) !important;
+        color: #f7f3ee !important;
+      }
+
+      /* Detail Modal in Dark Mode */
+      html.dark #pinDetailModal > div {
+        background-color: #191417 !important;
+        border: 1px solid rgba(247, 243, 238, 0.15) !important;
+        color: #f7f3ee !important;
+      }
+      html.dark #pinDetailModal h2,
+      html.dark #modalPinTitle {
+        color: #f7f3ee !important;
+      }
+      html.dark #modalPinDesc {
+        color: rgba(247, 243, 238, 0.72) !important;
+      }
+      html.dark #pinDetailModal .bg-\[\#F5F2EA\] {
+        background-color: #120e10 !important;
+      }
+      html.dark #pinDetailModal button[onclick="closePinDetailModal()"] {
+        background-color: #241d21 !important;
+        color: #f7f3ee !important;
+      }
+      html.dark #modalItemsList > div {
+        background-color: #211b1e !important;
+        border-color: rgba(247, 243, 238, 0.1) !important;
+        color: #f7f3ee !important;
+      }
+      html.dark #modalEstimatedTotal {
+        color: #e5a968 !important;
+      }
+
+      /* Saved Board Section & Empty States in Dark Mode */
+      html.dark #savedBoardSection h2,
+      html.dark #emptySavedState p.font-serif,
+      html.dark #emptyFilterState p.font-serif {
+        color: #f7f3ee !important;
+      }
+      html.dark #savedBoardSection p,
+      html.dark #emptySavedState p.text-stone-500,
+      html.dark #emptyFilterState p.text-stone-500 {
+        color: rgba(247, 243, 238, 0.65) !important;
+      }
+      html.dark #savedBoardSection button {
+        background-color: #241d21 !important;
+        color: #f7f3ee !important;
+      }
+      html.dark #btnLoadMore {
+        background-color: #191417 !important;
+        color: #f7f3ee !important;
+        border-color: rgba(247, 243, 238, 0.15) !important;
+      }
+      html.dark #btnLoadMore:hover {
+        background-color: #241d21 !important;
+      }
+
+      /* Mobile Bottom Nav in Dark Mode */
+      html.dark .mobile-bottom-nav {
+        background: rgba(13, 11, 12, 0.96) !important;
+        border-top-color: rgba(247, 243, 238, 0.12) !important;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.45) !important;
+      }
+      html.dark .mobile-nav-tab-item {
+        color: rgba(247, 243, 238, 0.55) !important;
+      }
+      html.dark .mobile-nav-tab-item.active {
+        color: #c93b5f !important;
+      }
+      html.dark .mobile-nav-tab-item.active svg {
+        stroke: #c93b5f !important;
+      }
+      html.dark .mobile-nav-tab-item.active::after {
+        background: #c93b5f !important;
+      }
     </style>
   </head>
   <body class="selection:bg-stone-900 selection:text-white">
@@ -372,6 +607,17 @@
 
           <!-- Right Navigation Actions (Mobile) -->
           <div class="flex sm:hidden items-center gap-2 shrink-0">
+            <!-- Theme Toggle Mobile -->
+            <button
+              type="button"
+              id="themeToggleBtnMobile"
+              class="theme-toggle-btn"
+              onclick="window.toggleTheme && window.toggleTheme()"
+              title="Ubah Mode (Gelap / Terang)"
+              aria-label="Ubah Mode Gelap atau Terang"
+              style="width: 32px; height: 32px; min-width: 32px;"
+            ></button>
+
             <!-- Saved Pins Board Button -->
             <button
               type="button"
@@ -467,6 +713,16 @@
 
         <!-- Right Navigation Actions (Desktop) -->
         <div class="hidden sm:flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <!-- Theme Toggle Desktop -->
+          <button
+            type="button"
+            id="themeToggleBtn"
+            class="theme-toggle-btn"
+            onclick="window.toggleTheme && window.toggleTheme()"
+            title="Ubah Mode (Gelap / Terang)"
+            aria-label="Ubah Mode Gelap atau Terang"
+          ></button>
+
           <!-- Saved Pins Board Button -->
           <button
             type="button"

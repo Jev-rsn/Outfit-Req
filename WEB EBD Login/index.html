@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script src="theme.js"></script>
   </head>
   <body>
     <!-- Loading Screen -->
@@ -116,6 +117,15 @@
           </a>
         </div>
         <div class="nav-right">
+          <button
+            type="button"
+            id="themeToggleBtn"
+            class="theme-toggle-btn"
+            onclick="window.toggleTheme && window.toggleTheme()"
+            title="Ubah Mode (Gelap / Terang)"
+            aria-label="Ubah Mode (Gelap / Terang)"
+            style="margin-right: 8px;"
+          ></button>
           <button
             class="nav-link nav-cta-btn"
             aria-label="Account"

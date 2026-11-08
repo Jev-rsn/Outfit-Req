@@ -10,6 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script>
     // Pengalihan instan ke Beranda Utama (WEB EBD/index.html)
+    try {
+      var t = localStorage.getItem('outfit_req_theme') || localStorage.getItem('theme');
+      if (t === 'dark' || (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch(e) {}
     window.location.replace("WEB EBD/index.html" + window.location.search + window.location.hash);
   </script>
   <style>
@@ -18,6 +24,26 @@
       --burgundy: #6D001A;
       --burgundy-light: rgba(109, 0, 26, 0.12);
       --ink: #111111;
+    }
+    :root.dark, html.dark {
+      --bg: #0D0B0C;
+      --burgundy: #C93B5F;
+      --burgundy-light: rgba(201, 59, 95, 0.2);
+      --ink: #F7F3EE;
+    }
+    html.dark p {
+      color: rgba(247, 243, 238, 0.7);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not(.light) {
+        --bg: #0D0B0C;
+        --burgundy: #C93B5F;
+        --burgundy-light: rgba(201, 59, 95, 0.2);
+        --ink: #F7F3EE;
+      }
+      body:not(.light) p {
+        color: rgba(247, 243, 238, 0.7);
+      }
     }
     body {
       margin: 0;

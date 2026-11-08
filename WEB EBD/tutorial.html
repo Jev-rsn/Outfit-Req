@@ -7,6 +7,8 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <title>Outfit Req — Panduan & Tutorial Penggunaan</title>
+    <!-- Theme Controller (Zero-FOUC) -->
+    <script src="theme.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1681,6 +1683,361 @@
           ) !important;
         }
       }
+
+      /* ========================================================
+         DARK MODE OVERRIDES (tutorial.html)
+         ======================================================== */
+      :root.dark, html.dark, [data-theme="dark"] {
+        --bg: #0d0b0c;
+        --bg2: #191417;
+        --ink: #f7f3ee;
+        --ink-dim: rgba(247, 243, 238, 0.72);
+        --line: rgba(247, 243, 238, 0.14);
+        --gold: #e5a968;
+        --burgundy: #c93b5f;
+        --burgundy2: #e05377;
+        --burgundy-light: rgba(201, 59, 95, 0.16);
+        --on-accent: #ffffff;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+      }
+      html.dark body, body.dark {
+        background: var(--bg);
+        color: var(--ink);
+      }
+      html.dark ::selection, [data-theme="dark"] ::selection {
+        background: var(--burgundy);
+        color: #ffffff;
+      }
+      html.dark ::-moz-selection, [data-theme="dark"] ::-moz-selection {
+        background: var(--burgundy);
+        color: #ffffff;
+      }
+      html.dark ::-webkit-scrollbar-track, [data-theme="dark"] ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      html.dark ::-webkit-scrollbar-thumb, [data-theme="dark"] ::-webkit-scrollbar-thumb {
+        background: rgba(201, 59, 95, 0.35);
+        border: 2px solid var(--bg);
+      }
+
+      /* Navbar in Dark Mode */
+      html.dark .nav-header {
+        background: rgba(15, 13, 14, 0.94);
+        border-bottom-color: var(--line);
+      }
+      html.dark .brand-logo {
+        color: var(--burgundy);
+      }
+      html.dark .brand-badge {
+        background: rgba(201, 59, 95, 0.18);
+        color: var(--burgundy);
+        border-color: rgba(201, 59, 95, 0.35);
+      }
+      html.dark .user-pill {
+        background: #191417;
+        border-color: rgba(201, 59, 95, 0.35);
+        color: var(--burgundy);
+      }
+      html.dark .guest-pill {
+        background: #191417;
+        border-color: var(--line);
+        color: var(--ink-dim);
+      }
+      html.dark .btn-nav-auth {
+        color: var(--burgundy);
+        border-color: rgba(201, 59, 95, 0.4);
+      }
+      html.dark .btn-nav-auth:hover {
+        background: rgba(201, 59, 95, 0.15);
+      }
+
+      /* Theme Toggle Button */
+      .theme-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 1px solid rgba(109, 0, 26, 0.2);
+        color: var(--burgundy);
+        cursor: pointer;
+        transition: all 0.22s ease;
+        box-shadow: 0 2px 8px rgba(109, 0, 26, 0.06);
+        padding: 0;
+        touch-action: manipulation;
+      }
+      .theme-toggle-btn:hover {
+        transform: scale(1.06);
+        border-color: var(--burgundy);
+        box-shadow: 0 4px 12px rgba(109, 0, 26, 0.16);
+      }
+      .theme-toggle-btn:active {
+        transform: scale(0.94);
+      }
+      html.dark .theme-toggle-btn {
+        background: #191417 !important;
+        border-color: rgba(247, 243, 238, 0.16) !important;
+        color: var(--gold) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+      }
+      html.dark .theme-toggle-btn:hover {
+        border-color: var(--burgundy) !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(201, 59, 95, 0.3) !important;
+      }
+
+      /* Matrix Pill & Hero Cards in Dark Mode */
+      html.dark .matrix-pill {
+        background: #191417;
+        border-color: var(--line);
+        color: var(--ink);
+      }
+      html.dark .hero-badge-pill {
+        background: rgba(201, 59, 95, 0.18);
+        border-color: rgba(201, 59, 95, 0.35);
+        color: var(--burgundy);
+      }
+      html.dark .hero-title {
+        color: var(--burgundy);
+      }
+      html.dark .customer-highlight {
+        color: var(--gold);
+        border-bottom-color: var(--gold);
+      }
+
+      /* Dual Cards Overview */
+      html.dark .component-card {
+        background: #191417;
+        border-color: var(--line);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+      html.dark .component-card:hover {
+        border-color: var(--burgundy);
+        box-shadow: 0 14px 40px rgba(201, 59, 95, 0.25);
+      }
+      html.dark .card-content h3 {
+        color: var(--ink);
+      }
+      html.dark .card-content p {
+        color: var(--ink-dim);
+      }
+      html.dark .card-meta-row span {
+        color: var(--ink-dim);
+      }
+
+      /* Pop-up Modal in Dark Mode */
+      html.dark .tutorial-popup-card {
+        background: #191417;
+        border-color: var(--line);
+        color: var(--ink);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      }
+      html.dark .popup-card-header {
+        border-bottom-color: var(--line);
+      }
+      html.dark .popup-tag-badge {
+        background: rgba(201, 59, 95, 0.18);
+        border-color: rgba(201, 59, 95, 0.35);
+        color: var(--burgundy);
+      }
+      html.dark .popup-card-title {
+        color: var(--burgundy);
+      }
+      html.dark .popup-card-subtitle {
+        color: var(--ink-dim);
+      }
+      html.dark .popup-close-btn {
+        background: #241d21;
+        border-color: var(--line);
+        color: var(--ink);
+      }
+      html.dark .popup-close-btn:hover {
+        background: var(--burgundy);
+        color: #ffffff;
+      }
+      html.dark .popup-tabs-bar {
+        border-bottom-color: var(--line);
+        background: #120e10;
+      }
+      html.dark .popup-tab-btn {
+        color: var(--ink-dim);
+      }
+      html.dark .popup-tab-btn.active {
+        color: var(--burgundy);
+      }
+      html.dark .popup-tab-btn.active::after {
+        background: var(--burgundy);
+      }
+      html.dark .tutorial-step-card {
+        background: #211b1e;
+        border-color: var(--line);
+      }
+      html.dark .step-number {
+        background: var(--burgundy);
+        color: #ffffff;
+      }
+      html.dark .step-title {
+        color: var(--ink);
+      }
+      html.dark .step-desc {
+        color: var(--ink-dim);
+      }
+      html.dark .feature-callout {
+        background: #151113;
+        border-color: var(--line);
+      }
+      html.dark .feature-callout strong {
+        color: var(--gold);
+      }
+
+      /* Verified Welcome Modal in Dark Mode */
+      html.dark .verified-modal-card {
+        background: #191417;
+        border-color: var(--line);
+        color: var(--ink);
+      }
+      html.dark .verified-modal-user {
+        background: #211b1e;
+        border-color: var(--line);
+      }
+      html.dark .btn-modal-outline {
+        border-color: var(--line);
+        color: var(--ink);
+      }
+
+      /* Mobile Bottom Nav in Dark Mode */
+      html.dark .mobile-bottom-nav {
+        background: rgba(15, 13, 14, 0.96) !important;
+        border-top-color: var(--line) !important;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.45) !important;
+      }
+      html.dark .mobile-nav-tab-item {
+        color: rgba(247, 243, 238, 0.55) !important;
+      }
+      html.dark .mobile-nav-tab-item.active {
+        color: var(--burgundy) !important;
+      }
+      html.dark .mobile-nav-tab-item.active svg {
+        stroke: var(--burgundy) !important;
+      }
+      html.dark .mobile-nav-tab-item.active::after {
+        background: var(--burgundy) !important;
+      }
+    
+      /* Empty State Tutorial */
+      .tutorial-empty-section {
+        min-height: calc(100vh - 160px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px 100px;
+      }
+      .tutorial-empty-card {
+        max-width: 540px;
+        width: 100%;
+        background: var(--bg2);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 48px 36px;
+        text-align: center;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(8px);
+        transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      .empty-icon-wrap {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        background: var(--burgundy-light);
+        border: 1px solid var(--line);
+        color: var(--burgundy);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 22px;
+      }
+      .empty-badge {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--burgundy);
+        background: var(--burgundy-light);
+        padding: 4px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        margin-bottom: 14px;
+      }
+      .empty-title {
+        font-family: 'Instrument Serif', Georgia, serif;
+        font-size: 34px;
+        font-weight: 400;
+        color: var(--burgundy);
+        letter-spacing: -0.5px;
+        margin: 0 0 12px;
+        line-height: 1.25;
+      }
+      .empty-desc {
+        font-size: 14px;
+        color: var(--ink-dim);
+        line-height: 1.65;
+        margin: 0 0 28px;
+      }
+      .empty-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .btn-empty-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--burgundy);
+        color: #fff;
+        padding: 10px 22px;
+        border-radius: 999px;
+        font-size: 13.5px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+      }
+      .btn-empty-primary:hover {
+        transform: translateY(-1px);
+        opacity: 0.95;
+        box-shadow: 0 4px 16px rgba(114, 47, 55, 0.25);
+      }
+      .btn-empty-secondary {
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 22px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--bg);
+        color: var(--ink);
+        font-size: 13.5px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+      }
+      .btn-empty-secondary:hover {
+        border-color: var(--burgundy);
+        color: var(--burgundy);
+        transform: translateY(-1px);
+      }
+      html.dark .btn-empty-primary {
+        color: #0D0B0C;
+        background: var(--burgundy);
+      }
+      html.dark .btn-empty-primary:hover {
+        box-shadow: 0 4px 16px rgba(201, 59, 95, 0.35);
+      }
+
     </style>
     <script>
       // Global stub agar pemanggilan onclick pada kartu langsung siap sejak awal
@@ -1768,6 +2125,16 @@
           <span>Masuk / Daftar</span>
         </a>
 
+        <!-- Theme Toggle Button (Light/Dark Mode) -->
+        <button
+          type="button"
+          id="themeToggleBtn"
+          class="theme-toggle-btn"
+          onclick="window.toggleTheme && window.toggleTheme()"
+          title="Ubah Mode (Gelap / Terang)"
+          aria-label="Ubah Mode Gelap atau Terang"
+        ></button>
+
         <!-- Tombol Navigasi Beranda Utama -->
         <a
           href="index.html"
@@ -1791,1492 +2158,52 @@
       </div>
     </header>
 
-    <!-- Hero Introduction (Universal untuk Semua Akun) -->
-    <section class="hero-welcome">
-      <div class="hero-badge-pill">
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.2"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M12 16v-4M12 8h.01" />
-        </svg>
-        <span>PANDUAN &amp; KURASI GAYA</span>
-      </div>
-
-      <h1 class="hero-title">Panduan Penggunaan Website</h1>
-      <p class="hero-subtitle" id="heroSubtitle">
-        Pelajari cara menemukan karakter gaya busana, menelusuri katalog outfit terkurasi, dan berbelanja di toko resmi.
-      </p>
-
-      <!-- Informasi Komparasi Akses Akun -->
-      <div class="account-matrix-row">
-        <div class="matrix-pill">
+    <!-- Main Empty State Content: Tutorial Sementara Dikosongkan -->
+    <main class="tutorial-empty-section" id="tutorialEmptySection">
+      <div class="tutorial-empty-card">
+        <div class="empty-icon-wrap">
           <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="var(--burgundy)"
-            stroke-width="2"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="m9 12 2 2 4-4" />
-          </svg>
-          <span
-            >Akses Tamu: <strong>Bebas eksplorasi katalog busana, filter acara, &amp; tautan toko resmi</strong></span
-          >
-        </div>
-        <div class="matrix-pill">
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="var(--burgundy)"
-            stroke-width="2"
-          >
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
-            />
-          </svg>
-          <span
-            >Akun Terdaftar:
-            <strong
-              >Simpan outfit favorit, analisis profil tubuh, &amp; kurasi personal</strong
-            ></span
-          >
-        </div>
-      </div>
-    </section>
-
-    <!-- 2 Pilihan Komponen Utama (Dual Overview Cards) -->
-    <section class="dual-component-grid" aria-label="Pilihan Komponen Tutorial">
-      <!-- Card 1: Tutorial Personality -->
-      <div
-        class="component-card-choice"
-        id="choiceCardPersonality"
-        onclick="openTutorialPopup('personality', event)"
-      >
-        <div class="choice-header">
-          <div class="choice-icon-wrap">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
-          </div>
-          <span class="choice-status-badge" id="badgeCardPersonality"
-            >Buka Panduan</span
-          >
-        </div>
-        <div class="choice-body">
-          <h3>Fitur Style Personality</h3>
-          <div class="choice-tagline">
-            Analisis Karakter Gaya &amp; Siluet Ideal
-          </div>
-          <p class="choice-desc">
-            Kenali 4 karakter gaya dominan (Classic, Minimalist, Chic, Streetwear), panduan siluet potongan pakaian, dan palet warna busana yang serasi.
-          </p>
-        </div>
-        <div class="choice-footer">
-          <button type="button" class="btn-card-action-trigger">
-            <span>Buka Panduan Personality</span>
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Card 2: Tutorial Rekomendasi -->
-      <div
-        class="component-card-choice"
-        id="choiceCardRekomendasi"
-        onclick="openTutorialPopup('rekomendasi', event)"
-      >
-        <div class="choice-header">
-          <div class="choice-icon-wrap">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-              <path d="M3 6h18" />
-              <path d="M16 10a4 4 0 0 1-8 0" />
-            </svg>
-          </div>
-          <span class="choice-status-badge" id="badgeCardRekomendasi"
-            >Buka Panduan</span
-          >
-        </div>
-        <div class="choice-body">
-          <h3>Fitur Rekomendasi Outfit</h3>
-          <div class="choice-tagline">
-            Filter Tema Acara, Kartu Editorial, &amp; Belanja
-          </div>
-          <p class="choice-desc">
-            Panduan menelusuri katalog foto outfit editorial, menyaring berdasarkan suasana acara (Kasual, Formal, Pesta, Liburan), dan membeli di toko resmi.
-          </p>
-        </div>
-        <div class="choice-footer">
-          <button type="button" class="btn-card-action-trigger">
-            <span>Buka Panduan Rekomendasi</span>
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Prompt Pemilihan Sebelum Card Ditekan -->
-    <div
-      class="tutorial-select-prompt"
-      id="tutorialSelectPrompt"
-      style="display: none !important;"
-      onclick="openTutorialPopup('personality', event)"
-      title="Tekan untuk membuka pop-up tutorial"
-      role="button"
-      tabindex="0"
-    >
-      <div class="prompt-icon-bounce">
-        <svg
-          width="22"
-          height="22"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="var(--burgundy)"
-          stroke-width="2.2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M12 5v14M19 12l-7 7-7-7" />
-        </svg>
-      </div>
-      <h3 class="prompt-title">Pilih Komponen Tutorial</h3>
-      <p class="prompt-text">
-        Silakan <strong>tekan salah satu card di atas</strong> untuk memunculkan
-        pop-up panduan langkah demi langkah. 
-      </p>
-    </div>
-
-    <!-- Main Content Area: Berisi 2 Komponen Tampilan Awal -->
-    <main class="tutorial-main" id="tutorialMainContainer" style="display: none !important;">
-      <!-- Segmented Tab Switcher with Close Button -->
-      <div class="segmented-control-wrapper">
-        <div class="segmented-control" role="tablist">
-          <button
-            class="seg-btn"
-            id="segBtnPersonality"
-            onclick="selectTutorialComponent('personality', true)"
-            role="tab"
-            aria-selected="false"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
-            <span>1. Cara Pakai Fitur Personality</span>
-          </button>
-          <button
-            class="seg-btn"
-            id="segBtnRekomendasi"
-            onclick="selectTutorialComponent('rekomendasi', true)"
-            role="tab"
-            aria-selected="false"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-              <path d="M3 6h18" />
-            </svg>
-            <span>2. Cara Pakai Fitur Rekomendasi</span>
-          </button>
-        </div>
-
-        <button
-          type="button"
-          class="btn-close-tutorial"
-          id="btnCloseTutorial"
-          onclick="closeTutorialContent()"
-          title="Tutup tampilan tutorial"
-        >
-          <svg
-            width="14"
-            height="14"
+            width="32"
+            height="32"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2.2"
+            stroke-width="1.8"
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="m18 15-6-6-6 6" />
-          </svg>
-          <span>Tutup Tutorial</span>
-        </button>
-      </div>
-
-      <!-- ========================================================
-           KOMPONEN 1: TAMPILAN AWAL TUTORIAL PERSONALITY (GENERAL)
-           ======================================================== -->
-      <section
-        class="tutorial-component-view"
-        id="viewPersonality"
-        role="tabpanel"
-        aria-label="Tutorial Personality"
-      >
-        <div class="view-header-card">
-          <div class="view-header-left">
-            <span class="view-badge">PANDUAN FITUR 1 &bull; STYLE PERSONALITY</span>
-            <h2 class="view-title">
-              Cara Menggunakan Fitur Style Personality
-            </h2>
-            <p class="view-desc">
-              Panduan memahami karakter kepribadian gaya, komposisi palet warna kain, dan rasio siluet ideal tubuh Anda.
-            </p>
-          </div>
-          <div
-            style="
-              background: var(--burgundy-light);
-              border: 1px solid var(--line);
-              border-radius: 14px;
-              padding: 12px 18px;
-              text-align: center;
-            "
-          >
-            <div
-              style="
-                font-size: 11px;
-                font-weight: 700;
-                color: var(--burgundy);
-                text-transform: uppercase;
-              "
-            >
-              Status Panduan
-            </div>
-            <div
-              style="
-                font-size: 14px;
-                font-weight: 700;
-                color: #15803d;
-                margin-top: 2px;
-              "
-            >
-              Tersedia Lengkap
-            </div>
-          </div>
-        </div>
-
-        <!-- 5 Langkah Alur Utama -->
-        <div class="popup-section-heading">
-          <span class="popup-section-badge">LANGKAH 1 - 5</span>
-          <span>Tahapan Menemukan Karakter Gaya &amp; Siluet Ideal</span>
-        </div>
-
-        <div class="popup-guide-grid">
-          <div class="popup-guide-card">
-            <div class="popup-step-header">
-              <div class="popup-step-num">1</div>
-              <div>
-                <span class="ui-cue-pill">Di Beranda Web</span>
-                <h4 class="popup-step-title">Pilih Mode "Tes Personality"</h4>
-              </div>
-            </div>
-            <p class="popup-step-desc">
-              Pada Beranda Utama, klik tombol <strong>"Tes Personality"</strong> di bawah judul utama atau eksplorasi kartu gaya busana.
-            </p>
-            <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik tombol <strong>"Tes Personality"</strong> untuk membuka formulir preferensi gaya busana.
-            </div>
-          </div>
-
-          <div class="popup-guide-card">
-            <div class="popup-step-header">
-              <div class="popup-step-num">2</div>
-              <div>
-                <span class="ui-cue-pill">Preferensi Acara</span>
-                <h4 class="popup-step-title">
-                  Tentukan Acara &amp; Suasana
-                </h4>
-              </div>
-            </div>
-            <p class="popup-step-desc">
-              Pilih suasana acara yang paling sering Anda hadiri: lingkungan kantor formal, hangout santai di kafe, pesta perayaan, atau liburan luar ruangan.
-            </p>
-            <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik kartu preferensi suasana yang paling mewakili kenyamanan dan kebutuhan berpakaian Anda.
-            </div>
-          </div>
-
-          <div class="popup-guide-card">
-            <div class="popup-step-header">
-              <div class="popup-step-num">3</div>
-              <div>
-                <span class="ui-cue-pill">Karakter Siluet</span>
-                <h4 class="popup-step-title">Sesuaikan Postur &amp; Ukuran</h4>
-              </div>
-            </div>
-            <p class="popup-step-desc">
-              Masukkan estimasi tinggi dan berat badan atau pilih profil tubuh Anda di menu Akun untuk mencocokkan rasio potongan pakaian.
-            </p>
-            <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Lengkapi data postur tubuh untuk mendapatkan saran siluet atasan dan bawahan yang seimbang.
-            </div>
-          </div>
-
-          <div class="popup-guide-card">
-            <div class="popup-step-header">
-              <div class="popup-step-num">4</div>
-              <div>
-                <span class="ui-cue-pill">Rangkuman Gaya</span>
-                <h4 class="popup-step-title">
-                  Dapatkan DNA Gaya &amp; Palet Warna
-                </h4>
-              </div>
-            </div>
-            <p class="popup-step-desc">
-              Layar akan menampilkan rangkuman tipe gaya dominan Anda (Classic, Minimalist, Chic, atau Streetwear) beserta panduan palet warna kain.
-            </p>
-            <div class="popup-step-action">
-              <strong>Hasil di Web:</strong> Tinjau tipe gaya dominan, panduan potongan atasan/bawahan, dan rekomendasi swatch palet warna.
-            </div>
-          </div>
-
-          <div class="popup-guide-card">
-            <div class="popup-step-header">
-              <div class="popup-step-num">5</div>
-              <div>
-                <span class="ui-cue-pill">Koleksi Profil</span>
-                <h4 class="popup-step-title">
-                  Simpan Inspirasi ke Profil Akun
-                </h4>
-              </div>
-            </div>
-            <p class="popup-step-desc">
-              Simpan rangkuman gaya dan foto outfit favorit ke akun profil Anda agar selalu dapat diakses saat berbelanja atau memilih busana harian.
-            </p>
-            <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik menu profil di pojok kanan atas untuk melihat riwayat analisis gaya dan foto yang tersimpan.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ========================================================
-           KOMPONEN 2: TAMPILAN AWAL TUTORIAL REKOMENDASI (GENERAL)
-           ======================================================== -->
-      <section
-        class="tutorial-component-view"
-        id="viewRekomendasi"
-        role="tabpanel"
-        aria-label="Tutorial Rekomendasi"
-      >
-        <div class="view-header-card">
-          <div class="view-header-left">
-            <span class="view-badge">PANDUAN FITUR 2 &bull; REKOMENDASI OUTFIT</span>
-            <h2 class="view-title">
-              Cara Menggunakan Galeri Rekomendasi Outfit
-            </h2>
-            <p class="view-desc">
-              Panduan menelusuri katalog foto outfit editorial, memfilter tema suasana acara, serta mengecek tautan toko resmi.
-            </p>
-            <div style="margin-top: 12px">
-              <a
-                href="rekomendasi.html"
-                style="
-                  display: inline-flex;
-                  align-items: center;
-                  gap: 8px;
-                  background: #6d001a;
-                  color: #fff8e7;
-                  padding: 8px 18px;
-                  border-radius: 999px;
-                  font-size: 12px;
-                  font-weight: 700;
-                  text-decoration: none;
-                  box-shadow: 0 4px 12px rgba(109, 0, 26, 0.2);
-                "
-              >
-                <span>Buka Galeri Rekomendasi</span>
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div
-            style="
-              background: var(--burgundy-light);
-              border: 1px solid var(--line);
-              border-radius: 14px;
-              padding: 12px 18px;
-              text-align: center;
-            "
-          >
-            <div
-              style="
-                font-size: 11px;
-                font-weight: 700;
-                color: var(--burgundy);
-                text-transform: uppercase;
-              "
-            >
-              Status Panduan
-            </div>
-            <div
-              style="
-                font-size: 14px;
-                font-weight: 700;
-                color: #15803d;
-                margin-top: 2px;
-              "
-            >
-              Tersedia Lengkap
-            </div>
-          </div>
-        </div>
-
-        <!-- 5 Langkah Alur Utama -->
-        <div class="popup-section-heading">
-          <span class="popup-section-badge">LANGKAH 1 - 5</span>
-          <span>Tahapan Menjelajahi Kurasi Busana &amp; Berbelanja</span>
-        </div>
-
-        <div class="popup-guide-grid">
-          <div class="popup-guide-card">
-            <div class="popup-step-header">
-              <div class="popup-step-num">1</div>
-              <div>
-                <span class="ui-cue-pill">Di Beranda Web</span>
-                <h4 class="popup-step-title">
-                  Buka Galeri Rekomendasi
-                </h4>
-              </div>
-            </div>
-            <p class="popup-step-desc">
-              Pilih menu <strong>"Lihat Rekomendasi"</strong> pada Beranda Utama atau langsung buka halaman Galeri untuk melihat feed foto busana.
-            </p>
-            <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik tombol <strong>"Lihat Rekomendasi"</strong> untuk menjelajahi katalog foto Pinterest waterfall.
-            </div>
-          </div>
-
-          <div class="popup-guide-card">
-            <div class="popup-step-header">
-              <div class="popup-step-num">2</div>
-              <div>
-                <span class="ui-cue-pill">Bilah Filter Acara</span>
-                <h4 class="popup-step-title">Pilih Tema Acara &amp; Kategori</h4>
-              </div>
-            </div>
-            <p class="popup-step-desc">
-              Gunakan bilah filter chip di atas galeri: Kasual, Formal, Minimalis, Streetwear, Pesta, Liburan, hingga filter eksklusif Konser atau Kajian Syar'i.
-            </p>
-            <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik salah satu chip kategori. Seluruh feed foto outfit akan terfilter secara instan.
-            </div>
-          </div>
-
-          <div class="popup-guide-card">
-            <div class="popup-step-header">
-              <div class="popup-step-num">3</div>
-              <div>
-                <span class="ui-cue-pill">Katalog Visual</span>
-                <h4 class="popup-step-title">
-                  Pilih Kartu Outfit yang Diinginkan
-                </h4>
-              </div>
-            </div>
-            <p class="popup-step-desc">
-              Klik pada kartu foto busana yang menarik perhatian Anda untuk membuka jendela rincian busana lengkap dengan palet warna dan komponen pakaian.
-            </p>
-            <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik foto outfit untuk membuka lembar rincian gaya, brand toko, dan estimasi total harga.
-            </div>
-          </div>
-
-          <div class="popup-guide-card">
-            <div class="popup-step-header">
-              <div class="popup-step-num">4</div>
-              <div>
-                <span class="ui-cue-pill">Koleksi Favorit</span>
-                <h4 class="popup-step-title">
-                  Simpan Outfit ke Akun Anda
-                </h4>
-              </div>
-            </div>
-            <p class="popup-step-desc">
-              Gunakan tombol <strong>"Simpan"</strong> berwarna merah di kartu atau jendela rincian untuk menyimpan outfit ke koleksi akun pribadi Anda.
-            </p>
-            <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Klik tombol <strong>"Simpan"</strong> untuk menambahkan outfit ke menu 'Foto yang Disimpan' di akun Anda.
-            </div>
-          </div>
-
-          <div class="popup-guide-card">
-            <div class="popup-step-header">
-              <div class="popup-step-num">5</div>
-              <div>
-                <span class="ui-cue-pill">Toko Mitra Resmi</span>
-                <h4 class="popup-step-title">
-                  Beli Produk di Toko Resmi
-                </h4>
-              </div>
-            </div>
-            <p class="popup-step-desc">
-              Setiap outfit terhubung langsung ke katalog toko e-commerce resmi mitra (Uniqlo Official, Shopee Live) untuk kemudahan pembelian.
-            </p>
-            <div class="popup-step-action">
-              <strong>Aksi di Web:</strong> Tekan tombol <strong>"Beli di Toko Resmi"</strong> untuk langsung menuju halaman produk original.
-            </div>
-          </div>
-        </div>
-
-        <!-- Panduan Kategori Acara -->
-        <div class="popup-section-heading">
-          <span class="popup-section-badge">KATEGORI ACARA</span>
-          <span>Inspirasi Paduan Busana Sesuai Suasana</span>
-        </div>
-
-        <div class="popup-style-grid">
-          <div class="popup-style-box">
-            <div class="popup-style-title">
-              <span>Kasual / Hangout</span>
-              <span class="popup-style-badge">Santai & Nyaman</span>
-            </div>
-            <p class="popup-style-text">
-              Kombinasi kaos katun berkualitas tinggi, denim berpotongan
-              relaxed, sneakers kasual fleksibel, dan tote bag minimalis untuk
-              aktivitas harian santai.
-            </p>
-            <div class="popup-palette-row">
-              <span>Paduan: Kaos Katun + Relaxed Denim + Sneakers Kasual</span>
-            </div>
-          </div>
-
-          <div class="popup-style-box">
-            <div class="popup-style-title">
-              <span>Kerja / Smart Casual</span>
-              <span class="popup-style-badge">Rapi & Profesional</span>
-            </div>
-            <p class="popup-style-text">
-              Paduan kemeja oxford berstruktur atau polo rajut, blazer unlined
-              semi-formal, celana bahan ankle-cut, dan sepatu loafers kulit
-              elegan.
-            </p>
-            <div class="popup-palette-row">
-              <span>Paduan: Blazer Unlined + Kemeja + Chinos + Loafers</span>
-            </div>
-          </div>
-
-          <div class="popup-style-box">
-            <div class="popup-style-title">
-              <span>Pesta & Kondangan</span>
-              <span class="popup-style-badge">Mewah & Anggun</span>
-            </div>
-            <p class="popup-style-text">
-              Gaun midi satin elegan atau kemeja batik sutra tulis berpadu
-              celana tailored gelap, disempurnakan heels atau pantofel formal
-              dan clutch bag.
-            </p>
-            <div class="popup-palette-row">
-              <span>Paduan: Dress Anggun / Batik Premium + Pantofel/Heels</span>
-            </div>
-          </div>
-
-          <div class="popup-style-box">
-            <div class="popup-style-title">
-              <span>Liburan / Pantai</span>
-              <span class="popup-style-badge">Sejuk & Bernapas</span>
-            </div>
-            <p class="popup-style-text">
-              Kemeja lengan pendek berbahan linen adem, celana pendek santai
-              atau rok flowy bernuansa earthy/pastel, sandal kulit, dan kacamata
-              hitam pelindung.
-            </p>
-            <div class="popup-palette-row">
-              <span>Paduan: Kemeja Linen + Celana Santai + Sandal Kulit</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tips Belanja Cerdas -->
-        <div class="tips-highlight-card">
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="var(--burgundy)"
-            stroke-width="2"
-            style="min-width: 22px; margin-top: 1px"
-          >
             <circle cx="12" cy="12" r="10" />
-            <path d="M12 16v-4M12 8h.01" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
           </svg>
-          <div>
-            <strong>Tips Belanja Cerdas:</strong> Cek spesifikasi bahan dan
-            panduan ukuran (<em>size chart</em>) sebelum checkout pada link toko
-            online resmi. Anda juga bisa mencocokkan potongan busana dengan data ukuran tubuh Anda di menu Akun.
-          </div>
         </div>
-
-        <!-- Takeaway Catatan Penting -->
-        <div class="takeaway-card">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="var(--burgundy)"
-            stroke-width="2"
-            style="min-width: 20px; margin-top: 2px"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 16v-4M12 8h.01" />
-          </svg>
-          <div>
-            <strong>Catatan untuk Pengguna Tamu:</strong> Anda bebas menelusuri
-            seluruh galeri kurasi outfit dan link belanja tanpa login. Untuk
-            menyimpan outfit favorit dan mengelola profil ukuran tubuh, silakan masuk
-            atau daftar akun.
-          </div>
-        </div>
-      </section>
-
-      <!-- Final Action Banner -->
-      <section class="final-action-card">
-        <h2 class="final-title">Siap Menjelajahi Outfit Req?</h2>
-        <p class="final-desc" id="finalBannerDesc">
-          Anda dapat berpindah antara kedua panduan ini kapan saja. Masuk ke
-          Beranda Utama untuk langsung mulai mencoba fiturnya!
+        <span class="empty-badge">Pusat Panduan</span>
+        <h1 class="empty-title">Panduan &amp; Tutorial</h1>
+        <p class="empty-desc">
+          Bagian panduan dan tutorial fitur sementara dikosongkan untuk tahap persiapan dan pembaruan sistem. Anda tetap dapat menjelajahi rekomendasi outfit dan mengakses seluruh fitur lainnya.
         </p>
-        <div class="final-btn-group">
-          <a href="index.html" class="btn-final-primary">
-            <span>MASUK KE BERANDA UTAMA</span>
+        <div class="empty-actions">
+          <a href="index.html" class="btn-empty-primary">
+            <span>Ke Beranda Utama</span>
             <svg
-              width="16"
-              height="16"
+              width="15"
+              height="15"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2.4"
+              stroke-width="2.2"
               stroke-linecap="round"
               stroke-linejoin="round"
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
-
-          <!-- Tombol Khusus Pengunjung Belum Login -->
-          <a
-            href="login.html?mode=login"
-            class="btn-final-auth"
-            id="finalAuthBtn"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"
-              />
-            </svg>
-            <span>DAFTAR / MASUK KE AKUN</span>
-          </a>
-
-          <a href="rekomendasi.html" class="btn-final-secondary">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <span>Buka Galeri Rekomendasi</span>
-          </a>
-        </div>
-      </section>
-    </main>
-
-    <!-- ========================================================
-         POP-UP MODAL CARD POLOSAN TUTORIAL (MUNCUL SAAT CARD DITEKAN)
-         ======================================================== -->
-    <div
-      id="tutorialPopupModal"
-      class="tutorial-popup-backdrop"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="popupTutorialTitle"
-      onclick="handleBackdropClick(event)"
-      style="display: none"
-    >
-      <div class="tutorial-popup-card" onclick="event.stopPropagation()">
-        <!-- Header Pop-up Card Polosan -->
-        <div class="popup-card-header">
-          <div class="popup-header-info">
-            <span class="popup-tag-badge" id="popupTagBadge"
-              >KOMPONEN 1 • PERSONALITY STYLE</span
-            >
-            <h2 class="popup-card-title" id="popupTutorialTitle">
-              Tutorial Personality
-            </h2>
-            <p class="popup-card-subtitle" id="popupTutorialDesc">
-              Panduan analisis kepribadian gaya (Classic, Minimalist, Chic,
-              Streetwear) dan pemahaman siluet ideal untuk semua jenis akun.
-            </p>
-          </div>
-          <button
-            type="button"
-            class="popup-close-btn"
-            onclick="closeTutorialPopup()"
-            title="Tutup pop-up (Esc)"
-            aria-label="Tutup"
-          >
-            &#10005;
-          </button>
-        </div>
-
-        <!-- Tab Switcher di dalam Pop-up Card -->
-        <div class="popup-tabs-bar" role="tablist">
-          <button
-            type="button"
-            class="popup-tab-btn active"
-            id="popupTabPersonality"
-            onclick="switchPopupTutorialTab('personality')"
-            role="tab"
-          >
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
-            <span>1. Cara Pakai Fitur Personality</span>
-          </button>
-          <button
-            type="button"
-            class="popup-tab-btn"
-            id="popupTabRekomendasi"
-            onclick="switchPopupTutorialTab('rekomendasi')"
-            role="tab"
-          >
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-              <path d="M3 6h18" />
-            </svg>
-            <span>2. Cara Pakai Fitur Rekomendasi</span>
-          </button>
-        </div>
-
-        <!-- Body Isi Tutorial -->
-        <div class="popup-card-body">
-          <!-- Panel Pop-up 1: Personality -->
-          <div class="popup-view-panel active" id="popupViewPersonality">
-            <div class="popup-section-heading">
-              <span class="popup-section-badge">PANDUAN LANGKAH 1 - 5</span>
-              <span>Tutorial Cara Menggunakan Fitur Personality di Web</span>
-            </div>
-
-            <div class="popup-guide-grid">
-              <div class="popup-guide-card">
-                <div class="popup-step-header">
-                  <div class="popup-step-num">1</div>
-                  <div>
-                    <span class="ui-cue-pill">Di Beranda Web</span>
-                    <h4 class="popup-step-title">
-                      Buka Menu "Tes Personality"
-                    </h4>
-                  </div>
-                </div>
-                <p class="popup-step-desc">
-                  Pada Beranda Utama (<strong>Main.dc.html</strong>), temukan
-                  dan klik tombol emas bertuliskan
-                  <strong>"Tes Personality"</strong> di bawah judul utama, atau
-                  pilih mode Personality.
-                </p>
-                <div class="popup-step-action">
-                  <strong>Aksi di Web:</strong> Klik tombol emas
-                  <strong>"Tes Personality"</strong> untuk masuk ke formulir
-                  kuis kepribadian gaya.
-                </div>
-              </div>
-
-              <div class="popup-guide-card">
-                <div class="popup-step-header">
-                  <div class="popup-step-num">2</div>
-                  <div>
-                    <span class="ui-cue-pill">Form Kuis Interaktif</span>
-                    <h4 class="popup-step-title">
-                      Jawab Kuis Preferensi Acara & Warna
-                    </h4>
-                  </div>
-                </div>
-                <p class="popup-step-desc">
-                  Pilih jawaban yang paling mencerminkan gaya harianmu: suasana
-                  acara yang sering didatangi (kantor, santai, pesta), warna
-                  favorit (monokrom, netral, earthy, bold), dan siluet busana
-                  yang disukai.
-                </p>
-                <div class="popup-step-action">
-                  <strong>Aksi di Web:</strong> Klik opsi kartu jawaban yang
-                  paling cocok dengan karakter dan kenyamanan berpakaianmu.
-                </div>
-              </div>
-
-              <div class="popup-guide-card">
-                <div class="popup-step-header">
-                  <div class="popup-step-num">3</div>
-                  <div>
-                    <span class="ui-cue-pill">Input Terenkripsi & Privat</span>
-                    <h4 class="popup-step-title">
-                      Masukkan Postur & Siluet Tubuh
-                    </h4>
-                  </div>
-                </div>
-                <p class="popup-step-desc">
-                  Ketik estimasi tinggi badan (cm) dan berat badan (kg), atau
-                  pilih siluet bentuk tubuhmu. Data ini dijamin privat dan hanya
-                  diolah algoritma web untuk menentukan proporsi busana.
-                </p>
-                <div class="popup-step-action">
-                  <strong>Aksi di Web:</strong> Isi kolom angka tinggi/berat
-                  badan atau pilih siluet postur, lalu tekan tombol
-                  <strong>"Analisis Gaya Saya"</strong>.
-                </div>
-              </div>
-
-              <div class="popup-guide-card">
-                <div class="popup-step-header">
-                  <div class="popup-step-num">4</div>
-                  <div>
-                    <span class="ui-cue-pill">Hasil Analisis Web</span>
-                    <h4 class="popup-step-title">
-                      Dapatkan DNA Gaya & Palet Warna
-                    </h4>
-                  </div>
-                </div>
-                <p class="popup-step-desc">
-                  Layar website akan langsung menampilkan rangkuman tipe gaya
-                  dominanmu (Classic, Minimalist, Chic, atau Streetwear),
-                  rekomendasi potongan siluet pakaian, dan kombinasi palet warna
-                  busana.
-                </p>
-                <div class="popup-step-action">
-                  <strong>Hasil di Web:</strong> Tinjau tipe gaya dominanmu,
-                  panduan siluet potongan atasan/bawahan, dan swatch palet warna
-                  kain.
-                </div>
-              </div>
-
-              <div class="popup-guide-card">
-                <div class="popup-step-header">
-                  <div class="popup-step-num">5</div>
-                  <div>
-                    <span class="ui-cue-pill">Koleksi Profil</span>
-                    <h4 class="popup-step-title">
-                      Simpan Inspirasi ke Profil Akun
-                    </h4>
-                  </div>
-                </div>
-                <p class="popup-step-desc">
-                  Simpan rangkuman preferensi gaya dan foto busana favorit langsung ke akun profil Anda. Anda dapat mengaksesnya kembali kapan saja lewat menu Akun.
-                </p>
-                <div class="popup-step-action">
-                  <strong>Aksi di Web:</strong> Klik ikon profil di pojok kanan
-                  atas untuk melihat koleksi outfit yang tersimpan dan data ukuran tubuh.
-                </div>
-              </div>
-            </div>
-
-            <!-- Rangkuman 4 Karakter Gaya Dominan -->
-            <div class="popup-section-heading">
-              <span class="popup-section-badge">4 TIPE KARAKTER GAYA</span>
-              <span>Hasil Analisis Gaya yang Dapat Kamu Peroleh di Web</span>
-            </div>
-
-            <div class="popup-style-grid">
-              <div class="popup-style-box">
-                <div class="popup-style-title">
-                  <span>1. Classic Style</span>
-                  <span class="popup-style-badge">Timeless & Rapi</span>
-                </div>
-                <p class="popup-style-text">
-                  Gaya abadi berstruktur tailored, kain berkualitas tinggi, dan
-                  siluet profesional berwibawa di setiap momen.
-                </p>
-                <div class="popup-palette-row">
-                  <span>Palet Web:</span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #1b2a47"
-                    title="Navy"
-                  ></span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #f4efe6"
-                    title="Cream"
-                  ></span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #2b2b2b"
-                    title="Charcoal"
-                  ></span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #ffffff"
-                    title="Putih"
-                  ></span>
-                  <span>(Navy, Cream, Charcoal, Putih)</span>
-                </div>
-              </div>
-
-              <div class="popup-style-box">
-                <div class="popup-style-title">
-                  <span>2. Minimalist Style</span>
-                  <span class="popup-style-badge">Clean & Fungsional</span>
-                </div>
-                <p class="popup-style-text">
-                  Garis potongan bersih tanpa motif ramai, fokus pada kenyamanan
-                  fungsional, dan kesan rapi modern yang praktis.
-                </p>
-                <div class="popup-palette-row">
-                  <span>Palet Web:</span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #111111"
-                    title="Hitam"
-                  ></span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #e8e4dc"
-                    title="Off-White"
-                  ></span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #8f8b82"
-                    title="Warm Grey"
-                  ></span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #6d5f53"
-                    title="Taupe"
-                  ></span>
-                  <span>(Monokrom, Warm Grey, Earthy)</span>
-                </div>
-              </div>
-
-              <div class="popup-style-box">
-                <div class="popup-style-title">
-                  <span>3. Chic Style</span>
-                  <span class="popup-style-badge">Modis & Statement</span>
-                </div>
-                <p class="popup-style-text">
-                  Siluet dinamis dengan perpaduan tekstur mewah, aksesori
-                  standout, dan sentuhan berani yang modis serta up-to-date.
-                </p>
-                <div class="popup-palette-row">
-                  <span>Palet Web:</span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #6d001a"
-                    title="Burgundy"
-                  ></span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #134e4a"
-                    title="Emerald"
-                  ></span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #b8860b"
-                    title="Gold"
-                  ></span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #c2410c"
-                    title="Terracotta"
-                  ></span>
-                  <span>(Burgundy, Emerald, Gold, Terracotta)</span>
-                </div>
-              </div>
-
-              <div class="popup-style-box">
-                <div class="popup-style-title">
-                  <span>4. Streetwear Style</span>
-                  <span class="popup-style-badge">Urban & Ekspresif</span>
-                </div>
-                <p class="popup-style-text">
-                  Kenyamanan santai berjiwa muda dengan potongan oversized,
-                  paduan sneakers ikonik, outer unik, dan vibe perkotaan yang
-                  bebas.
-                </p>
-                <div class="popup-palette-row">
-                  <span>Palet Web:</span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #171717"
-                    title="Hitam"
-                  ></span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #556b2f"
-                    title="Olive"
-                  ></span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #c3b091"
-                    title="Khaki"
-                  ></span>
-                  <span
-                    class="popup-color-dot"
-                    style="background: #e11d48"
-                    title="Merah Aksen"
-                  ></span>
-                  <span>(Hitam, Olive, Khaki, Bold Accent)</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Tips Siluet Tubuh -->
-            <div class="tips-highlight-card">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--burgundy)"
-                stroke-width="2"
-                style="min-width: 22px; margin-top: 1px"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 16v-4M12 8h.01" />
-              </svg>
-              <div>
-                <strong>Tips Menggunakan Hasil Siluet di Web:</strong> Gunakan
-                saran siluet dari hasil tes saat memilih outfit di Beranda. Jika
-                hasil siluetmu menyarankan atasan longgar/oversized, seimbangkan
-                dengan celana yang lebih ramping atau berpotongan lurus (<em
-                  >straight cut</em
-                >).
-              </div>
-            </div>
-
-            <!-- Akses Akun Info -->
-            <div class="takeaway-card" style="margin-top: 14px">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--burgundy)"
-                stroke-width="2"
-                style="min-width: 20px; margin-top: 2px"
-              >
-                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                <circle cx="8.5" cy="7" r="4" />
-                <polyline points="17 11 19 13 23 9" />
-              </svg>
-              <div>
-                <strong>Akses Semua Pengguna:</strong> Pengunjung tamu dapat
-                mencoba panduan kepribadian gaya secara bebas. Pengguna yang
-                masuk atau mendaftar dapat menyimpan riwayat analisis gaya dan
-                koleksi foto outfit tanpa batas.
-              </div>
-            </div>
-
-            <!-- Banner Coba Langsung di Web -->
-            <div class="popup-cta-banner">
-              <div class="popup-cta-text">
-                <h4>Siap Mencoba Fitur Personality di Web?</h4>
-                <p>
-                  Klik tombol di bawah untuk langsung menuju Beranda Utama dan
-                  memulai kuis gayamu.
-                </p>
-              </div>
-              <a href="index.html" class="popup-cta-btn">
-                <span>Coba Fitur di Beranda Utama</span>
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </a>
-            </div>
-          </div>
-
-          <!-- Panel Pop-up 2: Rekomendasi -->
-          <div class="popup-view-panel" id="popupViewRekomendasi">
-            <div class="popup-section-heading">
-              <span class="popup-section-badge">PANDUAN LANGKAH 1 - 5</span>
-              <span
-                >Tutorial Cara Menggunakan Fitur Rekomendasi Outfit di Web</span
-              >
-            </div>
-
-            <div class="popup-guide-grid">
-              <div class="popup-guide-card">
-                <div class="popup-step-header">
-                  <div class="popup-step-num">1</div>
-                  <div>
-                    <span class="ui-cue-pill">Di Beranda Web</span>
-                    <h4 class="popup-step-title">
-                      Buka Mode Rekomendasi di Beranda
-                    </h4>
-                  </div>
-                </div>
-                <p class="popup-step-desc">
-                  Pada Beranda Utama (<strong>Main.dc.html</strong>), klik
-                  tombol <strong>"Lihat Rekomendasi"</strong> di bawah judul
-                  atau gulir ke bawah ke panggung kartu kipas busana interaktif.
-                </p>
-                <div class="popup-step-action">
-                  <strong>Aksi di Web:</strong> Klik tombol
-                  <strong>"Lihat Rekomendasi"</strong> untuk mengaktifkan galeri
-                  kurasi outfit berdasarkan tema acara.
-                </div>
-              </div>
-
-              <div class="popup-guide-card">
-                <div class="popup-step-header">
-                  <div class="popup-step-num">2</div>
-                  <div>
-                    <span class="ui-cue-pill">Bilah Filter Acara</span>
-                    <h4 class="popup-step-title">Pilih Filter Tema Acara</h4>
-                  </div>
-                </div>
-                <p class="popup-step-desc">
-                  Klik tombol filter kategori di atas panggung busana:
-                  <strong>Kasual</strong> (hangout santai),
-                  <strong>Kerja</strong> (kantor / profesional),
-                  <strong>Pesta / Kondangan</strong> (acara formal), atau
-                  <strong>Olahraga</strong> (sporty).
-                </p>
-                <div class="popup-step-action">
-                  <strong>Aksi di Web:</strong> Tekan salah satu tombol pill
-                  filter acara. Deretan judul dan koleksi kartu busana otomatis
-                  berganti seketika.
-                </div>
-              </div>
-
-              <div class="popup-guide-card">
-                <div class="popup-step-header">
-                  <div class="popup-step-num">3</div>
-                  <div>
-                    <span class="ui-cue-pill">Panggung Kartu Kipas</span>
-                    <h4 class="popup-step-title">
-                      Tekan Kartu Outfit yang Diinginkan
-                    </h4>
-                  </div>
-                </div>
-                <p class="popup-step-desc">
-                  Di layar tengah terdapat 9 kartu busana berbentuk kipas.
-                  <strong>Tekan/klik kartu foto outfit mana saja</strong> yang
-                  ingin kamu lihat detail tampilannya.
-                </p>
-                <div class="popup-step-action">
-                  <strong>Respon di Web:</strong> Kartu yang diklik langsung
-                  bergeser ke tengah (Featured Look) dengan bingkai burgundy
-                  emas dan menampilkan rincian outfit.
-                </div>
-              </div>
-
-              <div class="popup-guide-card">
-                <div class="popup-step-header">
-                  <div class="popup-step-num">4</div>
-                  <div>
-                    <span class="ui-cue-pill">Koleksi &amp; Simpan</span>
-                    <h4 class="popup-step-title">
-                      Simpan Outfit Favorit ke Akun
-                    </h4>
-                  </div>
-                </div>
-                <p class="popup-step-desc">
-                  Temukan inspirasi busana yang pas? Tekan tombol Simpan berwarna merah untuk menyimpan outfit ke koleksi profil akun Anda.
-                </p>
-                <div class="popup-step-action">
-                  <strong>Aksi di Web:</strong> Klik tombol Simpan pada kartu atau rincian outfit untuk menyimpannya ke menu 'Foto yang Disimpan'.
-                </div>
-              </div>
-
-              <div class="popup-guide-card">
-                <div class="popup-step-header">
-                  <div class="popup-step-num">5</div>
-                  <div>
-                    <span class="ui-cue-pill">Toko Online Resmi</span>
-                    <h4 class="popup-step-title">
-                      Beli Outfit via Link Belanja Langsung
-                    </h4>
-                  </div>
-                </div>
-                <p class="popup-step-desc">
-                  Setiap item pakaian (atasan, celana/rok, sepatu, aksesoris)
-                  dilengkapi link belanja resmi ke toko e-commerce mitra
-                  (Zalora, Tokopedia, Uniqlo, Shopee, dsb).
-                </p>
-                <div class="popup-step-action">
-                  <strong>Aksi di Web:</strong> Klik tautan produk pada rincian
-                  outfit untuk langsung diarahkan ke halaman checkout toko
-                  online resmi.
-                </div>
-              </div>
-            </div>
-
-            <!-- Panduan Memilih Tema Acara di Web -->
-            <div class="popup-section-heading">
-              <span class="popup-section-badge">FILTER ACARA DI WEB</span>
-              <span>Inspirasi Paduan Busana yang Tersedia di Beranda</span>
-            </div>
-
-            <div class="popup-style-grid">
-              <div class="popup-style-box">
-                <div class="popup-style-title">
-                  <span>Kasual / Hangout</span>
-                  <span class="popup-style-badge">Filter: Kasual</span>
-                </div>
-                <p class="popup-style-text">
-                  Kombinasi kaos katun premium, relaxed denim atau chinos
-                  santai, sneakers kasual fleksibel, dan tote bag minimalis
-                  untuk aktivitas harian.
-                </p>
-                <div class="popup-palette-row">
-                  <span
-                    >Rekomendasi Item: Kaos Katun + Relaxed Denim + Sneakers
-                    Kasual</span
-                  >
-                </div>
-              </div>
-
-              <div class="popup-style-box">
-                <div class="popup-style-title">
-                  <span>Kerja / Smart Casual</span>
-                  <span class="popup-style-badge">Filter: Kerja</span>
-                </div>
-                <p class="popup-style-text">
-                  Kemeja oxford berstruktur atau polo rajut, blazer unlined
-                  semi-formal, celana bahan rapi ankle-cut, dan sepatu loafers
-                  kulit berkelas.
-                </p>
-                <div class="popup-palette-row">
-                  <span
-                    >Rekomendasi Item: Blazer Unlined + Kemeja + Chinos +
-                    Loafers</span
-                  >
-                </div>
-              </div>
-
-              <div class="popup-style-box">
-                <div class="popup-style-title">
-                  <span>Pesta & Kondangan</span>
-                  <span class="popup-style-badge">Filter: Pesta</span>
-                </div>
-                <p class="popup-style-text">
-                  Gaun midi satin elegan atau kemeja batik sutra tulis berpadu
-                  celana tailored gelap, disempurnakan heels atau pantofel
-                  formal dan clutch.
-                </p>
-                <div class="popup-palette-row">
-                  <span
-                    >Rekomendasi Item: Dress Anggun / Batik Premium +
-                    Pantofel/Heels</span
-                  >
-                </div>
-              </div>
-
-              <div class="popup-style-box">
-                <div class="popup-style-title">
-                  <span>Liburan / Santai Outdoor</span>
-                  <span class="popup-style-badge"
-                    >Filter: Olahraga / Santai</span
-                  >
-                </div>
-                <p class="popup-style-text">
-                  Kemeja lengan pendek berbahan linen adem, celana pendek santai
-                  atau rok flowy bernuansa earthy/pastel, sandal kulit, dan
-                  kacamata hitam.
-                </p>
-                <div class="popup-palette-row">
-                  <span
-                    >Rekomendasi Item: Kemeja Linen + Celana Santai + Sandal
-                    Kulit</span
-                  >
-                </div>
-              </div>
-            </div>
-
-            <!-- Tips Belanja Cerdas -->
-            <div class="tips-highlight-card">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--burgundy)"
-                stroke-width="2"
-                style="min-width: 22px; margin-top: 1px"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 16v-4M12 8h.01" />
-              </svg>
-              <div>
-                <strong>Tips Belanja di Web:</strong> Cek tabel ukuran (<em
-                  >size chart</em
-                >) sebelum membeli di toko online resmi. Anda juga dapat
-                mencocokkan ukuran busana dengan data ukuran tubuh yang tersimpan pada profil akun Anda.
-              </div>
-            </div>
-
-            <!-- Akses Akun Info -->
-            <div class="takeaway-card" style="margin-top: 14px">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--burgundy)"
-                stroke-width="2"
-                style="min-width: 20px; margin-top: 2px"
-              >
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-                <path d="M3 6h18" />
-              </svg>
-              <div>
-                <strong>Akses untuk Semua Pengguna:</strong> Seluruh pengunjung
-                bebas menelusuri katalog outfit dan tautan belanja tanpa batas.
-                Pengguna yang masuk ke akun dapat menyimpan foto busana favorit dan mengelola multi-profil ukuran tubuh.
-              </div>
-            </div>
-
-            <!-- Banner Coba Langsung di Web -->
-            <div class="popup-cta-banner">
-              <div class="popup-cta-text">
-                <h4>Siap Menjelajahi Rekomendasi Outfit di Web?</h4>
-                <p>
-                  Klik tombol di bawah untuk langsung mencoba filter acara dan
-                  kartu kipas interaktif di Beranda.
-                </p>
-              </div>
-              <a href="index.html" class="popup-cta-btn">
-                <span>Buka Galeri Outfit di Beranda</span>
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Footer Pop-up Card -->
-        <div class="popup-card-footer">
-          <button
-            type="button"
-            class="btn-popup-close-secondary"
-            onclick="closeTutorialPopup()"
-          >
-            Tutup Pop-up
-          </button>
-          <a href="index.html" class="btn-popup-main-action">
-            <span>Masuk ke Beranda Utama</span>
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+          <a href="rekomendasi.html" class="btn-empty-secondary">
+            Lihat Rekomendasi
           </a>
         </div>
       </div>
-    </div>
+    </main>
 
     <!-- Modal Konfirmasi Akun Telah Terverifikasi (saat mendarat dari tautan email) -->
     <div
