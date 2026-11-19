@@ -1228,7 +1228,7 @@
           >
             <sc-if value="{{!isLoggedIn}}">
               <a
-                href="rekomendasi.html"
+                href="personality.html"
                 class="desktop-nav-link"
                 style="
                   font-size: 14px;
@@ -1236,8 +1236,38 @@
                   font-weight: 600;
                   transition: color 0.2s;
                 "
+                title="Buka Chat AI Personality Outfit"
+                >Personality</a
+              >
+              <a
+                href="rekomendasi.html"
+                class="desktop-nav-link"
+                style="
+                  font-size: 14px;
+                  color: var(--ink-dim);
+                  font-weight: 500;
+                  transition: color 0.2s;
+                "
+                onmouseover="this.style.color = 'var(--burgundy)'"
+                onmouseout="this.style.color = 'var(--ink-dim)'"
                 title="Buka Galeri Rekomendasi Outfit"
                 >Rekomendasi</a
+              >
+              <a
+                href="../Premium 3D/index.html?ref=showcase"
+                onclick="return handleStudio3DShowcase(event)"
+                class="desktop-nav-link"
+                style="
+                  font-size: 14px;
+                  color: var(--burgundy);
+                  font-weight: 700;
+                  transition: color 0.2s;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 4px;
+                "
+                title="Studio Visualisasi 3D Realistis (Khusus Premium)"
+                >Studio 3D <span style="font-size: 9px; background: #FFD700; color: #111; padding: 1px 5px; border-radius: 4px; font-weight: 800;">★</span></a
               >
               <a
                 href="tutorial.html#personality"
@@ -1403,6 +1433,13 @@
                     Galeri Rekomendasi Outfit
                   </a>
 
+                  <a href="../Premium 3D/index.html?ref=showcase" onclick="return handleStudio3DShowcase(event)" class="dropdown-action-btn" style="background: rgba(179, 135, 40, 0.12); color: #B38728; font-weight: 700; text-decoration: none;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    </svg>
+                    Studio Visualisasi 3D ★
+                  </a>
+
                   <a href="account.html" class="dropdown-action-btn btn-primary-action">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -1472,8 +1509,12 @@
               <span style="color: var(--burgundy); font-weight: 700;">Galeri Rekomendasi Outfit</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
             </a>
-            <a href="tutorial.html#personality" class="mobile-nav-item">
-              <span>Tes Style Personality</span>
+            <a href="../Premium 3D/index.html?ref=showcase" onclick="return handleStudio3DShowcase(event)" class="mobile-nav-item" style="color: #B38728; font-weight: 700;">
+              <span>Studio Visualisasi 3D ★</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="personality.html" class="mobile-nav-item">
+              <span>Chat AI Personality</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
             </a>
             <a href="tutorial.html" class="mobile-nav-item">
@@ -1798,6 +1839,15 @@
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
             <span>Galeri</span>
+          </a>
+
+          <a href="../Premium 3D/index.html?ref=showcase" onclick="return handleStudio3DShowcase(event)" class="mobile-nav-tab-item" style="color: #B38728;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+            <span style="font-weight: 700;">Studio 3D ★</span>
           </a>
 
           <a href="tutorial.html" class="mobile-nav-tab-item">
@@ -2265,6 +2315,35 @@
       } catch (err) {
         console.warn("[OutfitReq] Gagal inisialisasi Supabase di Main:", err);
       }
+
+      // Handler Akses Eksklusif Studio 3D (Khusus Premium)
+      function handleStudio3DShowcase(e) {
+        let isPremium = false;
+        let isLoggedIn = false;
+        try {
+          const userRaw = localStorage.getItem("outfit_req_user");
+          if (userRaw) {
+            const u = JSON.parse(userRaw);
+            isLoggedIn = !!(u.email && u.isLoggedIn !== false);
+            const tier = (u.tier || "").toString().toLowerCase().trim();
+            isPremium = tier.includes("premium") || u.isPremium === true;
+          }
+        } catch (err) {}
+
+        if (!isPremium) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          if (!isLoggedIn) {
+            window.location.href = "login.html?mode=login&ref=premium3d";
+          } else {
+            window.location.href = "account.html?upgrade=1";
+          }
+          return false;
+        }
+      }
+      window.handleStudio3DShowcase = handleStudio3DShowcase;
 
       // Fungsi Notifikasi Toast
       function showAuthToast(message) {

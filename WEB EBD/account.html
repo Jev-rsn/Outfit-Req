@@ -2,8 +2,11 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Akun Saya — Outfit Req</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Akun Saya — Orec</title>
 
     <!-- Fonts: Instrument Serif & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -95,7 +98,9 @@
 
       /* Prevent iOS Safari auto-zoom on input focus */
       @media (max-width: 768px) {
-        input, select, textarea {
+        input,
+        select,
+        textarea {
           font-size: 16px !important;
         }
       }
@@ -167,7 +172,7 @@
         transform: translateY(-1px);
       }
       .mobile-nav-tab-item.active::after {
-        content: '';
+        content: "";
         display: block;
         width: 14px;
         height: 2.5px;
@@ -281,21 +286,26 @@
       /* ========================================================
          DARK MODE OVERRIDES (account.html)
          ======================================================== */
-      :root.dark, html.dark, [data-theme="dark"] {
+      :root.dark,
+      html.dark,
+      [data-theme="dark"] {
         --bg-cream: #191417;
         --accent-maroon: #c93b5f;
         --surface-white: #211b1e;
         --text-black: #f7f3ee;
       }
-      html.dark body, body.dark {
+      html.dark body,
+      body.dark {
         background-color: #0d0b0c !important;
         color: #f7f3ee !important;
       }
-      html.dark ::selection, [data-theme="dark"] ::selection {
+      html.dark ::selection,
+      [data-theme="dark"] ::selection {
         background: #c93b5f;
         color: #ffffff;
       }
-      html.dark ::-moz-selection, [data-theme="dark"] ::-moz-selection {
+      html.dark ::-moz-selection,
+      [data-theme="dark"] ::-moz-selection {
         background: #c93b5f;
         color: #ffffff;
       }
@@ -447,7 +457,9 @@
     <header
       class="sticky top-0 z-40 bg-[#FFF8E7] border-b border-black/10 shadow-sm px-3 sm:px-4 md:px-8 py-2.5 sm:py-3.5"
     >
-      <div class="max-w-6xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
+      <div
+        class="max-w-6xl mx-auto flex items-center justify-between gap-2 sm:gap-4"
+      >
         <!-- Back Navigation to Main / Chat -->
         <a
           href="index.html"
@@ -486,12 +498,25 @@
             />
           </svg>
           <span class="font-serif text-xl sm:text-2xl tracking-wide text-black"
-            >outfit req</span
+            >Orec</span
           >
         </a>
 
         <!-- Top Right Status Badge & Google Auth Handler -->
         <div class="flex items-center gap-1.5 sm:gap-3">
+          <!-- Studio 3D Direct Link -->
+          <a
+            href="../Premium 3D/index.html?ref=account"
+            onclick="return handleStudio3DAccountClick(event)"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#6D001A] text-white hover:bg-black transition-all shadow-xs"
+            title="Buka Visualisasi Model Tubuh 3D (Fitur Premium)"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+            <span class="hidden sm:inline">Studio 3D</span>
+            <span class="sm:hidden">3D</span>
+            <span class="text-[9px] bg-amber-400 text-amber-950 px-1 py-0.2 rounded font-extrabold">★</span>
+          </a>
+
           <!-- Theme Toggle Button -->
           <button
             type="button"
@@ -579,10 +604,12 @@
     </header>
 
     <!-- SECONDARY TAB NAVIGATION: Akun vs Uji Personality vs Uji Rekomendasi -->
-    <div class="bg-white border-b border-black/10 py-2 sm:py-2.5 px-3 sm:px-4 md:px-8">
+    <div
+      class="bg-white border-b border-black/10 py-2 sm:py-2.5 px-3 sm:px-4 md:px-8"
+    >
       <div
         class="max-w-6xl mx-auto flex items-center justify-between gap-2 sm:gap-3 overflow-x-auto no-scrollbar pb-1 sm:pb-0"
-        style="-webkit-overflow-scrolling: touch; touch-action: pan-x;"
+        style="-webkit-overflow-scrolling: touch; touch-action: pan-x"
       >
         <div class="flex items-center gap-2">
           <button
@@ -624,8 +651,28 @@
           </a>
 
           <a
-            href="rekomendasi.html"
+            href="personality.html"
             class="px-4 py-1.5 rounded-full text-xs font-semibold text-white bg-[#6D001A] hover:bg-[#550014] transition-all flex items-center gap-1.5 whitespace-nowrap shadow-xs"
+            title="Buka Chat AI Personality (Konsultasi Outfit Interaktif)"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>Chat Personality</span>
+          </a>
+
+          <a
+            href="rekomendasi.html"
+            class="px-4 py-1.5 rounded-full text-xs font-semibold text-stone-700 hover:text-black bg-stone-100 hover:bg-stone-200 transition-all flex items-center gap-1.5 whitespace-nowrap"
           >
             <svg
               width="14"
@@ -654,7 +701,9 @@
     </div>
 
     <!-- MAIN CONTAINER (PAD & CENTERED) -->
-    <main class="max-w-4xl mx-auto px-3 sm:px-4 py-5 md:py-10 pb-24 has-mobile-nav">
+    <main
+      class="max-w-4xl mx-auto px-3 sm:px-4 py-5 md:py-10 pb-24 has-mobile-nav"
+    >
       <!-- ========================================================================= -->
       <!-- VIEW 1: DEDICATED ACCOUNT PAGE (KONTENER UTAMA KREM #FFF8E7)              -->
       <!-- ========================================================================= -->
@@ -746,7 +795,10 @@
                     Akun Free
                   </span>
                 </div>
-                <p id="userEmailDisplay" class="text-xs sm:text-sm text-black/60 mt-0.5 truncate max-w-[220px] sm:max-w-none">
+                <p
+                  id="userEmailDisplay"
+                  class="text-xs sm:text-sm text-black/60 mt-0.5 truncate max-w-[220px] sm:max-w-none"
+                >
                   Memuat data akun...
                 </p>
               </div>
@@ -878,7 +930,9 @@
               <p
                 class="text-xs sm:text-sm text-black/60 max-w-sm mx-auto mb-6 leading-relaxed"
               >
-                Akses kurasi outfit tanpa batas, filter acara tematik eksklusif (Konser, Acara Syar'i), simpan koleksi tak terbatas, dan kelola multi-profil ukuran tubuh personal.
+                Akses kurasi outfit tanpa batas, filter acara tematik eksklusif
+                (Konser, Acara Syar'i), simpan koleksi tak terbatas, dan kelola
+                multi-profil ukuran tubuh personal.
               </p>
 
               <!-- Pill Button Mencolok: Merah Marun (#6D001A) & Teks Putih (#FFFFFF) -->
@@ -931,6 +985,30 @@
                 <p class="text-xs text-black/60">
                   Digunakan untuk fitting pakaian & visualisasi model tubuh 360°
                 </p>
+              </div>
+
+              <!-- Callout: Buka Studio 3D Langsung -->
+              <div class="mt-3 p-3.5 rounded-2xl bg-gradient-to-r from-[#6D001A]/10 to-amber-500/10 border border-[#6D001A]/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-[#6D001A] text-white flex items-center justify-center shrink-0 shadow-sm">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <h4 class="text-xs font-bold text-black uppercase tracking-wider">Studio Visualisasi 3D Realistis</h4>
+                      <span class="text-[9px] bg-amber-400 text-amber-950 font-extrabold px-1.5 py-0.2 rounded">★ 3D LIVE</span>
+                    </div>
+                    <p class="text-xs text-black/70 mt-0.5">Lihat manekin 3D berputar 360° yang proporsi tubuhnya mengikuti data diri ini secara presisi.</p>
+                  </div>
+                </div>
+                <a
+                  href="../Premium 3D/index.html?ref=account"
+                  onclick="return handleStudio3DAccountClick(event)"
+                  class="px-4 py-2 rounded-full bg-[#6D001A] hover:bg-black text-white text-xs font-bold flex items-center gap-1.5 shadow-md transition-all shrink-0 active:scale-95"
+                >
+                  <span>Buka Studio 3D</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
               </div>
 
               <!-- Simulasi Auto Downgrade Button (Hidden by default) -->
@@ -1292,7 +1370,8 @@
                 Belum ada foto outfit yang disimpan.
               </p>
               <p class="text-xs text-black/60 mt-1">
-                Simpan outfit favorit Anda dari katalog Rekomendasi atau Beranda.
+                Simpan outfit favorit Anda dari katalog Rekomendasi atau
+                Beranda.
               </p>
             </div>
           </div>
@@ -1303,12 +1382,17 @@
             class="mt-8 pt-6 border-t border-black/10 flex flex-col sm:flex-row items-center justify-between gap-4"
           >
             <div class="text-xs text-black/60 text-center sm:text-left">
-              <p class="font-bold text-black text-sm" id="logoutSectionTitle">Sesi Masuk Akun</p>
+              <p class="font-bold text-black text-sm" id="logoutSectionTitle">
+                Sesi Masuk Akun
+              </p>
               <p class="mt-0.5" id="logoutSectionDesc">
-                Keluar dari akun Outfit Req Anda pada perangkat ini dengan aman.
+                Keluar dari akun Orec Anda pada perangkat ini dengan aman.
               </p>
             </div>
-            <div id="logoutSectionActions" class="flex items-center gap-2 flex-wrap justify-center sm:justify-end">
+            <div
+              id="logoutSectionActions"
+              class="flex items-center gap-2 flex-wrap justify-center sm:justify-end"
+            >
               <button
                 id="btnCardLogout"
                 type="button"
@@ -1339,7 +1423,11 @@
       <!-- ========================================================================= -->
       <!-- VIEW 3: UJI GLOBAL RIGHTS - PERSONALITY (CHAT AI) VIEW (HIDDEN) -->
       <!-- ========================================================================= -->
-      <section id="viewPersonality" class="view-panel view-hidden" style="display: none !important;">
+      <section
+        id="viewPersonality"
+        class="view-panel view-hidden"
+        style="display: none !important"
+      >
         <div
           class="bg-white border border-black/15 rounded-3xl p-6 md:p-8 shadow-sm"
         >
@@ -1380,8 +1468,8 @@
               <div
                 class="bg-white border border-black/10 rounded-2xl rounded-tl-none p-3.5 max-w-[80%] text-sm text-black shadow-sm"
               >
-                Halo! Saya asisten kurasi outfit Outfit Req. Ceritakan suasana
-                acara atau gaya pakaian yang ingin Anda kenakan hari ini!
+                Halo! Saya asisten kurasi outfit Orec. Ceritakan suasana acara
+                atau gaya pakaian yang ingin Anda kenakan hari ini!
               </div>
             </div>
           </div>
@@ -1426,7 +1514,11 @@
       <!-- ========================================================================= -->
       <!-- VIEW 4: UJI GLOBAL RIGHTS - REKOMENDASI OUTFIT & 360° VIEW (HIDDEN) -->
       <!-- ========================================================================= -->
-      <section id="viewRecommendation" class="view-panel view-hidden" style="display: none !important;">
+      <section
+        id="viewRecommendation"
+        class="view-panel view-hidden"
+        style="display: none !important"
+      >
         <div
           class="bg-white border border-black/15 rounded-3xl p-6 md:p-8 shadow-sm"
         >
@@ -1573,10 +1665,12 @@
     >
       <div
         class="bg-[#FFF8E7] border-t sm:border border-black rounded-t-3xl sm:rounded-3xl max-w-xl w-full p-4 sm:p-6 md:p-8 shadow-2xl relative my-0 sm:my-auto max-h-[92dvh] overflow-y-auto animate-slideUpMobile sm:animate-fadeIn"
-        style="-webkit-overflow-scrolling: touch;"
+        style="-webkit-overflow-scrolling: touch"
       >
         <!-- Mobile Drag Pull Handle -->
-        <div class="w-10 h-1 rounded-full bg-black/20 mx-auto mb-3 sm:hidden shrink-0"></div>
+        <div
+          class="w-10 h-1 rounded-full bg-black/20 mx-auto mb-3 sm:hidden shrink-0"
+        ></div>
 
         <!-- Close / Cancel Button -->
         <button
@@ -1603,7 +1697,7 @@
             class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-black/60 mb-2"
           >
             <span id="stepIndicatorTitle">LANGKAH 1 DARI 3</span>
-            <span class="text-[#6D001A]">OUTFIT REQ PREMIUM</span>
+            <span class="text-[#6D001A]">Orec PREMIUM</span>
           </div>
 
           <!-- Stepper Progress Bar -->
@@ -2228,16 +2322,18 @@
       class="fixed inset-0 z-50 modal-backdrop hidden flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-y-auto"
     >
       <div
-        class="bg-[#FFF8E7] border-t sm:border border-black rounded-t-3xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-6 md:p-8 shadow-2xl relative my-0 sm:my-auto animate-slideUpMobile sm:animate-fadeIn max-h-[92dvh] overflow-y-auto"
-        style="-webkit-overflow-scrolling: touch;"
+        class="bg-[#FFF8E7] dark:bg-[#1E1B1E] border-t sm:border border-black/20 dark:border-white/10 rounded-t-3xl sm:rounded-3xl max-w-2xl w-full p-4 sm:p-6 shadow-2xl relative my-0 sm:my-auto animate-slideUpMobile sm:animate-fadeIn max-h-[94dvh] overflow-y-auto"
+        style="-webkit-overflow-scrolling: touch"
       >
         <!-- Mobile Drag Pull Handle -->
-        <div class="w-10 h-1 rounded-full bg-black/20 mx-auto mb-3 sm:hidden shrink-0"></div>
+        <div
+          class="w-10 h-1 rounded-full bg-black/20 mx-auto mb-3 sm:hidden shrink-0"
+        ></div>
 
         <button
           type="button"
           onclick="closeVisualizer360()"
-          class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white border border-black/20 hover:border-black flex items-center justify-center text-black transition-all active:scale-95"
+          class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white dark:bg-stone-800 border border-black/20 hover:border-black flex items-center justify-center text-black dark:text-white transition-all active:scale-95 z-20"
         >
           <svg
             width="18"
@@ -2252,119 +2348,91 @@
           </svg>
         </button>
 
-        <div class="text-center mb-4">
+        <div class="text-center mb-3">
           <span
             class="text-xs font-bold uppercase tracking-wider text-[#6D001A] bg-[#6D001A]/10 px-3 py-1 rounded-full"
           >
-            Fitting Model 360° Aktif
+            Fitting Model 3D Realistis 360° Aktif
           </span>
           <h3
-            class="font-serif text-3xl font-normal text-black mt-2"
+            class="font-serif text-2xl sm:text-3xl font-normal text-black dark:text-white mt-1.5"
             id="v360OutfitTitle"
           >
             Editorial Blazer Kasual
           </h3>
-          <p class="text-xs text-black/60">
-            Disesuaikan dengan parameter postur Data Diri yang sedang aktif.
+          <p class="text-xs text-black/60 dark:text-stone-400">
+            Disesuaikan dengan parameter postur Data Diri Anda secara presisi.
           </p>
         </div>
 
+        <!-- Live Interactive 3D Studio Canvas Frame -->
         <div
-          class="relative w-64 h-72 mx-auto rounded-3xl viewer-circle border border-black/15 flex flex-col items-center justify-center overflow-hidden shadow-inner p-4"
+          class="relative w-full aspect-[4/3] sm:aspect-[16/10] max-h-[52vh] mx-auto rounded-2xl border border-black/15 overflow-hidden shadow-inner bg-stone-100 dark:bg-stone-900"
         >
-          <div
-            id="avatar360Wrapper"
-            class="transition-transform duration-200 ease-out flex flex-col items-center"
-          >
-            <div
-              class="w-12 h-14 bg-stone-800 rounded-full mb-1 border border-black/20 relative"
-            >
-              <div class="w-8 h-9 bg-[#f5d0b5] rounded-full mx-auto mt-2"></div>
-            </div>
-            <div
-              id="v360GarmentColor"
-              class="w-24 h-32 bg-[#6D001A] rounded-2xl border border-black/20 relative shadow-md flex items-center justify-center text-white text-[10px] font-bold"
-            >
-              <span id="v360GarmentBadge">Fitted (M)</span>
-            </div>
-            <div class="flex gap-2 -mt-1">
-              <div class="w-7 h-20 bg-stone-900 rounded-b-lg"></div>
-              <div class="w-7 h-20 bg-stone-900 rounded-b-lg"></div>
-            </div>
-          </div>
-
-          <div
-            class="absolute bottom-3 bg-black/80 text-white text-[10px] font-mono font-bold px-2.5 py-1 rounded-full"
-          >
-            Sudut Rotasi: <span id="v360AngleText">0° (Depan)</span>
-          </div>
-        </div>
-
-        <div class="mt-4 px-2">
-          <div class="flex justify-between text-xs text-black/60 mb-1">
-            <span>Tampak Depan</span>
-            <span>Samping</span>
-            <span>Belakang</span>
-            <span>Depan</span>
-          </div>
-          <input
-            type="range"
-            id="slider360Rotation"
-            min="0"
-            max="360"
-            value="0"
-            step="5"
-            oninput="handleRotate360(this.value)"
-            class="w-full h-2 bg-black/10 rounded-lg appearance-none cursor-pointer accent-[#6D001A]"
-          />
+          <iframe
+            id="iframeStudio3D"
+            src="about:blank"
+            class="w-full h-full border-0"
+            allow="fullscreen"
+            title="Interactive 3D Studio Viewer"
+          ></iframe>
         </div>
 
         <div
-          class="mt-4 p-3 bg-white rounded-2xl border border-black/10 text-xs grid grid-cols-3 gap-2 text-center"
+          class="mt-3 p-3 bg-white dark:bg-stone-900 rounded-2xl border border-black/10 dark:border-white/10 text-xs grid grid-cols-3 gap-2 text-center"
         >
           <div>
-            <span class="text-black/50 block">Tinggi / Berat</span>
-            <strong class="text-black" id="v360MetricTbBb">175cm / 68kg</strong>
+            <span class="text-black/50 dark:text-stone-400 block">Tinggi / Berat</span>
+            <strong class="text-black dark:text-white" id="v360MetricTbBb">175cm / 68kg</strong>
           </div>
           <div>
-            <span class="text-black/50 block">Rekomendasi Ukuran</span>
+            <span class="text-black/50 dark:text-stone-400 block">Rekomendasi Ukuran</span>
             <strong class="text-emerald-700 font-bold" id="v360MetricSize"
               >Size M (Pas Tubuh)</strong
             >
           </div>
           <div>
-            <span class="text-black/50 block">Lebar Bahu</span>
-            <strong class="text-black" id="v360MetricBahu"
+            <span class="text-black/50 dark:text-stone-400 block">Lebar Bahu</span>
+            <strong class="text-black dark:text-white" id="v360MetricBahu"
               >46 cm (Proporsional)</strong
             >
           </div>
         </div>
 
-        <div class="mt-5 flex gap-2">
+        <div class="mt-4 flex flex-wrap gap-2">
+          <a
+            id="btnOpenFullStudio3D"
+            href="../Premium 3D/index.html?ref=account"
+            target="_blank"
+            class="flex-1 min-w-[160px] py-2.5 px-4 rounded-xl bg-[#6D001A] hover:bg-black text-xs font-bold text-white transition-all flex items-center justify-center gap-1.5 shadow-sm"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            <span>Buka Studio 3D Penuh</span>
+          </a>
           <button
             type="button"
             onclick="saveCurrentOutfitToAccount()"
-            class="flex-1 py-3 px-4 rounded-full border border-black/20 hover:border-black bg-white text-xs font-semibold text-black transition-all flex items-center justify-center gap-1.5"
+            class="py-2.5 px-4 rounded-xl border border-black/20 hover:border-black bg-white dark:bg-stone-800 text-xs font-semibold text-black dark:text-white transition-all flex items-center justify-center gap-1.5"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
               <path d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
             </svg>
-            <span>Simpan ke Akun</span>
+            <span>Simpan Outfit</span>
           </button>
           <a
             id="v360StoreLink"
             href="https://tokopedia.com"
             target="_blank"
-            class="flex-1 py-3 px-4 rounded-full bg-[#6D001A] hover:bg-[#550014] text-xs font-bold text-white transition-all flex items-center justify-center gap-1.5"
+            class="py-2.5 px-4 rounded-xl border border-black/20 hover:border-black bg-white dark:bg-stone-800 text-xs font-semibold text-black dark:text-white transition-all flex items-center justify-center gap-1.5"
           >
-            <span>Beli Produk Resmi</span>
+            <span>Beli di Toko</span>
             <svg
-              width="14"
-              height="14"
+              width="13"
+              height="13"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="2.2"
             >
               <path
                 d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"
@@ -2384,10 +2452,12 @@
     >
       <div
         class="bg-[#FFF8E7] border-t sm:border border-black rounded-t-3xl sm:rounded-3xl max-w-md w-full p-4 sm:p-6 shadow-2xl relative my-0 sm:my-auto animate-slideUpMobile sm:animate-fadeIn max-h-[92dvh] overflow-y-auto"
-        style="-webkit-overflow-scrolling: touch;"
+        style="-webkit-overflow-scrolling: touch"
       >
         <!-- Mobile Drag Pull Handle -->
-        <div class="w-10 h-1 rounded-full bg-black/20 mx-auto mb-3 sm:hidden shrink-0"></div>
+        <div
+          class="w-10 h-1 rounded-full bg-black/20 mx-auto mb-3 sm:hidden shrink-0"
+        ></div>
 
         <button
           type="button"
@@ -2672,12 +2742,8 @@
             if (normTier === "premium") {
               return {
                 id: u.id || "usr_" + Date.now(),
-                name:
-                  u.name && !isDummyName(u.name) ? u.name : "Member Outfit Req",
-                email:
-                  u.email && !isDummyEmail(u.email)
-                    ? u.email
-                    : "",
+                name: u.name && !isDummyName(u.name) ? u.name : "Member Orec",
+                email: u.email && !isDummyEmail(u.email) ? u.email : "",
                 username: u.username || formatUsernameFrom(u.name, u.email),
                 tier: "premium",
                 isLoggedIn: true,
@@ -2776,13 +2842,16 @@
         {
           id: "shopee-28751940555",
           itemId: "28751940555",
-          title: "Jaqueta Com Capuz Casaco Corta-Vento Quente À Prova D'água Para Homens",
+          title:
+            "Jaqueta Com Capuz Casaco Corta-Vento Quente À Prova D'água Para Homens",
           category: "kasual",
           event_type: "ngonser",
           style: "Athleisure & Windbreaker",
-          image: "https://down-br.img.susercontent.com/file/cn-11134207-7r98o-lw6m33mma1c55c",
+          image:
+            "https://down-br.img.susercontent.com/file/cn-11134207-7r98o-lw6m33mma1c55c",
           store: "Shopee Mall",
-          storeUrl: "https://shopee.com.br/jaqueta-com-capuz-casaco-corta-vento-quente-a-prova-d-agua-para-homens-caminhadas-pesca-outerwear-ja-i.236700327.28751940555",
+          storeUrl:
+            "https://shopee.com.br/jaqueta-com-capuz-casaco-corta-vento-quente-a-prova-d-agua-para-homens-caminhadas-pesca-outerwear-ja-i.236700327.28751940555",
           price: "Rp 165.068",
           priceDisplay: "R$ 56.92 (~ Rp 165.068)",
           priceTotal: 165068,
@@ -2791,13 +2860,16 @@
         {
           id: "shopee-53717754452",
           itemId: "53717754452",
-          title: "Jaqueta Masculina Folgada e Versátil Com Capuz Estampa Em Cores Contrastantes",
+          title:
+            "Jaqueta Masculina Folgada e Versátil Com Capuz Estampa Em Cores Contrastantes",
           category: "kasual",
           event_type: "ngonser",
           style: "Casual Streetwear",
-          image: "https://down-br.img.susercontent.com/file/sg-11134201-8257s-mt1a632dqj29b3",
+          image:
+            "https://down-br.img.susercontent.com/file/sg-11134201-8257s-mt1a632dqj29b3",
           store: "Shopee Mall",
-          storeUrl: "https://shopee.com.br/jaqueta-masculina-folgada-e-versatil-com-capuz-estampa-em-cores-contrastantes-com-ziper-ideal-para-u-i.1930400645.53717754452",
+          storeUrl:
+            "https://shopee.com.br/jaqueta-masculina-folgada-e-versatil-com-capuz-estampa-em-cores-contrastantes-com-ziper-ideal-para-u-i.1930400645.53717754452",
           price: "Rp 376.507",
           priceDisplay: "R$ 129.83 (~ Rp 376.507)",
           priceTotal: 376507,
@@ -2806,13 +2878,16 @@
         {
           id: "shopee-29613458326",
           itemId: "29613458326",
-          title: "Jaqueta Masculina Com Fecho De Zíper Completo Clássica Para Negócios E Uso Casual",
+          title:
+            "Jaqueta Masculina Com Fecho De Zíper Completo Clássica Para Negócios E Uso Casual",
           category: "formal",
           event_type: "formal",
           style: "Classic Business Outerwear",
-          image: "https://down-br.img.susercontent.com/file/sg-11134201-7rbkw-lqkdfengj344d7",
+          image:
+            "https://down-br.img.susercontent.com/file/sg-11134201-7rbkw-lqkdfengj344d7",
           store: "Shopee Mall",
-          storeUrl: "https://shopee.com.br/jaqueta-masculina-com-fecho-de-ziper-completo-classica-para-negocios-e-uso-casual-casaco-macio-elegante-primavera-outono-i.1930400645.29613458326",
+          storeUrl:
+            "https://shopee.com.br/jaqueta-masculina-com-fecho-de-ziper-completo-classica-para-negocios-e-uso-casual-casaco-macio-elegante-primavera-outono-i.1930400645.29613458326",
           price: "Rp 242.179",
           priceDisplay: "R$ 83.51 (~ Rp 242.179)",
           priceTotal: 242179,
@@ -2821,13 +2896,16 @@
         {
           id: "shopee-22098376587",
           itemId: "22098376587",
-          title: "Jaqueta Impermeável de Inverno Masculina Bobojaco À Prova de Vento",
+          title:
+            "Jaqueta Impermeável de Inverno Masculina Bobojaco À Prova de Vento",
           category: "kasual",
           event_type: "ngonser",
           style: "Urban Puffer & Street",
-          image: "https://down-br.img.susercontent.com/file/br-11134207-820me-mqavg52do83m43",
+          image:
+            "https://down-br.img.susercontent.com/file/br-11134207-820me-mqavg52do83m43",
           store: "Shopee Mall",
-          storeUrl: "https://shopee.com.br/jaqueta-impermeavel-de-inverno-masculina-bobojaco-a-prova-de-vento-forro-macio-capuz-removivel-frio-grosso-e-intenso-i.1930400645.22098376587",
+          storeUrl:
+            "https://shopee.com.br/jaqueta-impermeavel-de-inverno-masculina-bobojaco-a-prova-de-vento-forro-macio-capuz-removivel-frio-grosso-e-intenso-i.1930400645.22098376587",
           price: "Rp 826.500",
           priceDisplay: "R$ 285.00 (~ Rp 826.500)",
           priceTotal: 826500,
@@ -2837,55 +2915,160 @@
 
       const DEFAULT_OUTFIT_CATALOG = [
         {
-          id: "shopee-28751940555",
-          title: "Jaqueta Com Capuz Casaco Corta-Vento Quente À Prova D'água Para Homens",
+          id: "3d-tshirt_graphic_white",
+          title: "Kaos Graphic Minimalist Putih (3D Live Fitting)",
+          category: "kasual",
+          event_type: "santai",
+          image: "images/3d/tshirt_graphic_white_thumb.jpg",
+          price: "Rp 149.000",
+          priceDisplay: "Rp 149.000",
+          priceTotal: 149000,
+          store: "Orec 3D Studio",
+          storeUrl: "../Premium 3D/index.html?top=tshirt_graphic_white&ref=account",
+          desc: "Katun combed 24s dengan sablon grafis geometris modern. Siap dicoba langsung di Studio Manekin 3D.",
+        },
+        {
+          id: "3d-flannel_red",
+          title: "Kemeja Flanel Buffalo Merah (3D Live Fitting)",
           category: "kasual",
           event_type: "ngonser",
-          image: "https://down-br.img.susercontent.com/file/cn-11134207-7r98o-lw6m33mma1c55c",
+          image: "images/3d/flannel_red_thumb.jpg",
+          price: "Rp 229.000",
+          priceDisplay: "Rp 229.000",
+          priceTotal: 229000,
+          store: "Orec 3D Studio",
+          storeUrl: "../Premium 3D/index.html?top=flannel_red&ref=account",
+          desc: "Kain flanel katun premium motif kotak buffalo merah-hitam klasik. Siap dicoba langsung di Studio Manekin 3D.",
+        },
+        {
+          id: "3d-polo_navy",
+          title: "Kaos Polo Pique Navy (3D Live Fitting)",
+          category: "formal",
+          event_type: "kantor",
+          image: "images/3d/polo_navy_thumb.jpg",
+          price: "Rp 179.000",
+          priceDisplay: "Rp 179.000",
+          priceTotal: 179000,
+          store: "Orec 3D Studio",
+          storeUrl: "../Premium 3D/index.html?top=polo_navy&ref=account",
+          desc: "Polo shirt katun rajut pique berkerah elegan, warna biru navy gelap. Siap dicoba langsung di Studio Manekin 3D.",
+        },
+        {
+          id: "3d-tshirt_white_basic",
+          title: "Kaos Polos Basic Putih (3D Live Fitting)",
+          category: "kasual",
+          event_type: "santai",
+          image: "images/3d/tshirt_white_basic_thumb.jpg",
+          price: "Rp 99.000",
+          priceDisplay: "Rp 99.000",
+          priceTotal: 99000,
+          store: "Orec 3D Studio",
+          storeUrl: "../Premium 3D/index.html?top=tshirt_white_basic&ref=account",
+          desc: "Kaos oblong putih polos combed 30s sejuk untuk pemakaian sehari-hari. Siap dicoba langsung di Studio Manekin 3D.",
+        },
+        {
+          id: "3d-jeans_blue",
+          title: "Jeans Biru Klasik Regular Fit (3D Live Fitting)",
+          category: "streetwear",
+          event_type: "santai",
+          image: "images/3d/jeans_blue_thumb.jpg",
+          price: "Rp 299.000",
+          priceDisplay: "Rp 299.000",
+          priceTotal: 299000,
+          store: "Orec 3D Studio",
+          storeUrl: "../Premium 3D/index.html?bot=jeans_blue&ref=account",
+          desc: "Denim twill 13.5 oz cuci medium wash dengan jahitan tembaga otentik. Siap dicoba langsung di Studio Manekin 3D.",
+        },
+        {
+          id: "3d-jeans_indigo",
+          title: "Jeans Indigo Gelap Raw Finish (3D Live Fitting)",
+          category: "streetwear",
+          event_type: "ngonser",
+          image: "images/3d/jeans_indigo_thumb.jpg",
+          price: "Rp 319.000",
+          priceDisplay: "Rp 319.000",
+          priceTotal: 319000,
+          store: "Orec 3D Studio",
+          storeUrl: "../Premium 3D/index.html?bot=jeans_indigo&ref=account",
+          desc: "Denim kaku raw indigo pekat dengan detail selvedge aksen putih. Siap dicoba langsung di Studio Manekin 3D.",
+        },
+        {
+          id: "3d-chino_khaki",
+          title: "Celana Chino Slim Khaki (3D Live Fitting)",
+          category: "formal",
+          event_type: "kantor",
+          image: "images/3d/chino_khaki_thumb.jpg",
+          price: "Rp 219.000",
+          priceDisplay: "Rp 219.000",
+          priceTotal: 219000,
+          store: "Orec 3D Studio",
+          storeUrl: "../Premium 3D/index.html?bot=chino_khaki&ref=account",
+          desc: "Celana panjang chino katun stretch warna khaki natural serbaguna. Siap dicoba langsung di Studio Manekin 3D.",
+        },
+        {
+          id: "shopee-28751940555",
+          title:
+            "Jaqueta Com Capuz Casaco Corta-Vento Quente À Prova D'água Para Homens",
+          category: "kasual",
+          event_type: "ngonser",
+          image:
+            "https://down-br.img.susercontent.com/file/cn-11134207-7r98o-lw6m33mma1c55c",
           price: "Rp 165.068",
           store: "Shopee Mall",
-          storeUrl: "https://shopee.com.br/jaqueta-com-capuz-casaco-corta-vento-quente-a-prova-d-agua-para-homens-caminhadas-pesca-outerwear-ja-i.236700327.28751940555",
+          storeUrl:
+            "https://shopee.com.br/jaqueta-com-capuz-casaco-corta-vento-quente-a-prova-d-agua-para-homens-caminhadas-pesca-outerwear-ja-i.236700327.28751940555",
           desc: "Jaket windbreaker bertudung hangat dan tahan air, cocok untuk acara kasual santai maupun konser musik.",
         },
         {
           id: "shopee-53717754452",
-          title: "Jaqueta Masculina Folgada e Versátil Com Capuz Estampa Em Cores Contrastantes",
+          title:
+            "Jaqueta Masculina Folgada e Versátil Com Capuz Estampa Em Cores Contrastantes",
           category: "kasual",
           event_type: "ngonser",
-          image: "https://down-br.img.susercontent.com/file/sg-11134201-8257s-mt1a632dqj29b3",
+          image:
+            "https://down-br.img.susercontent.com/file/sg-11134201-8257s-mt1a632dqj29b3",
           price: "Rp 376.507",
           store: "Shopee Mall",
-          storeUrl: "https://shopee.com.br/jaqueta-masculina-folgada-e-versatil-com-capuz-estampa-em-cores-contrastantes-com-ziper-ideal-para-u-i.1930400645.53717754452",
+          storeUrl:
+            "https://shopee.com.br/jaqueta-masculina-folgada-e-versatil-com-capuz-estampa-em-cores-contrastantes-com-ziper-ideal-para-u-i.1930400645.53717754452",
           desc: "Desain jaket longgar kontemporer beraksen warna kontras, gaya street look kekinian yang fleksibel.",
         },
         {
           id: "shopee-29613458326",
-          title: "Jaqueta Masculina Com Fecho De Zíper Completo Clássica Para Negócios E Uso Casual",
+          title:
+            "Jaqueta Masculina Com Fecho De Zíper Completo Clássica Para Negócios E Uso Casual",
           category: "formal",
           event_type: "formal",
-          image: "https://down-br.img.susercontent.com/file/sg-11134201-7rbkw-lqkdfengj344d7",
+          image:
+            "https://down-br.img.susercontent.com/file/sg-11134201-7rbkw-lqkdfengj344d7",
           price: "Rp 242.179",
           store: "Shopee Mall",
-          storeUrl: "https://shopee.com.br/jaqueta-masculina-com-fecho-de-ziper-completo-classica-para-negocios-e-uso-casual-casaco-macio-elegante-primavera-outono-i.1930400645.29613458326",
+          storeUrl:
+            "https://shopee.com.br/jaqueta-masculina-com-fecho-de-ziper-completo-classica-para-negocios-e-uso-casual-casaco-macio-elegante-primavera-outono-i.1930400645.29613458326",
           desc: "Jaket semi formal berpotongan rapi, memberikan kesan elegan dan profesional untuk pertemuan penting.",
         },
         {
           id: "shopee-22098376587",
-          title: "Jaqueta Impermeável de Inverno Masculina Bobojaco À Prova de Vento",
+          title:
+            "Jaqueta Impermeável de Inverno Masculina Bobojaco À Prova de Vento",
           category: "kasual",
           event_type: "ngonser",
-          image: "https://down-br.img.susercontent.com/file/br-11134207-820me-mqavg52do83m43",
+          image:
+            "https://down-br.img.susercontent.com/file/br-11134207-820me-mqavg52do83m43",
           price: "Rp 826.500",
           store: "Shopee Mall",
-          storeUrl: "https://shopee.com.br/jaqueta-impermeavel-de-inverno-masculina-bobojaco-a-prova-de-vento-forro-macio-capuz-removivel-frio-grosso-e-intenso-i.1930400645.22098376587",
+          storeUrl:
+            "https://shopee.com.br/jaqueta-impermeavel-de-inverno-masculina-bobojaco-a-prova-de-vento-forro-macio-capuz-removivel-frio-grosso-e-intenso-i.1930400645.22098376587",
           desc: "Puffer jacket tebal dengan lapisan lembut anti angin, cocok untuk hangout dan festival musik malam.",
         },
         {
           id: "shopee-54962639141",
-          title: "Hkitty Novo Estilo Chinês Jaqueta Abotoada Com Gola Alta Para Casais",
+          title:
+            "Hkitty Novo Estilo Chinês Jaqueta Abotoada Com Gola Alta Para Casais",
           category: "formal",
           event_type: "pengajian",
-          image: "https://down-br.img.susercontent.com/file/sg-11134201-824hf-mpt1asazu0b272",
+          image:
+            "https://down-br.img.susercontent.com/file/sg-11134201-824hf-mpt1asazu0b272",
           price: "Rp 410.495",
           store: "Shopee Mall",
           storeUrl: "https://shopee.com.br",
@@ -2896,7 +3079,8 @@
           title: "Kit 3 Jaquetas Blusas Unissex Com Capuz De Frio Forrado",
           category: "kasual",
           event_type: "ngonser",
-          image: "https://down-br.img.susercontent.com/file/br-11134207-820lp-msk9noxmrsp0be",
+          image:
+            "https://down-br.img.susercontent.com/file/br-11134207-820lp-msk9noxmrsp0be",
           price: "Rp 91.234",
           store: "Shopee Mall",
           storeUrl: "https://shopee.com.br",
@@ -2904,10 +3088,12 @@
         },
         {
           id: "shopee-46069351757",
-          title: "Jaquetas Masculinas De Hip Hop Corta-Vento Harajuku Streetwear",
+          title:
+            "Jaquetas Masculinas De Hip Hop Corta-Vento Harajuku Streetwear",
           category: "kasual",
           event_type: "ngonser",
-          image: "https://down-br.img.susercontent.com/file/sg-11134201-8258s-mud71ou6zitf0e",
+          image:
+            "https://down-br.img.susercontent.com/file/sg-11134201-8258s-mud71ou6zitf0e",
           price: "Rp 136.938",
           store: "Shopee Mall",
           storeUrl: "https://shopee.com.br",
@@ -2918,7 +3104,8 @@
           title: "Jaqueta Corta Vento Com Capuz De Nylon Com Forro",
           category: "formal",
           event_type: "pengajian",
-          image: "https://down-br.img.susercontent.com/file/sg-11134201-825a4-mtr4ztijgu803c",
+          image:
+            "https://down-br.img.susercontent.com/file/sg-11134201-825a4-mtr4ztijgu803c",
           price: "Rp 247.689",
           store: "Shopee Mall",
           storeUrl: "https://shopee.com.br",
@@ -3023,7 +3210,8 @@
         } else if (_same && _stored.tier === "premium") {
           calculatedTier = "premium";
         } else if (u.tier === "free") {
-          calculatedTier = _same && _stored.tier === "premium" ? "premium" : "free";
+          calculatedTier =
+            _same && _stored.tier === "premium" ? "premium" : "free";
         }
         APP_STATE.user.tier = calculatedTier;
         APP_STATE.user.isLoggedIn = u.isLoggedIn !== false;
@@ -3040,7 +3228,9 @@
       async function checkAndUpdateCustomerPremiumFromDatabase(overrideEmail) {
         if (!supabaseClient) return null;
         try {
-          const email = (overrideEmail || APP_STATE.user?.email || "").toLowerCase().trim();
+          const email = (overrideEmail || APP_STATE.user?.email || "")
+            .toLowerCase()
+            .trim();
           if (!email || isDummyEmail(email)) return null;
 
           const now = new Date();
@@ -3054,7 +3244,9 @@
 
           if (!uErr && dbUser) {
             if (dbUser.tier === "premium") {
-              const expDate = dbUser.premium_expires_at ? new Date(dbUser.premium_expires_at) : null;
+              const expDate = dbUser.premium_expires_at
+                ? new Date(dbUser.premium_expires_at)
+                : null;
               if (!expDate || expDate > now) {
                 APP_STATE.user.tier = "premium";
                 if (dbUser.premium_expires_at) {
@@ -3070,7 +3262,10 @@
                 saveSession();
                 renderUI();
                 renderRecommendationCards("semua");
-                return { isPremium: true, expiresAt: APP_STATE.user.premiumExpiresAt };
+                return {
+                  isPremium: true,
+                  expiresAt: APP_STATE.user.premiumExpiresAt,
+                };
               } else {
                 APP_STATE.user.tier = "free";
                 APP_STATE.user.premiumExpiresAt = null;
@@ -3100,12 +3295,15 @@
                 APP_STATE.user.name = sub.user_name;
               }
               try {
-                await supabaseClient.from("users").upsert({
-                  email: email,
-                  tier: "premium",
-                  premium_expires_at: sub.expires_at
-                }, { onConflict: "email" });
-              } catch(e) {}
+                await supabaseClient.from("users").upsert(
+                  {
+                    email: email,
+                    tier: "premium",
+                    premium_expires_at: sub.expires_at,
+                  },
+                  { onConflict: "email" },
+                );
+              } catch (e) {}
 
               saveSession();
               renderUI();
@@ -3114,11 +3312,15 @@
             }
           }
         } catch (err) {
-          console.warn("[OutfitReq] checkAndUpdateCustomerPremiumFromDatabase error:", err);
+          console.warn(
+            "[OutfitReq] checkAndUpdateCustomerPremiumFromDatabase error:",
+            err,
+          );
         }
         return null;
       }
-      window.checkAndUpdateCustomerPremiumFromDatabase = checkAndUpdateCustomerPremiumFromDatabase;
+      window.checkAndUpdateCustomerPremiumFromDatabase =
+        checkAndUpdateCustomerPremiumFromDatabase;
 
       // 3. INISIALISASI SAAT HALAMAN DIMUAT
       window.addEventListener("DOMContentLoaded", async () => {
@@ -3144,7 +3346,9 @@
                 category: it.category,
                 event_type: it.event_type,
                 image: it.image,
-                price: it.priceDisplay || `Rp ${it.priceTotal.toLocaleString("id-ID")}`,
+                price:
+                  it.priceDisplay ||
+                  `Rp ${it.priceTotal.toLocaleString("id-ID")}`,
                 store: it.store,
                 storeUrl: it.storeUrl,
                 desc: it.desc,
@@ -3183,7 +3387,9 @@
               !isDummyEmail(session.user.email)
             ) {
               applyUserAccount(session.user);
-              await checkAndUpdateCustomerPremiumFromDatabase(session.user.email);
+              await checkAndUpdateCustomerPremiumFromDatabase(
+                session.user.email,
+              );
               saveSession();
               await loadAccountSavedPhotos();
               renderUI();
@@ -3202,7 +3408,9 @@
               (event === "SIGNED_IN" || event === "USER_UPDATED")
             ) {
               applyUserAccount(session.user);
-              await checkAndUpdateCustomerPremiumFromDatabase(session.user.email);
+              await checkAndUpdateCustomerPremiumFromDatabase(
+                session.user.email,
+              );
               saveSession();
               await loadAccountSavedPhotos();
               renderUI();
@@ -3214,7 +3422,12 @@
 
       // Sinkronisasi otomatis antar tab jika ada foto yang disimpan/dihapus atau sesi akun berubah
       window.addEventListener("storage", async (e) => {
-        if (!e.key || e.key.includes("outfit_req_saved") || e.key === "outfit_req_user" || e.key === "outfit_req_logged_out") {
+        if (
+          !e.key ||
+          e.key.includes("outfit_req_saved") ||
+          e.key === "outfit_req_user" ||
+          e.key === "outfit_req_logged_out"
+        ) {
           loadStoredSession();
           await checkAndUpdateCustomerPremiumFromDatabase();
           await loadAccountSavedPhotos();
@@ -3239,8 +3452,15 @@
           const resolved = findActiveCustomerAccount();
           applyUserAccount(resolved);
           saveSession();
-          if (supabaseClient && resolved && resolved.email && !isDummyEmail(resolved.email)) {
-            checkAndUpdateCustomerPremiumFromDatabase(resolved.email).catch(() => {});
+          if (
+            supabaseClient &&
+            resolved &&
+            resolved.email &&
+            !isDummyEmail(resolved.email)
+          ) {
+            checkAndUpdateCustomerPremiumFromDatabase(resolved.email).catch(
+              () => {},
+            );
           }
 
           const storedProfiles = localStorage.getItem(
@@ -3326,13 +3546,20 @@
             btnLogout.classList.remove("inline-flex");
           }
           if (rowLogoutAccount) rowLogoutAccount.classList.remove("hidden");
-          if (logoutSecTitle) logoutSecTitle.innerText = "Status Sesi: Pengunjung Tamu";
-          if (logoutSecDesc) logoutSecDesc.innerText = "Anda saat ini dalam mode penjelajahan tamu. Masuk ke akun Anda untuk menyimpan data profil dan riwayat outfit secara permanen.";
+          if (logoutSecTitle)
+            logoutSecTitle.innerText = "Status Sesi: Pengunjung Tamu";
+          if (logoutSecDesc)
+            logoutSecDesc.innerText =
+              "Anda saat ini dalam mode penjelajahan tamu. Masuk ke akun Anda untuk menyimpan data profil dan riwayat outfit secara permanen.";
           if (btnCardLogout) {
-            btnCardLogout.className = "inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-xs md:text-sm font-semibold text-white bg-[#6D001A] hover:bg-black transition-all shadow-sm active:scale-[0.99] cursor-pointer";
-            btnCardLogout.onclick = () => { window.location.href = "login.html"; };
+            btnCardLogout.className =
+              "inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-xs md:text-sm font-semibold text-white bg-[#6D001A] hover:bg-black transition-all shadow-sm active:scale-[0.99] cursor-pointer";
+            btnCardLogout.onclick = () => {
+              window.location.href = "login.html";
+            };
           }
-          if (btnCardLogoutText) btnCardLogoutText.innerText = "Masuk ke Akun (Login)";
+          if (btnCardLogoutText)
+            btnCardLogoutText.innerText = "Masuk ke Akun (Login)";
           if (guestNoticeBanner) guestNoticeBanner.classList.remove("hidden");
         } else if (isFree) {
           if (usernameEl)
@@ -3363,12 +3590,16 @@
           }
           if (rowLogoutAccount) rowLogoutAccount.classList.remove("hidden");
           if (logoutSecTitle) logoutSecTitle.innerText = "Sesi Masuk Akun";
-          if (logoutSecDesc) logoutSecDesc.innerText = "Keluar dari akun Outfit Req Anda pada perangkat ini dengan aman.";
+          if (logoutSecDesc)
+            logoutSecDesc.innerText =
+              "Keluar dari akun Orec Anda pada perangkat ini dengan aman.";
           if (btnCardLogout) {
-            btnCardLogout.className = "inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-xs md:text-sm font-semibold text-red-700 bg-white hover:bg-red-700 hover:text-white border border-red-300 hover:border-red-700 transition-all shadow-sm active:scale-[0.99] cursor-pointer";
+            btnCardLogout.className =
+              "inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-xs md:text-sm font-semibold text-red-700 bg-white hover:bg-red-700 hover:text-white border border-red-300 hover:border-red-700 transition-all shadow-sm active:scale-[0.99] cursor-pointer";
             btnCardLogout.onclick = handleLogout;
           }
-          if (btnCardLogoutText) btnCardLogoutText.innerText = "Keluar (Logout)";
+          if (btnCardLogoutText)
+            btnCardLogoutText.innerText = "Keluar (Logout)";
           if (guestNoticeBanner) guestNoticeBanner.classList.add("hidden");
         } else if (isPremium) {
           if (usernameEl)
@@ -3400,12 +3631,16 @@
           }
           if (rowLogoutAccount) rowLogoutAccount.classList.remove("hidden");
           if (logoutSecTitle) logoutSecTitle.innerText = "Sesi Masuk Akun";
-          if (logoutSecDesc) logoutSecDesc.innerText = "Keluar dari akun Outfit Req Anda pada perangkat ini dengan aman.";
+          if (logoutSecDesc)
+            logoutSecDesc.innerText =
+              "Keluar dari akun Orec Anda pada perangkat ini dengan aman.";
           if (btnCardLogout) {
-            btnCardLogout.className = "inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-xs md:text-sm font-semibold text-red-700 bg-white hover:bg-red-700 hover:text-white border border-red-300 hover:border-red-700 transition-all shadow-sm active:scale-[0.99] cursor-pointer";
+            btnCardLogout.className =
+              "inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-xs md:text-sm font-semibold text-red-700 bg-white hover:bg-red-700 hover:text-white border border-red-300 hover:border-red-700 transition-all shadow-sm active:scale-[0.99] cursor-pointer";
             btnCardLogout.onclick = handleLogout;
           }
-          if (btnCardLogoutText) btnCardLogoutText.innerText = "Keluar (Logout)";
+          if (btnCardLogoutText)
+            btnCardLogoutText.innerText = "Keluar (Logout)";
           if (guestNoticeBanner) guestNoticeBanner.classList.add("hidden");
         }
 
@@ -3423,22 +3658,18 @@
               "ml-1 px-1.5 py-0.5 rounded-full text-[10px] bg-[#6D001A] text-white font-bold";
           }
           if (chatQuotaStatusBadge) {
-            chatQuotaStatusBadge.innerText =
-              "Status: Member Premium";
+            chatQuotaStatusBadge.innerText = "Status: Member Premium";
             chatQuotaStatusBadge.className =
               "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800";
           }
         } else if (isGuest) {
-          if (quotaDisplay)
-            quotaDisplay.innerText = "Mode Tamu (Guest)";
+          if (quotaDisplay) quotaDisplay.innerText = "Mode Tamu (Guest)";
           if (tabChatQuotaBadge) tabChatQuotaBadge.innerText = "Tamu";
           if (chatQuotaStatusBadge)
             chatQuotaStatusBadge.innerText = "Status: Pengunjung Tamu";
         } else {
-          if (quotaDisplay)
-            quotaDisplay.innerText = "Member Terdaftar (Aktif)";
-          if (tabChatQuotaBadge)
-            tabChatQuotaBadge.innerText = "Free";
+          if (quotaDisplay) quotaDisplay.innerText = "Member Terdaftar (Aktif)";
+          if (tabChatQuotaBadge) tabChatQuotaBadge.innerText = "Free";
           if (chatQuotaStatusBadge)
             chatQuotaStatusBadge.innerText = "Status: Member Free";
         }
@@ -3562,7 +3793,10 @@
         const u = APP_STATE.user;
         if (u && u.isLoggedIn && u.tier !== "guest") {
           if (u.email && !isDummyEmail(u.email)) {
-            return `outfit_req_saved_photos_${u.email.toLowerCase().trim().replace(/[^a-z0-9]/g, "_")}`;
+            return `outfit_req_saved_photos_${u.email
+              .toLowerCase()
+              .trim()
+              .replace(/[^a-z0-9]/g, "_")}`;
           }
           if (u.id && !u.id.startsWith("guest-") && !u.id.startsWith("demo-")) {
             return `outfit_req_saved_photos_${u.id}`;
@@ -3645,7 +3879,9 @@
               }
             }
             if (loadedItems.length === 0) {
-              const guestRaw = localStorage.getItem("outfit_req_saved_photos_guest");
+              const guestRaw = localStorage.getItem(
+                "outfit_req_saved_photos_guest",
+              );
               if (guestRaw) {
                 const parsedGuest = JSON.parse(guestRaw);
                 if (Array.isArray(parsedGuest) && parsedGuest.length > 0) {
@@ -3660,7 +3896,8 @@
         loadedItems = sanitizeSavedOutfits(loadedItems);
 
         // Fallback ke DEFAULT_SAVED_OUTFITS jika belum pernah diisi & tidak sengaja dikosongkan
-        const isExplicitlyCleared = localStorage.getItem("outfit_req_saved_cleared") === "true";
+        const isExplicitlyCleared =
+          localStorage.getItem("outfit_req_saved_cleared") === "true";
         if (loadedItems.length === 0 && !isExplicitlyCleared) {
           loadedItems = [...DEFAULT_SAVED_OUTFITS];
         }
@@ -3668,9 +3905,15 @@
         // Simpan versi bersih & tersinkronisasi ke localStorage
         try {
           localStorage.setItem(userKey, JSON.stringify(loadedItems));
-          localStorage.setItem("outfit_req_saved_photos", JSON.stringify(loadedItems));
+          localStorage.setItem(
+            "outfit_req_saved_photos",
+            JSON.stringify(loadedItems),
+          );
           if (APP_STATE.user && APP_STATE.user.id) {
-            localStorage.setItem(`outfit_req_saved_photos_${APP_STATE.user.id}`, JSON.stringify(loadedItems));
+            localStorage.setItem(
+              `outfit_req_saved_photos_${APP_STATE.user.id}`,
+              JSON.stringify(loadedItems),
+            );
           }
         } catch (e) {}
 
@@ -3679,19 +3922,30 @@
         renderSavedPhotos();
 
         // 2. Sinkronisasi dengan Supabase Database di latar belakang (Background Sync)
-        if (supabaseClient && APP_STATE.user && APP_STATE.user.isLoggedIn && APP_STATE.user.tier !== "guest") {
+        if (
+          supabaseClient &&
+          APP_STATE.user &&
+          APP_STATE.user.isLoggedIn &&
+          APP_STATE.user.tier !== "guest"
+        ) {
           try {
             let targetUserId = APP_STATE.user.id || "";
-            let isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(targetUserId);
+            let isUUID =
+              /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+                targetUserId,
+              );
             if (!isUUID) {
-              const { data: sessionData } = await supabaseClient.auth.getSession();
+              const { data: sessionData } =
+                await supabaseClient.auth.getSession();
               if (sessionData?.session?.user?.id) {
                 targetUserId = sessionData.session.user.id;
                 isUUID = true;
               }
             }
 
-            const targetEmail = (APP_STATE.user.email || "").toLowerCase().trim();
+            const targetEmail = (APP_STATE.user.email || "")
+              .toLowerCase()
+              .trim();
             const hasValidEmail = targetEmail && !isDummyEmail(targetEmail);
 
             let data = null;
@@ -3702,7 +3956,9 @@
               const res = await supabaseClient
                 .from("saved_photos")
                 .select("*")
-                .or(`user_id.eq.${targetUserId},user_email.ilike.${targetEmail}`)
+                .or(
+                  `user_id.eq.${targetUserId},user_email.ilike.${targetEmail}`,
+                )
                 .order("saved_at", { ascending: false });
               data = res.data;
               error = res.error;
@@ -3751,17 +4007,27 @@
                       id: row.item_id || row.outfit_id || row.id,
                       title: row.title || "Outfit Pilihan",
                       category: row.category || "Kasual",
-                      image: row.image_url || row.photo_url || "images/card1.jpg",
+                      image:
+                        row.image_url || row.photo_url || "images/card1.jpg",
                       store: row.store || "Shopee",
-                      storeUrl: row.store_url || row.product_link || "https://shopee.co.id",
+                      storeUrl:
+                        row.store_url ||
+                        row.product_link ||
+                        "https://shopee.co.id",
                       price: row.price_display || "Harga Shopee",
                     };
                   }
                 }
                 // Pastikan kepemilikan akun & jenis akun customer tercatat pada item
-                item.user_email = row.user_email || item.user_email || targetEmail;
-                item.user_tier = row.user_tier || item.user_tier || APP_STATE.user.tier || "free";
-                item.user_name = row.user_name || item.user_name || APP_STATE.user.name;
+                item.user_email =
+                  row.user_email || item.user_email || targetEmail;
+                item.user_tier =
+                  row.user_tier ||
+                  item.user_tier ||
+                  APP_STATE.user.tier ||
+                  "free";
+                item.user_name =
+                  row.user_name || item.user_name || APP_STATE.user.name;
                 return item;
               });
 
@@ -3770,21 +4036,37 @@
 
               // Gabungkan (Merge) cerdas tanpa menghapus item lokal
               const photoMap = new Map();
-              cleanedRemote.forEach((p) => { if (p && p.id) photoMap.set(String(p.id), p); });
-              APP_STATE.savedPhotos.forEach((p) => { if (p && p.id) photoMap.set(String(p.id), p); });
+              cleanedRemote.forEach((p) => {
+                if (p && p.id) photoMap.set(String(p.id), p);
+              });
+              APP_STATE.savedPhotos.forEach((p) => {
+                if (p && p.id) photoMap.set(String(p.id), p);
+              });
 
               APP_STATE.savedPhotos = Array.from(photoMap.values());
               try {
-                localStorage.setItem(userKey, JSON.stringify(APP_STATE.savedPhotos));
-                localStorage.setItem("outfit_req_saved_photos", JSON.stringify(APP_STATE.savedPhotos));
+                localStorage.setItem(
+                  userKey,
+                  JSON.stringify(APP_STATE.savedPhotos),
+                );
+                localStorage.setItem(
+                  "outfit_req_saved_photos",
+                  JSON.stringify(APP_STATE.savedPhotos),
+                );
                 if (APP_STATE.user && APP_STATE.user.id) {
-                  localStorage.setItem(`outfit_req_saved_photos_${APP_STATE.user.id}`, JSON.stringify(APP_STATE.savedPhotos));
+                  localStorage.setItem(
+                    `outfit_req_saved_photos_${APP_STATE.user.id}`,
+                    JSON.stringify(APP_STATE.savedPhotos),
+                  );
                 }
               } catch (e) {}
               renderSavedPhotos();
             }
           } catch (dbErr) {
-            console.warn("[OutfitReq] Supabase load saved_photos error:", dbErr);
+            console.warn(
+              "[OutfitReq] Supabase load saved_photos error:",
+              dbErr,
+            );
           }
         }
       }
@@ -3810,19 +4092,28 @@
           countEl.innerText = `${APP_STATE.savedPhotos.length} Outfit`;
 
         container.innerHTML = APP_STATE.savedPhotos
-          .map(
-            (item) => {
-              const safeTitle = (item.title || "Outfit Pilihan").replace(/'/g, "\\'");
-              const priceText = item.price || item.priceDisplay || (item.priceTotal ? `Rp ${Number(item.priceTotal).toLocaleString("id-ID")}` : "Rp 189.000");
-              const imgUrl = item.image || "images/card1.jpg";
-              const targetStoreUrl = item.storeUrl || "https://shopee.co.id";
-              const itemId = item.id || item.itemId || "item-1";
-              const itemTier = String(item.user_tier || (isPremium ? "premium" : "free")).toLowerCase();
-              const isItemPremium = itemTier === "premium";
-              return `
+          .map((item) => {
+            const safeTitle = (item.title || "Outfit Pilihan").replace(
+              /'/g,
+              "\\'",
+            );
+            const priceText =
+              item.price ||
+              item.priceDisplay ||
+              (item.priceTotal
+                ? `Rp ${Number(item.priceTotal).toLocaleString("id-ID")}`
+                : "Rp 189.000");
+            const imgUrl = item.image || "images/card1.jpg";
+            const targetStoreUrl = item.storeUrl || "https://shopee.co.id";
+            const itemId = item.id || item.itemId || "item-1";
+            const itemTier = String(
+              item.user_tier || (isPremium ? "premium" : "free"),
+            ).toLowerCase();
+            const isItemPremium = itemTier === "premium";
+            return `
         <div class="outfit-card group relative bg-white border border-black/15 rounded-2xl overflow-hidden shadow-sm flex flex-col">
           <div class="relative w-full aspect-[3/4] bg-stone-100 overflow-hidden">
-            <img src="${imgUrl}" alt="${item.title || 'Outfit'}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='images/card1.jpg'">
+            <img src="${imgUrl}" alt="${item.title || "Outfit"}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='images/card1.jpg'">
 
             ${
               isPremium
@@ -3854,8 +4145,8 @@
             <div>
               <div class="flex items-center justify-between gap-1 mb-1">
                 <span class="text-[10px] uppercase font-bold text-[#6D001A] truncate">${item.category || "Kasual"}</span>
-                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[8.5px] font-bold uppercase tracking-wider ${isItemPremium ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-stone-100 text-stone-700 border border-stone-200'}">
-                  ${isItemPremium ? '★ Premium' : 'Free Tier'}
+                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[8.5px] font-bold uppercase tracking-wider ${isItemPremium ? "bg-amber-100 text-amber-900 border border-amber-300" : "bg-stone-100 text-stone-700 border border-stone-200"}">
+                  ${isItemPremium ? "★ Premium" : "Free Tier"}
                 </span>
               </div>
               <div class="flex items-center justify-between gap-1 mb-0.5">
@@ -3873,51 +4164,75 @@
           </div>
         </div>
       `;
-            }
-          )
+          })
           .join("");
       }
 
       async function removeSavedPhoto(id) {
         const targetId = String(id);
-        const cleanTargetId = targetId.replace(/^shopee-/, '');
+        const cleanTargetId = targetId.replace(/^shopee-/, "");
         APP_STATE.savedPhotos = APP_STATE.savedPhotos.filter((p) => {
           if (!p) return false;
-          const pid = String(p.id || '');
-          const cleanPid = pid.replace(/^shopee-/, '');
-          const itemId = String(p.itemId || '');
-          return !(pid === targetId || cleanPid === cleanTargetId || itemId === targetId || itemId === cleanTargetId);
+          const pid = String(p.id || "");
+          const cleanPid = pid.replace(/^shopee-/, "");
+          const itemId = String(p.itemId || "");
+          return !(
+            pid === targetId ||
+            cleanPid === cleanTargetId ||
+            itemId === targetId ||
+            itemId === cleanTargetId
+          );
         });
         if (APP_STATE.savedPhotos.length === 0) {
           try {
             localStorage.setItem("outfit_req_saved_cleared", "true");
-          } catch(e) {}
+          } catch (e) {}
         } else {
           try {
             localStorage.removeItem("outfit_req_saved_cleared");
-          } catch(e) {}
+          } catch (e) {}
         }
         try {
           const userKey = getUserAccountStorageKey();
           localStorage.setItem(userKey, JSON.stringify(APP_STATE.savedPhotos));
-          localStorage.setItem("outfit_req_saved_photos", JSON.stringify(APP_STATE.savedPhotos));
-          localStorage.setItem("outfit_req_saved_timestamp", Date.now().toString());
+          localStorage.setItem(
+            "outfit_req_saved_photos",
+            JSON.stringify(APP_STATE.savedPhotos),
+          );
+          localStorage.setItem(
+            "outfit_req_saved_timestamp",
+            Date.now().toString(),
+          );
           if (APP_STATE.user && APP_STATE.user.id) {
-            localStorage.setItem(`outfit_req_saved_photos_${APP_STATE.user.id}`, JSON.stringify(APP_STATE.savedPhotos));
+            localStorage.setItem(
+              `outfit_req_saved_photos_${APP_STATE.user.id}`,
+              JSON.stringify(APP_STATE.savedPhotos),
+            );
           }
-        } catch(e) {}
+        } catch (e) {}
         renderSavedPhotos();
         showToast("Foto outfit dihapus dari simpanan akun Anda.");
 
         if (supabaseClient && APP_STATE.user) {
           try {
-            const targetEmail = (APP_STATE.user.email || "").toLowerCase().trim();
+            const targetEmail = (APP_STATE.user.email || "")
+              .toLowerCase()
+              .trim();
             let targetUserId = APP_STATE.user.id || "";
-            if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(targetUserId)) {
-              const { data: sessionData } = await supabaseClient.auth.getSession();
-              if (sessionData?.session?.user?.id) targetUserId = sessionData.session.user.id;
+            if (
+              !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+                targetUserId,
+              )
+            ) {
+              const { data: sessionData } =
+                await supabaseClient.auth.getSession();
+              if (sessionData?.session?.user?.id)
+                targetUserId = sessionData.session.user.id;
             }
-            const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(targetUserId);
+            const isUUID =
+              /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+                targetUserId,
+              );
 
             if (targetEmail && !isDummyEmail(targetEmail)) {
               try {
@@ -3962,15 +4277,17 @@
           items = items.filter((x) => x.event_type === "pengajian");
 
         container.innerHTML = items
-          .map(
-            (item) => {
-              const safeTitle = (item.title || "Outfit Rekomendasi").replace(/'/g, "\\'");
-              const imgUrl = item.image || "images/card1.jpg";
-              const targetStoreUrl = item.storeUrl || "https://shopee.co.id";
-              return `
+          .map((item) => {
+            const safeTitle = (item.title || "Outfit Rekomendasi").replace(
+              /'/g,
+              "\\'",
+            );
+            const imgUrl = item.image || "images/card1.jpg";
+            const targetStoreUrl = item.storeUrl || "https://shopee.co.id";
+            return `
         <div class="outfit-card group relative bg-white border border-black/15 rounded-2xl overflow-hidden shadow-sm flex flex-col">
           <div class="relative w-full aspect-[3/4] bg-stone-100 overflow-hidden">
-            <img src="${imgUrl}" alt="${item.title || 'Outfit'}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='images/card1.jpg'">
+            <img src="${imgUrl}" alt="${item.title || "Outfit"}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='images/card1.jpg'">
 
             ${
               isPremium
@@ -4017,8 +4334,7 @@
           </div>
         </div>
       `;
-            }
-          )
+          })
           .join("");
       }
 
@@ -4060,7 +4376,7 @@
       window.handleEventFilterClick = handleEventFilterClick;
 
       async function saveOutfitById(id) {
-        const item = APP_STATE.outfitCatalog.find(x => x.id === id);
+        const item = APP_STATE.outfitCatalog.find((x) => x.id === id);
         if (!item) return;
         await saveOutfitToSavedList(
           item.title,
@@ -4069,13 +4385,25 @@
           item.store,
           item.storeUrl,
           item.price,
-          item.id
+          item.id,
         );
       }
       window.saveOutfitById = saveOutfitById;
 
-      async function saveOutfitToSavedList(title, category, image, store, storeUrl, price, itemId) {
-        if (!APP_STATE.user || !APP_STATE.user.isLoggedIn || APP_STATE.user.tier === "guest") {
+      async function saveOutfitToSavedList(
+        title,
+        category,
+        image,
+        store,
+        storeUrl,
+        price,
+        itemId,
+      ) {
+        if (
+          !APP_STATE.user ||
+          !APP_STATE.user.isLoggedIn ||
+          APP_STATE.user.tier === "guest"
+        ) {
           showToast("Silakan masuk ke akun Anda untuk menyimpan produk.");
           setTimeout(() => {
             window.location.href = "login.html?redirect=account.html";
@@ -4083,11 +4411,13 @@
           return;
         }
 
-        const id = itemId || ("sp-" + Date.now());
-        const cleanId = String(id).replace(/^shopee-/, '');
-        const cleanPrice = String(price || '');
-        const numPrice = parseInt(cleanPrice.replace(/[^0-9]/g, '')) || 0;
-        const customerEmail = (APP_STATE.user?.email || "").toLowerCase().trim();
+        const id = itemId || "sp-" + Date.now();
+        const cleanId = String(id).replace(/^shopee-/, "");
+        const cleanPrice = String(price || "");
+        const numPrice = parseInt(cleanPrice.replace(/[^0-9]/g, "")) || 0;
+        const customerEmail = (APP_STATE.user?.email || "")
+          .toLowerCase()
+          .trim();
         const customerTier = getNormalizedTier(APP_STATE.user?.tier) || "free";
         const customerName = APP_STATE.user?.name || "Member";
 
@@ -4107,30 +4437,44 @@
           user_name: customerName,
           saved_by_email: customerEmail,
           saved_by_tier: customerTier,
-          saved_at: new Date().toISOString()
+          saved_at: new Date().toISOString(),
         };
 
         // Hindari duplikat
         const targetId = String(id);
         APP_STATE.savedPhotos = APP_STATE.savedPhotos.filter((p) => {
           if (!p) return false;
-          const pid = String(p.id || '');
-          const cleanPid = pid.replace(/^shopee-/, '');
-          const pItemId = String(p.itemId || '');
-          return !(pid === targetId || cleanPid === cleanId || pItemId === targetId || pItemId === cleanId);
+          const pid = String(p.id || "");
+          const cleanPid = pid.replace(/^shopee-/, "");
+          const pItemId = String(p.itemId || "");
+          return !(
+            pid === targetId ||
+            cleanPid === cleanId ||
+            pItemId === targetId ||
+            pItemId === cleanId
+          );
         });
         APP_STATE.savedPhotos.unshift(newPhoto);
 
         try {
           const userKey = getUserAccountStorageKey();
           localStorage.setItem(userKey, JSON.stringify(APP_STATE.savedPhotos));
-          localStorage.setItem("outfit_req_saved_photos", JSON.stringify(APP_STATE.savedPhotos));
-          localStorage.setItem("outfit_req_saved_timestamp", Date.now().toString());
+          localStorage.setItem(
+            "outfit_req_saved_photos",
+            JSON.stringify(APP_STATE.savedPhotos),
+          );
+          localStorage.setItem(
+            "outfit_req_saved_timestamp",
+            Date.now().toString(),
+          );
           localStorage.removeItem("outfit_req_saved_cleared");
           if (APP_STATE.user && APP_STATE.user.id) {
-            localStorage.setItem(`outfit_req_saved_photos_${APP_STATE.user.id}`, JSON.stringify(APP_STATE.savedPhotos));
+            localStorage.setItem(
+              `outfit_req_saved_photos_${APP_STATE.user.id}`,
+              JSON.stringify(APP_STATE.savedPhotos),
+            );
           }
-        } catch(e) {}
+        } catch (e) {}
         renderSavedPhotos();
         showToast(`"${title}" berhasil disimpan ke Akun Anda!`);
 
@@ -4138,11 +4482,20 @@
         if (supabaseClient && APP_STATE.user) {
           try {
             let targetUserId = APP_STATE.user.id || "";
-            if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(targetUserId)) {
-              const { data: sessionData } = await supabaseClient.auth.getSession();
-              if (sessionData?.session?.user?.id) targetUserId = sessionData.session.user.id;
+            if (
+              !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+                targetUserId,
+              )
+            ) {
+              const { data: sessionData } =
+                await supabaseClient.auth.getSession();
+              if (sessionData?.session?.user?.id)
+                targetUserId = sessionData.session.user.id;
             }
-            const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(targetUserId);
+            const isUUID =
+              /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+                targetUserId,
+              );
 
             const payloadWithColumns = {
               item_id: id,
@@ -4154,7 +4507,7 @@
               user_email: customerEmail,
               user_tier: customerTier,
               user_name: customerName,
-              item_data: newPhoto
+              item_data: newPhoto,
             };
             if (isUUID) payloadWithColumns.user_id = targetUserId;
 
@@ -4164,15 +4517,26 @@
 
             // JIKA insert gagal:
             if (insertErr) {
-              console.warn("[OutfitReq] Supabase primary insert notice:", insertErr);
+              console.warn(
+                "[OutfitReq] Supabase primary insert notice:",
+                insertErr,
+              );
               // Jika foreign key violation (error 23503) karena user_id belum ada di tabel users:
               // Otomatis retry tanpa user_id agar data outfit & customer tetap tersimpan lewat user_email
-              if (insertErr.code === "23503" || insertErr.message?.includes("foreign key") || insertErr.message?.includes("users")) {
+              if (
+                insertErr.code === "23503" ||
+                insertErr.message?.includes("foreign key") ||
+                insertErr.message?.includes("users")
+              ) {
                 const retryPayload = { ...payloadWithColumns };
                 delete retryPayload.user_id;
-                const { error: retryErr } = await supabaseClient.from("saved_photos").insert(retryPayload);
+                const { error: retryErr } = await supabaseClient
+                  .from("saved_photos")
+                  .insert(retryPayload);
                 if (!retryErr) {
-                  console.log("[OutfitReq] Sukses menyimpan ke Supabase via user_email fallback!");
+                  console.log(
+                    "[OutfitReq] Sukses menyimpan ke Supabase via user_email fallback!",
+                  );
                   insertErr = null;
                 } else {
                   insertErr = retryErr;
@@ -4188,12 +4552,17 @@
                   price_display: price || "Harga Shopee",
                   store: store || "Shopee",
                   store_url: storeUrl || "https://shopee.co.id",
-                  item_data: newPhoto
+                  item_data: newPhoto,
                 };
-                await supabaseClient.from("saved_photos").insert(fallbackPayload);
+                await supabaseClient
+                  .from("saved_photos")
+                  .insert(fallbackPayload);
               }
             } else {
-              console.log("[OutfitReq] Supabase insert saved_photos berhasil!", payloadWithColumns);
+              console.log(
+                "[OutfitReq] Supabase insert saved_photos berhasil!",
+                payloadWithColumns,
+              );
             }
           } catch (dbErr) {
             console.warn("Supabase insert saved_photos error:", dbErr);
@@ -4380,22 +4749,42 @@
       window.selectPaymentChannel = selectPaymentChannel;
 
       // Fungsi Terpusat untuk Sinkronisasi Status Premium & Transaksi ke Supabase Database
-      async function syncPremiumStatusToSupabase(customPackage, customPaymentMethod) {
+      async function syncPremiumStatusToSupabase(
+        customPackage,
+        customPaymentMethod,
+      ) {
         if (!supabaseClient) return;
         try {
           let targetUserId = APP_STATE.user.id || "";
-          if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(targetUserId)) {
-            const { data: sessionData } = await supabaseClient.auth.getSession();
-            if (sessionData?.session?.user?.id) targetUserId = sessionData.session.user.id;
+          if (
+            !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+              targetUserId,
+            )
+          ) {
+            const { data: sessionData } =
+              await supabaseClient.auth.getSession();
+            if (sessionData?.session?.user?.id)
+              targetUserId = sessionData.session.user.id;
           }
-          const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(targetUserId);
+          const isUUID =
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+              targetUserId,
+            );
           const targetEmail = (APP_STATE.user.email || "").toLowerCase().trim();
-          if (!targetEmail || targetEmail === "belum masuk" || isDummyEmail(targetEmail)) {
-            console.warn("[OutfitReq] Email pengguna tidak valid untuk sinkronisasi database.");
+          if (
+            !targetEmail ||
+            targetEmail === "belum masuk" ||
+            isDummyEmail(targetEmail)
+          ) {
+            console.warn(
+              "[OutfitReq] Email pengguna tidak valid untuk sinkronisasi database.",
+            );
             return;
           }
-          const targetName = APP_STATE.user.name || "Member Outfit Req";
-          const expiryIso = APP_STATE.user.premiumExpiresAt || new Date(Date.now() + 30 * 24 * 3600 * 1000).toISOString();
+          const targetName = APP_STATE.user.name || "Member Orec";
+          const expiryIso =
+            APP_STATE.user.premiumExpiresAt ||
+            new Date(Date.now() + 30 * 24 * 3600 * 1000).toISOString();
 
           // 1. Upsert / Simpan profil ke tabel public.users
           const userProfilePayload = {
@@ -4408,7 +4797,7 @@
             ld: APP_STATE.bodyProfiles?.[0]?.ld || 96,
             lp: APP_STATE.bodyProfiles?.[0]?.lp || 80,
             shoulder_width: APP_STATE.bodyProfiles?.[0]?.shoulder || 46,
-            body_data_consent_at: new Date().toISOString()
+            body_data_consent_at: new Date().toISOString(),
           };
           if (isUUID) userProfilePayload.id = targetUserId;
 
@@ -4419,17 +4808,23 @@
             if (uErr) {
               console.warn("[OutfitReq] Supabase users upsert with ID:", uErr);
               delete userProfilePayload.id;
-              await supabaseClient.from("users").upsert(userProfilePayload, { onConflict: "email" });
+              await supabaseClient
+                .from("users")
+                .upsert(userProfilePayload, { onConflict: "email" });
             }
-            console.log("[OutfitReq] Berhasil sinkronisasi status akun Premium ke tabel 'users' Supabase!");
+            console.log(
+              "[OutfitReq] Berhasil sinkronisasi status akun Premium ke tabel 'users' Supabase!",
+            );
           } catch (e) {
             console.warn("[OutfitReq] Error upsert users:", e);
           }
 
           // 2. Catat transaksi ke tabel premium_subscriptions
           try {
-            const pkg = customPackage || APP_STATE.selectedPackage || { id: "bulanan", price: 25000 };
-            const method = customPaymentMethod || APP_STATE.selectedPaymentChannel || "qris";
+            const pkg = customPackage ||
+              APP_STATE.selectedPackage || { id: "bulanan", price: 25000 };
+            const method =
+              customPaymentMethod || APP_STATE.selectedPaymentChannel || "qris";
             const subPayload = {
               package: pkg.id || "bulanan",
               price: pkg.price || 25000,
@@ -4440,7 +4835,7 @@
               auto_renew: false,
               user_email: targetEmail,
               user_name: targetName,
-              user_tier: "premium"
+              user_tier: "premium",
             };
             if (isUUID) subPayload.user_id = targetUserId;
 
@@ -4449,11 +4844,18 @@
               .insert(subPayload);
 
             if (subErr) {
-              console.warn("[OutfitReq] Supabase premium_subscriptions insert notice:", subErr);
+              console.warn(
+                "[OutfitReq] Supabase premium_subscriptions insert notice:",
+                subErr,
+              );
               delete subPayload.user_id;
-              await supabaseClient.from("premium_subscriptions").insert(subPayload);
+              await supabaseClient
+                .from("premium_subscriptions")
+                .insert(subPayload);
             }
-            console.log("[OutfitReq] Berhasil mencatat transaksi langganan ke tabel 'premium_subscriptions' Supabase!");
+            console.log(
+              "[OutfitReq] Berhasil mencatat transaksi langganan ke tabel 'premium_subscriptions' Supabase!",
+            );
           } catch (e) {
             console.warn("[OutfitReq] Error insert premium_subscriptions:", e);
           }
@@ -4472,10 +4874,15 @@
                 .update({ user_tier: "premium" })
                 .eq("user_id", targetUserId);
             }
-            console.log("[OutfitReq] Status seluruh outfit tersimpan diperbarui ke Premium di Supabase!");
+            console.log(
+              "[OutfitReq] Status seluruh outfit tersimpan diperbarui ke Premium di Supabase!",
+            );
           } catch (e) {}
         } catch (err) {
-          console.warn("[OutfitReq] syncPremiumStatusToSupabase exception:", err);
+          console.warn(
+            "[OutfitReq] syncPremiumStatusToSupabase exception:",
+            err,
+          );
         }
       }
       window.syncPremiumStatusToSupabase = syncPremiumStatusToSupabase;
@@ -4491,7 +4898,9 @@
         APP_STATE.user.premiumExpiresAt = expiry.toISOString();
         saveSession();
         renderUI();
-        showToast("Pembayaran terverifikasi! Menyimpan status Premium ke database...");
+        showToast(
+          "Pembayaran terverifikasi! Menyimpan status Premium ke database...",
+        );
 
         // Langsung catat ke database Supabase agar transaksi tidak hilang meskipun modal ditutup
         await syncPremiumStatusToSupabase();
@@ -4504,7 +4913,7 @@
         const nama = (
           document.getElementById("inputNama")?.value ||
           APP_STATE.user.name ||
-          "Member Outfit Req"
+          "Member Orec"
         ).trim();
         const tb = parseFloat(document.getElementById("inputTB")?.value) || 175;
         const bb = parseFloat(document.getElementById("inputBB")?.value) || 68;
@@ -4564,12 +4973,21 @@
           });
           try {
             const userKey = getUserAccountStorageKey();
-            localStorage.setItem(userKey, JSON.stringify(APP_STATE.savedPhotos));
-            localStorage.setItem("outfit_req_saved_photos", JSON.stringify(APP_STATE.savedPhotos));
+            localStorage.setItem(
+              userKey,
+              JSON.stringify(APP_STATE.savedPhotos),
+            );
+            localStorage.setItem(
+              "outfit_req_saved_photos",
+              JSON.stringify(APP_STATE.savedPhotos),
+            );
             if (APP_STATE.user && APP_STATE.user.id) {
-              localStorage.setItem(`outfit_req_saved_photos_${APP_STATE.user.id}`, JSON.stringify(APP_STATE.savedPhotos));
+              localStorage.setItem(
+                `outfit_req_saved_photos_${APP_STATE.user.id}`,
+                JSON.stringify(APP_STATE.savedPhotos),
+              );
             }
-          } catch(e) {}
+          } catch (e) {}
         }
 
         // Sinkronisasi status akun & tier ke database Supabase secara real-time
@@ -4597,7 +5015,11 @@
             u.tier = "free";
             u.premiumExpiresAt = null;
             if (supabaseClient && u.email && !isDummyEmail(u.email)) {
-              supabaseClient.from("users").update({ tier: "free", premium_expires_at: null }).ilike("email", u.email).then(() => {});
+              supabaseClient
+                .from("users")
+                .update({ tier: "free", premium_expires_at: null })
+                .ilike("email", u.email)
+                .then(() => {});
             }
             saveSession();
             renderUI();
@@ -4638,21 +5060,56 @@
       }
       window.simulateSubscriptionExpiration = simulateSubscriptionExpiration;
 
-      // 10. VISUALISASI MODEL TUBUH 360° (MODAL)
+      // Helper cek status Premium pengguna di halaman Akun
+      function checkIsUserPremiumAccount() {
+        if (!APP_STATE.user) return false;
+        if (APP_STATE.user.isPremium === true) return true;
+        const tier = (APP_STATE.user.tier || "").toString().toLowerCase().trim();
+        return tier.includes("premium");
+      }
+      window.checkIsUserPremiumAccount = checkIsUserPremiumAccount;
+
+      function handleStudio3DAccountClick(e) {
+        if (!checkIsUserPremiumAccount()) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          showToast("Fitur Studio 3D hanya untuk Member Premium. Silakan pilih paket langganan.");
+          if (typeof openUpgradeModal === "function") {
+            openUpgradeModal(1);
+          } else {
+            const el = document.getElementById("upgradeModal") || document.getElementById("upgradeStep1");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }
+          return false;
+        }
+      }
+      window.handleStudio3DAccountClick = handleStudio3DAccountClick;
+
+      // 10. VISUALISASI MODEL TUBUH 3D (INTERACTIVE STUDIO)
       function openVisualizer360(title, image, storeUrl) {
+        if (!checkIsUserPremiumAccount()) {
+          showToast("Fitur Visualisasi Model Tubuh 3D hanya untuk Member Premium.");
+          if (typeof openUpgradeModal === "function") {
+            openUpgradeModal(1);
+          }
+          return;
+        }
+
         const titleEl = document.getElementById("v360OutfitTitle");
         if (titleEl) titleEl.innerText = title;
         const linkEl = document.getElementById("v360StoreLink");
         if (linkEl) linkEl.href = storeUrl || "https://tokopedia.com";
 
-        const activeProfile = APP_STATE.bodyProfiles[0] || {
+        const activeProfile = (APP_STATE.bodyProfiles && (APP_STATE.bodyProfiles.find((p) => p.isActive) || APP_STATE.bodyProfiles[0])) || {
           name: APP_STATE.user.name,
           tb: 175,
           bb: 68,
           ld: 96,
+          lp: 80,
           shoulder: 46,
         };
-        activeProfile.name = APP_STATE.user.name;
 
         const tbBbEl = document.getElementById("v360MetricTbBb");
         if (tbBbEl)
@@ -4669,12 +5126,28 @@
 
         const sizeEl = document.getElementById("v360MetricSize");
         if (sizeEl) sizeEl.innerText = fitSize;
-        const badgeEl = document.getElementById("v360GarmentBadge");
-        if (badgeEl) badgeEl.innerText = `Fitted (${fitSize.split(" ")[0]})`;
 
-        const slider = document.getElementById("slider360Rotation");
-        if (slider) slider.value = 0;
-        handleRotate360(0);
+        // Tentukan kategori atasan / bawahan
+        const tLower = (title || "").toLowerCase();
+        let cat = "top";
+        if (tLower.includes("celana") || tLower.includes("chino") || tLower.includes("jeans") || tLower.includes("pants")) {
+          cat = "bot";
+        }
+
+        const imgParam = encodeURIComponent(image || "");
+        const nameParam = encodeURIComponent(title || "Outfit");
+        const profParam = `&h=${activeProfile.tb || 170}&w=${activeProfile.bb || 64}&c=${activeProfile.ld || 90}&p=${activeProfile.lp || 78}&b=${activeProfile.shoulder || 46}&gender=${activeProfile.gender || "male"}&skin=${activeProfile.skinTone || "warm"}`;
+        const studioUrl = `../Premium 3D/index.html?embed=true&ref=account&custom_img=${imgParam}&custom_name=${nameParam}&custom_cat=${cat}${profParam}`;
+
+        const iframe = document.getElementById("iframeStudio3D");
+        if (iframe) {
+          iframe.src = studioUrl;
+        }
+
+        const fullBtn = document.getElementById("btnOpenFullStudio3D");
+        if (fullBtn) {
+          fullBtn.href = `../Premium 3D/index.html?ref=account&custom_img=${imgParam}&custom_name=${nameParam}&custom_cat=${cat}${profParam}`;
+        }
 
         const modal = document.getElementById("modalVisualizer360");
         if (modal) modal.classList.remove("hidden");
@@ -4682,6 +5155,10 @@
       window.openVisualizer360 = openVisualizer360;
 
       function closeVisualizer360() {
+        const iframe = document.getElementById("iframeStudio3D");
+        if (iframe) {
+          iframe.src = "about:blank";
+        }
         const modal = document.getElementById("modalVisualizer360");
         if (modal) modal.classList.add("hidden");
       }
@@ -4787,6 +5264,15 @@
 
       // 12. TAB SWITCHING
       function switchMainTab(tabName) {
+        if (tabName === "personality") {
+          window.location.href = "personality.html";
+          return;
+        }
+        if (tabName === "recommendation") {
+          window.location.href = "rekomendasi.html";
+          return;
+        }
+
         const vAcc = document.getElementById("viewAccount");
         const vPer = document.getElementById("viewPersonality");
         const vRek = document.getElementById("viewRecommendation");
@@ -5000,11 +5486,21 @@
           APP_STATE.user.isLoggedIn = true;
           APP_STATE.user.premiumExpiresAt = null;
           APP_STATE.chatQuota.used = 0;
-          if (supabaseClient && APP_STATE.user.email && !isDummyEmail(APP_STATE.user.email)) {
+          if (
+            supabaseClient &&
+            APP_STATE.user.email &&
+            !isDummyEmail(APP_STATE.user.email)
+          ) {
             try {
-              await supabaseClient.from("users").update({ tier: "free", premium_expires_at: null }).ilike("email", APP_STATE.user.email);
-              await supabaseClient.from("saved_photos").update({ user_tier: "free" }).ilike("user_email", APP_STATE.user.email);
-            } catch(e) {}
+              await supabaseClient
+                .from("users")
+                .update({ tier: "free", premium_expires_at: null })
+                .ilike("email", APP_STATE.user.email);
+              await supabaseClient
+                .from("saved_photos")
+                .update({ user_tier: "free" })
+                .ilike("user_email", APP_STATE.user.email);
+            } catch (e) {}
           }
         } else if (stateName === "premium") {
           try {
@@ -5037,7 +5533,9 @@
                 category: it.category,
                 event_type: it.event_type,
                 image: it.image,
-                price: it.priceDisplay || `Rp ${it.priceTotal.toLocaleString("id-ID")}`,
+                price:
+                  it.priceDisplay ||
+                  `Rp ${it.priceTotal.toLocaleString("id-ID")}`,
                 store: it.store,
                 storeUrl: it.storeUrl,
                 desc: it.desc,
@@ -5153,7 +5651,14 @@
        ======================================================== -->
     <nav class="mobile-bottom-nav">
       <a href="index.html" class="mobile-nav-tab-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
           <polyline points="9 22 9 12 15 12 15 22" />
         </svg>
@@ -5161,15 +5666,38 @@
       </a>
 
       <a href="rekomendasi.html" class="mobile-nav-tab-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <circle cx="11" cy="11" r="8" />
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
         <span>Galeri</span>
       </a>
 
-      <a href="tutorial.html" class="mobile-nav-tab-item">
+      <a href="../Premium 3D/index.html?ref=account" onclick="return handleStudio3DAccountClick(event)" class="mobile-nav-tab-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+        <span>Studio 3D</span>
+      </a>
+
+      <a href="tutorial.html" class="mobile-nav-tab-item">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <circle cx="12" cy="12" r="10" />
           <path d="M12 16v-4" />
           <path d="M12 8h.01" />
@@ -5178,7 +5706,14 @@
       </a>
 
       <a href="account.html" class="mobile-nav-tab-item active">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
         </svg>

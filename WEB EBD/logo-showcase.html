@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outfit Req — Eksplorasi Desain Logo Baru</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FFF8E7;
+      --card-bg: #FFFFFF;
+      --burgundy: #6D001A;
+      --burgundy-light: rgba(109, 0, 26, 0.08);
+      --gold: #D4AF37;
+      --ink: #1C1917;
+      --ink-dim: #78716C;
+      --line: rgba(109, 0, 26, 0.14);
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0F0D0E;
+      --card-bg: #1C171A;
+      --burgundy: #E05377;
+      --burgundy-light: rgba(224, 83, 119, 0.15);
+      --gold: #E5A968;
+      --ink: #F7F3EE;
+      --ink-dim: #A8A29E;
+      --line: rgba(247, 243, 238, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 40px 20px 80px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .badge-tag {
+      display: inline-block;
+      padding: 6px 16px;
+      background: var(--burgundy-light);
+      color: var(--burgundy);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--burgundy);
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      font-size: 17px;
+      color: var(--ink-dim);
+      max-width: 600px;
+      margin: 0 auto 24px;
+    }
+
+    /* Actions Bar */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: var(--card-bg);
+      color: var(--ink);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn:hover {
+      background: var(--burgundy);
+      color: #FFF8E7;
+      border-color: var(--burgundy);
+    }
+    .btn-primary {
+      background: var(--burgundy);
+      color: #FFF8E7;
+      border-color: var(--burgundy);
+    }
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    /* Mockup Section */
+    .mockup-hero {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 50px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    }
+    .mockup-hero img {
+      max-width: 480px;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 12px 36px rgba(109, 0, 26, 0.15);
+      margin-top: 20px;
+    }
+
+    /* Grid of Concepts */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.03);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(109, 0, 26, 0.1);
+    }
+    .preview-box {
+      width: 160px;
+      height: 160px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--burgundy);
+      margin-bottom: 6px;
+    }
+    .card p {
+      font-size: 13px;
+      color: var(--ink-dim);
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    /* Scale Preview */
+    .scale-section {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 36px;
+      margin-bottom: 40px;
+    }
+    .scale-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 24px;
+    }
+    .scale-item {
+      text-align: center;
+    }
+    .scale-item span {
+      display: block;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--ink-dim);
+      font-weight: 500;
+    }
+
+    /* Navbar Preview */
+    .navbar-preview {
+      background: #FFF8E7;
+      border: 1px solid rgba(109, 0, 26, 0.18);
+      border-radius: 12px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-serif);
+      font-size: 24px;
+      color: #6D001A;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <span class="badge-tag">Brand Identity Exploration</span>
+      <h1>Outfit Req — Mockup Logo Sementara</h1>
+      <p class="subtitle">Eksplorasi revisi logo dengan filosofi <strong>Gantungan Baju + Tanda Tanya (?)</strong> tanpa elemen segitiga polkadot, disesuaikan dengan estetika mewah editorial website Anda.</p>
+      
+      <div class="controls">
+        <button class="btn btn-primary" onclick="toggleTheme()">🌓 Toggle Mode Gelap / Terang</button>
+        <a href="index.html" class="btn">← Kembali ke Website Utama</a>
+      </div>
+    </header>
+
+    <!-- AI Generated Realistic Render Mockup -->
+    <section class="mockup-hero">
+      <span class="badge-tag" style="background: rgba(212, 175, 55, 0.15); color: #B38F24;">3D / Luxury Visual Mockup</span>
+      <h2 style="font-family: var(--font-serif); font-size: 32px; color: var(--burgundy); margin-top: 6px;">Visualisasi Keseluruhan</h2>
+      <p style="font-size: 14px; color: var(--ink-dim);">Representasi lencana bordir/emblem dengan aksen bintang kilau dan tipografi editorial.</p>
+      <div>
+        <img src="images/outfit_req_mockup.jpg" alt="Outfit Req Logo Mockup" />
+      </div>
+    </section>
+
+    <!-- 4 Vector SVG Concepts -->
+    <h2 style="font-family: var(--font-serif); font-size: 30px; color: var(--burgundy); margin-bottom: 20px; text-align: center;">4 Pilihan Varian Desain Vektor (SVG)</h2>
+    <div class="grid">
+      <!-- Varian 1 -->
+      <div class="card">
+        <div class="preview-box">
+          <img src="images/logo_concept_1_minimal.svg" width="140" height="140" alt="Concept 1">
+        </div>
+        <h3>1. Minimalist Classic</h3>
+        <p>Hanger + Tanda Tanya murni. Sangat bersih, modern, dan memiliki jarak napas yang proporsional.</p>
+        <a href="images/logo_concept_1_minimal.svg" download class="btn">Unduh SVG</a>
+      </div>
+
+      <!-- Varian 2 -->
+      <div class="card">
+        <div class="preview-box">
+          <img src="images/logo_concept_2_sparkle.svg" width="140" height="140" alt="Concept 2">
+        </div>
+        <h3>2. AI Sparkle & Button</h3>
+        <p>Dilengkapi aksen bintang kilau emas (✦) dan detail kancing baju halus sebagai penutup tanda tanya.</p>
+        <a href="images/logo_concept_2_sparkle.svg" download class="btn">Unduh SVG</a>
+      </div>
+
+      <!-- Varian 3 -->
+      <div class="card">
+        <div class="preview-box">
+          <img src="images/logo_concept_3_seal.svg" width="140" height="140" alt="Concept 3">
+        </div>
+        <h3>3. Luxury Atelier Seal</h3>
+        <p>Gaya stempel butik klasik Eropa dengan garis ganda dan teks melingkar "OUTFIT REQ • CURATED STYLE".</p>
+        <a href="images/logo_concept_3_seal.svg" download class="btn">Unduh SVG</a>
+      </div>
+
+      <!-- Varian 4 -->
+      <div class="card">
+        <div class="preview-box">
+          <img src="images/logo_concept_4_modern.svg" width="140" height="140" alt="Concept 4">
+        </div>
+        <h3>4. Gold Duo-Tone</h3>
+        <p>Perpaduan warna Burgundy dengan aksen cantolan emas sampanye dan bentuk loop gantungan utuh.</p>
+        <a href="images/logo_concept_4_modern.svg" download class="btn">Unduh SVG</a>
+      </div>
+    </div>
+
+    <!-- Scalability & Responsive Test -->
+    <section class="scale-section">
+      <h3 style="font-family: var(--font-serif); font-size: 26px; color: var(--burgundy); text-align: center;">Uji Keterbacaan Berbagai Ukuran (Scalability Test)</h3>
+      <p style="text-align: center; font-size: 14px; color: var(--ink-dim);">Logo yang baik harus tetap tajam dan terbaca jelas mulai dari ukuran besar hingga ukuran favicon mini (16px/32px).</p>
+
+      <div class="scale-row">
+        <div class="scale-item">
+          <img src="images/logo_concept_2_sparkle.svg" width="180" height="180" alt="Large">
+          <span>Besar (180px)</span>
+        </div>
+        <div class="scale-item">
+          <img src="images/logo_concept_2_sparkle.svg" width="80" height="80" alt="Medium">
+          <span>Medium (80px)</span>
+        </div>
+        <div class="scale-item">
+          <img src="images/logo_concept_2_sparkle.svg" width="40" height="40" alt="Small">
+          <span>Navbar (40px)</span>
+        </div>
+        <div class="scale-item">
+          <img src="images/logo_concept_2_sparkle.svg" width="24" height="24" alt="Favicon">
+          <span>Favicon (24px)</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <h4 style="font-size: 15px; margin-bottom: 12px; color: var(--burgundy);">Simulasi Tampilan di Header Website:</h4>
+        <div class="navbar-preview">
+          <div class="nav-brand">
+            <img src="images/logo_concept_2_sparkle.svg" width="36" height="36" alt="Icon">
+            <span>outfit req</span>
+          </div>
+          <div style="font-size: 13px; letter-spacing: 1px; color: #6D001A; font-weight: 600;">
+            REKOMENDASI &bull; TUTORIAL &bull; MASUK
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+    }
+  </script>
+</body>
+</html>

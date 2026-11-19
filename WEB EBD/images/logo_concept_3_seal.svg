@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <path id="textPathTop" d="M 85 250 A 165 165 0 0 1 415 250" fill="none" />
+    <path id="textPathBottom" d="M 415 250 A 165 165 0 0 1 85 250" fill="none" />
+    <style>
+      .seal-text {
+        font-family: 'Instrument Serif', Georgia, serif;
+        font-size: 26px;
+        fill: #6D001A;
+        letter-spacing: 7px;
+        font-weight: 700;
+        text-anchor: middle;
+      }
+      .seal-sub {
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-size: 15px;
+        fill: #6D001A;
+        letter-spacing: 5px;
+        font-weight: 600;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+
+  <!-- Double Ring Outer Border -->
+  <circle cx="250" cy="250" r="215" fill="#FFF8E7" stroke="#6D001A" stroke-width="12" />
+  <circle cx="250" cy="250" r="198" fill="none" stroke="#6D001A" stroke-width="2.5" stroke-dasharray="6 4" />
+
+  <!-- Circular Curved Typography -->
+  <text class="seal-text">
+    <textPath href="#textPathTop" startOffset="50%">OUTFIT REQ</textPath>
+  </text>
+  <text class="seal-sub">
+    <textPath href="#textPathBottom" startOffset="50%">• CURATED STYLE •</textPath>
+  </text>
+
+  <!-- Question Mark Hook -->
+  <path d="M 224 200 C 220 162, 278 162, 278 200 C 278 226, 250 228, 250 252 L 250 264" 
+        fill="none" stroke="#6D001A" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Hanger Shoulder Arc -->
+  <path d="M 140 318 Q 250 264 360 318" 
+        fill="none" stroke="#6D001A" stroke-width="15" stroke-linecap="round" />
+
+  <!-- Tiny Gold Star Accent -->
+  <path d="M 250 146 Q 250 156 260 156 Q 250 156 250 166 Q 250 156 240 156 Q 250 156 250 146 Z" 
+        fill="#D4AF37" />
+</svg>

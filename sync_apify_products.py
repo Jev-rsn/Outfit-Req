@@ -261,6 +261,65 @@ def sync_to_supabase(items):
         except Exception as e:
             print(f"  [!] Batch upload error: {e}")
 
+def load_3d_products():
+    """Loads 3D visual products from Premium 3D catalog."""
+    path_3d = os.path.join(BASE_DIR, "Premium 3D", "products_catalog.json")
+    if not os.path.exists(path_3d):
+        return []
+    try:
+        with open(path_3d, "r", encoding="utf-8") as f:
+            cat_3d = json.load(f)
+        items_3d = []
+        meta_map = {
+            "tshirt_graphic_white": {"cat": "kasual", "event": "santai", "price": 149000, "type": "top"},
+            "flannel_red": {"cat": "kasual", "event": "ngonser", "price": 229000, "type": "top"},
+            "polo_navy": {"cat": "formal", "event": "kantor", "price": 179000, "type": "top"},
+            "tshirt_white_basic": {"cat": "kasual", "event": "santai", "price": 99000, "type": "top"},
+            "jeans_blue": {"cat": "streetwear", "event": "santai", "price": 299000, "type": "bottom"},
+            "jeans_indigo": {"cat": "streetwear", "event": "ngonser", "price": 319000, "type": "bottom"},
+            "chino_khaki": {"cat": "formal", "event": "kantor", "price": 219000, "type": "bottom"},
+        }
+        for section in ["tops", "bottoms"]:
+            for prod in cat_3d.get(section, []):
+                pid = prod["id"]
+                meta = meta_map.get(pid, {"cat": "kasual", "event": "santai", "price": 150000, "type": "top"})
+                param_key = "top" if meta["type"] == "top" else "bot"
+                store_url = f"../Premium 3D/index.html?{param_key}={pid}&ref=rekomendasi"
+                items_3d.append({
+                    "id": f"3d-{pid}",
+                    "itemId": f"3d-{pid}",
+                    "modelId": pid,
+                    "title": f"{prod['name']} (3D Live Fitting)",
+                    "name": prod['name'],
+                    "price": prod['price'],
+                    "priceTotal": meta["price"],
+                    "priceDisplay": prod['price'],
+                    "category": meta["cat"],
+                    "event_type": meta["event"],
+                    "rating": 4.9,
+                    "store": "Orec 3D Studio",
+                    "source_store": "Orec 3D Studio",
+                    "storeUrl": store_url,
+                    "product_link": store_url,
+                    "image": f"images/3d/{pid}_thumb.jpg",
+                    "photo_url": f"images/3d/{pid}_thumb.jpg",
+                    "thumb_b64": prod.get("thumb_b64", ""),
+                    "desc": f"{prod['desc']} Siap dicoba langsung di Studio Manekin 3D Realistis.",
+                    "aspect": "aspect-[3/4]",
+                    "gender": "unisex",
+                    "source": "orec-3d",
+                    "is3D": True,
+                    "isPremium": True,
+                    "savesCount": 128,
+                    "location": "Orec Studio Collection",
+                    "colors": [{"name": "Original", "hex": "#" + hex(prod.get("color_hex", 16777215))[2:].zfill(6)}],
+                    "items": [{"category": "Visual 3D Garment", "name": prod["name"], "store": "Orec 3D Studio", "price": prod["price"]}]
+                })
+        return items_3d
+    except Exception as e:
+        print(f"[!] Warning reading 3D catalog: {e}")
+        return []
+
 def main():
     run_new = "--run" in sys.argv
 
@@ -300,6 +359,12 @@ def main():
 
     for item in formatted_uniqlo:
         merged_items[item["id"]] = item
+
+    # Load and merge 3D Studio items
+    items_3d = load_3d_products()
+    for item in items_3d:
+        merged_items[item["id"]] = item
+    print(f"[+] Dimuat {len(items_3d)} produk visual 3D ke dalam database.")
 
     all_items = list(merged_items.values())
 

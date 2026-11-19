@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Orec — Personality</title>
+
+    <!-- Typography: Instrument Serif & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Theme Controller (Zero-FOUC) -->
+    <script src="theme.js"></script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FFF8E7",
+              burgundy: "#6D001A",
+              burgundyHover: "#550014",
+              burgundyLight: "rgba(109, 0, 26, 0.08)",
+              gold: "#D4AF37",
+              darkBg: "#0D0B0C",
+              darkSurface: "#191417",
+              darkCard: "#221B20",
+              darkLine: "rgba(255, 255, 255, 0.08)",
+            },
+            fontFamily: {
+              serif: ['"Instrument Serif"', "serif"],
+              sans: ['"Inter"', "sans-serif"],
+            },
+            boxShadow: {
+              soft: "0 10px 30px -5px rgba(109, 0, 26, 0.05)",
+              elevation: "0 20px 40px -10px rgba(0, 0, 0, 0.12)",
+            },
+          },
+        },
+      };
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+      html, body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .chat-scroll-area {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(109, 0, 26, 0.18) transparent;
+      }
+      .chat-scroll-area::-webkit-scrollbar {
+        width: 5px;
+      }
+      .chat-scroll-area::-webkit-scrollbar-thumb {
+        background: rgba(109, 0, 26, 0.2);
+        border-radius: 999px;
+      }
+      html.dark .chat-scroll-area::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.16);
+      }
+
+      @keyframes messageSlideUp {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-message {
+        animation: messageSlideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+    </style>
+  </head>
+
+  <body class="bg-[#FFF8E7] dark:bg-[#0D0B0C] text-black dark:text-white font-sans antialiased flex flex-col h-screen overflow-hidden">
+    <!-- ========================================================================= -->
+    <!-- TOP NAVIGATION BAR -->
+    <!-- ========================================================================= -->
+    <header class="flex-shrink-0 z-40 bg-white/95 dark:bg-[#141013]/95 backdrop-blur-md border-b border-black/[0.06] dark:border-white/[0.08] px-3 sm:px-6 py-2.5 transition-colors">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+        <!-- Left: Mobile Menu Toggle + Brand Logo -->
+        <div class="flex items-center gap-2 sm:gap-4">
+          <!-- Mobile Sidebar Toggle Button -->
+          <button
+            type="button"
+            id="btnMobileToggleSidebar"
+            onclick="toggleMobileSidebar()"
+            class="md:hidden p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-stone-700 dark:text-stone-300 transition-colors"
+            title="Riwayat Sesi"
+            aria-label="Buka Riwayat Sesi"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+
+          <!-- Brand Logo -->
+          <a href="index.html" class="flex items-center gap-2 group" title="Orec — Beranda">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#6D001A"
+              class="dark:stroke-[#E05377] transition-colors"
+              stroke-width="1.9"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3a2 2 0 0 1 2 2c0 .9-.6 1.6-1.4 1.9L21 12l-1 2H4l-1-2 8.4-5.1A2 2 0 0 1 10 5a2 2 0 0 1 2-2Z"></path>
+            </svg>
+            <span class="font-serif text-2xl tracking-wide text-black dark:text-white">Orec</span>
+          </a>
+
+          <!-- Primary Navigation Links (Desktop) -->
+          <nav class="hidden md:flex items-center gap-1.5 ml-4 pl-4 border-l border-black/10 dark:border-white/10 text-xs font-semibold">
+            <!-- 1. Personality (Current active) -->
+            <a
+              href="personality.html"
+              class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#6D001A] text-white transition-all shadow-xs"
+              title="Konsultasi Personality & Gaya Outfit"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span>PERSONALITY</span>
+            </a>
+
+            <!-- 2. Rekomendasi (Galeri) -->
+            <a
+              href="rekomendasi.html"
+              class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-stone-700 dark:text-stone-300 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-all"
+              title="Katalog Galeri Rekomendasi Outfit"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <span>REKOMENDASI</span>
+            </a>
+
+            <!-- 3. Studio 3D (Premium) -->
+            <a
+              href="../Premium 3D/index.html?ref=personality"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-stone-700 dark:text-stone-300 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-all"
+              title="Fitting 3D Realistis (Khusus Member Premium)"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              </svg>
+              <span>STUDIO 3D</span>
+              <span class="text-[9px] bg-amber-400 text-stone-900 font-bold px-1 rounded">★</span>
+            </a>
+
+            <!-- 4. Panduan -->
+            <a
+              href="tutorial.html"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-stone-700 dark:text-stone-300 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-all"
+              title="Panduan & Tutorial Fitur"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4M12 8h.01"></path>
+              </svg>
+              <span>PANDUAN</span>
+            </a>
+          </nav>
+        </div>
+
+        <!-- Right: Quota Badge, Theme Toggle & User Auth CTA -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Dynamic Live Quota Pill Indicator (FR-01, FR-06) -->
+          <button
+            type="button"
+            id="navQuotaBadge"
+            onclick="handleQuotaBadgeClick()"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all border shadow-xs"
+            title="Status kuota sesi konsultasi"
+          >
+            <span id="navQuotaDot" class="w-2 h-2 rounded-full bg-amber-500"></span>
+            <span id="navQuotaText">Memuat Kuota...</span>
+          </button>
+
+          <!-- Theme Toggle Button -->
+          <button
+            type="button"
+            id="themeToggleBtn"
+            class="theme-toggle-btn"
+            onclick="window.toggleTheme && window.toggleTheme()"
+            title="Ubah Mode (Gelap / Terang)"
+            aria-label="Ubah Mode Gelap atau Terang"
+            style="width: 34px; height: 34px; min-width: 34px;"
+          ></button>
+
+          <!-- User Profile / Auth Button -->
+          <div id="navUserContainer" class="flex items-center"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========================================================================= -->
+    <!-- WORKSPACE BODY: TWO-PANE LAYOUT (SIDEBAR HISTORI + CHAT STREAM) -->
+    <!-- ========================================================================= -->
+    <div class="flex-1 flex overflow-hidden relative">
+      <!-- ======================================================================= -->
+      <!-- LEFT SIDEBAR: HISTORI CHAT & MULTI-ROOM (FR-09) -->
+      <!-- ======================================================================= -->
+      <aside
+        id="chatSidebar"
+        class="fixed md:static inset-y-0 left-0 z-30 w-72 sm:w-80 bg-white dark:bg-[#141013] border-r border-black/[0.06] dark:border-white/[0.08] flex flex-col transition-transform duration-250 ease-out -translate-x-full md:translate-x-0 shadow-lg md:shadow-none"
+      >
+        <!-- Sidebar Header: New Chat Button -->
+        <div class="p-3.5 border-b border-black/[0.06] dark:border-white/[0.06] flex items-center gap-2">
+          <button
+            type="button"
+            onclick="handleCreateNewRoom()"
+            class="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[#6D001A] hover:bg-[#550014] text-white text-xs font-semibold transition-all shadow-xs active:scale-98"
+            title="Mulai sesi konsultasi baru"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>+ Sesi Baru</span>
+          </button>
+
+          <!-- Close sidebar button (Mobile only) -->
+          <button
+            type="button"
+            onclick="toggleMobileSidebar(false)"
+            class="md:hidden p-2 rounded-xl text-stone-500 hover:text-black dark:text-stone-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"
+            title="Tutup menu sidebar"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Sidebar Room History List -->
+        <div class="flex-1 overflow-y-auto chat-scroll-area p-3 space-y-1" id="chatRoomList"></div>
+
+        <!-- Sidebar Footer: User Tier Quota Card & Upgrade CTA -->
+        <div class="p-3 border-t border-black/[0.06] dark:border-white/[0.06] bg-[#FFF8E7]/40 dark:bg-white/[0.02]" id="sidebarFooterCard"></div>
+      </aside>
+
+      <!-- Mobile Backdrop Overlay when sidebar is open -->
+      <div
+        id="sidebarBackdrop"
+        onclick="toggleMobileSidebar(false)"
+        class="hidden fixed inset-0 z-20 bg-black/40 backdrop-blur-xs md:hidden transition-opacity"
+      ></div>
+
+      <!-- ======================================================================= -->
+      <!-- MAIN CHAT STREAM & COMPOSER AREA -->
+      <!-- ======================================================================= -->
+      <main class="flex-1 flex flex-col h-full overflow-hidden bg-[#FAF8F5] dark:bg-[#0D0B0C] relative">
+        <!-- Chat Header Sub-bar: Active Room Title + Penyesuaian Acara (FR-15) -->
+        <div class="flex-shrink-0 bg-white/80 dark:bg-[#141013]/80 backdrop-blur-sm border-b border-black/[0.06] dark:border-white/[0.06] px-4 py-2.5 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2 min-w-0">
+            <h2 id="activeRoomTitle" class="text-xs sm:text-sm font-semibold truncate text-stone-900 dark:text-white">
+              Konsultasi Gaya
+            </h2>
+            <span id="activeRoomTime" class="hidden sm:inline-block text-[11px] text-stone-400 dark:text-stone-500 shrink-0">
+              Sesi Aktif
+            </span>
+          </div>
+
+          <!-- Penyesuaian Acara (Fitur Khusus Premium - PRD FR-15) -->
+          <div class="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              id="btnEventSelector"
+              onclick="openEventModal()"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-[#1F181D] border border-black/10 dark:border-white/10 text-stone-800 dark:text-stone-200 hover:border-[#6D001A] transition-all shadow-xs"
+              title="Pilih Acara Khusus (Konser, Pengajian, Kantor) - Fitur Premium"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <span id="selectedEventLabel" class="hidden sm:inline">Penyesuaian Acara</span>
+              <span class="sm:hidden">Acara</span>
+              <span class="text-[9px] bg-amber-400 text-stone-950 font-bold px-1 rounded">★</span>
+            </button>
+
+            <!-- Reset / Clear Chat Button -->
+            <button
+              type="button"
+              onclick="handleClearCurrentRoomMessages()"
+              class="p-1.5 rounded-full text-stone-400 hover:text-red-700 dark:hover:text-red-400 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+              title="Bersihkan sesi ini"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Chat Messages Scroll Container -->
+        <div id="chatMessagesContainer" class="flex-1 overflow-y-auto chat-scroll-area p-3 sm:p-6 space-y-6">
+          <!-- Initial Welcome Hero Card (FR-04: Pertanyaan Pertama Boleh Dilewati) -->
+          <div id="welcomeHeroState" class="max-w-2xl mx-auto my-6 bg-white dark:bg-[#191417] border border-black/[0.08] dark:border-white/[0.08] rounded-3xl p-6 sm:p-8 shadow-soft text-center animate-message">
+            <h3 class="font-serif text-2xl sm:text-3xl font-normal text-stone-900 dark:text-white">
+              Konsultasi Gaya & Outfit
+            </h3>
+            <p class="text-xs sm:text-sm text-stone-600 dark:text-stone-300 mt-2 max-w-lg mx-auto leading-relaxed">
+              Tentukan agenda, suasana tempat, atau gaya busana yang kamu cari. Sistem akan mencocokkan padu padan siluet dengan produk nyata langsung dari katalog.
+            </p>
+
+            <!-- Quick Suggestion Chips (Inspiration Pills) -->
+            <div class="mt-6 text-left">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500 block mb-2 text-center">
+                Inspirasi Cepat:
+              </span>
+              <div class="flex flex-wrap gap-2 justify-center">
+                <button
+                  type="button"
+                  onclick="handleQuickPromptClick('Rekomendasi outfit nonton konser festival musik outdoor santai dan nyaman')"
+                  class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-stone-100 hover:bg-stone-200 dark:bg-white/10 dark:hover:bg-white/15 text-stone-800 dark:text-stone-200 transition-all border border-black/5 dark:border-white/5 active:scale-95"
+                >
+                  Konser & Festival Musik
+                </button>
+                <button
+                  type="button"
+                  onclick="handleQuickPromptClick('Outfit kajian atau pengajian santun rapi dan adem bernuansa earth tone')"
+                  class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-stone-100 hover:bg-stone-200 dark:bg-white/10 dark:hover:bg-white/15 text-stone-800 dark:text-stone-200 transition-all border border-black/5 dark:border-white/5 active:scale-95"
+                >
+                  Kajian & Pengajian Santun
+                </button>
+                <button
+                  type="button"
+                  onclick="handleQuickPromptClick('Gaya santai liburan ke pantai sore hari dengan kemeja katun atau linen sejuk')"
+                  class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-stone-100 hover:bg-stone-200 dark:bg-white/10 dark:hover:bg-white/15 text-stone-800 dark:text-stone-200 transition-all border border-black/5 dark:border-white/5 active:scale-95"
+                >
+                  Liburan Pantai & Kasual
+                </button>
+                <button
+                  type="button"
+                  onclick="handleQuickPromptClick('Smart casual rapi untuk kerja kantor atau sesi interview profesional')"
+                  class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-stone-100 hover:bg-stone-200 dark:bg-white/10 dark:hover:bg-white/15 text-stone-800 dark:text-stone-200 transition-all border border-black/5 dark:border-white/5 active:scale-95"
+                >
+                  Smart Casual Kantor
+                </button>
+                <button
+                  type="button"
+                  onclick="handleQuickPromptClick('Minimalist clean look untuk santai di mall atau ngopi di akhir pekan')"
+                  class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-stone-100 hover:bg-stone-200 dark:bg-white/10 dark:hover:bg-white/15 text-stone-800 dark:text-stone-200 transition-all border border-black/5 dark:border-white/5 active:scale-95"
+                >
+                  Minimalist Akhir Pekan
+                </button>
+              </div>
+            </div>
+
+            <!-- Skip first question button (FR-04) -->
+            <div class="mt-5 pt-3 border-t border-black/[0.06] dark:border-white/[0.06]">
+              <button
+                type="button"
+                onclick="handleSkipFirstQuestion()"
+                class="text-xs text-stone-500 hover:text-[#6D001A] dark:text-stone-400 dark:hover:text-[#E05377] font-semibold underline transition-colors"
+              >
+                Lewati pertanyaan pertama & tampilkan kurasi umum →
+              </button>
+            </div>
+          </div>
+
+          <!-- Dynamic Chat Message Thread Container -->
+          <div id="chatThread" class="max-w-3xl mx-auto space-y-6"></div>
+        </div>
+
+        <!-- Chat Input Dock Area (Fixed Bottom) -->
+        <div class="flex-shrink-0 p-3 sm:p-4 bg-white/95 dark:bg-[#141013]/95 backdrop-blur-md border-t border-black/[0.08] dark:border-white/[0.08]">
+          <div class="max-w-3xl mx-auto">
+            <!-- Active Event Indicator Pill if selected -->
+            <div id="activeEventBanner" class="hidden mb-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-stone-100 dark:bg-white/10 text-stone-800 dark:text-stone-200 border border-black/10 dark:border-white/10">
+              <span id="activeEventBannerText">Acara: Konser Musik</span>
+              <button type="button" onclick="resetSelectedEvent()" class="text-stone-400 hover:text-black dark:hover:text-white ml-1 font-bold">×</button>
+            </div>
+
+            <!-- Form Composer -->
+            <form id="chatForm" onsubmit="handleSendChatMessage(event)" class="relative flex items-center gap-2">
+              <div class="relative flex-1">
+                <input
+                  type="text"
+                  id="chatInputText"
+                  placeholder="Ketik kebutuhan outfit (misal: 'Kemeja flanel santai untuk nonton konser')..."
+                  class="w-full pl-4 pr-12 py-3 rounded-full border border-black/20 dark:border-white/20 focus:border-[#6D001A] dark:focus:border-[#E05377] outline-none text-xs sm:text-sm bg-white dark:bg-[#1E181D] text-black dark:text-white placeholder:text-stone-400 dark:placeholder:text-stone-500 shadow-xs transition-all"
+                  autocomplete="off"
+                />
+                <!-- Quick Clear Input -->
+                <button
+                  type="button"
+                  id="btnInputClear"
+                  onclick="clearChatInput()"
+                  class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 p-1 rounded-full"
+                  title="Hapus teks"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Send Button -->
+              <button
+                type="submit"
+                id="btnSendChat"
+                class="w-11 h-11 rounded-full bg-[#6D001A] hover:bg-[#550014] text-white flex items-center justify-center flex-shrink-0 transition-transform active:scale-95 shadow-xs"
+                title="Kirim"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+
+            <!-- Bottom Disclaimer Footnote -->
+            <p class="text-[11px] text-stone-500 dark:text-stone-400 mt-2 text-center" id="chatFootnote">
+              *Tamu: 3 chat &bull; Free: 10 chat / 3 hari &bull; Premium: Akses penuh tanpa batas & Model 3D.
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 1: IKLAN / UPGRADE PREMIUM (PRD FR-07, FR-11, FR-12, 4.2)           -->
+    <!-- ========================================================================= -->
+    <div
+      id="modalPremiumAd"
+      class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs transition-opacity"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="premiumModalTitle"
+    >
+      <div class="bg-white dark:bg-[#191417] border border-black/10 dark:border-white/10 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-elevation relative overflow-hidden animate-message">
+        <button
+          type="button"
+          onclick="closePremiumAdModal()"
+          class="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 rounded-full"
+          title="Tutup Modal"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <div class="text-center">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#6D001A]/10 text-[#6D001A] dark:bg-amber-400/20 dark:text-amber-300 uppercase tracking-widest">
+            Akses Eksklusif Premium
+          </span>
+          <h3 id="premiumModalTitle" class="font-serif text-2xl sm:text-3xl text-stone-900 dark:text-white mt-2">
+            Batas Konsultasi Tercapai
+          </h3>
+          <p class="text-xs sm:text-sm text-stone-600 dark:text-stone-300 mt-1.5" id="premiumModalDesc">
+            Tingkatkan ke paket Premium untuk konsultasi tanpa batas, penyesuaian acara khusus (Konser, Pengajian), dan visualisasi pakaian pada model tubuh 3D 360°.
+          </p>
+        </div>
+
+        <!-- 3 Subscription Packages (PRD FR-11) -->
+        <div class="mt-5 space-y-2.5">
+          <!-- 1. Mingguan (Rp 8.000) -->
+          <label class="flex items-center justify-between p-3.5 rounded-2xl border border-black/10 dark:border-white/10 hover:border-[#6D001A] dark:hover:border-[#E05377] cursor-pointer transition-all bg-[#FAF8F5] dark:bg-white/[0.02]">
+            <div class="flex items-center gap-3">
+              <input type="radio" name="premiumPackageRadio" value="mingguan" class="text-[#6D001A] focus:ring-[#6D001A]" />
+              <div>
+                <h4 class="text-xs sm:text-sm font-bold text-stone-900 dark:text-white">Paket Mingguan (7 Hari)</h4>
+                <p class="text-[11px] text-stone-500">Sekali bayar untuk kebutuhan agenda pekan ini</p>
+              </div>
+            </div>
+            <span class="text-sm font-bold text-[#6D001A] dark:text-[#E05377]">Rp 8.000</span>
+          </label>
+
+          <!-- 2. Bulanan (Rp 25.000) - Rekomendasi -->
+          <label class="flex items-center justify-between p-3.5 rounded-2xl border-2 border-[#6D001A] dark:border-[#E05377] cursor-pointer transition-all bg-[#FFF8E7] dark:bg-[#2A1820] relative">
+            <span class="absolute -top-2.5 right-4 px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase bg-[#6D001A] text-white">
+              Pilihan Utama
+            </span>
+            <div class="flex items-center gap-3">
+              <input type="radio" name="premiumPackageRadio" value="bulanan" checked class="text-[#6D001A] focus:ring-[#6D001A]" />
+              <div>
+                <h4 class="text-xs sm:text-sm font-bold text-stone-900 dark:text-white">Paket Bulanan (30 Hari)</h4>
+                <p class="text-[11px] text-stone-500">Akses penuh selama sebulan</p>
+              </div>
+            </div>
+            <span class="text-sm font-bold text-[#6D001A] dark:text-[#E05377]">Rp 25.000</span>
+          </label>
+
+          <!-- 3. Tahunan (Rp 200.000) -->
+          <label class="flex items-center justify-between p-3.5 rounded-2xl border border-black/10 dark:border-white/10 hover:border-[#6D001A] dark:hover:border-[#E05377] cursor-pointer transition-all bg-[#FAF8F5] dark:bg-white/[0.02]">
+            <div class="flex items-center gap-3">
+              <input type="radio" name="premiumPackageRadio" value="tahunan" class="text-[#6D001A] focus:ring-[#6D001A]" />
+              <div>
+                <h4 class="text-xs sm:text-sm font-bold text-stone-900 dark:text-white">Paket Tahunan (365 Hari)</h4>
+                <p class="text-[11px] text-stone-500">Nilai terbaik sepanjang tahun</p>
+              </div>
+            </div>
+            <span class="text-sm font-bold text-[#6D001A] dark:text-[#E05377]">Rp 200.000</span>
+          </label>
+        </div>
+
+        <!-- Payment Method (PRD FR-12) -->
+        <div class="mt-4">
+          <label class="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1.5">
+            Metode Pembayaran:
+          </label>
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <button
+              type="button"
+              onclick="selectPaymentMethod('qris', this)"
+              class="payment-method-btn p-2 rounded-xl border-2 border-[#6D001A] bg-stone-50 dark:bg-white/5 font-semibold text-stone-900 dark:text-white"
+            >
+              QRIS
+            </button>
+            <button
+              type="button"
+              onclick="selectPaymentMethod('ewallet', this)"
+              class="payment-method-btn p-2 rounded-xl border border-black/10 dark:border-white/10 font-semibold text-stone-600 dark:text-stone-300"
+            >
+              E-Wallet
+            </button>
+            <button
+              type="button"
+              onclick="selectPaymentMethod('bank', this)"
+              class="payment-method-btn p-2 rounded-xl border border-black/10 dark:border-white/10 font-semibold text-stone-600 dark:text-stone-300"
+            >
+              Transfer Bank
+            </button>
+          </div>
+        </div>
+
+        <!-- Upgrade Action Button -->
+        <div class="mt-6 flex flex-col gap-2">
+          <button
+            type="button"
+            onclick="handleExecuteUpgrade()"
+            class="w-full py-3 rounded-full bg-[#6D001A] hover:bg-[#550014] text-white font-bold text-sm transition-all shadow-xs active:scale-98"
+          >
+            Aktifkan Akses Premium
+          </button>
+          <a
+            href="account.html#upgrade"
+            class="w-full py-1.5 text-center text-xs text-stone-500 hover:text-black dark:hover:text-white font-medium"
+          >
+            Kelola di Halaman Akun →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 2: TAWARAN LOGIN GUEST SETELAH 3 CHAT (PRD FR-03, 4.3)              -->
+    <!-- ========================================================================= -->
+    <div
+      id="modalLoginPrompt"
+      class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs transition-opacity"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="bg-white dark:bg-[#191417] border border-black/10 dark:border-white/10 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-elevation relative text-center animate-message">
+        <button
+          type="button"
+          onclick="closeLoginPromptModal()"
+          class="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 rounded-full"
+          title="Tutup Modal"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <h3 class="font-serif text-2xl font-normal text-stone-900 dark:text-white">
+          Simpan Sesi via Gmail
+        </h3>
+        <p class="text-xs sm:text-sm text-stone-600 dark:text-stone-300 mt-2">
+          Batas 3 pertanyaan tamu telah tercapai. Hubungkan akun Google Mail untuk melanjutkan:
+        </p>
+
+        <!-- Benefit list -->
+        <ul class="text-left text-xs space-y-2.5 mt-4 p-4 rounded-2xl bg-[#FFF8E7] dark:bg-white/5 border border-black/5 dark:border-white/5">
+          <li class="flex items-center gap-2 text-stone-800 dark:text-stone-200">
+            <span class="text-stone-900 dark:text-white font-bold">&bull;</span>
+            <span><b>10 Pertanyaan Gratis</b> dengan reset berkala tiap 3 hari</span>
+          </li>
+          <li class="flex items-center gap-2 text-stone-800 dark:text-stone-200">
+            <span class="text-stone-900 dark:text-white font-bold">&bull;</span>
+            <span><b>Tautan Pembelian Resmi</b> dari toko mitra (Shopee, Tokopedia, Uniqlo)</span>
+          </li>
+          <li class="flex items-center gap-2 text-stone-800 dark:text-stone-200">
+            <span class="text-stone-900 dark:text-white font-bold">&bull;</span>
+            <span><b>Penyimpanan Riwayat Obrolan</b> antar perangkat</span>
+          </li>
+          <li class="flex items-center gap-2 text-stone-800 dark:text-stone-200">
+            <span class="text-stone-900 dark:text-white font-bold">&bull;</span>
+            <span><b>Koleksi Foto Pakaian Tersimpan</b> di profil akun</span>
+          </li>
+        </ul>
+
+        <!-- Action Google Login -->
+        <div class="mt-6 space-y-2">
+          <button
+            type="button"
+            onclick="triggerGoogleAuthFromPrompt()"
+            class="w-full py-2.5 rounded-full bg-white dark:bg-[#201A1E] border border-black/25 dark:border-white/25 text-stone-900 dark:text-white font-semibold text-xs sm:text-sm hover:bg-stone-50 dark:hover:bg-white/10 transition-all flex items-center justify-center gap-2 shadow-xs active:scale-98"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+              <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+            </svg>
+            <span>Masuk via Google Mail</span>
+          </button>
+
+          <button
+            type="button"
+            onclick="openPremiumAdModal()"
+            class="text-xs text-[#6D001A] dark:text-[#E05377] font-semibold underline block w-full py-1"
+          >
+            Atau pilih paket Premium (Mulai Rp 8.000) →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 3: PENYESUAIAN ACARA (PRD FR-15 - FITUR KHUSUS PREMIUM)            -->
+    <!-- ========================================================================= -->
+    <div
+      id="modalEventSelector"
+      class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs transition-opacity"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="bg-white dark:bg-[#191417] border border-black/10 dark:border-white/10 rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-elevation relative animate-message">
+        <button
+          type="button"
+          onclick="closeEventModal()"
+          class="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 rounded-full"
+          title="Tutup Modal"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <div class="text-center">
+          <span class="text-[10px] font-bold tracking-widest uppercase text-stone-500">
+            Fitur Member Premium
+          </span>
+          <h3 class="font-serif text-2xl text-stone-900 dark:text-white mt-1">
+            Penyesuaian Acara
+          </h3>
+          <p class="text-xs text-stone-500 mt-1">
+            Pilih konteks acara untuk menyelaraskan etika busana, jenis bahan, dan pilihan pakaian.
+          </p>
+        </div>
+
+        <div class="mt-4 space-y-2">
+          <!-- 1. Ngonser -->
+          <button
+            type="button"
+            onclick="handleSelectEvent('ngonser', 'Konser & Festival Musik')"
+            class="w-full flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 hover:border-[#6D001A] hover:bg-stone-50 dark:hover:bg-white/5 transition-all text-left"
+          >
+            <div>
+              <h4 class="text-xs font-bold text-stone-900 dark:text-white">Konser & Festival Musik</h4>
+              <p class="text-[11px] text-stone-500">Fleksibel bergerak, sirkulasi udara luar ruangan, alas kaki empuk</p>
+            </div>
+            <span class="text-xs text-amber-600 font-bold">★</span>
+          </button>
+
+          <!-- 2. Pengajian / Kajian -->
+          <button
+            type="button"
+            onclick="handleSelectEvent('pengajian', 'Kajian & Pengajian Santun')"
+            class="w-full flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 hover:border-[#6D001A] hover:bg-stone-50 dark:hover:bg-white/5 transition-all text-left"
+          >
+            <div>
+              <h4 class="text-xs font-bold text-stone-900 dark:text-white">Kajian & Pengajian Santun</h4>
+              <p class="text-[11px] text-stone-500">Potongan longgar (modest cut), tidak menerawang, palet netral tenang</p>
+            </div>
+            <span class="text-xs text-amber-600 font-bold">★</span>
+          </button>
+
+          <!-- 3. Kantor / Formal / Interview -->
+          <button
+            type="button"
+            onclick="handleSelectEvent('kantor', 'Kantor & Wawancara Kerja')"
+            class="w-full flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 hover:border-[#6D001A] hover:bg-stone-50 dark:hover:bg-white/5 transition-all text-left"
+          >
+            <div>
+              <h4 class="text-xs font-bold text-stone-900 dark:text-white">Kantor & Wawancara Kerja</h4>
+              <p class="text-[11px] text-stone-500">Siluet rapi terstruktur, smart formal, percaya diri</p>
+            </div>
+            <span class="text-xs text-amber-600 font-bold">★</span>
+          </button>
+
+          <!-- 4. Pantai / Liburan -->
+          <button
+            type="button"
+            onclick="handleSelectEvent('pantai', 'Liburan Pantai & Tropis')"
+            class="w-full flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 hover:border-[#6D001A] hover:bg-stone-50 dark:hover:bg-white/5 transition-all text-left"
+          >
+            <div>
+              <h4 class="text-xs font-bold text-stone-900 dark:text-white">Liburan Pantai & Tropis</h4>
+              <p class="text-[11px] text-stone-500">Bahan katun ringan atau linen alami yang adem</p>
+            </div>
+            <span class="text-xs text-amber-600 font-bold">★</span>
+          </button>
+
+          <!-- 5. Gala Dinner / Kondangan -->
+          <button
+            type="button"
+            onclick="handleSelectEvent('pesta', 'Gala Dinner & Acara Resmi')"
+            class="w-full flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 hover:border-[#6D001A] hover:bg-stone-50 dark:hover:bg-white/5 transition-all text-left"
+          >
+            <div>
+              <h4 class="text-xs font-bold text-stone-900 dark:text-white">Gala Dinner & Acara Resmi</h4>
+              <p class="text-[11px] text-stone-500">Kombinasi warna tegas berkelas dengan tekstur mewah</p>
+            </div>
+            <span class="text-xs text-amber-600 font-bold">★</span>
+          </button>
+
+          <!-- 6. Santai / Ngopi Weekend -->
+          <button
+            type="button"
+            onclick="handleSelectEvent('santai', 'Kasual Santai & Harian')"
+            class="w-full flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 hover:border-[#6D001A] hover:bg-stone-50 dark:hover:bg-white/5 transition-all text-left"
+          >
+            <div>
+              <h4 class="text-xs font-bold text-stone-900 dark:text-white">Kasual Santai & Harian</h4>
+              <p class="text-[11px] text-stone-500">Potongan santai untuk jalan santai atau ngopi akhir pekan</p>
+            </div>
+            <span class="text-xs text-amber-600 font-bold">★</span>
+          </button>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-black/[0.06] dark:border-white/[0.06] text-center">
+          <button
+            type="button"
+            onclick="resetSelectedEvent()"
+            class="text-xs text-stone-500 hover:text-black dark:hover:text-white font-medium"
+          >
+            Reset ke Kategori Umum
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 4: KONFIGURASI MESIN AI & STATUS DATABASE                          -->
+    <!-- ========================================================================= -->
+    <div
+      id="modalAiConfig"
+      class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs transition-opacity"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="bg-white dark:bg-[#191417] border border-black/10 dark:border-white/10 rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-elevation relative animate-message">
+        <button
+          type="button"
+          onclick="closeAiConfigModal()"
+          class="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 rounded-full"
+          title="Tutup Modal"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <div class="text-left">
+          <span class="text-[10px] font-bold tracking-widest uppercase text-stone-500">
+            Sistem Kurasi Kecerdasan Buatan
+          </span>
+          <h3 class="font-serif text-2xl text-stone-900 dark:text-white mt-1">
+            Status AI & Database
+          </h3>
+          <p class="text-xs text-stone-600 dark:text-stone-300 mt-1 leading-relaxed">
+            AI mengelola kurasi gaya secara langsung dari katalog produk database nyata (Supabase & Apify) tanpa data dummy.
+          </p>
+        </div>
+
+        <!-- Database Metrics Box -->
+        <div class="mt-4 p-3.5 rounded-2xl bg-[#FFF8E7] dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-2 text-xs">
+          <div class="flex items-center justify-between">
+            <span class="text-stone-600 dark:text-stone-400">Katalog Database:</span>
+            <span id="aiDbCatalogCount" class="font-bold text-stone-900 dark:text-white">222 Produk Nyata</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-stone-600 dark:text-stone-400">Sumber Produk:</span>
+            <span class="font-semibold text-stone-800 dark:text-stone-200">Supabase + Apify (Shopee/Uniqlo/3D)</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-stone-600 dark:text-stone-400">Status Mesin:</span>
+            <span id="aiActiveEngineStatus" class="font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>Database AI Curator</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Optional Gemini API Key -->
+        <div class="mt-5 space-y-2 text-left">
+          <div class="flex items-center justify-between">
+            <label for="inputGeminiApiKey" class="text-xs font-bold text-stone-900 dark:text-white">
+              Google Gemini API Key (Opsional)
+            </label>
+            <span class="text-[10px] text-stone-400">Google AI Studio</span>
+          </div>
+          <p class="text-[11px] text-stone-500 dark:text-stone-400 leading-normal">
+            Gunakan kunci API Gemini untuk penalaran LLM tingkat lanjut. Jika dikosongkan, AI otomatis menggunakan mesin kurasi database bawaan berkecepatan tinggi.
+          </p>
+          <div class="relative mt-1">
+            <input
+              type="password"
+              id="inputGeminiApiKey"
+              placeholder="Tempel Google Gemini API Key di sini..."
+              class="w-full px-3.5 py-2.5 rounded-xl border border-black/15 dark:border-white/15 bg-white dark:bg-[#120E11] text-xs font-mono text-stone-900 dark:text-white focus:outline-none focus:border-[#6D001A]"
+            />
+          </div>
+        </div>
+
+        <div class="mt-5 flex items-center gap-2">
+          <button
+            type="button"
+            onclick="handleSaveGeminiKey()"
+            class="flex-1 py-2.5 rounded-xl bg-[#6D001A] hover:bg-[#550014] text-white text-xs font-bold transition-all shadow-xs"
+          >
+            Simpan Konfigurasi
+          </button>
+          <button
+            type="button"
+            onclick="handleClearGeminiKey()"
+            class="px-3.5 py-2.5 rounded-xl border border-black/15 dark:border-white/15 text-stone-600 dark:text-stone-300 text-xs font-semibold hover:bg-stone-100 dark:hover:bg-white/5 transition-all"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Toast Notification -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <script src="personality.js"></script>
+  </body>
+</html>

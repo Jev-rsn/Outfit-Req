@@ -1,3 +1,14 @@
+# Browser test profiles & temporary test data
+.browser_test_profile/
+**/.browser_test_profile/
+*.dmp
+*.baj
+*.baf
+*.default
+
+# Sub-repositories
+Premium 3D/
+
 # Dependencies & Environment
 node_modules/
 .env

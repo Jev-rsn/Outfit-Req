@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <!-- Background Badge -->
+  <circle cx="250" cy="250" r="215" fill="#FFF8E7" stroke="#6D001A" stroke-width="16" />
+
+  <!-- Question Mark Hook -->
+  <path d="M 218 185 C 215 142, 282 142, 282 185 C 282 216, 250 218, 250 248 L 250 264" 
+        fill="none" stroke="#6D001A" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Hanger Shoulder Arc -->
+  <path d="M 125 320 Q 250 262 375 320" 
+        fill="none" stroke="#6D001A" stroke-width="18" stroke-linecap="round" />
+
+  <!-- Golden AI Sparkle (✦) -->
+  <path d="M 325 152 Q 325 174 347 174 Q 325 174 325 196 Q 325 174 303 174 Q 325 174 325 152 Z" 
+        fill="#D4AF37" />
+  <circle cx="362" cy="142" r="3.5" fill="#D4AF37" />
+
+  <!-- Floating Fashion Button (Detail cerdas penutup tanda tanya) -->
+  <circle cx="250" cy="308" r="14" fill="#6D001A" />
+  <circle cx="245" cy="308" r="2.5" fill="#FFF8E7" />
+  <circle cx="255" cy="308" r="2.5" fill="#FFF8E7" />
+</svg>

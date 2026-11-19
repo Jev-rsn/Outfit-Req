@@ -2,7 +2,10 @@
 <html lang="id">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>Outfit Req — Hero</title>
     <script src="theme.js"></script>
     <script src="./vendor/react.js"></script>
@@ -40,7 +43,9 @@
           /* ========================================================
              DARK MODE PALETTE (Luxury Velvet Noir)
              ======================================================== */
-          :root.dark, html.dark, [data-theme="dark"] {
+          :root.dark,
+          html.dark,
+          [data-theme="dark"] {
             --bg: #0d0b0c;
             --bg2: #191417;
             --ink: #f7f3ee;
@@ -527,7 +532,9 @@
             }
             .hero-wrap {
               min-height: auto;
-              padding-bottom: calc(84px + env(safe-area-inset-bottom, 16px)) !important;
+              padding-bottom: calc(
+                84px + env(safe-area-inset-bottom, 16px)
+              ) !important;
             }
             .header-shift {
               padding: 24px 16px 8px;
@@ -594,16 +601,32 @@
               margin-right: 0 !important;
               border-radius: 16px !important;
               box-shadow: 0 8px 24px rgba(109, 0, 26, 0.12) !important;
-              transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+              transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease !important;
             }
-            .card-1:hover, .card-2:hover, .card-3:hover, .card-4:hover,
-            .card-5:hover, .card-6:hover, .card-7:hover, .card-8:hover, .card-9:hover {
+            .card-1:hover,
+            .card-2:hover,
+            .card-3:hover,
+            .card-4:hover,
+            .card-5:hover,
+            .card-6:hover,
+            .card-7:hover,
+            .card-8:hover,
+            .card-9:hover {
               transform: none !important;
             }
             .card-item.is-selected,
-            .card-1.is-selected, .card-2.is-selected, .card-3.is-selected,
-            .card-4.is-selected, .card-5.is-selected, .card-6.is-selected,
-            .card-7.is-selected, .card-8.is-selected, .card-9.is-selected {
+            .card-1.is-selected,
+            .card-2.is-selected,
+            .card-3.is-selected,
+            .card-4.is-selected,
+            .card-5.is-selected,
+            .card-6.is-selected,
+            .card-7.is-selected,
+            .card-8.is-selected,
+            .card-9.is-selected {
               transform: scale(1.04) !important;
               border-color: var(--burgundy) !important;
               box-shadow: 0 14px 32px rgba(109, 0, 26, 0.32) !important;
@@ -754,7 +777,7 @@
             transform: translateY(-1px);
           }
           .mobile-nav-tab-item.active::after {
-            content: '';
+            content: "";
             display: block;
             width: 14px;
             height: 2.5px;
@@ -1006,27 +1029,33 @@
           /* ========================================================
              DARK MODE OVERRIDES & SURFACES (Craft Floor)
              ======================================================== */
-          html.dark ::selection, [data-theme="dark"] ::selection {
+          html.dark ::selection,
+          [data-theme="dark"] ::selection {
             background: var(--burgundy);
             color: #ffffff;
           }
-          html.dark ::-moz-selection, [data-theme="dark"] ::-moz-selection {
+          html.dark ::-moz-selection,
+          [data-theme="dark"] ::-moz-selection {
             background: var(--burgundy);
             color: #ffffff;
           }
-          html.dark ::-webkit-scrollbar-track, [data-theme="dark"] ::-webkit-scrollbar-track {
+          html.dark ::-webkit-scrollbar-track,
+          [data-theme="dark"] ::-webkit-scrollbar-track {
             background: var(--bg);
           }
-          html.dark ::-webkit-scrollbar-thumb, [data-theme="dark"] ::-webkit-scrollbar-thumb {
+          html.dark ::-webkit-scrollbar-thumb,
+          [data-theme="dark"] ::-webkit-scrollbar-thumb {
             background: rgba(201, 59, 95, 0.35);
             border: 2px solid var(--bg);
           }
-          html.dark ::-webkit-scrollbar-thumb:hover, [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+          html.dark ::-webkit-scrollbar-thumb:hover,
+          [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
             background: rgba(201, 59, 95, 0.55);
           }
 
           /* Parallax Glow in Dark Mode */
-          html.dark .hero-wrap, [data-theme="dark"] .hero-wrap {
+          html.dark .hero-wrap,
+          [data-theme="dark"] .hero-wrap {
             background:
               radial-gradient(
                 650px circle at var(--cx) var(--cy),
@@ -1062,123 +1091,150 @@
           .theme-toggle-btn:active {
             transform: scale(0.94);
           }
-          html.dark .theme-toggle-btn, [data-theme="dark"] .theme-toggle-btn {
+          html.dark .theme-toggle-btn,
+          [data-theme="dark"] .theme-toggle-btn {
             background: #191417 !important;
             border-color: rgba(247, 243, 238, 0.18) !important;
             color: var(--gold) !important;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
           }
-          html.dark .theme-toggle-btn:hover, [data-theme="dark"] .theme-toggle-btn:hover {
+          html.dark .theme-toggle-btn:hover,
+          [data-theme="dark"] .theme-toggle-btn:hover {
             border-color: var(--burgundy) !important;
             color: #ffffff !important;
             box-shadow: 0 4px 16px rgba(201, 59, 95, 0.25) !important;
           }
 
           /* Guest Profile Icon in Dark Mode */
-          html.dark #guestProfileIconBtn, [data-theme="dark"] #guestProfileIconBtn {
+          html.dark #guestProfileIconBtn,
+          [data-theme="dark"] #guestProfileIconBtn {
             background: #191417 !important;
             border-color: rgba(247, 243, 238, 0.2) !important;
             color: #f7f3ee !important;
           }
-          html.dark #guestProfileIconBtn svg, [data-theme="dark"] #guestProfileIconBtn svg {
+          html.dark #guestProfileIconBtn svg,
+          [data-theme="dark"] #guestProfileIconBtn svg {
             stroke: #f7f3ee !important;
           }
 
           /* Mobile Nav in Dark Mode */
-          html.dark .mobile-nav-toggle, [data-theme="dark"] .mobile-nav-toggle {
+          html.dark .mobile-nav-toggle,
+          [data-theme="dark"] .mobile-nav-toggle {
             background: #191417 !important;
             border-color: rgba(201, 59, 95, 0.35) !important;
             color: var(--burgundy) !important;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
           }
-          html.dark .mobile-nav-drawer, [data-theme="dark"] .mobile-nav-drawer {
+          html.dark .mobile-nav-drawer,
+          [data-theme="dark"] .mobile-nav-drawer {
             background: rgba(15, 13, 14, 0.98) !important;
             border-bottom: 1px solid var(--line) !important;
             box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6) !important;
           }
-          html.dark .mobile-nav-item, [data-theme="dark"] .mobile-nav-item {
+          html.dark .mobile-nav-item,
+          [data-theme="dark"] .mobile-nav-item {
             background: #191417 !important;
             border-color: rgba(247, 243, 238, 0.12) !important;
             color: var(--ink) !important;
           }
-          html.dark .mobile-nav-item:active, [data-theme="dark"] .mobile-nav-item:active {
+          html.dark .mobile-nav-item:active,
+          [data-theme="dark"] .mobile-nav-item:active {
             background: rgba(201, 59, 95, 0.15) !important;
           }
-          html.dark .mobile-nav-item.highlight, [data-theme="dark"] .mobile-nav-item.highlight {
+          html.dark .mobile-nav-item.highlight,
+          [data-theme="dark"] .mobile-nav-item.highlight {
             background: var(--burgundy) !important;
             color: #ffffff !important;
             border-color: var(--burgundy) !important;
           }
 
           /* Mobile Bottom Nav in Dark Mode */
-          html.dark .mobile-bottom-nav, [data-theme="dark"] .mobile-bottom-nav {
+          html.dark .mobile-bottom-nav,
+          [data-theme="dark"] .mobile-bottom-nav {
             background: rgba(15, 13, 14, 0.96) !important;
             border-top-color: rgba(247, 243, 238, 0.12) !important;
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.45) !important;
           }
-          html.dark .mobile-nav-tab-item, [data-theme="dark"] .mobile-nav-tab-item {
+          html.dark .mobile-nav-tab-item,
+          [data-theme="dark"] .mobile-nav-tab-item {
             color: rgba(247, 243, 238, 0.55) !important;
           }
-          html.dark .mobile-nav-tab-item.active, [data-theme="dark"] .mobile-nav-tab-item.active {
+          html.dark .mobile-nav-tab-item.active,
+          [data-theme="dark"] .mobile-nav-tab-item.active {
             color: var(--burgundy) !important;
           }
-          html.dark .mobile-nav-tab-item.active svg, [data-theme="dark"] .mobile-nav-tab-item.active svg {
+          html.dark .mobile-nav-tab-item.active svg,
+          [data-theme="dark"] .mobile-nav-tab-item.active svg {
             stroke: var(--burgundy) !important;
           }
-          html.dark .mobile-nav-tab-item.active::after, [data-theme="dark"] .mobile-nav-tab-item.active::after {
+          html.dark .mobile-nav-tab-item.active::after,
+          [data-theme="dark"] .mobile-nav-tab-item.active::after {
             background: var(--burgundy) !important;
           }
 
           /* User Profile Pill & Dropdown in Dark Mode */
-          html.dark .user-profile-pill, [data-theme="dark"] .user-profile-pill {
+          html.dark .user-profile-pill,
+          [data-theme="dark"] .user-profile-pill {
             background: #191417 !important;
             border-color: rgba(201, 59, 95, 0.35) !important;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35) !important;
           }
-          html.dark .user-profile-pill:hover, [data-theme="dark"] .user-profile-pill:hover {
+          html.dark .user-profile-pill:hover,
+          [data-theme="dark"] .user-profile-pill:hover {
             background: #231d21 !important;
             border-color: var(--burgundy) !important;
           }
-          html.dark .user-profile-dropdown, [data-theme="dark"] .user-profile-dropdown {
+          html.dark .user-profile-dropdown,
+          [data-theme="dark"] .user-profile-dropdown {
             background: #191417 !important;
             border-color: rgba(247, 243, 238, 0.15) !important;
             box-shadow: 0 16px 42px rgba(0, 0, 0, 0.65) !important;
           }
-          html.dark .dropdown-header-info, [data-theme="dark"] .dropdown-header-info {
+          html.dark .dropdown-header-info,
+          [data-theme="dark"] .dropdown-header-info {
             border-bottom-color: rgba(247, 243, 238, 0.1) !important;
           }
-          html.dark .dropdown-user-name, [data-theme="dark"] .dropdown-user-name {
+          html.dark .dropdown-user-name,
+          [data-theme="dark"] .dropdown-user-name {
             color: #f7f3ee !important;
           }
-          html.dark .dropdown-user-email, [data-theme="dark"] .dropdown-user-email {
+          html.dark .dropdown-user-email,
+          [data-theme="dark"] .dropdown-user-email {
             color: rgba(247, 243, 238, 0.6) !important;
           }
-          html.dark .dropdown-badge-row, [data-theme="dark"] .dropdown-badge-row {
+          html.dark .dropdown-badge-row,
+          [data-theme="dark"] .dropdown-badge-row {
             background: rgba(21, 128, 61, 0.15) !important;
             border-color: rgba(21, 128, 61, 0.3) !important;
           }
-          html.dark .dropdown-quota-card, [data-theme="dark"] .dropdown-quota-card {
+          html.dark .dropdown-quota-card,
+          [data-theme="dark"] .dropdown-quota-card {
             background: #120e10 !important;
             border-color: rgba(201, 59, 95, 0.25) !important;
           }
-          html.dark .dropdown-quota-val, [data-theme="dark"] .dropdown-quota-val {
+          html.dark .dropdown-quota-val,
+          [data-theme="dark"] .dropdown-quota-val {
             color: #f7f3ee !important;
           }
-          html.dark .dropdown-quota-sub, [data-theme="dark"] .dropdown-quota-sub {
+          html.dark .dropdown-quota-sub,
+          [data-theme="dark"] .dropdown-quota-sub {
             color: rgba(247, 243, 238, 0.6) !important;
           }
-          html.dark .btn-secondary-action, [data-theme="dark"] .btn-secondary-action {
+          html.dark .btn-secondary-action,
+          [data-theme="dark"] .btn-secondary-action {
             border-color: rgba(247, 243, 238, 0.15) !important;
             color: #f7f3ee !important;
           }
-          html.dark .btn-secondary-action:hover, [data-theme="dark"] .btn-secondary-action:hover {
+          html.dark .btn-secondary-action:hover,
+          [data-theme="dark"] .btn-secondary-action:hover {
             background: rgba(201, 59, 95, 0.15) !important;
             color: var(--burgundy) !important;
             border-color: var(--burgundy) !important;
           }
 
           /* Card Items in Dark Mode */
-          html.dark .card-item, [data-theme="dark"] .card-item {
+          html.dark .card-item,
+          [data-theme="dark"] .card-item {
             background: #1e181c !important;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
           }
@@ -1228,7 +1284,7 @@
           >
             <sc-if value="{{!isLoggedIn}}">
               <a
-                href="rekomendasi.html"
+                href="personality.html"
                 class="desktop-nav-link"
                 style="
                   font-size: 14px;
@@ -1236,6 +1292,20 @@
                   font-weight: 600;
                   transition: color 0.2s;
                 "
+                title="Buka Chat AI Personality Outfit"
+                >Personality</a
+              >
+              <a
+                href="rekomendasi.html"
+                class="desktop-nav-link"
+                style="
+                  font-size: 14px;
+                  color: var(--ink-dim);
+                  font-weight: 500;
+                  transition: color 0.2s;
+                "
+                onmouseover="this.style.color = 'var(--burgundy)'"
+                onmouseout="this.style.color = 'var(--ink-dim)'"
                 title="Buka Galeri Rekomendasi Outfit"
                 >Rekomendasi</a
               >
@@ -1305,10 +1375,23 @@
                   cursor: pointer;
                   transition: all 0.2s;
                 "
-                onmouseover="this.style.borderColor = '#000000'; this.style.transform = 'scale(1.05)'"
-                onmouseout="this.style.borderColor = 'rgba(0, 0, 0, 0.2)'; this.style.transform = 'scale(1)'"
+                onmouseover="
+                  this.style.borderColor = '#000000';
+                  this.style.transform = 'scale(1.05)';
+                "
+                onmouseout="
+                  this.style.borderColor = 'rgba(0, 0, 0, 0.2)';
+                  this.style.transform = 'scale(1)';
+                "
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-width="2"
+                >
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
                 </svg>
@@ -1323,7 +1406,16 @@
                 aria-label="Buka Menu Navigasi Mobile"
                 title="Menu Navigasi"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <line x1="3" y1="12" x2="21" y2="12"></line>
                   <line x1="3" y1="6" x2="21" y2="6"></line>
                   <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -1340,7 +1432,11 @@
                 title="Ubah Mode (Gelap / Terang)"
                 aria-label="Ubah Mode Gelap atau Terang"
               ></button>
-              <div id="userMenuWrap" class="user-menu-wrap" style="position: relative;">
+              <div
+                id="userMenuWrap"
+                class="user-menu-wrap"
+                style="position: relative"
+              >
                 <button
                   type="button"
                   class="user-profile-pill"
@@ -1348,7 +1444,7 @@
                   title="Menu Profil Pengguna"
                   onclick="{{toggleUserDropdown}}"
                   aria-expanded="{{userDropdownExpanded}}"
-                  style="cursor: pointer;"
+                  style="cursor: pointer"
                 >
                   <span class="user-avatar-circle">{{userInitial}}</span>
                   <span class="user-name-text">Halo, {{userName}}</span>
@@ -1356,15 +1452,23 @@
                     class="user-status-dot"
                     title="Akun Terverifikasi"
                   ></span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left: 2px; opacity: 0.7;">
-                    <path d="m6 9 6 6 6-6"/>
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    style="margin-left: 2px; opacity: 0.7"
+                  >
+                    <path d="m6 9 6 6 6-6" />
                   </svg>
                 </button>
 
                 <div class="{{userDropdownClass}}" id="userProfileDropdown">
                   <div class="dropdown-header-info">
                     <div class="dropdown-avatar-lg">{{userInitial}}</div>
-                    <div style="overflow: hidden;">
+                    <div style="overflow: hidden">
                       <div class="dropdown-user-name">{{userName}}</div>
                       <div class="dropdown-user-email">{{userEmail}}</div>
                     </div>
@@ -1372,12 +1476,29 @@
 
                   <div class="dropdown-badge-row">
                     <span class="dropdown-badge-label">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2.5">
-                        <polyline points="20 6 9 17 4 12"/>
+                      <svg
+                        width="13"
+                        height="13"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#15803d"
+                        stroke-width="2.5"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
                       </svg>
                       Akun Terverifikasi
                     </span>
-                    <span style="font-size: 11px; font-weight: 700; color: var(--burgundy); background: rgba(109, 0, 26, 0.08); padding: 2px 7px; border-radius: 6px;">{{userTier}}</span>
+                    <span
+                      style="
+                        font-size: 11px;
+                        font-weight: 700;
+                        color: var(--burgundy);
+                        background: rgba(109, 0, 26, 0.08);
+                        padding: 2px 7px;
+                        border-radius: 6px;
+                      "
+                      >{{userTier}}</span
+                    >
                   </div>
 
                   <div class="dropdown-quota-card">
@@ -1387,35 +1508,91 @@
                   </div>
 
                   <sc-if value="{{!isPremium}}">
-                    <a href="account.html?upgrade=1" class="dropdown-action-btn" style="background: #6D001A; color: #ffffff; font-weight: 700; border: none; margin-bottom: 6px; justify-content: center; text-decoration: none;">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    <a
+                      href="account.html?upgrade=1"
+                      class="dropdown-action-btn"
+                      style="
+                        background: #6d001a;
+                        color: #ffffff;
+                        font-weight: 700;
+                        border: none;
+                        margin-bottom: 6px;
+                        justify-content: center;
+                        text-decoration: none;
+                      "
+                    >
+                      <svg
+                        width="15"
+                        height="15"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                      >
+                        <polygon
+                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        />
                       </svg>
                       Upgrade ke Premium Member
                     </a>
                   </sc-if>
 
-                  <a href="rekomendasi.html" class="dropdown-action-btn btn-primary-action" style="background: rgba(109, 0, 26, 0.08); color: var(--burgundy); font-weight: 700;">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <circle cx="11" cy="11" r="8"/>
-                      <path d="m21 21-4.3-4.3"/>
+                  <a
+                    href="rekomendasi.html"
+                    class="dropdown-action-btn btn-primary-action"
+                    style="
+                      background: rgba(109, 0, 26, 0.08);
+                      color: var(--burgundy);
+                      font-weight: 700;
+                    "
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <circle cx="11" cy="11" r="8" />
+                      <path d="m21 21-4.3-4.3" />
                     </svg>
                     Galeri Rekomendasi Outfit
                   </a>
 
-                  <a href="account.html" class="dropdown-action-btn btn-primary-action">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                      <circle cx="12" cy="7" r="4"/>
+                  <a
+                    href="account.html"
+                    class="dropdown-action-btn btn-primary-action"
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
                     </svg>
                     Buka Halaman Akun Saya
                   </a>
 
-                  <a href="tutorial.html" class="dropdown-action-btn btn-secondary-action">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <circle cx="12" cy="12" r="10"/>
-                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                      <line x1="12" y1="17" x2="12.01" y2="17"/>
+                  <a
+                    href="tutorial.html"
+                    class="dropdown-action-btn btn-secondary-action"
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                      <line x1="12" y1="17" x2="12.01" y2="17" />
                     </svg>
                     Panduan & Tutorial Website
                   </a>
@@ -1424,20 +1601,46 @@
                     type="button"
                     onclick="window.toggleTheme && window.toggleTheme()"
                     class="dropdown-action-btn btn-secondary-action"
-                    style="display: flex; align-items: center; justify-content: flex-start; gap: 8px;"
+                    style="
+                      display: flex;
+                      align-items: center;
+                      justify-content: flex-start;
+                      gap: 8px;
+                    "
                     title="Ubah Mode Tampilan"
                   >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
                     </svg>
                     <span id="dropdownThemeText">Mode Gelap / Terang</span>
                   </button>
 
-                  <button type="button" onclick="{{logoutUser}}" id="btnDropdownLogout" class="dropdown-action-btn btn-logout-action">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                      <polyline points="16 17 21 12 16 7"/>
-                      <line x1="21" y1="12" x2="9" y2="12"/>
+                  <button
+                    type="button"
+                    onclick="{{logoutUser}}"
+                    id="btnDropdownLogout"
+                    class="dropdown-action-btn btn-logout-action"
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                      <polyline points="16 17 21 12 16 7" />
+                      <line x1="21" y1="12" x2="9" y2="12" />
                     </svg>
                     Keluar (Logout)
                   </button>
@@ -1453,7 +1656,16 @@
                 aria-label="Buka Menu Navigasi Mobile"
                 title="Menu Navigasi"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <line x1="3" y1="12" x2="21" y2="12"></line>
                   <line x1="3" y1="6" x2="21" y2="6"></line>
                   <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -1466,41 +1678,123 @@
           <div id="mobileNavDrawer" class="mobile-nav-drawer">
             <a href="index.html" class="mobile-nav-item">
               <span>Beranda Utama</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
             </a>
             <a href="rekomendasi.html" class="mobile-nav-item">
-              <span style="color: var(--burgundy); font-weight: 700;">Galeri Rekomendasi Outfit</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              <span style="color: var(--burgundy); font-weight: 700"
+                >Galeri Rekomendasi Outfit</span
+              >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
             </a>
-            <a href="tutorial.html#personality" class="mobile-nav-item">
-              <span>Tes Style Personality</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            <a href="personality.html" class="mobile-nav-item">
+              <span>Chat AI Personality</span>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
             </a>
             <a href="tutorial.html" class="mobile-nav-item">
               <span>Panduan & Tutorial Fitur</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
             </a>
             <a href="account.html" class="mobile-nav-item">
               <span>Halaman Akun Saya</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
             </a>
             <button
               type="button"
               class="mobile-nav-item"
               onclick="window.toggleTheme && window.toggleTheme()"
-              style="width: 100%; border: 1px solid var(--line); cursor: pointer; text-align: left; background: var(--bg2);"
+              style="
+                width: 100%;
+                border: 1px solid var(--line);
+                cursor: pointer;
+                text-align: left;
+                background: var(--bg2);
+              "
             >
-              <span style="display: flex; align-items: center; gap: 8px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+              <span style="display: flex; align-items: center; gap: 8px">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
                 </svg>
                 <span>Mode Tampilan</span>
               </span>
-              <span id="mobileThemeStatus" style="font-size: 11px; font-weight: 700; color: var(--burgundy); background: rgba(109, 0, 26, 0.08); padding: 2px 8px; border-radius: 6px;">Mode Gelap</span>
+              <span
+                id="mobileThemeStatus"
+                style="
+                  font-size: 11px;
+                  font-weight: 700;
+                  color: var(--burgundy);
+                  background: rgba(109, 0, 26, 0.08);
+                  padding: 2px 8px;
+                  border-radius: 6px;
+                "
+                >Mode Gelap</span
+              >
             </button>
             <a href="login.html?mode=login" class="mobile-nav-item highlight">
               <span>Masuk / Daftar Akun 3D</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
             </a>
           </div>
         </nav>
@@ -1534,7 +1828,7 @@
             "
           >
             <a
-              href="tutorial.html#personality"
+              href="personality.html"
               class="hero-cta-btn"
               style="
                 background: var(--gold);
@@ -1542,9 +1836,9 @@
                 font-weight: 600;
                 box-shadow: 0 4px 14px rgba(109, 0, 26, 0.22);
               "
-              title="Ikuti Tes Style Personality"
+              title="Konsultasi Outfit di Chat AI Personality"
             >
-              <span>Tes Personality</span>
+              <span>Chat Personality</span>
               <svg
                 width="14"
                 height="14"
@@ -1604,7 +1898,8 @@
                 class="card-photo"
                 onerror="
                   this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=80';
+                  this.src =
+                    'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=80';
                 "
               />
               <div class="card-overlay">
@@ -1625,7 +1920,8 @@
                 class="card-photo"
                 onerror="
                   this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=80';
+                  this.src =
+                    'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=80';
                 "
               />
               <div class="card-overlay">
@@ -1646,7 +1942,8 @@
                 class="card-photo"
                 onerror="
                   this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&auto=format&fit=crop&q=80';
+                  this.src =
+                    'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&auto=format&fit=crop&q=80';
                 "
               />
               <div class="card-overlay">
@@ -1667,7 +1964,8 @@
                 class="card-photo"
                 onerror="
                   this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=600&auto=format&fit=crop&q=80';
+                  this.src =
+                    'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=600&auto=format&fit=crop&q=80';
                 "
               />
               <div class="card-overlay">
@@ -1688,7 +1986,8 @@
                 class="card-photo"
                 onerror="
                   this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=700&auto=format&fit=crop&q=80';
+                  this.src =
+                    'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=700&auto=format&fit=crop&q=80';
                 "
               />
               <div class="card-overlay card-overlay-center">
@@ -1709,7 +2008,8 @@
                 class="card-photo"
                 onerror="
                   this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&auto=format&fit=crop&q=80';
+                  this.src =
+                    'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&auto=format&fit=crop&q=80';
                 "
               />
               <div class="card-overlay">
@@ -1730,7 +2030,8 @@
                 class="card-photo"
                 onerror="
                   this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&auto=format&fit=crop&q=80';
+                  this.src =
+                    'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&auto=format&fit=crop&q=80';
                 "
               />
               <div class="card-overlay">
@@ -1751,7 +2052,8 @@
                 class="card-photo"
                 onerror="
                   this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?w=600&auto=format&fit=crop&q=80';
+                  this.src =
+                    'https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?w=600&auto=format&fit=crop&q=80';
                 "
               />
               <div class="card-overlay">
@@ -1772,7 +2074,8 @@
                 class="card-photo"
                 onerror="
                   this.onerror = null;
-                  this.src = 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&auto=format&fit=crop&q=80';
+                  this.src =
+                    'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&auto=format&fit=crop&q=80';
                 "
               />
               <div class="card-overlay">
@@ -1785,7 +2088,14 @@
         <!-- MOBILE BOTTOM NAVIGATION BAR -->
         <nav class="mobile-bottom-nav">
           <a href="index.html" class="mobile-nav-tab-item active">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
               <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
@@ -1793,7 +2103,14 @@
           </a>
 
           <a href="rekomendasi.html" class="mobile-nav-tab-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <circle cx="11" cy="11" r="8" />
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
@@ -1801,7 +2118,14 @@
           </a>
 
           <a href="tutorial.html" class="mobile-nav-tab-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <circle cx="12" cy="12" r="10" />
               <path d="M12 16v-4" />
               <path d="M12 8h.01" />
@@ -1810,7 +2134,14 @@
           </a>
 
           <a href="account.html" class="mobile-nav-tab-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
@@ -1825,357 +2156,127 @@
       data-props='{"$preview":{"width":1440,"height":980}}'
     >
       class Component extends DCLogic {
-        constructor(props) {
-          super(props);
-          let initialUser = null;
-          try {
-            function _isDummy(em) {
-              if (!em || typeof em !== 'string') return true;
-              const s = em.toLowerCase().trim();
-              return s === 'customer' || s === 'belum masuk' || s.startsWith('demo') || s.startsWith('test') || s.includes('example.com');
-            }
-            const isLoggedOut = localStorage.getItem('outfit_req_logged_out') === 'true';
-            if (!isLoggedOut) {
-              const raw = localStorage.getItem('outfit_req_user');
-              if (raw) {
-                const parsed = JSON.parse(raw);
-                if (parsed && parsed.isLoggedIn && !_isDummy(parsed.email) && !_isDummy(parsed.name)) {
-                  initialUser = parsed;
+          constructor(props) {
+            super(props);
+            let initialUser = null;
+            try {
+              function _isDummy(em) {
+                if (!em || typeof em !== 'string') return true;
+                const s = em.toLowerCase().trim();
+                return s === 'customer' || s === 'belum masuk' || s.startsWith('demo') || s.startsWith('test') || s.includes('example.com');
+              }
+              const isLoggedOut = localStorage.getItem('outfit_req_logged_out') === 'true';
+              if (!isLoggedOut) {
+                const raw = localStorage.getItem('outfit_req_user');
+                if (raw) {
+                  const parsed = JSON.parse(raw);
+                  if (parsed && parsed.isLoggedIn && !_isDummy(parsed.email) && !_isDummy(parsed.name)) {
+                    initialUser = parsed;
+                  }
                 }
               }
-            }
-          } catch (e) {}
+            } catch (e) {}
 
-          this.state = {
-            mode: 'Personality',
-            activeFilter: 'Semua',
-            selectedCard: 5,
-            selectedColorIdx: 0,
-            customBgHex: null,
-            user: initialUser,
-            userDropdownOpen: false
-          };
-          this.rafId = null;
-          window.__mainComponent = this;
-        }
+            this.state = {
+              mode: 'Personality',
+              activeFilter: 'Semua',
+              selectedCard: 5,
+              selectedColorIdx: 0,
+              customBgHex: null,
+              user: initialUser,
+              userDropdownOpen: false
+            };
+            this.rafId = null;
+            window.__mainComponent = this;
+          }
 
-        componentDidMount() {
-          let targetMX = 0;
-          let targetMY = 0;
-          let currentMX = 0;
-          let currentMY = 0;
+          componentDidMount() {
+            let targetMX = 0;
+            let targetMY = 0;
+            let currentMX = 0;
+            let currentMY = 0;
 
-          let targetCX = window.innerWidth ? window.innerWidth / 2 : 720;
-          let targetCY = window.innerHeight ? window.innerHeight / 2 : 490;
-          let currentCX = targetCX;
-          let currentCY = targetCY;
+            let targetCX = window.innerWidth ? window.innerWidth / 2 : 720;
+            let targetCY = window.innerHeight ? window.innerHeight / 2 : 490;
+            let currentCX = targetCX;
+            let currentCY = targetCY;
 
-          const root = document.documentElement;
+            const root = document.documentElement;
 
-          this.onMove = (e) => {
-            const w = window.innerWidth || 1440;
-            const h = window.innerHeight || 980;
+            this.onMove = (e) => {
+              const w = window.innerWidth || 1440;
+              const h = window.innerHeight || 980;
 
-            targetMX = ((e.clientX / w) - 0.5) * 2;
-            targetMY = ((e.clientY / h) - 0.5) * 2;
-            targetCX = e.clientX;
-            targetCY = e.clientY;
-          };
+              targetMX = ((e.clientX / w) - 0.5) * 2;
+              targetMY = ((e.clientY / h) - 0.5) * 2;
+              targetCX = e.clientX;
+              targetCY = e.clientY;
+            };
 
-          this.onLeave = () => {
-            targetMX = 0;
-            targetMY = 0;
-          };
+            this.onLeave = () => {
+              targetMX = 0;
+              targetMY = 0;
+            };
 
-          const tick = () => {
-            currentMX += (targetMX - currentMX) * 0.08;
-            currentMY += (targetMY - currentMY) * 0.08;
-            currentCX += (targetCX - currentCX) * 0.15;
-            currentCY += (targetCY - currentCY) * 0.15;
+            const tick = () => {
+              currentMX += (targetMX - currentMX) * 0.08;
+              currentMY += (targetMY - currentMY) * 0.08;
+              currentCX += (targetCX - currentCX) * 0.15;
+              currentCY += (targetCY - currentCY) * 0.15;
 
-            root.style.setProperty('--mx', currentMX.toFixed(4));
-            root.style.setProperty('--my', currentMY.toFixed(4));
-            root.style.setProperty('--cx', currentCX.toFixed(1) + 'px');
-            root.style.setProperty('--cy', currentCY.toFixed(1) + 'px');
+              root.style.setProperty('--mx', currentMX.toFixed(4));
+              root.style.setProperty('--my', currentMY.toFixed(4));
+              root.style.setProperty('--cx', currentCX.toFixed(1) + 'px');
+              root.style.setProperty('--cy', currentCY.toFixed(1) + 'px');
 
+              this.rafId = requestAnimationFrame(tick);
+            };
+
+            this.onTouchMove = (e) => {
+              if (e.touches && e.touches.length > 0) {
+                const t = e.touches[0];
+                const w = window.innerWidth || 360;
+                const h = window.innerHeight || 640;
+                targetMX = ((t.clientX / w) - 0.5) * 1.5;
+                targetMY = ((t.clientY / h) - 0.5) * 1.5;
+                targetCX = t.clientX;
+                targetCY = t.clientY;
+              }
+            };
+
+            window.addEventListener('mousemove', this.onMove, { passive: true });
+            window.addEventListener('touchmove', this.onTouchMove, { passive: true });
+            document.addEventListener('mouseleave', this.onLeave);
             this.rafId = requestAnimationFrame(tick);
-          };
 
-          this.onTouchMove = (e) => {
-            if (e.touches && e.touches.length > 0) {
-              const t = e.touches[0];
-              const w = window.innerWidth || 360;
-              const h = window.innerHeight || 640;
-              targetMX = ((t.clientX / w) - 0.5) * 1.5;
-              targetMY = ((t.clientY / h) - 0.5) * 1.5;
-              targetCX = t.clientX;
-              targetCY = t.clientY;
-            }
-          };
-
-          window.addEventListener('mousemove', this.onMove, { passive: true });
-          window.addEventListener('touchmove', this.onTouchMove, { passive: true });
-          document.addEventListener('mouseleave', this.onLeave);
-          this.rafId = requestAnimationFrame(tick);
-
-          // Cek kembali sesi pengguna saat mount
-          try {
-            if (localStorage.getItem('outfit_req_logged_out') === 'true') {
-              this.setState({ user: null });
-            } else {
-              const raw = localStorage.getItem('outfit_req_user');
-              if (raw) {
-                const parsed = JSON.parse(raw);
-                if (parsed && parsed.isLoggedIn) {
-                  this.setState({ user: parsed });
+            // Cek kembali sesi pengguna saat mount
+            try {
+              if (localStorage.getItem('outfit_req_logged_out') === 'true') {
+                this.setState({ user: null });
+              } else {
+                const raw = localStorage.getItem('outfit_req_user');
+                if (raw) {
+                  const parsed = JSON.parse(raw);
+                  if (parsed && parsed.isLoggedIn) {
+                    this.setState({ user: parsed });
+                  }
                 }
               }
-            }
-          } catch (e) {}
+            } catch (e) {}
 
-          // Dengarkan sinkronisasi sesi antar tab / window
-          this.onStorageChange = (e) => {
-            if (e.key === 'outfit_req_user') {
-              try {
-                const u = e.newValue ? JSON.parse(e.newValue) : null;
-                this.setState({ user: u && u.isLoggedIn ? u : null, userDropdownOpen: false });
-              } catch (err) {}
-            }
-          };
-          window.addEventListener('storage', this.onStorageChange);
-
-          // Method logout terpusat
-          this.logout = async (e) => {
-            if (e && e.stopPropagation) e.stopPropagation();
-            try {
-              if (window.supabaseClient) await window.supabaseClient.auth.signOut();
-              else if (typeof supabase !== 'undefined' && supabase) await supabase.auth.signOut();
-            } catch (err) {}
-            try {
-              for (let i = localStorage.length - 1; i >= 0; i--) {
-                const k = localStorage.key(i);
-                if (k && (k.startsWith('sb-') || k.includes('supabase')) && k.includes('auth-token')) {
-                  localStorage.removeItem(k);
-                }
+            // Dengarkan sinkronisasi sesi antar tab / window
+            this.onStorageChange = (e) => {
+              if (e.key === 'outfit_req_user') {
+                try {
+                  const u = e.newValue ? JSON.parse(e.newValue) : null;
+                  this.setState({ user: u && u.isLoggedIn ? u : null, userDropdownOpen: false });
+                } catch (err) {}
               }
-            } catch (err) {}
-            localStorage.setItem('outfit_req_logged_out', 'true');
-            localStorage.removeItem('outfit_req_user');
-            this.setState({ user: null, userDropdownOpen: false });
-            if (typeof showAuthToast === 'function') {
-              showAuthToast('Anda telah berhasil keluar dari akun.');
-            }
-          };
-          window.__mainLogout = (e) => this.logout(e);
+            };
+            window.addEventListener('storage', this.onStorageChange);
 
-          // Tutup dropdown jika klik di luar area akun, atau proses aksi klik tombol
-          this.onDocClick = (e) => {
-            const logoutTarget = e.target.closest('#btnDropdownLogout');
-            if (logoutTarget) {
-              e.preventDefault();
-              e.stopPropagation();
-              this.logout(e);
-              return;
-            }
-            const profileBtn = e.target.closest('#userProfileBtn');
-            if (profileBtn) {
-              e.preventDefault();
-              e.stopPropagation();
-              this.setState({ userDropdownOpen: !this.state.userDropdownOpen });
-              return;
-            }
-            if (this.state.userDropdownOpen && !e.target.closest('#userMenuWrap')) {
-              this.setState({ userDropdownOpen: false });
-            }
-          };
-          document.addEventListener('click', this.onDocClick);
-        }
-
-        componentWillUnmount() {
-          window.removeEventListener('mousemove', this.onMove);
-          if (this.onTouchMove) window.removeEventListener('touchmove', this.onTouchMove);
-          document.removeEventListener('mouseleave', this.onLeave);
-          window.removeEventListener('storage', this.onStorageChange);
-          document.removeEventListener('click', this.onDocClick);
-          if (this.rafId) cancelAnimationFrame(this.rafId);
-        }
-
-        renderVals() {
-          const user = this.state.user;
-          const isUserLoggedIn = !!(user && user.isLoggedIn);
-          const isPremiumUser = isUserLoggedIn && !!(user?.tier && user.tier.toLowerCase().includes('premium'));
-          const userName = user?.name || (user?.email ? user.email.split('@')[0] : 'Customer');
-          const userEmail = user?.email || '';
-          const userInitial = (userName || userEmail || 'C').charAt(0).toUpperCase();
-          const userTier = isPremiumUser ? 'PREMIUM MEMBER' : (user?.tier || 'Free Member');
-          const quotaVal = isPremiumUser ? 'Premium Member' : 'Member Terdaftar';
-          const quotaSub = isPremiumUser ? 'Status Premium Aktif • Akses Penuh' : 'Akses Galeri & Koleksi Busana Tersimpan';
-
-          const isP = this.state.mode === 'Personality';
-          const f = this.state.activeFilter;
-          const sel = this.state.selectedCard;
-
-          const activeBtn = 'font-size:14px; font-weight:600; color:var(--on-accent); background:var(--gold); border:none; border-radius:999px; padding:12px 26px;';
-          const idleBtn = 'font-size:14px; font-weight:500; color:var(--ink-dim); background:transparent; border:none; border-radius:999px; padding:12px 26px;';
-
-          const activePill = 'font-size:13px; color:var(--on-accent); background:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:8px 18px; font-weight:600;';
-          const idlePill = 'font-size:13px; color:var(--ink-dim); border:1px solid var(--line); border-radius:999px; padding:8px 18px;';
-
-          const titleMap = {
-            'Semua': ['Temukan', 'Gayamu'],
-            'Kasual': ['Gaya', 'Kasual'],
-            'Kerja': ['Gaya', 'Kerja'],
-            'Pesta': ['Gaya', 'Pesta'],
-            'Olahraga': ['Gaya', 'Sporty'],
-            'Kondangan': ['Gaya', 'Formal']
-          };
-          const titles = titleMap[f] || titleMap['Semua'];
-
-          const CARD_PALETTES = {
-            1: {
-              name: 'Minimalist',
-              bg: '#F5EFE6',
-              bgDark: '#161413',
-              colors: [
-                { name: 'Warm Cream', hex: '#FFF8E7' },
-                { name: 'Oatmeal Taupe', hex: '#E2DAC8' },
-                { name: 'Muted Sand', hex: '#B8AD98' },
-                { name: 'Espresso Noir', hex: '#2A2421' }
-              ]
-            },
-            2: {
-              name: 'Smart Casual',
-              bg: '#EAF0F8',
-              bgDark: '#111722',
-              colors: [
-                { name: 'Oxford Navy', hex: '#1B2A4A' },
-                { name: 'Sky Slate', hex: '#94B4D8' },
-                { name: 'Camel Tan', hex: '#C19A6B' },
-                { name: 'Crisp White', hex: '#F8FAFC' }
-              ]
-            },
-            3: {
-              name: 'Classic Heritage',
-              bg: '#EFECE4',
-              bgDark: '#171612',
-              colors: [
-                { name: 'Olive Drab', hex: '#4B5320' },
-                { name: 'Warm Leather', hex: '#8B5A2B' },
-                { name: 'Vintage Khaki', hex: '#C3B091' },
-                { name: 'Dark Mahogany', hex: '#3E2723' }
-              ]
-            },
-            4: {
-              name: 'Urban Chic',
-              bg: '#EAECEF',
-              bgDark: '#131518',
-              colors: [
-                { name: 'Slate Charcoal', hex: '#2D3748' },
-                { name: 'Cool Grey', hex: '#718096' },
-                { name: 'Silver Mist', hex: '#CBD5E1' },
-                { name: 'Noir Black', hex: '#111827' }
-              ]
-            },
-            5: {
-              name: 'Featured Look',
-              bg: '#F9ECEF',
-              bgDark: '#1C0D12',
-              colors: [
-                { name: 'Royal Burgundy', hex: '#6D001A' },
-                { name: 'Velvet Crimson', hex: '#8A0A28' },
-                { name: 'Soft Rose Cream', hex: '#FFF0F3' },
-                { name: 'Champagne Gold', hex: '#E5A968' }
-              ]
-            },
-            6: {
-              name: 'Editorial Chic',
-              bg: '#ECECEC',
-              bgDark: '#121212',
-              colors: [
-                { name: 'High Fashion Black', hex: '#171717' },
-                { name: 'Bone Ivory', hex: '#F5F5F0' },
-                { name: 'Cashmere Grey', hex: '#71717A' },
-                { name: 'Smoky Ash', hex: '#3F3F46' }
-              ]
-            },
-            7: {
-              name: 'Artsy Bohemian',
-              bg: '#F7EDE4',
-              bgDark: '#1C130D',
-              colors: [
-                { name: 'Terracotta', hex: '#C86446' },
-                { name: 'Mustard Ochre', hex: '#D49B35' },
-                { name: 'Sage Green', hex: '#7A8B7B' },
-                { name: 'Warm Linen', hex: '#F7EDE2' }
-              ]
-            },
-            8: {
-              name: 'Modern Street',
-              bg: '#E8EFF5',
-              bgDark: '#0D141E',
-              colors: [
-                { name: 'Pitch Black', hex: '#0B0F19' },
-                { name: 'Industrial Slate', hex: '#334155' },
-                { name: 'Electric Cyan', hex: '#0284C7' },
-                { name: 'Concrete White', hex: '#F1F5F9' }
-              ]
-            },
-            9: {
-              name: 'Evening Glam',
-              bg: '#F0EAF8',
-              bgDark: '#140E20',
-              colors: [
-                { name: 'Midnight Violet', hex: '#1E1435' },
-                { name: 'Deep Amethyst', hex: '#4338CA' },
-                { name: 'Metallic Gold', hex: '#D4AF37' },
-                { name: 'Obsidian Noir', hex: '#0A0713' }
-              ]
-            }
-          };
-
-          const activePal = CARD_PALETTES[sel] || CARD_PALETTES[5];
-          const activeColorObj = activePal.colors[this.state.selectedColorIdx] || activePal.colors[0];
-          const activeColorHex = this.state.customBgHex || activeColorObj.hex;
-          const isDark = (typeof document !== 'undefined') && (document.documentElement.classList.contains('dark') || (localStorage.getItem('outfit_req_theme') === 'dark'));
-          const baseBg = isDark ? activePal.bgDark : activePal.bg;
-          const heroWrapStyle = `background: radial-gradient(850px circle at var(--cx) var(--cy), ${activeColorHex}35 0%, transparent 72%), ${baseBg}; transition: background 0.65s cubic-bezier(0.16, 1, 0.3, 1);`;
-
-          // Fungsi pembuat style kartu gambar: berbingkai rapi dan interaktif saat dipilih
-          const makeCardStyle = (idx, w, h, z, isLast) => {
-            const isSelected = sel === idx;
-            const bg = isSelected ? 'var(--bg2)' : 'var(--bg)';
-            const border = isSelected
-              ? `2.5px solid ${activeColorHex}`
-              : '1px solid var(--line)';
-            const shadow = isSelected
-              ? `0 20px 42px ${activeColorHex}66, 0 0 25px ${activeColorHex}44`
-              : '0 4px 16px rgba(0, 0, 0, 0.12)';
-            const mr = isLast ? '0px' : '-16px';
-            const zIdx = isSelected ? 50 : z;
-
-            return `width:${w}px; height:${h}px; margin-right:${mr}; z-index:${zIdx}; border:${border}; box-shadow:${shadow}; padding:0; background:${bg}; border-radius:12px; overflow:hidden; transition: all 0.3s ease;`;
-          };
-
-          const makeClass = (idx) => `card-item card-${idx}${sel === idx ? ' is-selected' : ''}`;
-
-          return {
-            heroWrapStyle: heroWrapStyle,
-
-            isLoggedIn: isUserLoggedIn,
-            isPremium: isPremiumUser,
-            userName: userName,
-            userEmail: userEmail,
-            userInitial: userInitial,
-            userTier: userTier,
-            quotaValue: quotaVal,
-            quotaSub: quotaSub,
-            userDropdownExpanded: this.state.userDropdownOpen ? 'true' : 'false',
-            userDropdownClass: 'user-profile-dropdown' + (this.state.userDropdownOpen ? ' open' : ''),
-            toggleUserDropdown: (e) => {
-              if (e && e.stopPropagation) e.stopPropagation();
-              this.setState({ userDropdownOpen: !this.state.userDropdownOpen });
-            },
-            logoutUser: async (e) => {
+            // Method logout terpusat
+            this.logout = async (e) => {
               if (e && e.stopPropagation) e.stopPropagation();
               try {
                 if (window.supabaseClient) await window.supabaseClient.auth.signOut();
@@ -2195,55 +2296,285 @@
               if (typeof showAuthToast === 'function') {
                 showAuthToast('Anda telah berhasil keluar dari akun.');
               }
-            },
-            subtitleText:
-              'Ceritakan acaramu, temukan karakter personality gayamu, dan dapatkan kurasi outfit terbaik dengan link belanja langsung.',
-            btnPersonalityStyle: isP ? activeBtn : idleBtn,
-            btnRekomendasiStyle: !isP ? activeBtn : idleBtn,
-            centerCardTitle1: titles[0],
-            centerCardTitle2: titles[1],
+            };
+            window.__mainLogout = (e) => this.logout(e);
 
-            card1Class: makeClass(1),
-            card1Style: makeCardStyle(1, 104, 258, 1, false),
-            selectCard1: () => this.setState({ selectedCard: 1, selectedColorIdx: 0, customBgHex: null }),
+            // Tutup dropdown jika klik di luar area akun, atau proses aksi klik tombol
+            this.onDocClick = (e) => {
+              const logoutTarget = e.target.closest('#btnDropdownLogout');
+              if (logoutTarget) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.logout(e);
+                return;
+              }
+              const profileBtn = e.target.closest('#userProfileBtn');
+              if (profileBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.setState({ userDropdownOpen: !this.state.userDropdownOpen });
+                return;
+              }
+              if (this.state.userDropdownOpen && !e.target.closest('#userMenuWrap')) {
+                this.setState({ userDropdownOpen: false });
+              }
+            };
+            document.addEventListener('click', this.onDocClick);
+          }
 
-            card2Class: makeClass(2),
-            card2Style: makeCardStyle(2, 110, 276, 2, false),
-            selectCard2: () => this.setState({ selectedCard: 2, selectedColorIdx: 0, customBgHex: null }),
+          componentWillUnmount() {
+            window.removeEventListener('mousemove', this.onMove);
+            if (this.onTouchMove) window.removeEventListener('touchmove', this.onTouchMove);
+            document.removeEventListener('mouseleave', this.onLeave);
+            window.removeEventListener('storage', this.onStorageChange);
+            document.removeEventListener('click', this.onDocClick);
+            if (this.rafId) cancelAnimationFrame(this.rafId);
+          }
 
-            card3Class: makeClass(3),
-            card3Style: makeCardStyle(3, 116, 296, 3, false),
-            selectCard3: () => this.setState({ selectedCard: 3, selectedColorIdx: 0, customBgHex: null }),
+          renderVals() {
+            const user = this.state.user;
+            const isUserLoggedIn = !!(user && user.isLoggedIn);
+            const isPremiumUser = isUserLoggedIn && !!(user?.tier && user.tier.toLowerCase().includes('premium'));
+            const userName = user?.name || (user?.email ? user.email.split('@')[0] : 'Customer');
+            const userEmail = user?.email || '';
+            const userInitial = (userName || userEmail || 'C').charAt(0).toUpperCase();
+            const userTier = isPremiumUser ? 'PREMIUM MEMBER' : (user?.tier || 'Free Member');
+            const quotaVal = isPremiumUser ? 'Premium Member' : 'Member Terdaftar';
+            const quotaSub = isPremiumUser ? 'Status Premium Aktif • Akses Penuh' : 'Akses Galeri & Koleksi Busana Tersimpan';
 
-            card4Class: makeClass(4),
-            card4Style: makeCardStyle(4, 120, 310, 4, false),
-            selectCard4: () => this.setState({ selectedCard: 4, selectedColorIdx: 0, customBgHex: null }),
+            const isP = this.state.mode === 'Personality';
+            const f = this.state.activeFilter;
+            const sel = this.state.selectedCard;
 
-            card5Class: makeClass(5),
-            card5Style: makeCardStyle(5, 168, 338, 5, false),
-            selectCard5: () => this.setState({ selectedCard: 5, selectedColorIdx: 0, customBgHex: null }),
+            const activeBtn = 'font-size:14px; font-weight:600; color:var(--on-accent); background:var(--gold); border:none; border-radius:999px; padding:12px 26px;';
+            const idleBtn = 'font-size:14px; font-weight:500; color:var(--ink-dim); background:transparent; border:none; border-radius:999px; padding:12px 26px;';
 
-            card6Class: makeClass(6),
-            card6Style: makeCardStyle(6, 120, 310, 4, false),
-            selectCard6: () => this.setState({ selectedCard: 6, selectedColorIdx: 0, customBgHex: null }),
+            const activePill = 'font-size:13px; color:var(--on-accent); background:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:8px 18px; font-weight:600;';
+            const idlePill = 'font-size:13px; color:var(--ink-dim); border:1px solid var(--line); border-radius:999px; padding:8px 18px;';
 
-            card7Class: makeClass(7),
-            card7Style: makeCardStyle(7, 116, 296, 3, false),
-            selectCard7: () => this.setState({ selectedCard: 7, selectedColorIdx: 0, customBgHex: null }),
+            const titleMap = {
+              'Semua': ['Temukan', 'Gayamu'],
+              'Kasual': ['Gaya', 'Kasual'],
+              'Kerja': ['Gaya', 'Kerja'],
+              'Pesta': ['Gaya', 'Pesta'],
+              'Olahraga': ['Gaya', 'Sporty'],
+              'Kondangan': ['Gaya', 'Formal']
+            };
+            const titles = titleMap[f] || titleMap['Semua'];
 
-            card8Class: makeClass(8),
-            card8Style: makeCardStyle(8, 110, 276, 2, false),
-            selectCard8: () => this.setState({ selectedCard: 8, selectedColorIdx: 0, customBgHex: null }),
+            const CARD_PALETTES = {
+              1: {
+                name: 'Minimalist',
+                bg: '#F5EFE6',
+                bgDark: '#161413',
+                colors: [
+                  { name: 'Warm Cream', hex: '#FFF8E7' },
+                  { name: 'Oatmeal Taupe', hex: '#E2DAC8' },
+                  { name: 'Muted Sand', hex: '#B8AD98' },
+                  { name: 'Espresso Noir', hex: '#2A2421' }
+                ]
+              },
+              2: {
+                name: 'Smart Casual',
+                bg: '#EAF0F8',
+                bgDark: '#111722',
+                colors: [
+                  { name: 'Oxford Navy', hex: '#1B2A4A' },
+                  { name: 'Sky Slate', hex: '#94B4D8' },
+                  { name: 'Camel Tan', hex: '#C19A6B' },
+                  { name: 'Crisp White', hex: '#F8FAFC' }
+                ]
+              },
+              3: {
+                name: 'Classic Heritage',
+                bg: '#EFECE4',
+                bgDark: '#171612',
+                colors: [
+                  { name: 'Olive Drab', hex: '#4B5320' },
+                  { name: 'Warm Leather', hex: '#8B5A2B' },
+                  { name: 'Vintage Khaki', hex: '#C3B091' },
+                  { name: 'Dark Mahogany', hex: '#3E2723' }
+                ]
+              },
+              4: {
+                name: 'Urban Chic',
+                bg: '#EAECEF',
+                bgDark: '#131518',
+                colors: [
+                  { name: 'Slate Charcoal', hex: '#2D3748' },
+                  { name: 'Cool Grey', hex: '#718096' },
+                  { name: 'Silver Mist', hex: '#CBD5E1' },
+                  { name: 'Noir Black', hex: '#111827' }
+                ]
+              },
+              5: {
+                name: 'Featured Look',
+                bg: '#F9ECEF',
+                bgDark: '#1C0D12',
+                colors: [
+                  { name: 'Royal Burgundy', hex: '#6D001A' },
+                  { name: 'Velvet Crimson', hex: '#8A0A28' },
+                  { name: 'Soft Rose Cream', hex: '#FFF0F3' },
+                  { name: 'Champagne Gold', hex: '#E5A968' }
+                ]
+              },
+              6: {
+                name: 'Editorial Chic',
+                bg: '#ECECEC',
+                bgDark: '#121212',
+                colors: [
+                  { name: 'High Fashion Black', hex: '#171717' },
+                  { name: 'Bone Ivory', hex: '#F5F5F0' },
+                  { name: 'Cashmere Grey', hex: '#71717A' },
+                  { name: 'Smoky Ash', hex: '#3F3F46' }
+                ]
+              },
+              7: {
+                name: 'Artsy Bohemian',
+                bg: '#F7EDE4',
+                bgDark: '#1C130D',
+                colors: [
+                  { name: 'Terracotta', hex: '#C86446' },
+                  { name: 'Mustard Ochre', hex: '#D49B35' },
+                  { name: 'Sage Green', hex: '#7A8B7B' },
+                  { name: 'Warm Linen', hex: '#F7EDE2' }
+                ]
+              },
+              8: {
+                name: 'Modern Street',
+                bg: '#E8EFF5',
+                bgDark: '#0D141E',
+                colors: [
+                  { name: 'Pitch Black', hex: '#0B0F19' },
+                  { name: 'Industrial Slate', hex: '#334155' },
+                  { name: 'Electric Cyan', hex: '#0284C7' },
+                  { name: 'Concrete White', hex: '#F1F5F9' }
+                ]
+              },
+              9: {
+                name: 'Evening Glam',
+                bg: '#F0EAF8',
+                bgDark: '#140E20',
+                colors: [
+                  { name: 'Midnight Violet', hex: '#1E1435' },
+                  { name: 'Deep Amethyst', hex: '#4338CA' },
+                  { name: 'Metallic Gold', hex: '#D4AF37' },
+                  { name: 'Obsidian Noir', hex: '#0A0713' }
+                ]
+              }
+            };
 
-            card9Class: makeClass(9),
-            card9Style: makeCardStyle(9, 104, 258, 1, true),
-            selectCard9: () => this.setState({ selectedCard: 9, selectedColorIdx: 0, customBgHex: null }),
+            const activePal = CARD_PALETTES[sel] || CARD_PALETTES[5];
+            const activeColorObj = activePal.colors[this.state.selectedColorIdx] || activePal.colors[0];
+            const activeColorHex = this.state.customBgHex || activeColorObj.hex;
+            const isDark = (typeof document !== 'undefined') && (document.documentElement.classList.contains('dark') || (localStorage.getItem('outfit_req_theme') === 'dark'));
+            const baseBg = isDark ? activePal.bgDark : activePal.bg;
+            const heroWrapStyle = `background: radial-gradient(850px circle at var(--cx) var(--cy), ${activeColorHex}35 0%, transparent 72%), ${baseBg}; transition: background 0.65s cubic-bezier(0.16, 1, 0.3, 1);`;
 
-            selectPersonality: () => this.setState({ mode: 'Personality', selectedCard: 5, selectedColorIdx: 0, customBgHex: null }),
-            selectRekomendasi: () => this.setState({ mode: 'Rekomendasi', selectedCard: 3, selectedColorIdx: 0, customBgHex: null })
-          };
+            // Fungsi pembuat style kartu gambar: berbingkai rapi dan interaktif saat dipilih
+            const makeCardStyle = (idx, w, h, z, isLast) => {
+              const isSelected = sel === idx;
+              const bg = isSelected ? 'var(--bg2)' : 'var(--bg)';
+              const border = isSelected
+                ? `2.5px solid ${activeColorHex}`
+                : '1px solid var(--line)';
+              const shadow = isSelected
+                ? `0 20px 42px ${activeColorHex}66, 0 0 25px ${activeColorHex}44`
+                : '0 4px 16px rgba(0, 0, 0, 0.12)';
+              const mr = isLast ? '0px' : '-16px';
+              const zIdx = isSelected ? 50 : z;
+
+              return `width:${w}px; height:${h}px; margin-right:${mr}; z-index:${zIdx}; border:${border}; box-shadow:${shadow}; padding:0; background:${bg}; border-radius:12px; overflow:hidden; transition: all 0.3s ease;`;
+            };
+
+            const makeClass = (idx) => `card-item card-${idx}${sel === idx ? ' is-selected' : ''}`;
+
+            return {
+              heroWrapStyle: heroWrapStyle,
+
+              isLoggedIn: isUserLoggedIn,
+              isPremium: isPremiumUser,
+              userName: userName,
+              userEmail: userEmail,
+              userInitial: userInitial,
+              userTier: userTier,
+              quotaValue: quotaVal,
+              quotaSub: quotaSub,
+              userDropdownExpanded: this.state.userDropdownOpen ? 'true' : 'false',
+              userDropdownClass: 'user-profile-dropdown' + (this.state.userDropdownOpen ? ' open' : ''),
+              toggleUserDropdown: (e) => {
+                if (e && e.stopPropagation) e.stopPropagation();
+                this.setState({ userDropdownOpen: !this.state.userDropdownOpen });
+              },
+              logoutUser: async (e) => {
+                if (e && e.stopPropagation) e.stopPropagation();
+                try {
+                  if (window.supabaseClient) await window.supabaseClient.auth.signOut();
+                  else if (typeof supabase !== 'undefined' && supabase) await supabase.auth.signOut();
+                } catch (err) {}
+                try {
+                  for (let i = localStorage.length - 1; i >= 0; i--) {
+                    const k = localStorage.key(i);
+                    if (k && (k.startsWith('sb-') || k.includes('supabase')) && k.includes('auth-token')) {
+                      localStorage.removeItem(k);
+                    }
+                  }
+                } catch (err) {}
+                localStorage.setItem('outfit_req_logged_out', 'true');
+                localStorage.removeItem('outfit_req_user');
+                this.setState({ user: null, userDropdownOpen: false });
+                if (typeof showAuthToast === 'function') {
+                  showAuthToast('Anda telah berhasil keluar dari akun.');
+                }
+              },
+              subtitleText:
+                'Ceritakan acaramu, temukan karakter personality gayamu, dan dapatkan kurasi outfit terbaik dengan link belanja langsung.',
+              btnPersonalityStyle: isP ? activeBtn : idleBtn,
+              btnRekomendasiStyle: !isP ? activeBtn : idleBtn,
+              centerCardTitle1: titles[0],
+              centerCardTitle2: titles[1],
+
+              card1Class: makeClass(1),
+              card1Style: makeCardStyle(1, 104, 258, 1, false),
+              selectCard1: () => this.setState({ selectedCard: 1, selectedColorIdx: 0, customBgHex: null }),
+
+              card2Class: makeClass(2),
+              card2Style: makeCardStyle(2, 110, 276, 2, false),
+              selectCard2: () => this.setState({ selectedCard: 2, selectedColorIdx: 0, customBgHex: null }),
+
+              card3Class: makeClass(3),
+              card3Style: makeCardStyle(3, 116, 296, 3, false),
+              selectCard3: () => this.setState({ selectedCard: 3, selectedColorIdx: 0, customBgHex: null }),
+
+              card4Class: makeClass(4),
+              card4Style: makeCardStyle(4, 120, 310, 4, false),
+              selectCard4: () => this.setState({ selectedCard: 4, selectedColorIdx: 0, customBgHex: null }),
+
+              card5Class: makeClass(5),
+              card5Style: makeCardStyle(5, 168, 338, 5, false),
+              selectCard5: () => this.setState({ selectedCard: 5, selectedColorIdx: 0, customBgHex: null }),
+
+              card6Class: makeClass(6),
+              card6Style: makeCardStyle(6, 120, 310, 4, false),
+              selectCard6: () => this.setState({ selectedCard: 6, selectedColorIdx: 0, customBgHex: null }),
+
+              card7Class: makeClass(7),
+              card7Style: makeCardStyle(7, 116, 296, 3, false),
+              selectCard7: () => this.setState({ selectedCard: 7, selectedColorIdx: 0, customBgHex: null }),
+
+              card8Class: makeClass(8),
+              card8Style: makeCardStyle(8, 110, 276, 2, false),
+              selectCard8: () => this.setState({ selectedCard: 8, selectedColorIdx: 0, customBgHex: null }),
+
+              card9Class: makeClass(9),
+              card9Style: makeCardStyle(9, 104, 258, 1, true),
+              selectCard9: () => this.setState({ selectedCard: 9, selectedColorIdx: 0, customBgHex: null }),
+
+              selectPersonality: () => this.setState({ mode: 'Personality', selectedCard: 5, selectedColorIdx: 0, customBgHex: null }),
+              selectRekomendasi: () => this.setState({ mode: 'Rekomendasi', selectedCard: 3, selectedColorIdx: 0, customBgHex: null })
+            };
+          }
         }
-      }
     </script>
     <script>
       // ==============================================================================
@@ -2296,7 +2627,12 @@
       document.addEventListener("click", (e) => {
         const d = document.getElementById("mobileNavDrawer");
         const btn = e.target.closest(".mobile-nav-toggle");
-        if (d && d.classList.contains("open") && !d.contains(e.target) && !btn) {
+        if (
+          d &&
+          d.classList.contains("open") &&
+          !d.contains(e.target) &&
+          !btn
+        ) {
           d.classList.remove("open");
         }
       });
@@ -2311,16 +2647,29 @@
         // Cek sesi aktif Supabase jika ada
         if (supabase) {
           try {
-            const { data: { session } } = await supabase.auth.getSession();
+            const {
+              data: { session },
+            } = await supabase.auth.getSession();
             if (session?.user) {
               const u = session.user;
-              let customerName = u.user_metadata?.full_name || u.user_metadata?.name || u.email.split('@')[0];
-              customerName = customerName.charAt(0).toUpperCase() + customerName.slice(1);
+              let customerName =
+                u.user_metadata?.full_name ||
+                u.user_metadata?.name ||
+                u.email.split("@")[0];
+              customerName =
+                customerName.charAt(0).toUpperCase() + customerName.slice(1);
               let userTier = "free";
               let expAt = null;
               try {
-                const stored = JSON.parse(localStorage.getItem("outfit_req_user") || "null");
-                if (stored && stored.email && stored.email.toLowerCase() === u.email.toLowerCase() && stored.tier === "premium") {
+                const stored = JSON.parse(
+                  localStorage.getItem("outfit_req_user") || "null",
+                );
+                if (
+                  stored &&
+                  stored.email &&
+                  stored.email.toLowerCase() === u.email.toLowerCase() &&
+                  stored.tier === "premium"
+                ) {
                   userTier = "premium";
                   expAt = stored.premiumExpiresAt || null;
                 }
@@ -2333,26 +2682,32 @@
                   .ilike("email", u.email)
                   .maybeSingle();
                 if (dbU && dbU.tier === "premium") {
-                  const expDate = dbU.premium_expires_at ? new Date(dbU.premium_expires_at) : null;
+                  const expDate = dbU.premium_expires_at
+                    ? new Date(dbU.premium_expires_at)
+                    : null;
                   if (!expDate || expDate > new Date()) {
                     userTier = "premium";
                     expAt = dbU.premium_expires_at || expAt;
                   }
                 }
-              } catch(e) {}
+              } catch (e) {}
 
               const activeUser = {
                 id: u.id,
                 name: customerName,
-                username: "@" + customerName.toLowerCase().replace(/[^a-z0-9_]/g, ''),
+                username:
+                  "@" + customerName.toLowerCase().replace(/[^a-z0-9_]/g, ""),
                 email: u.email,
                 tier: userTier,
                 premiumExpiresAt: expAt,
                 isLoggedIn: true,
-                verifiedAt: new Date().toISOString()
+                verifiedAt: new Date().toISOString(),
               };
               try {
-                localStorage.setItem("outfit_req_user", JSON.stringify(activeUser));
+                localStorage.setItem(
+                  "outfit_req_user",
+                  JSON.stringify(activeUser),
+                );
               } catch (e) {}
               if (window.__mainComponent) {
                 window.__mainComponent.setState({ user: activeUser });
@@ -2380,15 +2735,27 @@
       // Eksekusi saat dokumen siap
       window.addEventListener("DOMContentLoaded", async () => {
         // Cek parameter ?logout=1 atau flag logout tersimpan
-        const hasLogoutParam = new URLSearchParams(window.location.search).has("logout");
-        if (hasLogoutParam || localStorage.getItem('outfit_req_logged_out') === 'true') {
+        const hasLogoutParam = new URLSearchParams(window.location.search).has(
+          "logout",
+        );
+        if (
+          hasLogoutParam ||
+          localStorage.getItem("outfit_req_logged_out") === "true"
+        ) {
           if (window.__mainComponent) {
-            window.__mainComponent.setState({ user: null, userDropdownOpen: false });
+            window.__mainComponent.setState({
+              user: null,
+              userDropdownOpen: false,
+            });
           }
-          if (hasLogoutParam && typeof showAuthToast === 'function') {
-            showAuthToast('Anda telah berhasil keluar dari akun.');
+          if (hasLogoutParam && typeof showAuthToast === "function") {
+            showAuthToast("Anda telah berhasil keluar dari akun.");
             try {
-              window.history.replaceState(null, document.title, window.location.pathname);
+              window.history.replaceState(
+                null,
+                document.title,
+                window.location.pathname,
+              );
             } catch (e) {}
           }
           return;
@@ -2430,9 +2797,19 @@
               let userTier = "Free Member";
               let expAt = null;
               try {
-                const stored = JSON.parse(localStorage.getItem("outfit_req_user") || "null");
-                if (stored && stored.email && stored.email.toLowerCase() === u.email.toLowerCase()) {
-                  if (stored.tier && (stored.tier.toLowerCase().includes("premium") || stored.tier === "premium")) {
+                const stored = JSON.parse(
+                  localStorage.getItem("outfit_req_user") || "null",
+                );
+                if (
+                  stored &&
+                  stored.email &&
+                  stored.email.toLowerCase() === u.email.toLowerCase()
+                ) {
+                  if (
+                    stored.tier &&
+                    (stored.tier.toLowerCase().includes("premium") ||
+                      stored.tier === "premium")
+                  ) {
                     userTier = "Premium Member";
                     expAt = stored.premiumExpiresAt || null;
                   }
@@ -2446,13 +2823,15 @@
                   .ilike("email", u.email)
                   .maybeSingle();
                 if (dbU && dbU.tier === "premium") {
-                  const expDate = dbU.premium_expires_at ? new Date(dbU.premium_expires_at) : null;
+                  const expDate = dbU.premium_expires_at
+                    ? new Date(dbU.premium_expires_at)
+                    : null;
                   if (!expDate || expDate > new Date()) {
                     userTier = "Premium Member";
                     expAt = dbU.premium_expires_at || expAt;
                   }
                 }
-              } catch(e) {}
+              } catch (e) {}
 
               const userData = {
                 id: u.id,
@@ -2501,9 +2880,19 @@
               let userTier = "Free Member";
               let expAt = null;
               try {
-                const stored = JSON.parse(localStorage.getItem("outfit_req_user") || "null");
-                if (stored && stored.email && stored.email.toLowerCase() === u.email.toLowerCase()) {
-                  if (stored.tier && (stored.tier.toLowerCase().includes("premium") || stored.tier === "premium")) {
+                const stored = JSON.parse(
+                  localStorage.getItem("outfit_req_user") || "null",
+                );
+                if (
+                  stored &&
+                  stored.email &&
+                  stored.email.toLowerCase() === u.email.toLowerCase()
+                ) {
+                  if (
+                    stored.tier &&
+                    (stored.tier.toLowerCase().includes("premium") ||
+                      stored.tier === "premium")
+                  ) {
                     userTier = "Premium Member";
                     expAt = stored.premiumExpiresAt || null;
                   }
@@ -2517,13 +2906,15 @@
                   .ilike("email", u.email)
                   .maybeSingle();
                 if (dbU && dbU.tier === "premium") {
-                  const expDate = dbU.premium_expires_at ? new Date(dbU.premium_expires_at) : null;
+                  const expDate = dbU.premium_expires_at
+                    ? new Date(dbU.premium_expires_at)
+                    : null;
                   if (!expDate || expDate > new Date()) {
                     userTier = "Premium Member";
                     expAt = dbU.premium_expires_at || expAt;
                   }
                 }
-              } catch(e) {}
+              } catch (e) {}
 
               const userData = {
                 id: u.id,

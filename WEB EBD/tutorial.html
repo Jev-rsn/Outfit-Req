@@ -2120,6 +2120,18 @@
           <span>Pengunjung Tamu</span>
         </div>
 
+        <!-- Studio 3D Navigation Link -->
+        <a
+          href="../Premium 3D/index.html?ref=tutorial"
+          onclick="return handleStudio3DTutorial(event)"
+          class="btn-nav-auth"
+          style="background: rgba(179, 135, 40, 0.12); color: #B38728; border: 1px solid rgba(179, 135, 40, 0.35); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;"
+          title="Buka Studio Visualisasi 3D Realistis (Khusus Premium)"
+        >
+          <span>Studio 3D</span>
+          <span style="font-size: 9px; background: #FFD700; color: #111; padding: 1px 4px; border-radius: 3px; font-weight: 800;">★</span>
+        </a>
+
         <!-- Tombol Masuk / Daftar jika belum login -->
         <a href="login.html?mode=login" class="btn-nav-auth" id="navAuthBtn">
           <span>Masuk / Daftar</span>
@@ -2183,27 +2195,79 @@
           Bagian panduan dan tutorial fitur sementara dikosongkan untuk tahap persiapan dan pembaruan sistem. Anda tetap dapat menjelajahi rekomendasi outfit dan mengakses seluruh fitur lainnya.
         </p>
         <div class="empty-actions">
-          <a href="login.html" class="btn-empty-primary">
-            <span>Ke Halaman Utama</span>
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </a>
-          <a href="index.html" class="btn-empty-secondary">
-            Galeri Outfit
+          <a href="../Premium 3D/index.html?ref=tutorial" onclick="return handleStudio3DTutorial(event)" class="btn-empty-primary" style="background: linear-gradient(135deg, #6D001A 0%, #B38728 100%); border: none;">
+            <span>Eksplorasi Studio 3D</span>
+            <span style="font-size: 10px; background: #FFD700; color: #111; padding: 2px 5px; border-radius: 4px; font-weight: 800;">★</span>
           </a>
           <a href="rekomendasi.html" class="btn-empty-secondary">
             Lihat Rekomendasi
           </a>
+          <a href="index.html" class="btn-empty-secondary">
+            Galeri Outfit
+          </a>
+          <a href="account.html" class="btn-empty-secondary">
+            Atur Ukuran Tubuh
+          </a>
+        </div>
+
+        <!-- Fitur Premium 3D Guide Card -->
+        <div class="tutorial-3d-card" style="margin-top: 32px; border-top: 1px dashed var(--line); padding-top: 28px; text-align: left;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 16px;">✨</span>
+              <span style="font-size: 11px; font-weight: 800; color: #B38728; background: rgba(179, 135, 40, 0.12); padding: 3px 9px; border-radius: 999px; letter-spacing: 0.5px;">FITUR PREMIUM BARU</span>
+            </div>
+            <a href="../Premium 3D/index.html?ref=tutorial" onclick="return handleStudio3DTutorial(event)" style="font-size: 12px; font-weight: 700; color: var(--burgundy); text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+              Buka Studio 3D Sekarang &rarr;
+            </a>
+          </div>
+          <h2 style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; color: var(--ink); margin: 0 0 8px; font-weight: 400;">
+            Visualisasi Manekin Tubuh 3D Realistis
+          </h2>
+          <p style="font-size: 13px; color: var(--ink-dim); line-height: 1.55; margin: 0 0 16px;">
+            Fitting busana langsung di atas manekin digital 3D 360° yang proporsinya secara otomatis mengikuti ukuran tubuh personal Anda.
+          </p>
+
+          <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px;">
+            <div style="display: flex; gap: 12px; background: rgba(109,0,26,0.03); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; align-items: flex-start;">
+              <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--burgundy); color: #fff; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">1</span>
+              <div>
+                <strong style="font-size: 13px; color: var(--ink); display: block;">Simpan Profil Ukuran Tubuh</strong>
+                <span style="font-size: 12px; color: var(--ink-dim); line-height: 1.4;">Buka <a href="account.html" style="color: var(--burgundy); font-weight: 600;">Halaman Akun</a>, masukkan Tinggi Badan, Berat Badan, Lingkar Dada/Pinggang, &amp; Warna Kulit.</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; background: rgba(109,0,26,0.03); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; align-items: flex-start;">
+              <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--burgundy); color: #fff; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">2</span>
+              <div>
+                <strong style="font-size: 13px; color: var(--ink); display: block;">Pilih Baju &amp; Klik "Gunakan (3D)"</strong>
+                <span style="font-size: 12px; color: var(--ink-dim); line-height: 1.4;">Jelajahi <a href="rekomendasi.html" style="color: var(--burgundy); font-weight: 600;">Galeri Rekomendasi</a>, arahkan kursor ke kartu busana favorit dan klik tombol <strong>Gunakan ★</strong>.</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; background: rgba(109,0,26,0.03); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; align-items: flex-start;">
+              <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--burgundy); color: #fff; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">3</span>
+              <div>
+                <strong style="font-size: 13px; color: var(--ink); display: block;">Fitting &amp; Rotasi 360° Real-Time</strong>
+                <span style="font-size: 12px; color: var(--ink-dim); line-height: 1.4;">Studio 3D memproyeksikan kain baju ke tubuh manekin sesuai postur Anda. Putar, zoom, dan ganti size secara interaktif.</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; background: rgba(109,0,26,0.03); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; align-items: flex-start;">
+              <span style="width: 24px; height: 24px; border-radius: 50%; background: var(--burgundy); color: #fff; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">4</span>
+              <div>
+                <strong style="font-size: 13px; color: var(--ink); display: block;">Simpan Kombinasi ke Akun</strong>
+                <span style="font-size: 12px; color: var(--ink-dim); line-height: 1.4;">Klik "Simpan Outfit" di Studio 3D untuk menyimpan look ke koleksi Akun Anda tanpa kehilangan riwayat fitting.</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <a href="../Premium 3D/index.html?ref=tutorial" onclick="return handleStudio3DTutorial(event)" class="btn-empty-primary" style="background: linear-gradient(135deg, #6D001A 0%, #B38728 100%); color: #fff; border: none; padding: 12px 28px; width: 100%; box-sizing: border-box; justify-content: center; font-weight: 700;">
+              <span>Buka Studio Visualisasi 3D</span>
+              <span style="font-size: 10px; background: #FFD700; color: #111; padding: 2px 6px; border-radius: 4px;">★ PREMIUM</span>
+            </a>
+          </div>
         </div>
       </div>
     </main>
@@ -2649,6 +2713,35 @@
         }
       }
 
+      // Handler Akses Studio 3D (Khusus Member Premium)
+      function handleStudio3DTutorial(e) {
+        let isPremium = false;
+        let isLoggedIn = false;
+        try {
+          const userRaw = localStorage.getItem("outfit_req_user");
+          if (userRaw) {
+            const u = JSON.parse(userRaw);
+            isLoggedIn = !!(u.email && u.isLoggedIn !== false && u.email !== "Belum masuk");
+            const tier = (u.tier || "").toString().toLowerCase().trim();
+            isPremium = tier.includes("premium") || u.isPremium === true;
+          }
+        } catch (err) {}
+
+        if (!isPremium) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          if (!isLoggedIn) {
+            window.location.href = "login.html?mode=login&ref=premium3d";
+          } else {
+            window.location.href = "account.html?upgrade=1";
+          }
+          return false;
+        }
+      }
+      window.handleStudio3DTutorial = handleStudio3DTutorial;
+
       // ========================================================
       // 4. SINKRONISASI DATA SESI (CUSTOMER vs TAMU)
       // ========================================================
@@ -2736,7 +2829,12 @@
         syncUserInfo();
 
         const hash = window.location.hash.toLowerCase();
-        if (hash.includes("rekomendasi")) {
+        if (hash.includes("3d") || hash.includes("visualisasi")) {
+          setTimeout(() => {
+            const card3d = document.querySelector(".tutorial-3d-card");
+            if (card3d) card3d.scrollIntoView({ behavior: "smooth" });
+          }, 150);
+        } else if (hash.includes("rekomendasi")) {
           setTimeout(() => window.openTutorialPopup("rekomendasi"), 100);
         } else if (hash.includes("personality") || hash.includes("tutorial")) {
           setTimeout(() => window.openTutorialPopup("personality"), 100);
@@ -2810,6 +2908,20 @@
         <span>Beranda</span>
       </a>
 
+      <a href="personality.html" class="mobile-nav-tab-item">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span>Personality</span>
+      </a>
+
       <a href="rekomendasi.html" class="mobile-nav-tab-item">
         <svg
           viewBox="0 0 24 24"
@@ -2823,6 +2935,22 @@
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
         <span>Galeri</span>
+      </a>
+
+      <a href="../Premium 3D/index.html?ref=tutorial" onclick="return handleStudio3DTutorial(event)" class="mobile-nav-tab-item" style="color: #B38728;">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+        <span style="font-weight: 700;">Studio 3D ★</span>
       </a>
 
       <a href="tutorial.html" class="mobile-nav-tab-item active">

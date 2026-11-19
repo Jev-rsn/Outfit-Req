@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gunakan: Visualisasi Body 3D</title>
+<style>
+:root{--bg:#FFFFFF;--stage:#FFF8E7;--ink:#111111;--mut:#5c5560;--line:#e4dccb;--brand:#6D001A;--onbrand:#FFFFFF;--panel:#FFFFFF;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121012;--stage:#1d191b;--ink:#f4efe9;--mut:#b2a9ae;--line:#3a3236;--brand:#d4486b;--onbrand:#121012;--panel:#181416}}
+:root[data-theme="dark"]{--bg:#121012;--stage:#1d191b;--ink:#f4efe9;--mut:#b2a9ae;--line:#3a3236;--brand:#d4486b;--onbrand:#121012;--panel:#181416}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;font-size:14px}
+.app{display:grid;grid-template-columns:1fr 340px;height:100%}
+#stage{position:relative;background:var(--stage);min-height:50vh;overflow:hidden}
+#stage canvas{display:block;width:100%;height:100%}
+.hint{position:absolute;left:12px;bottom:10px;color:var(--mut);font-size:12px;pointer-events:none}
+.fit{position:absolute;left:12px;top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:12px}
+.chip b{color:var(--brand)}
+aside{overflow:auto;padding:16px;border-left:1px solid var(--line);background:var(--bg)}
+h1{font-size:18px;margin:0 0 2px;color:var(--brand)}
+.sub{color:var(--mut);margin:0 0 14px;font-size:12px}
+fieldset{border:1px solid var(--line);border-radius:8px;margin:0 0 12px;padding:10px 12px}
+legend{padding:0 6px;font-weight:700}
+.row{display:grid;grid-template-columns:78px 1fr 52px;align-items:center;gap:8px;margin:6px 0}
+.row output{text-align:right;color:var(--mut);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--brand)}
+button,select{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 10px;cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+button.on{background:var(--brand);color:var(--onbrand);border-color:var(--brand)}
+.prods{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.prods button{display:flex;align-items:center;gap:6px;padding:4px 8px}
+.prods i{width:14px;height:14px;border-radius:3px;border:1px solid var(--line);display:inline-block}
+.line{display:flex;gap:8px;align-items:center;margin-top:6px;flex-wrap:wrap}
+.note{font-size:12px;color:var(--mut);margin:8px 0 0;line-height:1.5}
+@media (max-width:760px){.app{grid-template-columns:1fr;grid-template-rows:55vh auto;height:auto}aside{border-left:0;border-top:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div id="stage">
+    <div class="fit"><span class="chip">Atasan: <b id="fitTop">-</b></span><span class="chip">Celana: <b id="fitBot">-</b></span></div>
+    <div class="hint">Seret untuk memutar, cubit atau scroll untuk zoom</div>
+  </div>
+  <aside>
+    <h1>Gunakan</h1>
+    <p class="sub">Prototipe visualisasi body 3D. Ukuran tubuh dan size pakaian mengubah bentuk mesh secara langsung.</p>
+
+    <fieldset><legend>Data tubuh</legend>
+      <div class="row"><label for="H">Tinggi</label><input id="H" type="range" min="145" max="195" value="170"><output></output></div>
+      <div class="row"><label for="W">Berat</label><input id="W" type="range" min="40" max="130" value="65"><output></output></div>
+      <div class="row"><label for="C">Lingkar dada</label><input id="C" type="range" min="76" max="130" value="92"><output></output></div>
+      <div class="row"><label for="P">Lingkar pinggang</label><input id="P" type="range" min="60" max="125" value="76"><output></output></div>
+      <div class="row"><label for="B">Lebar bahu</label><input id="B" type="range" min="34" max="56" value="42"><output></output></div>
+      <div class="line"><button id="est" type="button">Estimasi dari tinggi dan berat</button></div>
+      <p class="note">Jika LD, LP, dan bahu kosong, sistem memperkirakannya dari tinggi dan berat.</p>
+    </fieldset>
+
+    <fieldset><legend>Atasan</legend>
+      <div class="line"><label><input type="checkbox" id="topOn" checked> Tampilkan</label>
+        <label>Size <select id="topSize"></select></label></div>
+      <div class="prods" id="topProds"></div>
+    </fieldset>
+
+    <fieldset><legend>Celana</legend>
+      <div class="line"><label><input type="checkbox" id="botOn" checked> Tampilkan</label>
+        <label>Size <select id="botSize"></select></label></div>
+      <div class="prods" id="botProds"></div>
+    </fieldset>
+
+    <div class="line"><button id="spin" type="button">Putar 360°</button><button id="reset" type="button">Reset kamera</button></div>
+    <p class="note">Tekstur di sini dibuat otomatis sebagai contoh. Pada sistem asli, isi <code>texture_url</code> dengan hasil proyeksi foto katalog ke UV template (lihat <code>PRODUCTS</code> di kode).</p>
+  </aside>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+"use strict";
+const stage=document.getElementById('stage');
+const SC=0.01; // 1 cm = 0.01 unit scene
+
+/* ---------- DATA: size chart dan produk (ganti dengan data dari database) ---------- */
+const TOP_SIZES={XS:86,S:92,M:98,L:104,XL:110,"2XL":116,"3XL":122};   // lingkar dada pakaian (cm)
+const BOT_SIZES={XS:68,S:74,M:80,L:86,XL:92,"2XL":98,"3XL":104};     // lingkar pinggang pakaian (cm)
+// Pada produksi: { id, name, texture_url, garment_type, template_id, size_chart }
+const PRODUCTS={
+  top:[{name:"Navy polos",t:"solid",c:["#1f2f55"]},{name:"Garis merah",t:"stripe",c:["#f3efe6","#6D001A"]},
+       {name:"Kotak hijau",t:"plaid",c:["#2f6b4f","#d9e8d2"]},{name:"Hitam",t:"solid",c:["#161616"]}],
+  bot:[{name:"Denim",t:"solid",c:["#3d5a80"]},{name:"Krem",t:"solid",c:["#d8c9a8"]},
+       {name:"Hitam",t:"solid",c:["#1a1a1a"]},{name:"Cokelat",t:"stripe",c:["#7a5a3c","#6a4b30"]}]
+};
+const state={H:170,W:65,C:92,P:76,B:42,top:0,bot:0,topSize:"M",botSize:"L",topOn:true,botOn:true};
+
+/* ---------- Tekstur contoh (placeholder pengganti foto katalog) ---------- */
+function makeTexture(p){
+  const cv=document.createElement('canvas');cv.width=cv.height=256;
+  const g=cv.getContext('2d');
+  g.fillStyle=p.c[0];g.fillRect(0,0,256,256);
+  if(p.t==="stripe"){g.fillStyle=p.c[1];for(let y=0;y<256;y+=32)g.fillRect(0,y,256,12);}
+  if(p.t==="plaid"){g.fillStyle=p.c[1];g.globalAlpha=.55;
+    for(let i=0;i<256;i+=64){g.fillRect(i,0,10,256);g.fillRect(0,i,256,10);}g.globalAlpha=1;}
+  const tx=new THREE.CanvasTexture(cv);
+  tx.wrapS=tx.wrapT=THREE.RepeatWrapping;tx.encoding=THREE.sRGBEncoding;
+  return tx;
+}
+// Untuk foto asli: new THREE.TextureLoader().load(product.texture_url)
+
+/* ---------- Scene ---------- */
+let renderer;
+try{renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});}
+catch(e){stage.insertAdjacentHTML('beforeend','<p style="padding:24px">Perangkat tidak mendukung WebGL. Tampilkan foto 2D sebagai cadangan.</p>');return;}
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+stage.appendChild(renderer.domElement);
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(35,1,0.1,50);
+scene.add(new THREE.HemisphereLight(0xfff4e8,0x8a7f78,0.75));
+const key=new THREE.DirectionalLight(0xffffff,1.1);key.position.set(1.8,3.2,3);key.castShadow=true;
+key.shadow.mapSize.set(2048,2048);key.shadow.bias=-0.0006;
+const shc=key.shadow.camera;shc.left=-1.4;shc.right=1.4;shc.top=2.4;shc.bottom=-0.6;shc.near=0.5;shc.far=9;
+scene.add(key);
+const rim=new THREE.DirectionalLight(0xcfd8ff,0.55);rim.position.set(-2.5,2,-3);scene.add(rim);
+const fill=new THREE.DirectionalLight(0xffffff,0.3);fill.position.set(-2,1,2);scene.add(fill);
+const floor=new THREE.Mesh(new THREE.CircleGeometry(3,64),new THREE.ShadowMaterial({opacity:.22}));
+floor.rotation.x=-Math.PI/2;floor.position.y=-0.016;floor.receiveShadow=true;scene.add(floor);
+const controls=new THREE.OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;controls.enablePan=false;controls.minDistance=1.2;controls.maxDistance=5;
+controls.autoRotateSpeed=2.5;
+const world=new THREE.Group();world.scale.setScalar(SC);scene.add(world); // model dibangun dalam cm
+
+function resetCam(){
+  const h=state.H*SC;
+  controls.target.set(0,h*0.5,0);
+  camera.position.set(0,h*0.55,h*2.5);
+  controls.update();
+}
+function resize(){
+  const w=stage.clientWidth,h=stage.clientHeight;
+  renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(stage);
+
+/* ---------- Mesh builder: bentuk tubuh dan pakaian dihitung dari ukuran (setara morph target) ---------- */
+const skin=new THREE.MeshPhysicalMaterial({color:0xc9bbb0,roughness:.5,clearcoat:.35,clearcoatRoughness:.45});
+const rad=c=>c/(2*Math.PI);
+const SX=1.18,SZ=0.82; // penampang torso elips
+
+function lathe(pts,mat,sx,sz){
+  const curve=new THREE.CatmullRomCurve3(pts.map(p=>new THREE.Vector3(p[0],p[1],0)));
+  const v=curve.getPoints(48).map(p=>new THREE.Vector2(Math.max(p.x,0.1),p.y));
+  const m=new THREE.Mesh(new THREE.LatheGeometry(v,48),mat);
+  m.scale.set(sx||1,1,sz||1);return m;
+}
+function cyl(rt,rb,y0,y1,x,mat){
+  const m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,y1-y0,32,1,true),mat);
+  m.position.set(x,(y0+y1)/2,0);return m;
+}
+function clear(){while(world.children.length){const o=world.children.pop();
+  o.traverse(n=>{if(n.geometry)n.geometry.dispose();});}}
+
+const texCache={};
+function mat(kind,idx){
+  const k=kind+idx;
+  if(!texCache[k]){texCache[k]=new THREE.MeshStandardMaterial({map:makeTexture(PRODUCTS[kind][idx]),roughness:.9,side:THREE.DoubleSide});}
+  return texCache[k];
+}
+function fitLabel(diff,tight,loose){return diff<tight?"ketat":(diff>loose?"longgar":"pas");}
+
+function build(){
+  clear();
+  const {H,W,C,P,B}=state;
+  const hip=Math.max(C,P+18);
+  const bmi=W/Math.pow(H/100,2);
+  const armR=Math.min(6,Math.max(3.6,4.2+(bmi-22)*0.15));
+  const chestR=rad(C),waistR=rad(P),hipR=rad(hip);
+  const shR=Math.max(8,(B/2-armR*0.9)/SX);
+  const neckR=Math.max(4.6,H*0.026);
+  const yCr=0.47*H,yHip=0.52*H,ySh=0.80*H,yNk=0.84*H;
+  const e=0.5;
+
+  // Penampang torso: [tinggi relatif, radius tubuh, faktor size pakaian (0 = ikut bahu)]
+  const rows=[[0.47,hipR*.88,0],[0.52,hipR,.97],[0.56,hipR*.93,.97],[0.62,waistR,.96],
+    [0.67,waistR+(chestR-waistR)*.7,.98],[0.72,chestR,1],[0.76,chestR*.94,.93],
+    [0.80,shR,0],[0.822,shR*.55+neckR*.45,0],[0.838,neckR*1.15,0],[0.852,neckR,0]];
+  world.add(lathe(rows.map(r=>[r[1],r[0]*H]),skin,SX,SZ));
+
+  // Kaki: paha, lutut, betis, pergelangan
+  const legTop=hipR*.62,ankle=Math.max(2.8,legTop*.34),lx=hipR*SX*.5;
+  const legPts=add=>[[legTop+add,yCr+.015*H],[legTop*.93+add,.38*H],[legTop*.64+add,.285*H],
+    [legTop*.68+add,.20*H],[legTop*.45+add,.12*H],[ankle+add,.045*H],[ankle*.95+add,.03*H]];
+  [-1,1].forEach(s=>{
+    const leg=lathe(legPts(0),skin);leg.position.x=s*lx;world.add(leg);
+    const foot=new THREE.Mesh(new THREE.SphereGeometry(1,24,16),skin);
+    foot.scale.set(ankle*1.25,.028*H,.075*H);foot.position.set(s*lx,.025*H,.035*H);world.add(foot);
+  });
+
+  // Leher, kepala (polos, tanpa wajah), dan dudukan
+  world.add(cyl(neckR,neckR*1.05,yNk-.01*H,yNk+.045*H,0,skin));
+  const head=new THREE.Mesh(new THREE.SphereGeometry(.066*H,40,28),skin);
+  head.position.set(0,.93*H,.004*H);head.scale.set(.88,1.12,.98);world.add(head);
+  const base=new THREE.Mesh(new THREE.CylinderGeometry(.16*H,.16*H,1.6,48),
+    new THREE.MeshStandardMaterial({color:0x2a2428,roughness:.35,metalness:.5}));
+  base.position.y=-.8;world.add(base);
+
+  // Atasan
+  const sizeC=TOP_SIZES[state.topSize],sizeR=rad(sizeC),dTop=sizeC-C;
+  const topMat=state.topOn?mat('top',state.top):null;
+  if(state.topOn){
+    const gp=rows.slice(1,9).map(r=>[r[2]?Math.max(r[1]+e,sizeR*r[2]):r[1]+e+.4,r[0]*H]);
+    gp.push([neckR+1.6,.836*H]);
+    world.add(lathe(gp,topMat,SX,SZ));
+  }
+
+  // Lengan (pose sedikit terbuka), tangan, dan lengan baju
+  [-1,1].forEach(s=>{
+    const g=new THREE.Group();g.position.set(s*B/2,ySh,0);g.rotation.z=s*.09;
+    g.add(lathe([[armR*.98,-.012*H],[armR,-.06*H],[armR*.86,-.15*H],[armR*.78,-.18*H],
+      [armR*.8,-.215*H],[armR*.56,-.29*H],[armR*.5,-.31*H]],skin));
+    const d=new THREE.Mesh(new THREE.SphereGeometry(armR,24,16),skin);d.position.y=-.012*H;g.add(d);
+    const hand=new THREE.Mesh(new THREE.SphereGeometry(1,20,14),skin);
+    hand.scale.set(armR*.62,armR*1.15,armR*.4);hand.position.y=-.335*H;g.add(hand);
+    if(state.topOn){
+      const sl=Math.max(armR*1.08+e,armR+(sizeC-C)*.05);
+      const tube=new THREE.Mesh(new THREE.CylinderGeometry(sl,sl*.93,.138*H,32,1,true),topMat);
+      tube.position.y=-.081*H;g.add(tube);
+      const cap=new THREE.Mesh(new THREE.SphereGeometry(sl,24,16),topMat);cap.position.y=-.012*H;cap.scale.y=.9;g.add(cap);
+    }
+    world.add(g);
+  });
+  document.getElementById('fitTop').textContent=state.topOn?fitLabel(dTop,2,14):"-";
+
+  // Celana
+  const sizeP=BOT_SIZES[state.botSize],dBot=sizeP-P;
+  if(state.botOn){
+    const m=mat('bot',state.bot),loose=Math.max(0,sizeP-P)*.03;
+    const wR=Math.max(waistR+e,rad(sizeP));
+    world.add(lathe([[wR,.64*H],[Math.max(hipR*.93+e,(wR+hipR)/2),.56*H],
+      [Math.max(hipR+e,wR*1.04),yHip],[hipR*.9+e,yCr]],m,SX,SZ));
+    [-1,1].forEach(s=>{const l=lathe(legPts(e+loose).slice(0,6),m);l.position.x=s*lx;world.add(l);});
+  }
+  document.getElementById('fitBot').textContent=state.botOn?fitLabel(dBot,1,12):"-";
+
+  world.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=(o.material===skin);}});
+}
+
+/* ---------- UI ---------- */
+const sliders={H:'H',W:'W',C:'C',P:'P',B:'B'};
+const unit={H:' cm',W:' kg',C:' cm',P:' cm',B:' cm'};
+function syncOut(id){const el=document.getElementById(id);el.nextElementSibling.textContent=el.value+unit[id];}
+Object.keys(sliders).forEach(id=>{
+  const el=document.getElementById(id);syncOut(id);
+  el.addEventListener('input',()=>{state[id]=+el.value;syncOut(id);build();});
+});
+function setSlider(id,v){const el=document.getElementById(id);el.value=Math.round(v);state[id]=+el.value;syncOut(id);}
+document.getElementById('est').addEventListener('click',()=>{
+  const bmi=state.W/Math.pow(state.H/100,2),d=bmi-22;
+  setSlider('C',88+d*2.6+(state.H-170)*0.3);
+  setSlider('P',74+d*3.0+(state.H-170)*0.15);
+  setSlider('B',state.H*0.245+d*0.2);
+  build();
+});
+function fillSizes(id,obj,key){
+  const s=document.getElementById(id);
+  Object.keys(obj).forEach(k=>{const o=document.createElement('option');o.value=o.textContent=k;s.appendChild(o);});
+  s.value=state[key];
+  s.addEventListener('change',()=>{state[key]=s.value;build();});
+}
+fillSizes('topSize',TOP_SIZES,'topSize');fillSizes('botSize',BOT_SIZES,'botSize');
+function fillProds(boxId,kind){
+  const box=document.getElementById(boxId);
+  PRODUCTS[kind].forEach((p,i)=>{
+    const b=document.createElement('button');b.type='button';
+    b.innerHTML='<i style="background:'+p.c[0]+'"></i>'+p.name;
+    if(i===state[kind])b.classList.add('on');
+    b.addEventListener('click',()=>{state[kind]=i;[...box.children].forEach(c=>c.classList.remove('on'));b.classList.add('on');build();});
+    box.appendChild(b);
+  });
+}
+fillProds('topProds','top');fillProds('botProds','bot');
+document.getElementById('topOn').addEventListener('change',e=>{state.topOn=e.target.checked;build();});
+document.getElementById('botOn').addEventListener('change',e=>{state.botOn=e.target.checked;build();});
+const spin=document.getElementById('spin');
+spin.addEventListener('click',()=>{controls.autoRotate=!controls.autoRotate;spin.classList.toggle('on',controls.autoRotate);});
+document.getElementById('reset').addEventListener('click',resetCam);
+
+/* ---------- Jalankan ---------- */
+resize();build();resetCam();
+(function loop(){requestAnimationFrame(loop);controls.update();renderer.render(scene,camera);})();
+})();
+</script>
+</body>
+</html>

@@ -638,6 +638,18 @@
 
           <!-- Right Navigation Actions (Mobile) -->
           <div class="flex sm:hidden items-center gap-2 shrink-0">
+            <!-- Studio 3D Mobile Button -->
+            <a
+              href="../Premium 3D/index.html?ref=rekomendasi"
+              onclick="return handleStudio3DNav(event)"
+              class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-bold bg-[#6D001A] text-white transition-all shadow-xs active:scale-95"
+              title="Studio Fitting 3D (Khusus Premium)"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+              <span>3D</span>
+              <span class="text-[9px] bg-amber-400 text-amber-950 px-0.5 rounded font-extrabold">★</span>
+            </a>
+
             <!-- Theme Toggle Mobile -->
             <button
               type="button"
@@ -744,6 +756,30 @@
 
         <!-- Right Navigation Actions (Desktop) -->
         <div class="hidden sm:flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <!-- Personality Chat Navigation Button -->
+          <a
+            href="personality.html"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-full text-xs font-semibold bg-white border border-black/10 hover:border-[#6D001A] text-stone-800 transition-all shadow-xs"
+            title="Konsultasi Outfit Interaktif (Chat AI Personality)"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>Personality</span>
+          </a>
+
+          <!-- Studio 3D Navigation Button -->
+          <a
+            href="../Premium 3D/index.html?ref=rekomendasi"
+            onclick="return handleStudio3DNav(event)"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-full text-xs font-bold bg-[#6D001A] text-white hover:bg-black transition-all shadow-xs"
+            title="Buka Visualisasi Model Tubuh 3D (Khusus Premium)"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            <span>Studio 3D</span>
+            <span class="text-[9px] bg-amber-400 text-amber-950 px-1 py-0.2 rounded font-extrabold tracking-tight">★</span>
+          </a>
+
           <!-- Theme Toggle Desktop -->
           <button
             type="button"
@@ -829,68 +865,87 @@
             Semua
           </button>
 
-          <!-- Apify Live Marketplace Chip -->
+          <!-- Koleksi Produk 3D Studio Chip -->
           <button
             type="button"
-            onclick="selectCategoryFilter('shopee', this)"
-            class="chip-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all flex items-center gap-1.5"
+            onclick="selectCategoryFilter('3d', this)"
+            class="chip-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold text-amber-950 bg-amber-400/25 hover:bg-amber-400/40 border border-amber-500/30 transition-all flex items-center gap-1.5"
             role="tab"
             aria-selected="false"
-            title="Katalog produk dari Apify Shopee API"
+            title="Katalog produk resmi Studio 3D (Siap Coba di Manekin)"
           >
-            <span class="w-1.5 h-1.5 rounded-full bg-[#EE4D2D]"></span>
-            <span>Shopee Live</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+            <span>Koleksi 3D ★</span>
           </button>
 
-          <!-- Apify Uniqlo Official Chip -->
-          <button
-            type="button"
-            onclick="selectCategoryFilter('uniqlo', this)"
-            class="chip-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all flex items-center gap-1.5"
-            role="tab"
-            aria-selected="false"
-            title="Katalog produk resmi Uniqlo dari Apify Actor"
-          >
-            <span class="w-1.5 h-1.5 rounded-full bg-[#E60012]"></span>
-            <span>Uniqlo Official</span>
-          </button>
-
+          <!-- Kasual Chip -->
           <button
             type="button"
             onclick="selectCategoryFilter('kasual', this)"
             class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
             role="tab"
             aria-selected="false"
+            title="Tema outfit kasual & santai sehari-hari"
           >
             Kasual
           </button>
 
+          <!-- Smart Casual Chip -->
+          <button
+            type="button"
+            onclick="selectCategoryFilter('smartcasual', this)"
+            class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
+            role="tab"
+            aria-selected="false"
+            title="Tema outfit semi-formal, polo shirt, dan kemeja rapi"
+          >
+            Smart Casual
+          </button>
+
+          <!-- Formal Chip -->
           <button
             type="button"
             onclick="selectCategoryFilter('formal', this)"
             class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
             role="tab"
             aria-selected="false"
+            title="Tema outfit busana resmi & kerja"
           >
             Formal
           </button>
 
+          <!-- Outerwear Chip -->
+          <button
+            type="button"
+            onclick="selectCategoryFilter('outerwear', this)"
+            class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
+            role="tab"
+            aria-selected="false"
+            title="Tema outfit luaran, jaket, blazer, dan coat"
+          >
+            Outerwear
+          </button>
+
+          <!-- Minimalis Chip -->
           <button
             type="button"
             onclick="selectCategoryFilter('minimalist', this)"
             class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
             role="tab"
             aria-selected="false"
+            title="Tema outfit esensial polos & clean"
           >
             Minimalis
           </button>
 
+          <!-- Streetwear Chip -->
           <button
             type="button"
             onclick="selectCategoryFilter('streetwear', this)"
             class="chip-pill shrink-0 px-4 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60 transition-all"
             role="tab"
             aria-selected="false"
+            title="Tema outfit urban & streetwear kekinian"
           >
             Streetwear
           </button>
@@ -1213,6 +1268,18 @@
 
           <!-- Action CTAs -->
           <div class="mt-6 pt-4 border-t border-stone-100 space-y-2 sticky bottom-0 bg-white/95 backdrop-blur-xs -mx-4 -mb-4 p-4 pb-[max(16px,env(safe-area-inset-bottom,16px))] sm:p-0 sm:static sm:bg-transparent">
+            <!-- Tombol Gunakan Model 3D (PRD GN-01 & FR-13) -->
+            <button
+              type="button"
+              id="modalTry3DBtn"
+              onclick="handleGunakan3D(APP_STATE.activeModalPin?.id)"
+              class="w-full py-3 sm:py-2.5 px-4 rounded-xl bg-[#6D001A] hover:bg-black text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.98]"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+              <span>Coba di Model Tubuh 3D (Gunakan)</span>
+              <span class="text-[10px] bg-amber-400 text-amber-950 font-bold px-1.5 py-0.5 rounded">★ PREMIUM</span>
+            </button>
+
             <a
               id="modalDirectStoreLink"
               href="#"
@@ -1240,6 +1307,70 @@
       </div>
     </div>
 
+    <!-- ========================================================
+       MODAL: FITUR PREMIUM TERKUNCI (PRD GN-13)
+       ======================================================== -->
+    <div
+      id="modalPremiumLocked"
+      class="fixed inset-0 z-50 modal-backdrop hidden flex items-center justify-center p-4 overflow-y-auto"
+      onclick="if(event.target === this) closePremiumLockedModal();"
+    >
+      <div
+        class="bg-white dark:bg-[#1E1B1E] border border-black/10 dark:border-white/10 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative text-center animate-slideUpMobile sm:animate-fadeIn"
+      >
+        <button
+          type="button"
+          onclick="closePremiumLockedModal()"
+          class="absolute top-4 right-4 w-8 h-8 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 flex items-center justify-center hover:bg-stone-200 transition-colors"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+
+        <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center mb-4 shadow-inner">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+
+        <span class="text-[11px] font-bold uppercase tracking-wider text-[#6D001A] bg-[#6D001A]/10 px-3 py-1 rounded-full">
+          Fitur Khusus Akun Premium
+        </span>
+
+        <h3 class="font-serif text-2xl font-normal text-stone-900 dark:text-white mt-3">
+          Visualisasi Model Tubuh 3D (Gunakan)
+        </h3>
+
+        <p class="text-xs text-stone-600 dark:text-stone-300 mt-2 leading-relaxed">
+          Fitur <b>Gunakan</b> memungkinkan pengguna Premium mencoba pakaian rekomendasi langsung pada manekin tubuh 3D ultra-realistis yang ukurannya (TB, BB, LD, LP, Bahu) mengikuti postur tubuh Anda secara presisi dengan rotasi 360°.
+        </p>
+
+        <!-- Preview Thumbnail -->
+        <div id="lockedPreviewBox" class="mt-4 p-3 rounded-2xl bg-stone-50 dark:bg-stone-900 border border-black/5 flex items-center gap-3 text-left">
+          <img id="lockedPreviewImg" src="images/card1.jpg" alt="Outfit Preview" class="w-16 h-20 rounded-xl object-cover shrink-0 border border-black/10">
+          <div class="min-w-0">
+            <span class="text-[10px] font-bold text-amber-600 uppercase">Outfit Pilihan</span>
+            <h4 id="lockedPreviewTitle" class="text-xs font-bold text-stone-900 dark:text-white truncate">Kemeja Pilihan</h4>
+            <p class="text-[11px] text-stone-500 mt-0.5">Siap dicoba di model 3D saat status Premium aktif.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 space-y-2.5">
+          <a
+            href="account.html#paket-premium"
+            class="w-full py-3 px-4 rounded-xl bg-[#6D001A] hover:bg-black text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition-all active:scale-98"
+          >
+            <span>Upgrade ke Premium Sekarang (Mulai Rp 25.000)</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <button
+            type="button"
+            onclick="closePremiumLockedModal()"
+            class="w-full py-2.5 px-4 rounded-xl bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 text-stone-800 dark:text-stone-200 font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
+          >
+            <span>Tutup Pratinjau</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Minimal Toast -->
     <div id="toastNotification" class="toast-pill">
       <span id="toastMessage">Tersimpan</span>
@@ -1257,12 +1388,28 @@
         <span>Beranda</span>
       </a>
 
+      <a href="personality.html" class="mobile-nav-tab-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span>Personality</span>
+      </a>
+
       <a href="rekomendasi.html" class="mobile-nav-tab-item active">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8" />
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
         <span>Galeri</span>
+      </a>
+
+      <a href="../Premium 3D/index.html?ref=rekomendasi" onclick="return handleStudio3DNav(event)" class="mobile-nav-tab-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+        <span>Studio 3D</span>
       </a>
 
       <a href="tutorial.html" class="mobile-nav-tab-item">
@@ -2207,27 +2354,123 @@
 
         let filtered = [...OUTFIT_CATALOG];
 
-        if (APP_STATE.activeCategory === "shopee") {
+        if (APP_STATE.activeCategory === "3d") {
           filtered = filtered.filter(
             (item) =>
-              item.source === "apify-shopee" ||
-              (item.store && item.store.toLowerCase().includes("shopee")),
+              item.is3D === true ||
+              (item.source && item.source.includes("3d")) ||
+              (item.store && item.store.toLowerCase().includes("3d")) ||
+              (item.id && String(item.id).startsWith("3d-")),
           );
-        } else if (APP_STATE.activeCategory === "uniqlo") {
+        } else if (APP_STATE.activeCategory === "outerwear") {
           filtered = filtered.filter(
             (item) =>
-              item.source === "apify-uniqlo" ||
-              (item.store && item.store.toLowerCase().includes("uniqlo")),
+              item.category === "outerwear" ||
+              /jaket|jaqueta|casaco|outerwear|corta-vento|windbreaker|puffer|coat|blazer|cardigan/i.test(
+                (item.title || "") + " " + (item.desc || "") + " " + (item.style || "")
+              )
+          );
+        } else if (APP_STATE.activeCategory === "smartcasual") {
+          filtered = filtered.filter(
+            (item) =>
+              item.category === "smartcasual" ||
+              /polo|chino|kemeja|shirt|linen|blazer|flanel|seersucker|smart/i.test(
+                (item.title || "") + " " + (item.desc || "") + " " + (item.style || "")
+              )
+          );
+        } else if (APP_STATE.activeCategory === "kasual") {
+          filtered = filtered.filter(
+            (item) =>
+              item.category === "kasual" ||
+              /casual|santai|kaos|tee|shorts|easy|flanel/i.test(
+                (item.title || "") + " " + (item.desc || "") + " " + (item.style || "")
+              )
+          );
+        } else if (APP_STATE.activeCategory === "formal") {
+          filtered = filtered.filter(
+            (item) =>
+              item.category === "formal" ||
+              /formal|kantor|bisnis|business|blazer|polo|chino|suit/i.test(
+                (item.title || "") + " " + (item.desc || "") + " " + (item.style || "")
+              )
+          );
+        } else if (APP_STATE.activeCategory === "streetwear") {
+          filtered = filtered.filter(
+            (item) =>
+              item.category === "streetwear" ||
+              /street|harajuku|hip hop|jeans|denim|graphic|oversize|hoodie|cargo/i.test(
+                (item.title || "") + " " + (item.desc || "") + " " + (item.style || "")
+              )
+          );
+        } else if (APP_STATE.activeCategory === "minimalist") {
+          filtered = filtered.filter(
+            (item) =>
+              item.category === "minimalist" ||
+              /polos|basic|minimal|plain|solid|white|black|airism/i.test(
+                (item.title || "") + " " + (item.desc || "") + " " + (item.style || "")
+              )
+          );
+        } else if (APP_STATE.activeCategory === "oldmoney") {
+          filtered = filtered.filter(
+            (item) =>
+              item.category === "oldmoney" ||
+              /polo|linen|pique|chino|classic|clássica|oxford|seersucker|navy|khaki|elegante/i.test(
+                (item.title || "") + " " + (item.desc || "") + " " + (item.style || "")
+              )
+          );
+        } else if (APP_STATE.activeCategory === "sporty") {
+          filtered = filtered.filter(
+            (item) =>
+              item.category === "sporty" ||
+              /sport|active|stretch|biker|sweat|jogger|corta-vento|windbreaker/i.test(
+                (item.title || "") + " " + (item.desc || "") + " " + (item.style || "")
+              )
+          );
+        } else if (APP_STATE.activeCategory === "pesta") {
+          filtered = filtered.filter(
+            (item) =>
+              item.category === "pesta" ||
+              item.category === "formal" ||
+              /elegante|elegant|blazer|polo|chino|navy|suit|pesta/i.test(
+                (item.title || "") + " " + (item.desc || "") + " " + (item.style || "")
+              )
+          );
+        } else if (APP_STATE.activeCategory === "pantai" || APP_STATE.activeCategory === "liburan") {
+          filtered = filtered.filter(
+            (item) =>
+              item.category === "pantai" ||
+              item.category === "liburan" ||
+              /shorts|linen|pantai|summer|caminhadas|pesca|easy|seersucker|santai/i.test(
+                (item.title || "") + " " + (item.desc || "") + " " + (item.style || "")
+              )
+          );
+        } else if (APP_STATE.activeCategory === "hijab") {
+          filtered = filtered.filter(
+            (item) =>
+              item.category === "hijab" ||
+              /long|capuz|gola alta|impermeável|casaco|jaqueta|lengan panjang|chino|jeans|modest/i.test(
+                (item.title || "") + " " + (item.desc || "") + " " + (item.style || "")
+              )
           );
         } else if (APP_STATE.activeCategory !== "all") {
           filtered = filtered.filter(
-            (item) => item.category === APP_STATE.activeCategory,
+            (item) =>
+              item.category === APP_STATE.activeCategory ||
+              (item.style && item.style.toLowerCase().includes(APP_STATE.activeCategory.toLowerCase()))
           );
         }
+
         if (APP_STATE.activeEvent) {
-          filtered = filtered.filter(
-            (item) => item.event_type === APP_STATE.activeEvent,
-          );
+          const ev = APP_STATE.activeEvent;
+          filtered = filtered.filter((item) => {
+            if (item.event_type === ev) return true;
+            const fullText = ((item.title || "") + " " + (item.desc || "") + " " + (item.category || "")).toLowerCase();
+            if (ev === "kantor") return /kantor|formal|bisnis|business|polo|chino|kemeja|blazer/.test(fullText);
+            if (ev === "ngonser") return /ngonser|konser|street|harajuku|flanel|graphic|jeans|windbreaker/.test(fullText);
+            if (ev === "dating") return /polo|linen|smart|seersucker|chino|flanel|elegante/.test(fullText);
+            if (ev === "pengajian") return /gola alta|chino|long|panjang|polo|rapi|sopan|syar/.test(fullText);
+            return false;
+          });
         }
         if (APP_STATE.searchQuery.trim()) {
           const q = APP_STATE.searchQuery.toLowerCase().trim();
@@ -2253,14 +2496,35 @@
 
         if (countBadge) countBadge.innerText = `${filtered.length} ide`;
         if (statusText) {
-          if (APP_STATE.activeCategory === "all") {
-            statusText.innerText = "Menampilkan seluruh inspirasi";
-          } else if (APP_STATE.activeCategory === "shopee") {
-            statusText.innerText = "Katalog Live Marketplace: Shopee";
-          } else if (APP_STATE.activeCategory === "uniqlo") {
-            statusText.innerText = "Katalog Resmi: Uniqlo Official";
+          const statusLabels = {
+            all: "Menampilkan seluruh inspirasi outfit",
+            "3d": "Koleksi Eksklusif: Visualisasi Manekin 3D Realistis",
+            smartcasual: "Tema Outfit: Smart Casual & Semi-Formal",
+            outerwear: "Tema Outfit: Outerwear, Jaket & Luaran",
+            kasual: "Tema Outfit: Kasual Santai Sehari-hari",
+            formal: "Tema Outfit: Formal & Busana Resmi",
+            minimalist: "Tema Outfit: Minimalis Bersih & Basic",
+            streetwear: "Tema Outfit: Streetwear & Urban Style",
+            oldmoney: "Tema Outfit: Old Money & Classic Aesthetic",
+            sporty: "Tema Outfit: Sporty & Active Wear",
+            pesta: "Tema Outfit: Pesta, Gala & Perayaan",
+            pantai: "Tema Outfit: Liburan, Santai & Pantai",
+            hijab: "Tema Outfit: Modest Wear & Hijab Style",
+          };
+          if (APP_STATE.activeEvent) {
+            const evLabels = {
+              kantor: "Acara: Pakaian Kantor & Kerja",
+              ngonser: "Acara: Konser Musik & Festival",
+              dating: "Acara: Kencan & Dinner",
+              pengajian: "Acara: Kajian & Acara Syar'i",
+            };
+            statusText.innerText =
+              evLabels[APP_STATE.activeEvent] ||
+              `Inspirasi Acara: ${APP_STATE.activeEvent}`;
           } else {
-            statusText.innerText = `Kategori: ${APP_STATE.activeCategory.charAt(0).toUpperCase() + APP_STATE.activeCategory.slice(1)}`;
+            statusText.innerText =
+              statusLabels[APP_STATE.activeCategory] ||
+              `Tema Outfit: ${APP_STATE.activeCategory.charAt(0).toUpperCase() + APP_STATE.activeCategory.slice(1)}`;
           }
         }
 
@@ -2291,6 +2555,7 @@
         container.innerHTML = itemsToRender
           .map((pin) => {
             const isSaved = isPinSaved(pin.id);
+            const is3D = pin.is3D === true || (pin.store && pin.store.includes("3D")) || (pin.id && String(pin.id).startsWith("3d-"));
             const isShopee = pin.source === "apify-shopee" || (pin.store && pin.store.toLowerCase().includes("shopee"));
             const isUniqlo = pin.source === "apify-uniqlo" || (pin.store && pin.store.toLowerCase().includes("uniqlo"));
             const colors = getPinColors(pin);
@@ -2313,35 +2578,44 @@
                 src="${pin.image}" 
                 alt="${pin.title}" 
                 loading="lazy" 
-                onerror="this.onerror=null; this.src='${pin.localFallback || "images/card1.jpg"}';"
+                onerror="this.onerror=null; this.src='${pin.thumb_b64 || pin.localFallback || "images/card1.jpg"}';"
               />
 
               <!-- Hover Overlay with Red Save Button -->
               <div class="pin-hover-overlay">
                 <div class="flex items-center justify-between w-full">
                   ${
-                    isShopee
+                    is3D
                       ? `
-                    <span class="px-2 py-0.5 rounded-full bg-white/95 text-[10px] font-semibold text-[#EE4D2D] flex items-center gap-1 shadow-xs">
-                      <span class="w-1.5 h-1.5 rounded-full bg-[#EE4D2D]"></span> Shopee
+                    <span class="px-2 py-0.5 rounded-full bg-black/90 text-[10px] font-bold text-amber-300 flex items-center gap-1 shadow-xs border border-amber-400/40">
+                      <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Orec 3D
                     </span>
                   `
-                      : isUniqlo
-                      ? `
-                    <span class="px-2 py-0.5 rounded-full bg-white/95 text-[10px] font-semibold text-[#E60012] flex items-center gap-1 shadow-xs">
-                      <span class="w-1.5 h-1.5 rounded-full bg-[#E60012]"></span> Uniqlo
+                      : `
+                    <span class="px-2 py-0.5 rounded-full bg-white/95 text-[10px] font-semibold text-stone-800 flex items-center gap-1 shadow-xs">
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#6D001A]"></span> ${pin.category ? pin.category.charAt(0).toUpperCase() + pin.category.slice(1) : "Outfit"}
                     </span>
                   `
-                      : "<span></span>"
                   }
-                  <button 
-                    type="button" 
-                    onclick="event.stopPropagation(); togglePinSave('${pin.id}')"
-                    id="saveBtn-${pin.id}"
-                    class="btn-pin-save px-3.5 py-1.5 rounded-full text-xs font-semibold text-white shadow-md transition-all ${isSaved ? "bg-stone-900" : "bg-[#E60023] hover:bg-[#b8001c]"}"
-                  >
-                    ${isSaved ? "Tersimpan" : "Simpan"}
-                  </button>
+                  <div class="flex items-center gap-1.5">
+                    <button 
+                      type="button" 
+                      onclick="event.stopPropagation(); handleGunakan3D('${pin.id}')"
+                      class="px-2.5 py-1.5 rounded-full text-xs font-bold bg-[#6D001A] hover:bg-black text-white shadow-md transition-all flex items-center gap-1 active:scale-95"
+                      title="Gunakan pada Model 3D"
+                    >
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                      <span>Gunakan</span>
+                    </button>
+                    <button 
+                      type="button" 
+                      onclick="event.stopPropagation(); togglePinSave('${pin.id}')"
+                      id="saveBtn-${pin.id}"
+                      class="btn-pin-save px-3 py-1.5 rounded-full text-xs font-semibold text-white shadow-md transition-all ${isSaved ? "bg-stone-900" : "bg-[#E60023] hover:bg-[#b8001c]"}"
+                    >
+                      ${isSaved ? "Tersimpan" : "Simpan"}
+                    </button>
+                  </div>
                 </div>
 
                 <div class="flex items-center justify-between w-full">
@@ -2392,6 +2666,112 @@
           })
           .join("");
       }
+
+      // 4.5. INTEGRASI FITUR PREMIUM: VISUALISASI MODEL TUBUH 3D (PRD GN-01 & FR-13)
+      function handleGunakan3D(pinId) {
+        const pin = (pinId ? findPinById(pinId) : APP_STATE.activeModalPin) || {};
+
+        let isPremium = false;
+        try {
+          const userRaw = localStorage.getItem("outfit_req_user");
+          if (userRaw) {
+            const u = JSON.parse(userRaw);
+            const tier = (u.tier || "").toString().toLowerCase().trim();
+            isPremium = tier.includes("premium") || u.isPremium === true;
+          }
+        } catch (e) {}
+
+        if (!isPremium) {
+          const lockedModal = document.getElementById("modalPremiumLocked");
+          const imgEl = document.getElementById("lockedPreviewImg");
+          const titleEl = document.getElementById("lockedPreviewTitle");
+          if (imgEl && pin.image) imgEl.src = pin.image;
+          if (titleEl && pin.title) titleEl.innerText = pin.title;
+          if (lockedModal) lockedModal.classList.remove("hidden");
+          return;
+        }
+
+        // Tentukan kategori atasan / bawahan
+        const catLower = (pin.category || "").toLowerCase();
+        const titleLower = (pin.title || "").toLowerCase();
+        let cat = "top";
+        if (
+          catLower.includes("celana") ||
+          catLower.includes("bawahan") ||
+          catLower.includes("rok") ||
+          catLower.includes("jeans") ||
+          catLower.includes("pants") ||
+          titleLower.includes("celana") ||
+          titleLower.includes("jeans") ||
+          titleLower.includes("chino")
+        ) {
+          cat = "bot";
+        }
+
+        let profParam = "";
+        try {
+          const profRaw = localStorage.getItem("outfit_req_body_profiles");
+          if (profRaw) {
+            const profiles = JSON.parse(profRaw);
+            const active = profiles.find((p) => p.isActive) || profiles[0];
+            if (active) {
+              profParam = `&h=${active.tb || 170}&w=${active.bb || 64}&c=${active.ld || 90}&p=${active.lp || 78}&b=${active.shoulder || 43}&gender=${active.gender || "male"}&skin=${active.skinTone || "warm"}`;
+            }
+          }
+        } catch (e) {}
+
+        let targetUrl = "";
+        if (pin.id && String(pin.id).startsWith("3d-")) {
+          const modelKey = pin.modelId || String(pin.id).replace(/^3d-/, "");
+          if (cat === "bot") {
+            targetUrl = `../Premium 3D/index.html?ref=rekomendasi&bot=${encodeURIComponent(modelKey)}${profParam}`;
+          } else {
+            targetUrl = `../Premium 3D/index.html?ref=rekomendasi&top=${encodeURIComponent(modelKey)}${profParam}`;
+          }
+        } else {
+          const imgParam = encodeURIComponent(pin.image || "");
+          const nameParam = encodeURIComponent(pin.title || "Outfit Rekomendasi");
+          targetUrl = `../Premium 3D/index.html?ref=rekomendasi&custom_img=${imgParam}&custom_name=${nameParam}&custom_cat=${cat}${profParam}`;
+        }
+
+        window.location.href = targetUrl;
+      }
+      window.handleGunakan3D = handleGunakan3D;
+
+      function handleStudio3DNav(e) {
+        let isPremium = false;
+        try {
+          const userRaw = localStorage.getItem("outfit_req_user");
+          if (userRaw) {
+            const u = JSON.parse(userRaw);
+            const tier = (u.tier || "").toString().toLowerCase().trim();
+            isPremium = tier.includes("premium") || u.isPremium === true;
+          }
+        } catch (err) {}
+
+        if (!isPremium) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          const lockedModal = document.getElementById("modalPremiumLocked");
+          if (lockedModal) {
+            const previewTitle = document.getElementById("lockedPreviewTitle");
+            if (previewTitle) previewTitle.textContent = "Studio 3D Manekin Digital";
+            lockedModal.classList.remove("hidden");
+          } else {
+            window.location.href = "account.html#paket-premium";
+          }
+          return false;
+        }
+      }
+      window.handleStudio3DNav = handleStudio3DNav;
+
+      function closePremiumLockedModal() {
+        const lockedModal = document.getElementById("modalPremiumLocked");
+        if (lockedModal) lockedModal.classList.add("hidden");
+      }
+      window.closePremiumLockedModal = closePremiumLockedModal;
 
       // 5. PIN SAVE LOGIC (PER-ACCOUNT & DATABASE SYNC)
       async function togglePinSave(pinId) {
