@@ -1005,6 +1005,21 @@ class App {
           registeredAt: new Date().toISOString()
         };
 
+        // Sinkronisasi data akun baru ke tabel public.users Supabase
+        const sbClient = getSupabaseClient();
+        if (sbClient && data?.user?.id) {
+          try {
+            await sbClient.from('users').upsert({
+              id: data.user.id,
+              email: email.value.trim().toLowerCase(),
+              name: name.value.trim(),
+              tier: 'free'
+            }, { onConflict: 'email' });
+          } catch (syncErr) {
+            console.warn('[OutfitReq Login] Sync new user to Supabase error:', syncErr);
+          }
+        }
+
         // Simpan ke daftar customer terdaftar di local storage
         try {
           const regMap = JSON.parse(localStorage.getItem('outfit_req_registered_customers') || '{}');
@@ -1265,6 +1280,23 @@ class App {
           localStorage.removeItem('outfit_req_logged_out');
           localStorage.setItem('outfit_req_user', JSON.stringify(userData));
         } catch (err) {}
+
+        // Pastikan akun tersinkronisasi ke tabel public.users Supabase
+        const sbClient = getSupabaseClient();
+        if (sbClient && data?.user?.id) {
+          try {
+            const syncPayload = {
+              id: data.user.id,
+              email: email.value.trim().toLowerCase(),
+              name: customerName,
+              tier: activeTier
+            };
+            if (activeExpiry) syncPayload.premium_expires_at = activeExpiry;
+            await sbClient.from('users').upsert(syncPayload, { onConflict: 'email' });
+          } catch (syncErr) {
+            console.warn('[OutfitReq Login] Sync user to Supabase error:', syncErr);
+          }
+        }
 
         this._redirectToMain();
       } catch (err) {

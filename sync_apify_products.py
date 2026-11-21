@@ -21,8 +21,11 @@ if os.path.exists(ENV_FILE):
     with open(ENV_FILE, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
-            if line.startswith("APIFY_TOKEN=") and not os.environ.get("APIFY_TOKEN"):
-                os.environ["APIFY_TOKEN"] = line.split("=", 1)[1].strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1)
+                k, v = k.strip(), v.strip().strip('"').strip("'")
+                if not os.environ.get(k):
+                    os.environ[k] = v
 
 # User's Apify credentials & actor settings
 APIFY_TOKEN = os.environ.get("APIFY_TOKEN", "")
@@ -31,8 +34,8 @@ ACTOR_SHOPEE = "fmKWN5uByUCIy2Sam"
 
 OUTPUT_FILE = os.path.join(BASE_DIR, "WEB EBD", "data", "apify_products.json")
 
-SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://iklhjmmmolulglxirvrc.supabase.co")
-SUPABASE_KEY = os.environ.get("SUPABASE_ANON_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrbGhqbW1tb2x1bGdseGlydnJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyODAzNjQsImV4cCI6MjEwODg1NjM2NH0.NsKrraBp5W2SEDzKXM6GWevYr1g4iwGUei2CSawqNmQ")
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
+SUPABASE_KEY = os.environ.get("SUPABASE_ANON_KEY", "")
 
 COLOR_HEX_MAP = {
     "BLACK": "#111827", "WHITE": "#F9FAFB", "GRAY": "#6B7280", "NAVY": "#1E3A8A",
@@ -320,6 +323,24 @@ def load_3d_products():
         print(f"[!] Warning reading 3D catalog: {e}")
         return []
 
+def load_pinterest_products():
+    """Loads Pinterest outfit inspiration items (Regular / Free Tier)."""
+    path_pinterest = os.path.join(BASE_DIR, "WEB EBD", "data", "pinterest_outfits.json")
+    if not os.path.exists(path_pinterest):
+        try:
+            import sync_pinterest_outfits
+            sync_pinterest_outfits.main()
+        except Exception:
+            pass
+    if os.path.exists(path_pinterest):
+        try:
+            with open(path_pinterest, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                return data.get("items", [])
+        except Exception as e:
+            print(f"[!] Warning reading Pinterest catalog: {e}")
+    return []
+
 def main():
     run_new = "--run" in sys.argv
 
@@ -366,12 +387,20 @@ def main():
         merged_items[item["id"]] = item
     print(f"[+] Dimuat {len(items_3d)} produk visual 3D ke dalam database.")
 
+    # Load and merge Pinterest items (Regular / Free Tier)
+    items_pinterest = load_pinterest_products()
+    for item in items_pinterest:
+        merged_items[item["id"]] = item
+    print(f"[+] Dimuat {len(items_pinterest)} produk inspirasi Pinterest ke dalam database.")
+
     all_items = list(merged_items.values())
 
     # Save to local cache
     payload = {
-        "source": "Apify Multi-Marketplace Catalog (Shopee & Uniqlo)",
+        "source": "Unified Catalog (Shopee, Uniqlo, 3D Studio & Pinterest)",
         "totalItems": len(all_items),
+        "hasPinterestProducts": len(items_pinterest) > 0,
+        "has3DProducts": len(items_3d) > 0,
         "items": all_items
     }
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)

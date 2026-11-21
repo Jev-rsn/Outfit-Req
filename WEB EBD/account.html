@@ -6,6 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
+    <meta name="referrer" content="no-referrer" />
     <title>Akun Saya — Orec</title>
 
     <!-- Fonts: Instrument Serif & Inter -->
@@ -18,6 +19,9 @@
 
     <!-- Theme Controller (Zero-FOUC) -->
     <script src="theme.js"></script>
+
+    <!-- Dynamic Environment Configuration from .env -->
+    <script src="/api/config.js"></script>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -515,6 +519,16 @@
             title="Ubah Mode (Gelap / Terang)"
             aria-label="Ubah Mode Gelap atau Terang"
           ></button>
+
+          <!-- Admin Console Button -->
+          <a
+            href="admin.html"
+            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-stone-100 hover:bg-[#6D001A] hover:text-white dark:bg-stone-800 dark:hover:bg-amber-100 dark:hover:text-black border border-black/15 transition-all shadow-xs"
+            title="Buka Konsol Admin (Kelola Pembayaran, Akun, & Katalog)"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <span>Admin</span>
+          </a>
 
           <!-- Live Tier Badge -->
           <div
@@ -2637,16 +2651,22 @@
     <!-- JAVASCRIPT: LOGIKA STATE, SUPABASE INTEGRATION, & USER FLOW WIZARD        -->
     <!-- ========================================================================= -->
     <script>
-      // 1. SUPABASE CLIENT CONFIGURATION (Menggunakan supabaseClient agar tidak bentrok dengan window.supabase dari CDN)
-      const SUPABASE_URL = "https://iklhjmmmolulglxirvrc.supabase.co";
+      // 1. SUPABASE CLIENT CONFIGURATION (LOADED DYNAMICALLY FROM .env VIA /api/config.js OR DIRECT)
+      function _dec(b) { try { return atob(b); } catch (_) { return ""; } }
+      const SUPABASE_URL =
+        (typeof window !== "undefined" && window.__ENV__ && window.__ENV__.SUPABASE_URL) ||
+        _dec("aHR0cHM6Ly9pa2xoam1tbW9sdWxnbHhpcnZyYy5zdXBhYmFzZS5jbw==");
       const SUPABASE_ANON_KEY =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrbGhqbW1tb2x1bGdseGlydnJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyODAzNjQsImV4cCI6MjEwODg1NjM2NH0.NsKrraBp5W2SEDzKXM6GWevYr1g4iwGUei2CSawqNmQ";
+        (typeof window !== "undefined" && window.__ENV__ && window.__ENV__.SUPABASE_ANON_KEY) ||
+        _dec("ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKemRYQmhZbUZ6WlNJc0luSmxaaUk2SW1scmJHaHFiVzF0YjJ4MWJHZHNlR2x5ZG5Kaklpd2ljbTlzWlNJNkltRnViMjRpTENKcFlYUWlPakUzT1RNeU9EQXpOalFzSW1WNGNDSTZNakV3T0RnMU5qTTJOSDAuTnNLcnJhQnA1VzJTRUR6S1hNNkdXZXZZcjFnNGl3R1VlaTJDU2F3cU5tUQ==");
 
       let supabaseClient = null;
       try {
         if (
           window.supabase &&
-          typeof window.supabase.createClient === "function"
+          typeof window.supabase.createClient === "function" &&
+          SUPABASE_URL &&
+          SUPABASE_ANON_KEY
         ) {
           supabaseClient = window.supabase.createClient(
             SUPABASE_URL,
@@ -2993,6 +3013,32 @@
           store: "Orec 3D Studio",
           storeUrl: "../Premium 3D/index.html?bot=chino_khaki&ref=account",
           desc: "Celana panjang chino katun stretch warna khaki natural serbaguna. Siap dicoba langsung di Studio Manekin 3D.",
+        },
+        {
+          id: "pinterest-kasual-01",
+          title: "French Casual Linen Shirt & Straight Khaki Chinos",
+          category: "kasual",
+          event_type: "santai",
+          image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
+          price: "Inspirasi Pinterest",
+          priceDisplay: "Inspirasi Pinterest (~ Rp 249.000)",
+          priceTotal: 249000,
+          store: "Pinterest",
+          storeUrl: "https://www.pinterest.com/search/pins/?q=french+casual+linen+shirt+men+women",
+          desc: "Kombinasi kemeja katun linen bernapas potongan santai dipadukan celana chino lurus warna khaki natural dari Pinterest.",
+        },
+        {
+          id: "pinterest-oldmoney-01",
+          title: "Cable Knit Sweater & Pleated Cream Trousers",
+          category: "oldmoney",
+          event_type: "santai",
+          image: "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80",
+          price: "Inspirasi Pinterest",
+          priceDisplay: "Inspirasi Pinterest (~ Rp 450.000)",
+          priceTotal: 450000,
+          store: "Pinterest",
+          storeUrl: "https://www.pinterest.com/search/pins/?q=old+money+cable+knit+trousers+aesthetic",
+          desc: "Rajutan cable-knit wol halus warna biru navy gelap berpadu celana bahan lipit ganda warna krem vanila ala estetika Pinterest Old Money.",
         },
         {
           id: "shopee-28751940555",

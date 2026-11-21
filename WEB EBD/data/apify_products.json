@@ -1,7 +1,8 @@
 {
-  "totalItems": 222,
-  "lastSynced": "2026-11-03 22:34:26",
-  "source": "Apify Marketplace Multi-Actor (Shopee & Uniqlo)",
+  "source": "Apify & Pinterest Unified Catalog (Shopee, Uniqlo, 3D & Pinterest)",
+  "totalItems": 305,
+  "hasPinterestProducts": true,
+  "has3DProducts": true,
   "items": [
     {
       "id": "3d-tshirt_graphic_white",
@@ -294,6 +295,4096 @@
           "name": "Celana Chino Slim Khaki",
           "store": "Orec 3D Studio",
           "price": "Rp 219.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1070308667709444047",
+      "itemId": "pinterest-1070308667709444047",
+      "title": "Old Money Men’s Outfit",
+      "category": "oldmoney",
+      "event_type": "santai",
+      "style": "Quiet Luxury Old Money",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1070308667709444047/",
+      "product_link": "https://www.pinterest.com/pin/1070308667709444047/",
+      "image": "https://i.pinimg.com/736x/50/46/14/5046141aff1547224d7b05be49257b02.jpg",
+      "photo_url": "https://i.pinimg.com/736x/50/46/14/5046141aff1547224d7b05be49257b02.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180000,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 1438,
+      "desc": "Neutral tones, tailored trousers, and refined knitwear—classic elegance meets modern sophistication.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#797164"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Old Money Men’s Outfit",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1070308667709444047/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AZ5tNvr21_Xcrb9p73umGSxReVRXQD1Ig6L7enmaa_O1BiLSdpnzF8Cr4KCwuJgHDzIgcOuYqex77HjkWL2gstQ",
+      "itemId": "pinterest-AZ5tNvr21_Xcrb9p73umGSxReVRXQD1Ig6L7enmaa_O1BiLSdpnzF8Cr4KCwuJgHDzIgcOuYqex77HjkWL2gstQ",
+      "title": "VIVAIA Lexi Round-Toe Casual Sneakers: Your go-to pair for eff...",
+      "category": "smartcasual",
+      "event_type": "kantor",
+      "style": "Smart Loafer Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AZ5tNvr21_Xcrb9p73umGSxReVRXQD1Ig6L7enmaa_O1BiLSdpnzF8Cr4KCwuJgHDzIgcOuYqex77HjkWL2gstQ/",
+      "product_link": "https://www.pinterest.com/pin/AZ5tNvr21_Xcrb9p73umGSxReVRXQD1Ig6L7enmaa_O1BiLSdpnzF8Cr4KCwuJgHDzIgcOuYqex77HjkWL2gstQ/",
+      "image": "https://i.pinimg.com/736x/74/88/5a/74885af06adf15278ac3514870739080.jpg",
+      "photo_url": "https://i.pinimg.com/736x/74/88/5a/74885af06adf15278ac3514870739080.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180017,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 283,
+      "desc": "The Pair Worth Buying This Fall🍂👟\nGet ready for a more active day with Lexi sneakers. Blending cloud-like support with timeless fall style, they keep you moving effortlessly from morning walks to weekend coffee runs.✅Machine washable✅Softstep feedback✅Soft re-nylon upper✅Free Shipping & Returns",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#adac71"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "VIVAIA Lexi Round-Toe Casual Sneakers: Your go-to pair for eff...",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AZ5tNvr21_Xcrb9p73umGSxReVRXQD1Ig6L7enmaa_O1BiLSdpnzF8Cr4KCwuJgHDzIgcOuYqex77HjkWL2gstQ/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1093108140836020845",
+      "itemId": "pinterest-1093108140836020845",
+      "title": "Everyday Casual Pinterest Look",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1093108140836020845/",
+      "product_link": "https://www.pinterest.com/pin/1093108140836020845/",
+      "image": "https://i.pinimg.com/736x/07/0d/f2/070df2467c37f9080c0bda3bdb1eec85.jpg",
+      "photo_url": "https://i.pinimg.com/736x/07/0d/f2/070df2467c37f9080c0bda3bdb1eec85.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180034,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 360,
+      "desc": "Inspirasi padu padan busana Everyday Casual Pinterest Look dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#c0b7ad"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Everyday Casual Pinterest Look",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1093108140836020845/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1101763496376610596",
+      "itemId": "pinterest-1101763496376610596",
+      "title": "Explore 20 Top Old Money Men’s Outfits for Fall 2024: Timeless...",
+      "category": "oldmoney",
+      "event_type": "santai",
+      "style": "Quiet Luxury Old Money",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1101763496376610596/",
+      "product_link": "https://www.pinterest.com/pin/1101763496376610596/",
+      "image": "https://i.pinimg.com/736x/d9/1c/b4/d91cb4cd8e6e5b7f5d631a8f24a58211.jpg",
+      "photo_url": "https://i.pinimg.com/736x/d9/1c/b4/d91cb4cd8e6e5b7f5d631a8f24a58211.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180051,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 981,
+      "desc": "Explore 20 Top Old Money Men’s Outfits for Fall 2024: Timeless Elegance Meets Modern Sophistication",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#4f574c"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Explore 20 Top Old Money Men’s Outfits for Fall 2024: Timeless...",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1101763496376610596/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-891360951274972338",
+      "itemId": "pinterest-891360951274972338",
+      "title": "fits Outfit Style",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/891360951274972338/",
+      "product_link": "https://www.pinterest.com/pin/891360951274972338/",
+      "image": "https://i.pinimg.com/736x/89/c6/d8/89c6d8866ae0b1806e94ff68dc6d0731.jpg",
+      "photo_url": "https://i.pinimg.com/736x/89/c6/d8/89c6d8866ae0b1806e94ff68dc6d0731.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180068,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 862,
+      "desc": "Inspirasi padu padan busana fits Outfit Style dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#273144"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#F4F3EE"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "fits Outfit Style",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/891360951274972338/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AWjyI9XUC7LfzNeAaaaH1d3ndI4XjK3_B4vbgEp8ILsXj5aefptGJ52gayfOK1qCAmAzaFKIa0U2-x39Lgszgqc",
+      "itemId": "pinterest-AWjyI9XUC7LfzNeAaaaH1d3ndI4XjK3_B4vbgEp8ILsXj5aefptGJ52gayfOK1qCAmAzaFKIa0U2-x39Lgszgqc",
+      "title": "【Tempat Malaysia】CLIFF Seluar panjang lelaki hitam gaya retro ...",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AWjyI9XUC7LfzNeAaaaH1d3ndI4XjK3_B4vbgEp8ILsXj5aefptGJ52gayfOK1qCAmAzaFKIa0U2-x39Lgszgqc/",
+      "product_link": "https://www.pinterest.com/pin/AWjyI9XUC7LfzNeAaaaH1d3ndI4XjK3_B4vbgEp8ILsXj5aefptGJ52gayfOK1qCAmAzaFKIa0U2-x39Lgszgqc/",
+      "image": "https://i.pinimg.com/736x/e9/9e/11/e99e1139f4176ca755b4e6f25fdad0a2.jpg",
+      "photo_url": "https://i.pinimg.com/736x/e9/9e/11/e99e1139f4176ca755b4e6f25fdad0a2.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180085,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 415,
+      "desc": "🎉Selamat datang ke cliff_men Store🎉\n✨Pelanggan yang dihormati, kami adalah pengeluar pakaian lelaki yang bergaya, harga kami sangat berpatutan, sila ikuti kami! ✨\n💰Klik \"IKUTI\" Untuk Mengikuti Kami, Anda Akan Mendapat Kupon Diskaun Tambahan!\n💕Jika anda ingin menghantarnya kepada keluarga, kekasih atau rakan anda, kami boleh membantu anda menulis nota kecil. (anda perlu membuat nota sebelum membuat pesanan, supaya kami boleh memberi anda nota tepat pada masanya, menjadi lebih pendek)\n\nMaklumat Saiz:\nSaiz Tinggi / Berat\nM (155-165cm, 40 - 50kg)\nL (165-175cm, 50 - 60kg)\nXL (170-180cm, 60-70kg)\n2XL (175-185cm, 70-80kg)\n3XL (180-190cm, 80-90kg)\n--------------------------------------\n🚚🚚🚚Penghantaran dari Johor dan Dihantar Dalam Masa 1-2 Hari!\n📣Jika anda mempunyai sebarang pertanyaan, si",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#83857c"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "【Tempat Malaysia】CLIFF Seluar panjang lelaki hitam gaya retro ...",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AWjyI9XUC7LfzNeAaaaH1d3ndI4XjK3_B4vbgEp8ILsXj5aefptGJ52gayfOK1qCAmAzaFKIa0U2-x39Lgszgqc/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-450289662761633424",
+      "itemId": "pinterest-450289662761633424",
+      "title": "The ’90s style moments that keep guys trawling eBay",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/450289662761633424/",
+      "product_link": "https://www.pinterest.com/pin/450289662761633424/",
+      "image": "https://i.pinimg.com/736x/29/9f/68/299f684a38c926c75d54d69363a80af3.jpg",
+      "photo_url": "https://i.pinimg.com/736x/29/9f/68/299f684a38c926c75d54d69363a80af3.jpg",
+      "aspect": "aspect-[4/5]",
+      "priceTotal": 180102,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 1916,
+      "desc": "The '90s style moments that changed menswear for good | British GQ",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#444333"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "The ’90s style moments that keep guys trawling eBay",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/450289662761633424/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-862509766130252696",
+      "itemId": "pinterest-862509766130252696",
+      "title": "Everyday Casual Pinterest Look",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/862509766130252696/",
+      "product_link": "https://www.pinterest.com/pin/862509766130252696/",
+      "image": "https://i.pinimg.com/736x/b0/f4/c7/b0f4c7d73407bb8a8229ef0bf47874af.jpg",
+      "photo_url": "https://i.pinimg.com/736x/b0/f4/c7/b0f4c7d73407bb8a8229ef0bf47874af.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180119,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 501,
+      "desc": "Inspirasi padu padan busana Everyday Casual Pinterest Look dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#b5bbc1"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Everyday Casual Pinterest Look",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/862509766130252696/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AW1NeIrNeTnrnQQ3oIXZ0AMz1okT7gh-73u0UDqsNVlYyfSutZBO-ti9AlRltFas2BwCYKpZdZsjQRj_PyKETFk",
+      "itemId": "pinterest-AW1NeIrNeTnrnQQ3oIXZ0AMz1okT7gh-73u0UDqsNVlYyfSutZBO-ti9AlRltFas2BwCYKpZdZsjQRj_PyKETFk",
+      "title": "Onitsuka Tiger Tokuten 'Grey White' US 9.5",
+      "category": "outerwear",
+      "event_type": "santai",
+      "style": "Heritage Suede Layering",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AW1NeIrNeTnrnQQ3oIXZ0AMz1okT7gh-73u0UDqsNVlYyfSutZBO-ti9AlRltFas2BwCYKpZdZsjQRj_PyKETFk/",
+      "product_link": "https://www.pinterest.com/pin/AW1NeIrNeTnrnQQ3oIXZ0AMz1okT7gh-73u0UDqsNVlYyfSutZBO-ti9AlRltFas2BwCYKpZdZsjQRj_PyKETFk/",
+      "image": "https://i.pinimg.com/736x/67/f1/1a/67f11a33bcd696686300c2f1b3755741.jpg",
+      "photo_url": "https://i.pinimg.com/736x/67/f1/1a/67f11a33bcd696686300c2f1b3755741.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180136,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 514,
+      "desc": "Step into the realm of timeless style with Onitsuka Tiger's Tokuten 'Grey White'. These iconic sneakers blend vintage aesthetics with contemporary flair. Their supple leather upper in pristine white evokes a classic appeal, while the contrasting grey suede overlays add a touch of sophistication. The signature tiger stripes exude a timeless elegance, making these sneakers an essential for the discerning fashionista seeking both comfort and style. Experience the fusion of tradition and modernity with the Onitsuka Tiger Tokuten 'Grey White'.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#ffffff"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Onitsuka Tiger Tokuten 'Grey White' US 9.5",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AW1NeIrNeTnrnQQ3oIXZ0AMz1okT7gh-73u0UDqsNVlYyfSutZBO-ti9AlRltFas2BwCYKpZdZsjQRj_PyKETFk/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1027383733775229462",
+      "itemId": "pinterest-1027383733775229462",
+      "title": "Men's Streetwear Outfit Ideas",
+      "category": "streetwear",
+      "event_type": "ngonser",
+      "style": "Urban Streetwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1027383733775229462/",
+      "product_link": "https://www.pinterest.com/pin/1027383733775229462/",
+      "image": "https://i.pinimg.com/736x/b5/42/92/b5429233219a13f424d57bee08545ed8.jpg",
+      "photo_url": "https://i.pinimg.com/736x/b5/42/92/b5429233219a13f424d57bee08545ed8.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180153,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 667,
+      "desc": "Discover modern men's streetwear outfit ideas featuring relaxed fits, oversized layers, sneakers, neutral colors, and effortless everyday style. Save these streetwear looks for your next outfit inspiration.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#232120"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#F4F3EE"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Men's Streetwear Outfit Ideas",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1027383733775229462/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AacgGvMl3aw3h0xIB1ZisV8XgE4gcaelukm_-1eMzRoitdz6q_g9yY9tWlAodLVSDMLXN3eBa97eS77UefSJtHE",
+      "itemId": "pinterest-AacgGvMl3aw3h0xIB1ZisV8XgE4gcaelukm_-1eMzRoitdz6q_g9yY9tWlAodLVSDMLXN3eBa97eS77UefSJtHE",
+      "title": "L0V333 </3@🎼🖤🖤🖤",
+      "category": "streetwear",
+      "event_type": "ngonser",
+      "style": "Urban Streetwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AacgGvMl3aw3h0xIB1ZisV8XgE4gcaelukm_-1eMzRoitdz6q_g9yY9tWlAodLVSDMLXN3eBa97eS77UefSJtHE/",
+      "product_link": "https://www.pinterest.com/pin/AacgGvMl3aw3h0xIB1ZisV8XgE4gcaelukm_-1eMzRoitdz6q_g9yY9tWlAodLVSDMLXN3eBa97eS77UefSJtHE/",
+      "image": "https://i.pinimg.com/736x/be/ba/04/beba044907d9939ea8f0862fd93011b8.jpg",
+      "photo_url": "https://i.pinimg.com/736x/be/ba/04/beba044907d9939ea8f0862fd93011b8.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180170,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 580,
+      "desc": "Sweet but psycho, in my studded boots and leather jacket. Who said heels and bikes don’t mix?",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#796056"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "L0V333 </3@🎼🖤🖤🖤",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AacgGvMl3aw3h0xIB1ZisV8XgE4gcaelukm_-1eMzRoitdz6q_g9yY9tWlAodLVSDMLXN3eBa97eS77UefSJtHE/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-978407087805279300",
+      "itemId": "pinterest-978407087805279300",
+      "title": "25SUMMER 4th DROP.\n\n6.25(Wed) 6pm,\n25Summer 네 번째 디자인이 발매됩니다.",
+      "category": "pantai",
+      "event_type": "santai",
+      "style": "Summer Vacation Look",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/978407087805279300/",
+      "product_link": "https://www.pinterest.com/pin/978407087805279300/",
+      "image": "https://i.pinimg.com/736x/3d/a8/3b/3da83b7cd8d5065a628ce134ae67cfab.jpg",
+      "photo_url": "https://i.pinimg.com/736x/3d/a8/3b/3da83b7cd8d5065a628ce134ae67cfab.jpg",
+      "aspect": "aspect-[4/5]",
+      "priceTotal": 180187,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2801,
+      "desc": "25SUMMER 4th DROP.\n\n6.25(Wed) 6pm,\n25Summer 네 번째 디자인이 발매됩니다.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#504944"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "25SUMMER 4th DROP.\n\n6.25(Wed) 6pm,\n25Summer 네 번째 디자인이 발매됩니다.",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/978407087805279300/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-640637115794326613",
+      "itemId": "pinterest-640637115794326613",
+      "title": "Men's Cream T-Shirt and Brown Wide-Leg Trousers Outfit",
+      "category": "sporty",
+      "event_type": "santai",
+      "style": "Sporty Sneaker Chic",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/640637115794326613/",
+      "product_link": "https://www.pinterest.com/pin/640637115794326613/",
+      "image": "https://i.pinimg.com/736x/97/df/4f/97df4f9f50ee024d2c225bffb0f6e966.jpg",
+      "photo_url": "https://i.pinimg.com/736x/97/df/4f/97df4f9f50ee024d2c225bffb0f6e966.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180204,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 654,
+      "desc": "The everyday combination worth repeating. An oversized cream T-shirt, chocolate brown trousers and white sneakers, finished with a black weekender. Save this neutral men's outfit for casual Fridays, travel days and easy weekends.  AI-created outfit inspiration.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#8a8072"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Men's Cream T-Shirt and Brown Wide-Leg Trousers Outfit",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/640637115794326613/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AakDx9iAapnui1qN0vqSzBPlm33F3JUGwTSWIpQiigCDq42jR47-_H2nASAu9rJhu40aANSpnWgFdDg4S2wNvT4",
+      "itemId": "pinterest-AakDx9iAapnui1qN0vqSzBPlm33F3JUGwTSWIpQiigCDq42jR47-_H2nASAu9rJhu40aANSpnWgFdDg4S2wNvT4",
+      "title": "Monochromatic Mauve Set, Retro City Boy Vibe 🍇✨",
+      "category": "streetwear",
+      "event_type": "ngonser",
+      "style": "Urban Streetwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AakDx9iAapnui1qN0vqSzBPlm33F3JUGwTSWIpQiigCDq42jR47-_H2nASAu9rJhu40aANSpnWgFdDg4S2wNvT4/",
+      "product_link": "https://www.pinterest.com/pin/AakDx9iAapnui1qN0vqSzBPlm33F3JUGwTSWIpQiigCDq42jR47-_H2nASAu9rJhu40aANSpnWgFdDg4S2wNvT4/",
+      "image": "https://i.pinimg.com/736x/8b/4e/70/8b4e70d8abe1b256b4107681cf9449aa.jpg",
+      "photo_url": "https://i.pinimg.com/736x/8b/4e/70/8b4e70d8abe1b256b4107681cf9449aa.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180221,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 679,
+      "desc": "Take the guesswork out of daily styling. This matching set combines a drop-shoulder heavyweight tee with relaxed balloon pants in a washed dusty rose tone—giving you an instant, high-street streetwear look.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#c28b93"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Monochromatic Mauve Set, Retro City Boy Vibe 🍇✨",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AakDx9iAapnui1qN0vqSzBPlm33F3JUGwTSWIpQiigCDq42jR47-_H2nASAu9rJhu40aANSpnWgFdDg4S2wNvT4/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-872361390342579530",
+      "itemId": "pinterest-872361390342579530",
+      "title": "Men's outfit 《Asthetic Outfits 》",
+      "category": "streetwear",
+      "event_type": "ngonser",
+      "style": "Urban Streetwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/872361390342579530/",
+      "product_link": "https://www.pinterest.com/pin/872361390342579530/",
+      "image": "https://i.pinimg.com/736x/ca/39/86/ca398619ae1b169cf3e6e8fb30b0b070.jpg",
+      "photo_url": "https://i.pinimg.com/736x/ca/39/86/ca398619ae1b169cf3e6e8fb30b0b070.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180238,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 1440,
+      "desc": "Welcome to [Cotton Clan] - where modern fashion meets timeless design.\n\nWe create high-quality, trend-driven apparel that blends comfort, durability, and elevated style.\n\nOur collections are inspired by street culture, minimalism, and bold self-expression.\n\nEvery piece is crafted with attention to detail, premium materials, and a passion for innovation.\n\nTag us in your fits to get featured.\n\nCollaborations and influencer partnerships open message to connect.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#776b60"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Men's outfit 《Asthetic Outfits 》",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/872361390342579530/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-953426183648231307",
+      "itemId": "pinterest-953426183648231307",
+      "title": "Everyday Casual Pinterest Look",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/953426183648231307/",
+      "product_link": "https://www.pinterest.com/pin/953426183648231307/",
+      "image": "https://i.pinimg.com/736x/09/ad/45/09ad453a8664af500e16ed0768df28f7.jpg",
+      "photo_url": "https://i.pinimg.com/736x/09/ad/45/09ad453a8664af500e16ed0768df28f7.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180255,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 797,
+      "desc": "Inspirasi padu padan busana Everyday Casual Pinterest Look dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#e5e5e5"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Everyday Casual Pinterest Look",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/953426183648231307/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AUZPfiNrWmBrFRX06HWJ6qzAA3VTjPqSxL3QuqEgO97Pih-D8v45MuGXuCdLchFTlD4uN8N_nLmH1oarGi84sbY",
+      "itemId": "pinterest-AUZPfiNrWmBrFRX06HWJ6qzAA3VTjPqSxL3QuqEgO97Pih-D8v45MuGXuCdLchFTlD4uN8N_nLmH1oarGi84sbY",
+      "title": "鳥冷帽（現貨）",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AUZPfiNrWmBrFRX06HWJ6qzAA3VTjPqSxL3QuqEgO97Pih-D8v45MuGXuCdLchFTlD4uN8N_nLmH1oarGi84sbY/",
+      "product_link": "https://www.pinterest.com/pin/AUZPfiNrWmBrFRX06HWJ6qzAA3VTjPqSxL3QuqEgO97Pih-D8v45MuGXuCdLchFTlD4uN8N_nLmH1oarGi84sbY/",
+      "image": "https://i.pinimg.com/736x/28/be/b9/28beb9d410674cb535fdcacce0d422ef.jpg",
+      "photo_url": "https://i.pinimg.com/736x/28/be/b9/28beb9d410674cb535fdcacce0d422ef.jpg",
+      "aspect": "aspect-[1/1]",
+      "priceTotal": 180272,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 778,
+      "desc": "Inspirasi padu padan busana 鳥冷帽（現貨） dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#9e9085"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "鳥冷帽（現貨）",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AUZPfiNrWmBrFRX06HWJ6qzAA3VTjPqSxL3QuqEgO97Pih-D8v45MuGXuCdLchFTlD4uN8N_nLmH1oarGi84sbY/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-776448791992949730",
+      "itemId": "pinterest-776448791992949730",
+      "title": "ピッティ ウオモ(PITTI UOMO) 97 最新スニーカー事情！注目モデルをランキングで紹介",
+      "category": "formal",
+      "event_type": "kantor",
+      "style": "Sartorial Italian Tailoring",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/776448791992949730/",
+      "product_link": "https://www.pinterest.com/pin/776448791992949730/",
+      "image": "https://i.pinimg.com/736x/f9/ac/57/f9ac57f6a26c2a6f8badf1b4fab12c6d.jpg",
+      "photo_url": "https://i.pinimg.com/736x/f9/ac/57/f9ac57f6a26c2a6f8badf1b4fab12c6d.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180289,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 831,
+      "desc": "ピッティ ウオモ(PITTI UOMO) 97 最新スニーカー事情！注目モデルをランキングで紹介",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#847462"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "ピッティ ウオモ(PITTI UOMO) 97 最新スニーカー事情！注目モデルをランキングで紹介",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/776448791992949730/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1089660072386048506",
+      "itemId": "pinterest-1089660072386048506",
+      "title": "Rikes-Wohndesign",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1089660072386048506/",
+      "product_link": "https://www.pinterest.com/pin/1089660072386048506/",
+      "image": "https://i.pinimg.com/736x/58/44/7f/58447f026f9a0249a41b8fb28954a1a6.jpg",
+      "photo_url": "https://i.pinimg.com/736x/58/44/7f/58447f026f9a0249a41b8fb28954a1a6.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180459,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 1141,
+      "desc": "Inspirasi padu padan busana Rikes-Wohndesign dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#a7937f"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Rikes-Wohndesign",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1089660072386048506/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-333477547433996857",
+      "itemId": "pinterest-333477547433996857",
+      "title": "Casual hombre",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/333477547433996857/",
+      "product_link": "https://www.pinterest.com/pin/333477547433996857/",
+      "image": "https://i.pinimg.com/736x/25/94/d1/2594d120686a7befbb019dd6603f0a37.jpg",
+      "photo_url": "https://i.pinimg.com/736x/25/94/d1/2594d120686a7befbb019dd6603f0a37.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180629,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 1571,
+      "desc": "Inspirasi padu padan busana Casual hombre dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#7f7f8a"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Casual hombre",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/333477547433996857/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-817544138653605308",
+      "itemId": "pinterest-817544138653605308",
+      "title": "20+ Grandpa-Core Fall Outfits",
+      "category": "smartcasual",
+      "event_type": "santai",
+      "style": "Soft Knit Cardigan Layer",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/817544138653605308/",
+      "product_link": "https://www.pinterest.com/pin/817544138653605308/",
+      "image": "https://i.pinimg.com/736x/74/6e/69/746e69ce2cda9907e8ff7c21daa888a9.jpg",
+      "photo_url": "https://i.pinimg.com/736x/74/6e/69/746e69ce2cda9907e8ff7c21daa888a9.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180646,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 1872,
+      "desc": "Autumn dressing feels more interesting when vintage menswear pieces are mixed with relaxed layers and soft seasonal textures. These ideas include sweater vests, corduroy pants, loafers, cardigans, button-down shirts, wool jackets, and easy retro-inspired combinations.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#cdaa99"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "20+ Grandpa-Core Fall Outfits",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/817544138653605308/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-461548661831839352",
+      "itemId": "pinterest-461548661831839352",
+      "title": "Discover 21 Stylish Bohemian Outfits for Men in 2024: From Cas...",
+      "category": "formal",
+      "event_type": "kantor",
+      "style": "Smart Formal Tailoring",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/461548661831839352/",
+      "product_link": "https://www.pinterest.com/pin/461548661831839352/",
+      "image": "https://i.pinimg.com/736x/af/80/74/af80742bc1f18e5895f22ebf7038a059.jpg",
+      "photo_url": "https://i.pinimg.com/736x/af/80/74/af80742bc1f18e5895f22ebf7038a059.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180663,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2985,
+      "desc": "Discover 21 Stylish Bohemian Outfits for Men in 2024: From Casual to Formal Looks, Beach Vibes to Party Attire - GentsOsprey",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#9e8b7d"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Discover 21 Stylish Bohemian Outfits for Men in 2024: From Cas...",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/461548661831839352/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-681239881114670770",
+      "itemId": "pinterest-681239881114670770",
+      "title": "clothes Outfit Style",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/681239881114670770/",
+      "product_link": "https://www.pinterest.com/pin/681239881114670770/",
+      "image": "https://i.pinimg.com/736x/da/92/8d/da928d3a8b6aca42532d7bdb43263620.jpg",
+      "photo_url": "https://i.pinimg.com/736x/da/92/8d/da928d3a8b6aca42532d7bdb43263620.jpg",
+      "aspect": "aspect-[4/5]",
+      "priceTotal": 180680,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 1610,
+      "desc": "Inspirasi padu padan busana clothes Outfit Style dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#b7babf"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "clothes Outfit Style",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/681239881114670770/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-915286324281056155",
+      "itemId": "pinterest-915286324281056155",
+      "title": "Everyday Casual Pinterest Look",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/915286324281056155/",
+      "product_link": "https://www.pinterest.com/pin/915286324281056155/",
+      "image": "https://i.pinimg.com/736x/fd/91/9c/fd919c18d9303470fa1b2715ca4a5fb2.jpg",
+      "photo_url": "https://i.pinimg.com/736x/fd/91/9c/fd919c18d9303470fa1b2715ca4a5fb2.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180697,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2287,
+      "desc": "Inspirasi padu padan busana Everyday Casual Pinterest Look dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#5b5a5a"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Everyday Casual Pinterest Look",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/915286324281056155/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1034561345671697199",
+      "itemId": "pinterest-1034561345671697199",
+      "title": "new fashion Outfit Style",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1034561345671697199/",
+      "product_link": "https://www.pinterest.com/pin/1034561345671697199/",
+      "image": "https://i.pinimg.com/736x/59/97/30/5997302190ae5cd08fa9b0d71188c52c.jpg",
+      "photo_url": "https://i.pinimg.com/736x/59/97/30/5997302190ae5cd08fa9b0d71188c52c.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180714,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 3972,
+      "desc": "Inspirasi padu padan busana new fashion Outfit Style dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#413b32"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "new fashion Outfit Style",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1034561345671697199/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-485262928615535925",
+      "itemId": "pinterest-485262928615535925",
+      "title": "The Best Street Style Photos From the Resort 2024 Shows in Sydney",
+      "category": "streetwear",
+      "event_type": "ngonser",
+      "style": "Urban Streetwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/485262928615535925/",
+      "product_link": "https://www.pinterest.com/pin/485262928615535925/",
+      "image": "https://i.pinimg.com/736x/62/ae/c9/62aec9afcaba8c840fb1a80d0064896a.jpg",
+      "photo_url": "https://i.pinimg.com/736x/62/ae/c9/62aec9afcaba8c840fb1a80d0064896a.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180748,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 5402,
+      "desc": "The Best Street Style Photos From the Resort 2024 Shows in Sydney | Vogue",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#9a938e"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "The Best Street Style Photos From the Resort 2024 Shows in Sydney",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/485262928615535925/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1024498615371331884",
+      "itemId": "pinterest-1024498615371331884",
+      "title": "Everyday Casual Pinterest Look",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1024498615371331884/",
+      "product_link": "https://www.pinterest.com/pin/1024498615371331884/",
+      "image": "https://i.pinimg.com/736x/cc/70/f8/cc70f8b359a1d6e06a6df2aa4077c0d3.jpg",
+      "photo_url": "https://i.pinimg.com/736x/cc/70/f8/cc70f8b359a1d6e06a6df2aa4077c0d3.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180765,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2131,
+      "desc": "Inspirasi padu padan busana Everyday Casual Pinterest Look dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#657a77"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Everyday Casual Pinterest Look",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1024498615371331884/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-243405554854201716",
+      "itemId": "pinterest-243405554854201716",
+      "title": "Pierre Mahéo Officine Générale",
+      "category": "pesta",
+      "event_type": "dating",
+      "style": "Elevated Date Night",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/243405554854201716/",
+      "product_link": "https://www.pinterest.com/pin/243405554854201716/",
+      "image": "https://i.pinimg.com/736x/5f/61/03/5f6103977c33ea26b748aa1050d358c1.jpg",
+      "photo_url": "https://i.pinimg.com/736x/5f/61/03/5f6103977c33ea26b748aa1050d358c1.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180782,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2060,
+      "desc": "Plus cool que jamais, la maison Officine Générale célèbre cette année dix ans d’existence. Rencontre avec son fondateur et directeur artistique, Pierre Mahéo.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#bdad9a"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Pierre Mahéo Officine Générale",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/243405554854201716/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1086282372638916818",
+      "itemId": "pinterest-1086282372638916818",
+      "title": "Men’s Outfit Inspiration 2026 – Best Casual, Wedding & Indo We...",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1086282372638916818/",
+      "product_link": "https://www.pinterest.com/pin/1086282372638916818/",
+      "image": "https://i.pinimg.com/736x/a5/83/c3/a583c395a9133f31190311989d79caa9.jpg",
+      "photo_url": "https://i.pinimg.com/736x/a5/83/c3/a583c395a9133f31190311989d79caa9.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180799,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 1969,
+      "desc": "Men’s Outfit Inspiration 2026 – Best Casual, Wedding & Indo Western Styles",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#eae9e7"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Men’s Outfit Inspiration 2026 – Best Casual, Wedding & Indo We...",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1086282372638916818/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-958914945676543458",
+      "itemId": "pinterest-958914945676543458",
+      "title": "Everyday Casual Pinterest Look",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/958914945676543458/",
+      "product_link": "https://www.pinterest.com/pin/958914945676543458/",
+      "image": "https://i.pinimg.com/736x/d9/07/23/d9072329682c99a1c70a44c4b42166af.jpg",
+      "photo_url": "https://i.pinimg.com/736x/d9/07/23/d9072329682c99a1c70a44c4b42166af.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180816,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2134,
+      "desc": "Inspirasi padu padan busana Everyday Casual Pinterest Look dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#908981"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Everyday Casual Pinterest Look",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/958914945676543458/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AWflx99fgwk5ka2kQSJuo3UjFpq2jHU-tOCQ47MYW8VYsOppJzzvmmBmK6DFoEtrQfLsFnHUPz0HuXNfZ7TE51I",
+      "itemId": "pinterest-AWflx99fgwk5ka2kQSJuo3UjFpq2jHU-tOCQ47MYW8VYsOppJzzvmmBmK6DFoEtrQfLsFnHUPz0HuXNfZ7TE51I",
+      "title": "VIVAIA Allday Unisex Comfy Slip-On Sneakers: Your perfect part...",
+      "category": "smartcasual",
+      "event_type": "kantor",
+      "style": "Smart Loafer Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AWflx99fgwk5ka2kQSJuo3UjFpq2jHU-tOCQ47MYW8VYsOppJzzvmmBmK6DFoEtrQfLsFnHUPz0HuXNfZ7TE51I/",
+      "product_link": "https://www.pinterest.com/pin/AWflx99fgwk5ka2kQSJuo3UjFpq2jHU-tOCQ47MYW8VYsOppJzzvmmBmK6DFoEtrQfLsFnHUPz0HuXNfZ7TE51I/",
+      "image": "https://i.pinimg.com/736x/5b/ba/9e/5bba9e68974e5d89a49005f5161d2cf9.jpg",
+      "photo_url": "https://i.pinimg.com/736x/5b/ba/9e/5bba9e68974e5d89a49005f5161d2cf9.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180833,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 1875,
+      "desc": "@ugc.nataliya All-day comfort sneakers that are breathable, comfy, and sooo pretty! They’re my go-to for workouts and everyday wear.✅Roomy toe box✅Enhanced arch support✅Hands-free design✅Machine washable✅Free Shipping & Returns",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#a1907f"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "VIVAIA Allday Unisex Comfy Slip-On Sneakers: Your perfect part...",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AWflx99fgwk5ka2kQSJuo3UjFpq2jHU-tOCQ47MYW8VYsOppJzzvmmBmK6DFoEtrQfLsFnHUPz0HuXNfZ7TE51I/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AbyNV8wwsAjRoR68_TT9TVXzS-S629vsOhJEu3tEi653G0GYxVh63gFq6Klhn3MQO8Hj0TP-vc2txNHtbgAeIeE",
+      "itemId": "pinterest-AbyNV8wwsAjRoR68_TT9TVXzS-S629vsOhJEu3tEi653G0GYxVh63gFq6Klhn3MQO8Hj0TP-vc2txNHtbgAeIeE",
+      "title": "The Detail People Notice — Premium Streetwear · Loved by 100,0...",
+      "category": "streetwear",
+      "event_type": "ngonser",
+      "style": "Urban Streetwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AbyNV8wwsAjRoR68_TT9TVXzS-S629vsOhJEu3tEi653G0GYxVh63gFq6Klhn3MQO8Hj0TP-vc2txNHtbgAeIeE/",
+      "product_link": "https://www.pinterest.com/pin/AbyNV8wwsAjRoR68_TT9TVXzS-S629vsOhJEu3tEi653G0GYxVh63gFq6Klhn3MQO8Hj0TP-vc2txNHtbgAeIeE/",
+      "image": "https://i.pinimg.com/736x/c3/a8/e1/c3a8e1cd8b2cf73aea03a2c12fe5f24e.jpg",
+      "photo_url": "https://i.pinimg.com/736x/c3/a8/e1/c3a8e1cd8b2cf73aea03a2c12fe5f24e.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180850,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 1900,
+      "desc": "Not basic. Just better.\n\nChocolate brown premium streetwear with signature handcrafted appliqués. The kind of piece you build your wardrobe around.\n\n– Premium heavyweight cotton\n– Hand-stitched plush details\n– Relaxed silhouette, refined fit\n– European craftsmanship\n\nCute is the new classic. In chocolate.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#977f62"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "The Detail People Notice — Premium Streetwear · Loved by 100,0...",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AbyNV8wwsAjRoR68_TT9TVXzS-S629vsOhJEu3tEi653G0GYxVh63gFq6Klhn3MQO8Hj0TP-vc2txNHtbgAeIeE/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-Acj-_zjiQnGzuzZQmBfhDNV_3Pv9Tke_yepULGm66eIEx3LZBfGE8yFl-XGls_TVzAUmyXmxWwWOHxEQQGsK2xU",
+      "itemId": "pinterest-Acj-_zjiQnGzuzZQmBfhDNV_3Pv9Tke_yepULGm66eIEx3LZBfGE8yFl-XGls_TVzAUmyXmxWwWOHxEQQGsK2xU",
+      "title": "MSPO Training Track Jacket",
+      "category": "outerwear",
+      "event_type": "santai",
+      "style": "Layering Outerwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/Acj-_zjiQnGzuzZQmBfhDNV_3Pv9Tke_yepULGm66eIEx3LZBfGE8yFl-XGls_TVzAUmyXmxWwWOHxEQQGsK2xU/",
+      "product_link": "https://www.pinterest.com/pin/Acj-_zjiQnGzuzZQmBfhDNV_3Pv9Tke_yepULGm66eIEx3LZBfGE8yFl-XGls_TVzAUmyXmxWwWOHxEQQGsK2xU/",
+      "image": "https://i.pinimg.com/736x/5f/ea/6e/5fea6e375850f73f42c975dfd1f71c6b.jpg",
+      "photo_url": "https://i.pinimg.com/736x/5f/ea/6e/5fea6e375850f73f42c975dfd1f71c6b.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180867,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 1933,
+      "desc": "Inspirasi padu padan busana MSPO Training Track Jacket dengan sentuhan layering outerwear dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#17181a"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#F4F3EE"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "MSPO Training Track Jacket",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/Acj-_zjiQnGzuzZQmBfhDNV_3Pv9Tke_yepULGm66eIEx3LZBfGE8yFl-XGls_TVzAUmyXmxWwWOHxEQQGsK2xU/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-92042386130877974",
+      "itemId": "pinterest-92042386130877974",
+      "title": "Everyday Casual Pinterest Look",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/92042386130877974/",
+      "product_link": "https://www.pinterest.com/pin/92042386130877974/",
+      "image": "https://i.pinimg.com/736x/5e/a5/00/5ea500c5c35661857a15f974ce0ed423.jpg",
+      "photo_url": "https://i.pinimg.com/736x/5e/a5/00/5ea500c5c35661857a15f974ce0ed423.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 180901,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2935,
+      "desc": "Inspirasi padu padan busana Everyday Casual Pinterest Look dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#a5a59e"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Everyday Casual Pinterest Look",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/92042386130877974/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AYKP3WGiZw_Ox2RCjQ-2lBycqVwIRrzB-jq6-mWs-_eg8eeuKnuE-UOKz1071i-y2_-irXkZPTTbsHkQNR-SVuc",
+      "itemId": "pinterest-AYKP3WGiZw_Ox2RCjQ-2lBycqVwIRrzB-jq6-mWs-_eg8eeuKnuE-UOKz1071i-y2_-irXkZPTTbsHkQNR-SVuc",
+      "title": "Personalized Couple Poker Embroidered Sweatshirt",
+      "category": "minimalist",
+      "event_type": "santai",
+      "style": "Clean Minimalist",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AYKP3WGiZw_Ox2RCjQ-2lBycqVwIRrzB-jq6-mWs-_eg8eeuKnuE-UOKz1071i-y2_-irXkZPTTbsHkQNR-SVuc/",
+      "product_link": "https://www.pinterest.com/pin/AYKP3WGiZw_Ox2RCjQ-2lBycqVwIRrzB-jq6-mWs-_eg8eeuKnuE-UOKz1071i-y2_-irXkZPTTbsHkQNR-SVuc/",
+      "image": "https://i.pinimg.com/736x/8b/ec/35/8bec35b527bbaffb8ce75a8815649f3f.jpg",
+      "photo_url": "https://i.pinimg.com/736x/8b/ec/35/8bec35b527bbaffb8ce75a8815649f3f.jpg",
+      "aspect": "aspect-[1/1]",
+      "priceTotal": 180952,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2098,
+      "desc": "Each sweatshirt features a custom poker-style embroidered design inspired by classic playing cards. Your uploaded photo is carefully adapted into a clean embroidered illustration, keeping the look minimal, modern, and wearable. The chest embroidery adds a subtle statement, while personalized names on the sleeve create a thoughtful finishing touch.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#8d6e47"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Personalized Couple Poker Embroidered Sweatshirt",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AYKP3WGiZw_Ox2RCjQ-2lBycqVwIRrzB-jq6-mWs-_eg8eeuKnuE-UOKz1071i-y2_-irXkZPTTbsHkQNR-SVuc/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-937522847457543526",
+      "itemId": "pinterest-937522847457543526",
+      "title": "Edgy Grunge Streetwear Inspo: Dark Aesthetics, Layered Fits, a...",
+      "category": "streetwear",
+      "event_type": "ngonser",
+      "style": "Urban Streetwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/937522847457543526/",
+      "product_link": "https://www.pinterest.com/pin/937522847457543526/",
+      "image": "https://i.pinimg.com/736x/c5/06/ec/c506ec012dbd628f562e7c8dbc097913.jpg",
+      "photo_url": "https://i.pinimg.com/736x/c5/06/ec/c506ec012dbd628f562e7c8dbc097913.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 180969,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2167,
+      "desc": "😌😌😌 Dive into edgy grunge streetwear inspo—dark aesthetics, layered fits, and DIY outfit ideas to reinvent your look. Think distressed denim, oversized silhouettes, bold textures, and thrifted pieces remixed with safety pins and patches. Perfect for moody city vibes and rebellious self-expression—mix, match, and make it yours. 😌",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#767874"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Edgy Grunge Streetwear Inspo: Dark Aesthetics, Layered Fits, a...",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/937522847457543526/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AUUERUQ3NgZ0oLg2TQf-wfZlQZJIgiuWNu3bA0ApDjNBp9OiJyzKTotteO5GRnNh8EP22pIsJPWhf3nJoNYeu9U",
+      "itemId": "pinterest-AUUERUQ3NgZ0oLg2TQf-wfZlQZJIgiuWNu3bA0ApDjNBp9OiJyzKTotteO5GRnNh8EP22pIsJPWhf3nJoNYeu9U",
+      "title": "DEADLY MIKE Red Men's Champion T-Shirt",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AUUERUQ3NgZ0oLg2TQf-wfZlQZJIgiuWNu3bA0ApDjNBp9OiJyzKTotteO5GRnNh8EP22pIsJPWhf3nJoNYeu9U/",
+      "product_link": "https://www.pinterest.com/pin/AUUERUQ3NgZ0oLg2TQf-wfZlQZJIgiuWNu3bA0ApDjNBp9OiJyzKTotteO5GRnNh8EP22pIsJPWhf3nJoNYeu9U/",
+      "image": "https://i.pinimg.com/736x/09/9e/b9/099eb949e715a69d7283a26e14f7349b.jpg",
+      "photo_url": "https://i.pinimg.com/736x/09/9e/b9/099eb949e715a69d7283a26e14f7349b.jpg",
+      "aspect": "aspect-[1/1]",
+      "priceTotal": 180986,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2164,
+      "desc": "DEADLY MIKE Red Men's Champion T-Shirt | Official Madukes",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#181818"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#F4F3EE"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "DEADLY MIKE Red Men's Champion T-Shirt",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AUUERUQ3NgZ0oLg2TQf-wfZlQZJIgiuWNu3bA0ApDjNBp9OiJyzKTotteO5GRnNh8EP22pIsJPWhf3nJoNYeu9U/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1069534611529301270",
+      "itemId": "pinterest-1069534611529301270",
+      "title": "Quiet Luxury Men’s Outfit – Neutral Knitwear Style",
+      "category": "oldmoney",
+      "event_type": "santai",
+      "style": "Quiet Luxury Heritage",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1069534611529301270/",
+      "product_link": "https://www.pinterest.com/pin/1069534611529301270/",
+      "image": "https://i.pinimg.com/736x/d9/cf/33/d9cf33b9332b45e26c2b1cd1ee55345b.jpg",
+      "photo_url": "https://i.pinimg.com/736x/d9/cf/33/d9cf33b9332b45e26c2b1cd1ee55345b.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 181003,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 3881,
+      "desc": "A refined neutral menswear look featuring soft knitwear, relaxed cream trousers and clean sneakers. Discover modern luxury pieces and timeless outfit inspiration at AllureMen.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#5e554d"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Quiet Luxury Men’s Outfit – Neutral Knitwear Style",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1069534611529301270/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-Acn2TZs9siEE-d74nlQJOTid2jctsuRPHg1JKDW5TsPwMYAQ9m-pqASDoM6StmKpmKMletsF6wJr_e37c1f1ivk",
+      "itemId": "pinterest-Acn2TZs9siEE-d74nlQJOTid2jctsuRPHg1JKDW5TsPwMYAQ9m-pqASDoM6StmKpmKMletsF6wJr_e37c1f1ivk",
+      "title": "Celebrate in style this season",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/Acn2TZs9siEE-d74nlQJOTid2jctsuRPHg1JKDW5TsPwMYAQ9m-pqASDoM6StmKpmKMletsF6wJr_e37c1f1ivk/",
+      "product_link": "https://www.pinterest.com/pin/Acn2TZs9siEE-d74nlQJOTid2jctsuRPHg1JKDW5TsPwMYAQ9m-pqASDoM6StmKpmKMletsF6wJr_e37c1f1ivk/",
+      "image": "https://i.pinimg.com/736x/6b/7d/a0/6b7da0e9b82513db7cb12b888b468e62.jpg",
+      "photo_url": "https://i.pinimg.com/736x/6b/7d/a0/6b7da0e9b82513db7cb12b888b468e62.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181037,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2263,
+      "desc": "10% off code <HiSoo10>\nFree shipping on orders over $120",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#4c4943"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Celebrate in style this season",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/Acn2TZs9siEE-d74nlQJOTid2jctsuRPHg1JKDW5TsPwMYAQ9m-pqASDoM6StmKpmKMletsF6wJr_e37c1f1ivk/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AXcSSdu69pbcNmWhJgQNmtbRIM9vlyx9QN8DOR10a5NJxC7lKihae_0gr8vvNdjRCA6QOWNd2e7yTuRIxl-CFgA",
+      "itemId": "pinterest-AXcSSdu69pbcNmWhJgQNmtbRIM9vlyx9QN8DOR10a5NJxC7lKihae_0gr8vvNdjRCA6QOWNd2e7yTuRIxl-CFgA",
+      "title": "Oversized Boxy Knitted Crewneck JerseyVobia - Pakol",
+      "category": "minimalist",
+      "event_type": "santai",
+      "style": "Minimalist Knitwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AXcSSdu69pbcNmWhJgQNmtbRIM9vlyx9QN8DOR10a5NJxC7lKihae_0gr8vvNdjRCA6QOWNd2e7yTuRIxl-CFgA/",
+      "product_link": "https://www.pinterest.com/pin/AXcSSdu69pbcNmWhJgQNmtbRIM9vlyx9QN8DOR10a5NJxC7lKihae_0gr8vvNdjRCA6QOWNd2e7yTuRIxl-CFgA/",
+      "image": "https://i.pinimg.com/736x/d8/8c/34/d88c342ac7e3cc7a493383e421f341d2.jpg",
+      "photo_url": "https://i.pinimg.com/736x/d8/8c/34/d88c342ac7e3cc7a493383e421f341d2.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 181054,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2296,
+      "desc": "Vobia Crewneck Knitted Oversized Boxy - Pakolo\n\nProduct Specifications:\n- Nylon Acrylic Material 370 gsm\n- Regular Fit\n- Size Chart is on the last slide of the product photo\n\nNote:\n- Complaints can only be processed by including an UNBOXING VIDEO.\n- Without VIDEO UNBOXING, the product exchange guarantee is not valid.\n- All products in the display case can be ordered immediately as long as stock is available\n- Product deliveries are made every Monday-Saturday from 9.00-17.00 WIB\n- Product delivery from Depok\n- Every purchase before 5 pm will be sent on the same day\n- instant and sameday delivery applies to orders before 4 pm\n- A difference of 1-2 cm in the product may occur due to the development and production process\n- Please wash before the product is used",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#877f7b"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Oversized Boxy Knitted Crewneck JerseyVobia - Pakol",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AXcSSdu69pbcNmWhJgQNmtbRIM9vlyx9QN8DOR10a5NJxC7lKihae_0gr8vvNdjRCA6QOWNd2e7yTuRIxl-CFgA/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1088393434980132667",
+      "itemId": "pinterest-1088393434980132667",
+      "title": "Luxury Casual Outfit Ideas for Men",
+      "category": "oldmoney",
+      "event_type": "santai",
+      "style": "Quiet Luxury Heritage",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1088393434980132667/",
+      "product_link": "https://www.pinterest.com/pin/1088393434980132667/",
+      "image": "https://i.pinimg.com/736x/c8/2a/3c/c82a3c860b60d352a3046d09a469a04f.jpg",
+      "photo_url": "https://i.pinimg.com/736x/c8/2a/3c/c82a3c860b60d352a3046d09a469a04f.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 181071,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2341,
+      "desc": "Discover a refined quiet-luxury look built from premium basics, neutral tones, tailored trousers and sophisticated leather footwear.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#9a866d"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Luxury Casual Outfit Ideas for Men",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1088393434980132667/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AWJjEKo9zgFN5RNECoaGVM6O87jOyTzd-gxMICNIxZpYSN6A6oK5vLGKd8CiqmI8zai2xM6mQpPymIltRS9qfIk",
+      "itemId": "pinterest-AWJjEKo9zgFN5RNECoaGVM6O87jOyTzd-gxMICNIxZpYSN6A6oK5vLGKd8CiqmI8zai2xM6mQpPymIltRS9qfIk",
+      "title": "20% off sitewide",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AWJjEKo9zgFN5RNECoaGVM6O87jOyTzd-gxMICNIxZpYSN6A6oK5vLGKd8CiqmI8zai2xM6mQpPymIltRS9qfIk/",
+      "product_link": "https://www.pinterest.com/pin/AWJjEKo9zgFN5RNECoaGVM6O87jOyTzd-gxMICNIxZpYSN6A6oK5vLGKd8CiqmI8zai2xM6mQpPymIltRS9qfIk/",
+      "image": "https://i.pinimg.com/736x/fb/61/a3/fb61a3a113f5f4f41456bd414e8aef9e.jpg",
+      "photo_url": "https://i.pinimg.com/736x/fb/61/a3/fb61a3a113f5f4f41456bd414e8aef9e.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181088,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2362,
+      "desc": "Enjoy 20% off sitewide with code BF20. For a limited time only. Free shipping & extended returns.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#673b29"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "20% off sitewide",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AWJjEKo9zgFN5RNECoaGVM6O87jOyTzd-gxMICNIxZpYSN6A6oK5vLGKd8CiqmI8zai2xM6mQpPymIltRS9qfIk/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-135741376265098068",
+      "itemId": "pinterest-135741376265098068",
+      "title": "First Look at July",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/135741376265098068/",
+      "product_link": "https://www.pinterest.com/pin/135741376265098068/",
+      "image": "https://i.pinimg.com/736x/c6/c8/22/c6c822364c4934058be3ed21306ad956.jpg",
+      "photo_url": "https://i.pinimg.com/736x/c6/c8/22/c6c822364c4934058be3ed21306ad956.jpg",
+      "aspect": "aspect-[4/5]",
+      "priceTotal": 181105,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 3023,
+      "desc": "First Look at July - Buck Mason- Modern American Classics",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#4d3c2c"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "First Look at July",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/135741376265098068/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AWz-ySpfsx2nZuh95z142NI6XreggfL5fgJLuQCKStsW2XOTpIEH-aWKJ8XSTsJCgOX85BdXKNbM7JS0qQSo2Zg",
+      "itemId": "pinterest-AWz-ySpfsx2nZuh95z142NI6XreggfL5fgJLuQCKStsW2XOTpIEH-aWKJ8XSTsJCgOX85BdXKNbM7JS0qQSo2Zg",
+      "title": "Say Goodbye to Outfit Stress 👚",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AWz-ySpfsx2nZuh95z142NI6XreggfL5fgJLuQCKStsW2XOTpIEH-aWKJ8XSTsJCgOX85BdXKNbM7JS0qQSo2Zg/",
+      "product_link": "https://www.pinterest.com/pin/AWz-ySpfsx2nZuh95z142NI6XreggfL5fgJLuQCKStsW2XOTpIEH-aWKJ8XSTsJCgOX85BdXKNbM7JS0qQSo2Zg/",
+      "image": "https://i.pinimg.com/736x/69/19/de/6919dedb2d1df8d6dcb3adccee98b4dd.jpg",
+      "photo_url": "https://i.pinimg.com/736x/69/19/de/6919dedb2d1df8d6dcb3adccee98b4dd.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181122,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2428,
+      "desc": "Organize your wardrobe, plan fresh looks, and get daily outfit inspo from Stylix AI.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#f6f1ed"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Say Goodbye to Outfit Stress 👚",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AWz-ySpfsx2nZuh95z142NI6XreggfL5fgJLuQCKStsW2XOTpIEH-aWKJ8XSTsJCgOX85BdXKNbM7JS0qQSo2Zg/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AZkUYvbJF4upxJNCz9Sy_ClrcxqP_mrmNEsMKcXBPqDQIPsUVTmDw2MhoJoKPzZlOCZ_p7EclhR_aoc4rMXEVtQ",
+      "itemId": "pinterest-AZkUYvbJF4upxJNCz9Sy_ClrcxqP_mrmNEsMKcXBPqDQIPsUVTmDw2MhoJoKPzZlOCZ_p7EclhR_aoc4rMXEVtQ",
+      "title": "Low-rise & High Attitude: Y2K Street Style Outfits",
+      "category": "streetwear",
+      "event_type": "ngonser",
+      "style": "Urban Streetwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AZkUYvbJF4upxJNCz9Sy_ClrcxqP_mrmNEsMKcXBPqDQIPsUVTmDw2MhoJoKPzZlOCZ_p7EclhR_aoc4rMXEVtQ/",
+      "product_link": "https://www.pinterest.com/pin/AZkUYvbJF4upxJNCz9Sy_ClrcxqP_mrmNEsMKcXBPqDQIPsUVTmDw2MhoJoKPzZlOCZ_p7EclhR_aoc4rMXEVtQ/",
+      "image": "https://i.pinimg.com/736x/c4/39/78/c43978a86a71d1c4f42e6616655f47ba.jpg",
+      "photo_url": "https://i.pinimg.com/736x/c4/39/78/c43978a86a71d1c4f42e6616655f47ba.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181139,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2481,
+      "desc": "Explore more edgy designer streetwear at Psylos1 to level up your 2000s aesthetic.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#645953"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Low-rise & High Attitude: Y2K Street Style Outfits",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AZkUYvbJF4upxJNCz9Sy_ClrcxqP_mrmNEsMKcXBPqDQIPsUVTmDw2MhoJoKPzZlOCZ_p7EclhR_aoc4rMXEVtQ/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-996984436259843966",
+      "itemId": "pinterest-996984436259843966",
+      "title": "Everyday Casual Pinterest Look",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/996984436259843966/",
+      "product_link": "https://www.pinterest.com/pin/996984436259843966/",
+      "image": "https://i.pinimg.com/736x/a7/50/a3/a750a305dbbd67caa29451a7dec13db1.jpg",
+      "photo_url": "https://i.pinimg.com/736x/a7/50/a3/a750a305dbbd67caa29451a7dec13db1.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181156,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 9838,
+      "desc": "Inspirasi padu padan busana Everyday Casual Pinterest Look dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#938d87"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Everyday Casual Pinterest Look",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/996984436259843966/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-726205508709466266",
+      "itemId": "pinterest-726205508709466266",
+      "title": "Mens outfits Outfit Style",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/726205508709466266/",
+      "product_link": "https://www.pinterest.com/pin/726205508709466266/",
+      "image": "https://i.pinimg.com/736x/af/eb/e0/afebe08749038a88fbfac8ca07164081.jpg",
+      "photo_url": "https://i.pinimg.com/736x/af/eb/e0/afebe08749038a88fbfac8ca07164081.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 181173,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2559,
+      "desc": "MENS OUTFIT INSPIRATION",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#f5f4f1"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Mens outfits Outfit Style",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/726205508709466266/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-Aci15p6JuxpJI9mnXhUZ6vsOa2HbqeOPiuVFiwWjDD7eKbM_-K9XpQdAhT88JS9m6aQj7SJoSyZ7s4dzwoSkNKw",
+      "itemId": "pinterest-Aci15p6JuxpJI9mnXhUZ6vsOa2HbqeOPiuVFiwWjDD7eKbM_-K9XpQdAhT88JS9m6aQj7SJoSyZ7s4dzwoSkNKw",
+      "title": "20% off sitewide",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/Aci15p6JuxpJI9mnXhUZ6vsOa2HbqeOPiuVFiwWjDD7eKbM_-K9XpQdAhT88JS9m6aQj7SJoSyZ7s4dzwoSkNKw/",
+      "product_link": "https://www.pinterest.com/pin/Aci15p6JuxpJI9mnXhUZ6vsOa2HbqeOPiuVFiwWjDD7eKbM_-K9XpQdAhT88JS9m6aQj7SJoSyZ7s4dzwoSkNKw/",
+      "image": "https://i.pinimg.com/736x/ba/e1/d9/bae1d94aec7e9cdf2a76a126958d3ec8.jpg",
+      "photo_url": "https://i.pinimg.com/736x/ba/e1/d9/bae1d94aec7e9cdf2a76a126958d3ec8.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181241,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2659,
+      "desc": "Enjoy 20% off sitewide with code BF20. For a limited time only. Free shipping & extended returns.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#2c2625"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#F4F3EE"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "20% off sitewide",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/Aci15p6JuxpJI9mnXhUZ6vsOa2HbqeOPiuVFiwWjDD7eKbM_-K9XpQdAhT88JS9m6aQj7SJoSyZ7s4dzwoSkNKw/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-47639708554378388",
+      "itemId": "pinterest-47639708554378388",
+      "title": "JAPAN Outfit Style",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/47639708554378388/",
+      "product_link": "https://www.pinterest.com/pin/47639708554378388/",
+      "image": "https://i.pinimg.com/736x/4f/aa/88/4faa88ec8188131c75f679384424bd32.jpg",
+      "photo_url": "https://i.pinimg.com/736x/4f/aa/88/4faa88ec8188131c75f679384424bd32.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181258,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 4076,
+      "desc": "Inspirasi padu padan busana JAPAN Outfit Style dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#524e45"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "JAPAN Outfit Style",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/47639708554378388/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1053490537856626001",
+      "itemId": "pinterest-1053490537856626001",
+      "title": "Everyday Casual Pinterest Look",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1053490537856626001/",
+      "product_link": "https://www.pinterest.com/pin/1053490537856626001/",
+      "image": "https://i.pinimg.com/736x/cb/e5/7e/cbe57e7df96d15a1a13e5c1523cb233c.jpg",
+      "photo_url": "https://i.pinimg.com/736x/cb/e5/7e/cbe57e7df96d15a1a13e5c1523cb233c.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181275,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 3557,
+      "desc": "Inspirasi padu padan busana Everyday Casual Pinterest Look dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#514335"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Everyday Casual Pinterest Look",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1053490537856626001/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1088745278703724365",
+      "itemId": "pinterest-1088745278703724365",
+      "title": "best combination .",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1088745278703724365/",
+      "product_link": "https://www.pinterest.com/pin/1088745278703724365/",
+      "image": "https://i.pinimg.com/736x/66/3e/57/663e578be7c53278443e49045ada345e.jpg",
+      "photo_url": "https://i.pinimg.com/736x/66/3e/57/663e578be7c53278443e49045ada345e.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181326,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2828,
+      "desc": "Inspirasi padu padan busana best combination . dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#ada391"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "best combination .",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1088745278703724365/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-624170829641717615",
+      "itemId": "pinterest-624170829641717615",
+      "title": "lucas",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/624170829641717615/",
+      "product_link": "https://www.pinterest.com/pin/624170829641717615/",
+      "image": "https://i.pinimg.com/736x/0a/de/3b/0ade3b0550462117ee62e5bac035cc87.jpg",
+      "photo_url": "https://i.pinimg.com/736x/0a/de/3b/0ade3b0550462117ee62e5bac035cc87.jpg",
+      "aspect": "aspect-[4/5]",
+      "priceTotal": 181343,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 7521,
+      "desc": "lucas | Just a little recap of some favorite outfits lately. Which one’s your favorite? 🤞🏽 . . . . . . .    | Instagram",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#745a3a"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "lucas",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/624170829641717615/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-4594656915999451520",
+      "itemId": "pinterest-4594656915999451520",
+      "title": "Men's Fall Outfits 2026: 12 Trendy Looks to Upgrade Your Wardrobe",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/4594656915999451520/",
+      "product_link": "https://www.pinterest.com/pin/4594656915999451520/",
+      "image": "https://i.pinimg.com/736x/a4/74/bb/a474bb15b3bb7d8690f7b4aa38d91a93.jpg",
+      "photo_url": "https://i.pinimg.com/736x/a4/74/bb/a474bb15b3bb7d8690f7b4aa38d91a93.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181360,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 4534,
+      "desc": "Inspirasi padu padan busana Men's Fall Outfits 2026: 12 Trendy Looks to Upgrade Your Wardrobe dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#7e7165"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Men's Fall Outfits 2026: 12 Trendy Looks to Upgrade Your Wardrobe",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/4594656915999451520/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1130122100275578083",
+      "itemId": "pinterest-1130122100275578083",
+      "title": "Casual street style in the city",
+      "category": "streetwear",
+      "event_type": "ngonser",
+      "style": "Urban Streetwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1130122100275578083/",
+      "product_link": "https://www.pinterest.com/pin/1130122100275578083/",
+      "image": "https://i.pinimg.com/736x/3e/02/1b/3e021b1377f47b8d3ada98be6612abf2.jpg",
+      "photo_url": "https://i.pinimg.com/736x/3e/02/1b/3e021b1377f47b8d3ada98be6612abf2.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181377,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 2979,
+      "desc": "Inspirasi padu padan busana Casual street style in the city dengan sentuhan urban streetwear dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#53504e"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Casual street style in the city",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1130122100275578083/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AYiJcnNeFh8YoLpGcLqctia3IMliV7roxYlFF1hImD_Dwjmtx6uiD1HpdKeRRK1-MOb5cf6MCYIPiHabIxFPyAs",
+      "itemId": "pinterest-AYiJcnNeFh8YoLpGcLqctia3IMliV7roxYlFF1hImD_Dwjmtx6uiD1HpdKeRRK1-MOb5cf6MCYIPiHabIxFPyAs",
+      "title": "Everyday Urban Aesthetics. As always, with love",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AYiJcnNeFh8YoLpGcLqctia3IMliV7roxYlFF1hImD_Dwjmtx6uiD1HpdKeRRK1-MOb5cf6MCYIPiHabIxFPyAs/",
+      "product_link": "https://www.pinterest.com/pin/AYiJcnNeFh8YoLpGcLqctia3IMliV7roxYlFF1hImD_Dwjmtx6uiD1HpdKeRRK1-MOb5cf6MCYIPiHabIxFPyAs/",
+      "image": "https://i.pinimg.com/736x/9f/64/e7/9f64e7e0cd30405b40e9d0e47fc5ab65.jpg",
+      "photo_url": "https://i.pinimg.com/736x/9f/64/e7/9f64e7e0cd30405b40e9d0e47fc5ab65.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 181394,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 3680,
+      "desc": "Inspirasi padu padan busana Everyday Urban Aesthetics. As always, with love dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#91877d"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Everyday Urban Aesthetics. As always, with love",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AYiJcnNeFh8YoLpGcLqctia3IMliV7roxYlFF1hImD_Dwjmtx6uiD1HpdKeRRK1-MOb5cf6MCYIPiHabIxFPyAs/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-688769336776624779",
+      "itemId": "pinterest-688769336776624779",
+      "title": "Drip Outfit Style",
+      "category": "streetwear",
+      "event_type": "ngonser",
+      "style": "Modern Drip Streetwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/688769336776624779/",
+      "product_link": "https://www.pinterest.com/pin/688769336776624779/",
+      "image": "https://i.pinimg.com/736x/b5/6b/52/b56b52d8ae58b900f003ebd7245e18ad.jpg",
+      "photo_url": "https://i.pinimg.com/736x/b5/6b/52/b56b52d8ae58b900f003ebd7245e18ad.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181411,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 3329,
+      "desc": "Inspirasi padu padan busana Drip Outfit Style dengan sentuhan modern drip streetwear dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#1f1416"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#F4F3EE"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Drip Outfit Style",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/688769336776624779/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1146940230218508224",
+      "itemId": "pinterest-1146940230218508224",
+      "title": "Everyday Casual Pinterest Look",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1146940230218508224/",
+      "product_link": "https://www.pinterest.com/pin/1146940230218508224/",
+      "image": "https://i.pinimg.com/736x/56/a3/db/56a3db7acf31f883840e9350b161d128.jpg",
+      "photo_url": "https://i.pinimg.com/736x/56/a3/db/56a3db7acf31f883840e9350b161d128.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181428,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 3082,
+      "desc": "Inspirasi padu padan busana Everyday Casual Pinterest Look dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#696262"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Everyday Casual Pinterest Look",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1146940230218508224/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-989736455601242864",
+      "itemId": "pinterest-989736455601242864",
+      "title": "Old money outfit",
+      "category": "oldmoney",
+      "event_type": "santai",
+      "style": "Quiet Luxury Old Money",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/989736455601242864/",
+      "product_link": "https://www.pinterest.com/pin/989736455601242864/",
+      "image": "https://i.pinimg.com/736x/9e/ae/80/9eae8064d0cef34aa73e03055ffaa236.jpg",
+      "photo_url": "https://i.pinimg.com/736x/9e/ae/80/9eae8064d0cef34aa73e03055ffaa236.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 181462,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 6416,
+      "desc": "Inspirasi padu padan busana Old money outfit dengan sentuhan quiet luxury old money dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#484c33"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Old money outfit",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/989736455601242864/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-1018658009489081267",
+      "itemId": "pinterest-1018658009489081267",
+      "title": "Стиль Outfit Style",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/1018658009489081267/",
+      "product_link": "https://www.pinterest.com/pin/1018658009489081267/",
+      "image": "https://i.pinimg.com/736x/d0/87/55/d087550f22bd464b1dfca87598cd1536.jpg",
+      "photo_url": "https://i.pinimg.com/736x/d0/87/55/d087550f22bd464b1dfca87598cd1536.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181479,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 3221,
+      "desc": "Inspirasi padu padan busana Стиль Outfit Style dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#262220"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#F4F3EE"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "Стиль Outfit Style",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/1018658009489081267/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-AX-orYmhUoaAslgi603CkEYq4P1_AooJZ25upj4DeHkNgD8Pzp5acRPY5Dy0thmJgcBbho-Sj97jTjAm6BTffh0",
+      "itemId": "pinterest-AX-orYmhUoaAslgi603CkEYq4P1_AooJZ25upj4DeHkNgD8Pzp5acRPY5Dy0thmJgcBbho-Sj97jTjAm6BTffh0",
+      "title": "👜 Stilvoll unterwegs bei jedem Wetter",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/AX-orYmhUoaAslgi603CkEYq4P1_AooJZ25upj4DeHkNgD8Pzp5acRPY5Dy0thmJgcBbho-Sj97jTjAm6BTffh0/",
+      "product_link": "https://www.pinterest.com/pin/AX-orYmhUoaAslgi603CkEYq4P1_AooJZ25upj4DeHkNgD8Pzp5acRPY5Dy0thmJgcBbho-Sj97jTjAm6BTffh0/",
+      "image": "https://i.pinimg.com/736x/f6/80/16/f6801676388ef800402ef251bb6cfcdf.jpg",
+      "photo_url": "https://i.pinimg.com/736x/f6/80/16/f6801676388ef800402ef251bb6cfcdf.jpg",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 181496,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Inspiration",
+      "savesCount": 3154,
+      "desc": "Eine praktische Tasche für alle, die unterwegs flexibel bleiben möchten! Das leichte Nylonmaterial und der verstellbare Schulterriemen machen sie zum idealen Begleiter für Alltag, Reisen und Freizeit. Praktisch, kompakt und bequem.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#a69687"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "👜 Stilvoll unterwegs bei jedem Wetter",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/AX-orYmhUoaAslgi603CkEYq4P1_AooJZ25upj4DeHkNgD8Pzp5acRPY5Dy0thmJgcBbho-Sj97jTjAm6BTffh0/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-123145371047113075",
+      "itemId": "pinterest-123145371047113075",
+      "title": "The 10 Best-Dressed Men of the Week",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/123145371047113075/",
+      "product_link": "https://www.pinterest.com/pin/123145371047113075/",
+      "image": "https://i.pinimg.com/736x/12/6f/ac/126facf3e9f04c39cf3c06e629f710a1.jpg",
+      "photo_url": "https://i.pinimg.com/736x/12/6f/ac/126facf3e9f04c39cf3c06e629f710a1.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181513,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Inspiration",
+      "savesCount": 3327,
+      "desc": "Inspirasi padu padan busana The 10 Best-Dressed Men of the Week dengan sentuhan everyday casual dari kurasi Pinterest.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#828082"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "The 10 Best-Dressed Men of the Week",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/123145371047113075/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-619948705000911530",
+      "itemId": "pinterest-619948705000911530",
+      "title": "OFT Outfit Style",
+      "category": "pantai",
+      "event_type": "santai",
+      "style": "Summer Vacation Look",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/pin/619948705000911530/",
+      "product_link": "https://www.pinterest.com/pin/619948705000911530/",
+      "image": "https://i.pinimg.com/736x/44/5e/bb/445ebb415e75a760cce158a8d7d560d1.jpg",
+      "photo_url": "https://i.pinimg.com/736x/44/5e/bb/445ebb415e75a760cce158a8d7d560d1.jpg",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 181530,
+      "priceDisplay": "Inspirasi Pinterest",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Inspiration",
+      "savesCount": 3228,
+      "desc": "outfit ideas outfit ideas summer ootd",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dominant",
+          "hex": "#928c89"
+        },
+        {
+          "name": "Aksen",
+          "hex": "#1E1E1E"
+        }
+      ],
+      "items": [
+        {
+          "category": "Inspirasi Fashion",
+          "name": "OFT Outfit Style",
+          "store": "Pinterest",
+          "price": "Inspirasi Pinterest",
+          "url": "https://www.pinterest.com/pin/619948705000911530/"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-kasual-01",
+      "itemId": "pinterest-kasual-01",
+      "title": "French Casual Linen Shirt & Straight Khaki Chinos",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Everyday Relaxed Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=french+casual+linen+shirt+men+women",
+      "product_link": "https://www.pinterest.com/search/pins/?q=french+casual+linen+shirt+men+women",
+      "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 249000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 249.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Curated Board",
+      "savesCount": 1420,
+      "desc": "Kombinasi kemeja katun linen bernapas potongan santai dipadukan celana chino lurus warna khaki natural. Sempurna untuk kopi santai akhir pekan atau jalan sore.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Warm Sand",
+          "hex": "#D8C4B6"
+        },
+        {
+          "name": "Off White",
+          "hex": "#F5F5F0"
+        },
+        {
+          "name": "Olive Slate",
+          "hex": "#4F5D54"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Relaxed French Linen Shirt",
+          "store": "Pinterest Curation",
+          "price": "Rp 149.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Straight Leg Khaki Chinos",
+          "store": "Pinterest Curation",
+          "price": "Rp 100.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-kasual-02",
+      "itemId": "pinterest-kasual-02",
+      "title": "Minimalist Crewneck Boxy Tee & Relaxed Washed Denim",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Clean Weekend Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=boxy+tee+relaxed+denim+casual+outfit",
+      "product_link": "https://www.pinterest.com/search/pins/?q=boxy+tee+relaxed+denim+casual+outfit",
+      "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[4/5]",
+      "priceTotal": 199000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 199.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Curated Board",
+      "savesCount": 980,
+      "desc": "Kaos katun berat (heavyweight 220gsm) berpotongan boxy bersih berpasangan dengan celana denim washed biru terang potongan regular fit.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Milk White",
+          "hex": "#F9F9F6"
+        },
+        {
+          "name": "Medium Wash Denim",
+          "hex": "#5B7C99"
+        },
+        {
+          "name": "Charcoal",
+          "hex": "#2F3136"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Heavyweight Boxy Tee 220gsm",
+          "store": "Pinterest Curation",
+          "price": "Rp 99.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Relaxed Light-Wash Jeans",
+          "store": "Pinterest Curation",
+          "price": "Rp 100.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-kasual-03",
+      "itemId": "pinterest-kasual-03",
+      "title": "Waffle Knit Polo & Olive Fatigue Shorts",
+      "category": "kasual",
+      "event_type": "santai",
+      "style": "Summer Texture Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=waffle+knit+polo+olive+shorts",
+      "product_link": "https://www.pinterest.com/search/pins/?q=waffle+knit+polo+olive+shorts",
+      "image": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 215000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 215.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Curated Board",
+      "savesCount": 1130,
+      "desc": "Polo knit bertekstur waffle warna oatmeal dengan aksen kancing tanduk, dipadukan celana pendek katun ripstop warna olive green.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Oatmeal Beige",
+          "hex": "#D7C9B1"
+        },
+        {
+          "name": "Army Olive",
+          "hex": "#4B5320"
+        },
+        {
+          "name": "Bone",
+          "hex": "#EDE8D0"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Open-Collar Waffle Polo",
+          "store": "Pinterest Curation",
+          "price": "Rp 120.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Olive Fatigue Pocket Shorts",
+          "store": "Pinterest Curation",
+          "price": "Rp 95.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-smartcasual-01",
+      "itemId": "pinterest-smartcasual-01",
+      "title": "Deconstructed Unlined Blazer & Pleated Ankle Trousers",
+      "category": "smartcasual",
+      "event_type": "kantor",
+      "style": "Contemporary Smart Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=deconstructed+blazer+smart+casual+outfit",
+      "product_link": "https://www.pinterest.com/search/pins/?q=deconstructed+blazer+smart+casual+outfit",
+      "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 389000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 389.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Curated Board",
+      "savesCount": 2150,
+      "desc": "Blazer tanpa furing yang luwes berbahan linen-blend warna sage grey dipadukan celana bahan berlipit satu (single pleat) di atas mata kaki.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Sage Grey",
+          "hex": "#8A9A86"
+        },
+        {
+          "name": "Charcoal Black",
+          "hex": "#1F2124"
+        },
+        {
+          "name": "Chalk White",
+          "hex": "#F4F4F4"
+        }
+      ],
+      "items": [
+        {
+          "category": "Outerwear",
+          "name": "Unstructured Linen-Cotton Blazer",
+          "store": "Pinterest Curation",
+          "price": "Rp 239.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Single Pleat Tapered Trousers",
+          "store": "Pinterest Curation",
+          "price": "Rp 150.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-smartcasual-02",
+      "itemId": "pinterest-smartcasual-02",
+      "title": "Ribbed Knit Cardigan & Tapered Navy Chinos",
+      "category": "smartcasual",
+      "event_type": "kantor",
+      "style": "Soft Tailoring Smart Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=knit+cardigan+smart+casual+mens+womens",
+      "product_link": "https://www.pinterest.com/search/pins/?q=knit+cardigan+smart+casual+mens+womens",
+      "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[4/5]",
+      "priceTotal": 310000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 310.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Curated Board",
+      "savesCount": 1640,
+      "desc": "Cardigan rajut warna krem berkerah v-neck halus di atas kaos polos katun putih, diimbangi bawahan chino navy berpola tapered rapi.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Butter Cream",
+          "hex": "#EFE8D8"
+        },
+        {
+          "name": "Deep Navy",
+          "hex": "#1B2A4A"
+        },
+        {
+          "name": "Espresso Brown",
+          "hex": "#3E2723"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Fine Ribbed Button Cardigan",
+          "store": "Pinterest Curation",
+          "price": "Rp 160.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Navy Smart Ankle Chinos",
+          "store": "Pinterest Curation",
+          "price": "Rp 150.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-smartcasual-03",
+      "itemId": "pinterest-smartcasual-03",
+      "title": "Oxford Cloth Button-Down & Tailored Mocha Slacks",
+      "category": "smartcasual",
+      "event_type": "kuliah",
+      "style": "Ivy Academic Smart Casual",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=oxford+shirt+brown+trousers+aesthetic",
+      "product_link": "https://www.pinterest.com/search/pins/?q=oxford+shirt+brown+trousers+aesthetic",
+      "image": "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 289000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 289.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Curated Board",
+      "savesCount": 1820,
+      "desc": "Kemeja oxford katun klasik biru muda dengan kerah roll button-down yang berkarakter, dipadukan celana slacks berpotongan lurus warna mocha hangat.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Powder Blue",
+          "hex": "#A0C4DF"
+        },
+        {
+          "name": "Warm Mocha",
+          "hex": "#735340"
+        },
+        {
+          "name": "Tan Leather",
+          "hex": "#A26E49"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Classic Heavy Oxford Shirt",
+          "store": "Pinterest Curation",
+          "price": "Rp 139.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Tailored Mocha Wool-Touch Slacks",
+          "store": "Pinterest Curation",
+          "price": "Rp 150.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-streetwear-01",
+      "itemId": "pinterest-streetwear-01",
+      "title": "Oversized Vintage Acid-Wash Tee & Multi-Pocket Cargos",
+      "category": "streetwear",
+      "event_type": "ngonser",
+      "style": "Tokyo Urban Streetwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=oversized+tee+cargo+pants+streetwear+aesthetic",
+      "product_link": "https://www.pinterest.com/search/pins/?q=oversized+tee+cargo+pants+streetwear+aesthetic",
+      "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 299000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 299.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Curated Board",
+      "savesCount": 3410,
+      "desc": "Kaos sablon grafis retro faded wash berpotongan drop-shoulder lebar dengan celana cargo multi-pocket berbahan parasut tebal yang tangguh.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Washed Anthracite",
+          "hex": "#2B2B2A"
+        },
+        {
+          "name": "Dark Olive Cargo",
+          "hex": "#3D4436"
+        },
+        {
+          "name": "Neon Acent",
+          "hex": "#CEFF00"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Faded Wash Vintage Graphic Tee",
+          "store": "Pinterest Curation",
+          "price": "Rp 129.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Multi-Pocket Parachute Cargos",
+          "store": "Pinterest Curation",
+          "price": "Rp 170.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-streetwear-02",
+      "itemId": "pinterest-streetwear-02",
+      "title": "Heavyweight Hoodie & Baggy Skate Denim",
+      "category": "streetwear",
+      "event_type": "ngonser",
+      "style": "90s Retro Skate Streetwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=heavyweight+hoodie+baggy+jeans+aesthetic",
+      "product_link": "https://www.pinterest.com/search/pins/?q=heavyweight+hoodie+baggy+jeans+aesthetic",
+      "image": "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[4/5]",
+      "priceTotal": 359000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 359.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Curated Board",
+      "savesCount": 2890,
+      "desc": "Hoodie katun fleece 330gsm bersiluet kokoh dan jatuh natural, berpadu sempurna dengan celana baggy jeans biru pudar khas kultur skate 90-an.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Heather Grey",
+          "hex": "#B0B3B8"
+        },
+        {
+          "name": "Vintage Fade Blue",
+          "hex": "#768DA1"
+        },
+        {
+          "name": "Jet Black",
+          "hex": "#111111"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Structured Fleece Heavy Hoodie",
+          "store": "Pinterest Curation",
+          "price": "Rp 189.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Wide Baggy Carpenter Denim",
+          "store": "Pinterest Curation",
+          "price": "Rp 170.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-streetwear-03",
+      "itemId": "pinterest-streetwear-03",
+      "title": "Cropped Utility Windbreaker & Wide Parachute Pants",
+      "category": "streetwear",
+      "event_type": "santai",
+      "style": "Techwear Minimal Street",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=cropped+windbreaker+parachute+pants",
+      "product_link": "https://www.pinterest.com/search/pins/?q=cropped+windbreaker+parachute+pants",
+      "image": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[2/3]",
+      "priceTotal": 329000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 329.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Curated Board",
+      "savesCount": 2210,
+      "desc": "Jaket windbreaker semi-cropped tahan angin dengan tali serut elastis dan celana parasut ekstra lebar dengan manset serut di pergelangan kaki.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Matte Black",
+          "hex": "#1A1A1A"
+        },
+        {
+          "name": "Silver Grey",
+          "hex": "#C5C6C7"
+        },
+        {
+          "name": "Signal Orange",
+          "hex": "#E85A18"
+        }
+      ],
+      "items": [
+        {
+          "category": "Outerwear",
+          "name": "Cinch-Hem Utility Windbreaker",
+          "store": "Pinterest Curation",
+          "price": "Rp 169.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Wide Tech Parachute Pants",
+          "store": "Pinterest Curation",
+          "price": "Rp 160.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-minimalist-01",
+      "itemId": "pinterest-minimalist-01",
+      "title": "Clean Monochrome Mock-Neck Top & Fluid Pleated Pants",
+      "category": "minimalist",
+      "event_type": "santai",
+      "style": "Clean Capsule Minimalist",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=monochrome+minimalist+mockneck+outfit",
+      "product_link": "https://www.pinterest.com/search/pins/?q=monochrome+minimalist+mockneck+outfit",
+      "image": "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 279000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 279.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Curated Board",
+      "savesCount": 3890,
+      "desc": "Atasan mock-neck rajutan halus berwarna hitam pekat yang membingkai postur secara elegan, dipadukan celana bahan bergelombang jatuh warna abu-abu arang.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "True Black",
+          "hex": "#0F0F0F"
+        },
+        {
+          "name": "Granite Grey",
+          "hex": "#404040"
+        },
+        {
+          "name": "Alabaster",
+          "hex": "#EBEAE6"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Fine Gauge Knit Mock-Neck",
+          "store": "Pinterest Curation",
+          "price": "Rp 129.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Fluid Draped Pleated Trousers",
+          "store": "Pinterest Curation",
+          "price": "Rp 150.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-minimalist-02",
+      "itemId": "pinterest-minimalist-02",
+      "title": "Bone White Boxy Tee & Slate Grey Straight Trousers",
+      "category": "minimalist",
+      "event_type": "santai",
+      "style": "Architectural Minimalist",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=minimalist+white+tee+grey+slacks",
+      "product_link": "https://www.pinterest.com/search/pins/?q=minimalist+white+tee+grey+slacks",
+      "image": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[4/5]",
+      "priceTotal": 235000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 235.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Curated Board",
+      "savesCount": 1950,
+      "desc": "Kesederhanaan tanpa cela: kaos berstruktur warna bone white bersih dengan garis leher rapat, dipasangkan dengan celana lurus bahan wol-campuran warna slate.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Bone White",
+          "hex": "#F8F7F2"
+        },
+        {
+          "name": "Slate Grey",
+          "hex": "#5A6570"
+        },
+        {
+          "name": "Warm Umber",
+          "hex": "#635345"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Heavy Cotton Structured Tee",
+          "store": "Pinterest Curation",
+          "price": "Rp 95.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Clean Cut Slate Trousers",
+          "store": "Pinterest Curation",
+          "price": "Rp 140.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-oldmoney-01",
+      "itemId": "pinterest-oldmoney-01",
+      "title": "Cable Knit Sweater & Pleated Cream Trousers",
+      "category": "oldmoney",
+      "event_type": "santai",
+      "style": "Quiet Luxury Heritage",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=old+money+cable+knit+trousers+aesthetic",
+      "product_link": "https://www.pinterest.com/search/pins/?q=old+money+cable+knit+trousers+aesthetic",
+      "image": "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 450000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 450.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Curated Board",
+      "savesCount": 4620,
+      "desc": "Rajutan cable-knit wol halus warna biru navy gelap dikenakan di atas kemeja berkerah poplin putih, berpadu celana bahan lipit ganda warna krem vanila.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Heritage Navy",
+          "hex": "#14213D"
+        },
+        {
+          "name": "Cream Vanilla",
+          "hex": "#F4F1DE"
+        },
+        {
+          "name": "Chestnut Brown",
+          "hex": "#58311B"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Heritage Navy Cable-Knit Pullover",
+          "store": "Pinterest Curation",
+          "price": "Rp 260.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Double Pleated Cream Trousers",
+          "store": "Pinterest Curation",
+          "price": "Rp 190.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-oldmoney-02",
+      "itemId": "pinterest-oldmoney-02",
+      "title": "Bespoke Linen Camp Shirt & Tailored Stone Pants",
+      "category": "oldmoney",
+      "event_type": "santai",
+      "style": "Riviera Quiet Luxury",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=linen+shirt+side+adjuster+trousers+old+money",
+      "product_link": "https://www.pinterest.com/search/pins/?q=linen+shirt+side+adjuster+trousers+old+money",
+      "image": "https://images.unsplash.com/photo-1479064555552-3ef4979f8908?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1479064555552-3ef4979f8908?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[4/5]",
+      "priceTotal": 379000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 379.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Curated Board",
+      "savesCount": 3100,
+      "desc": "Kemeja kerah camp lapel berbahan linen murni warna sage green kecokelatan dipadu celana katun gurun warna stone rapi dengan gesper samping (side adjusters).",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Muted Sage",
+          "hex": "#8A9A86"
+        },
+        {
+          "name": "Desert Stone",
+          "hex": "#D3C5B4"
+        },
+        {
+          "name": "Espresso Leather",
+          "hex": "#382923"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Italian Linen Camp Collar Shirt",
+          "store": "Pinterest Curation",
+          "price": "Rp 189.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Side Adjuster Stone Trousers",
+          "store": "Pinterest Curation",
+          "price": "Rp 190.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-outerwear-01",
+      "itemId": "pinterest-outerwear-01",
+      "title": "Minimalist Gabardine Trench Coat & Neutral Layering",
+      "category": "outerwear",
+      "event_type": "kantor",
+      "style": "Timeless Trench Outerwear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=minimalist+trench+coat+outfit+aesthetic",
+      "product_link": "https://www.pinterest.com/search/pins/?q=minimalist+trench+coat+outfit+aesthetic",
+      "image": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 520000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 520.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Curated Board",
+      "savesCount": 2780,
+      "desc": "Trench coat panjang berkancing ganda bahan katun gabardine tahan air warna camel klasik, membungkus inner kaos putih bersih dan celana panjang berpotongan lurus.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Camel Khaki",
+          "hex": "#C19A6B"
+        },
+        {
+          "name": "Crisp White",
+          "hex": "#FFFFFF"
+        },
+        {
+          "name": "Dark Charcoal",
+          "hex": "#282828"
+        }
+      ],
+      "items": [
+        {
+          "category": "Outerwear",
+          "name": "Classic Gabardine Double Trench",
+          "store": "Pinterest Curation",
+          "price": "Rp 340.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Straight Leg Wool Slacks",
+          "store": "Pinterest Curation",
+          "price": "Rp 180.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-hijab-01",
+      "itemId": "pinterest-hijab-01",
+      "title": "Earth Tone Layered Linen Abaya & Sand Palazzo",
+      "category": "hijab",
+      "event_type": "pengajian",
+      "style": "Chic Modest Editorial",
+      "gender": "wanita",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=modest+linen+abaya+earth+tone+outfit",
+      "product_link": "https://www.pinterest.com/search/pins/?q=modest+linen+abaya+earth+tone+outfit",
+      "image": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 360000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 360.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Curated Board",
+      "savesCount": 4120,
+      "desc": "Outer abaya katun linen bertekstur warna sage olive lembut dipadukan pashmina ceruty premium warna pasir dan celana kulot palazzo berpotongan lapang.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Muted Sage",
+          "hex": "#9AA897"
+        },
+        {
+          "name": "Desert Sand",
+          "hex": "#E3D5C3"
+        },
+        {
+          "name": "Soft Walnut",
+          "hex": "#6C584C"
+        }
+      ],
+      "items": [
+        {
+          "category": "Outerwear",
+          "name": "Open Linen Flowy Abaya",
+          "store": "Pinterest Curation",
+          "price": "Rp 210.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "High-Waist Sand Palazzo Trousers",
+          "store": "Pinterest Curation",
+          "price": "Rp 150.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-hijab-02",
+      "itemId": "pinterest-hijab-02",
+      "title": "Oversized Pastel Cardigan & Pleated Flowy Maxi Skirt",
+      "category": "hijab",
+      "event_type": "kuliah",
+      "style": "Soft Pastel Modest Chic",
+      "gender": "wanita",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=oversized+cardigan+pleated+maxi+skirt+hijab",
+      "product_link": "https://www.pinterest.com/search/pins/?q=oversized+cardigan+pleated+maxi+skirt+hijab",
+      "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[4/5]",
+      "priceTotal": 310000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 310.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Curated Board",
+      "savesCount": 3560,
+      "desc": "Kardigan rajut berpotongan longgar warna dusty cream lembut dengan rok plisket (pleated skirt) berayun anggun dan pashmina senada.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Dusty Cream",
+          "hex": "#EAE3D2"
+        },
+        {
+          "name": "Rose Taupe",
+          "hex": "#905D5D"
+        },
+        {
+          "name": "Oat Milk",
+          "hex": "#FAF6EE"
+        }
+      ],
+      "items": [
+        {
+          "category": "Outerwear",
+          "name": "Long Knit Pastel Cardigan",
+          "store": "Pinterest Curation",
+          "price": "Rp 160.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Flowy Pleated Maxi Skirt",
+          "store": "Pinterest Curation",
+          "price": "Rp 150.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-pantai-01",
+      "itemId": "pinterest-pantai-01",
+      "title": "Striped Resort Camp Shirt & Off-White Linen Shorts",
+      "category": "pantai",
+      "event_type": "santai",
+      "style": "Mediterranean Resort Wear",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=striped+resort+shirt+linen+shorts",
+      "product_link": "https://www.pinterest.com/search/pins/?q=striped+resort+shirt+linen+shorts",
+      "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 249000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 249.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Curated Board",
+      "savesCount": 2340,
+      "desc": "Kemeja garis-garis nautikal biru laut dan putih dengan kerah terbuka berpadu celana pendek linen bertali serut yang sejuk maksimal untuk terik pesisir pantai.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Coast Blue",
+          "hex": "#3B6978"
+        },
+        {
+          "name": "Pure Chalk",
+          "hex": "#FFFFFF"
+        },
+        {
+          "name": "Straw Weave",
+          "hex": "#D8B168"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Nautical Striped Resort Shirt",
+          "store": "Pinterest Curation",
+          "price": "Rp 139.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Drawstring Off-White Linen Shorts",
+          "store": "Pinterest Curation",
+          "price": "Rp 110.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-pantai-02",
+      "itemId": "pinterest-pantai-02",
+      "title": "Crochet Knit Polo & Relaxed Sand Drawstring Trousers",
+      "category": "pantai",
+      "event_type": "santai",
+      "style": "Breezy Vacation Chic",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=crochet+knit+shirt+linen+beach+pants",
+      "product_link": "https://www.pinterest.com/search/pins/?q=crochet+knit+shirt+linen+beach+pants",
+      "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[4/5]",
+      "priceTotal": 289000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 289.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Curated Board",
+      "savesCount": 2810,
+      "desc": "Polo rajut crochet berpori sirkulasi udara optimal warna krem ecru dengan celana panjang serut santai katun-linen warna pasir pantai.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Ecru Crochet",
+          "hex": "#EBE3D5"
+        },
+        {
+          "name": "Dune Sand",
+          "hex": "#C9B6A1"
+        },
+        {
+          "name": "Ocean Coral",
+          "hex": "#DF7861"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Open-Stitch Crochet Knit Polo",
+          "store": "Pinterest Curation",
+          "price": "Rp 149.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Relaxed Linen Beach Trousers",
+          "store": "Pinterest Curation",
+          "price": "Rp 140.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-pesta-01",
+      "itemId": "pinterest-pesta-01",
+      "title": "Midnight Satin Shirt & High-Waisted Pleated Trousers",
+      "category": "pesta",
+      "event_type": "dating",
+      "style": "Elevated Evening Minimalist",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=midnight+black+satin+shirt+evening+outfit",
+      "product_link": "https://www.pinterest.com/search/pins/?q=midnight+black+satin+shirt+evening+outfit",
+      "image": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 399000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 399.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 5.0,
+      "location": "Pinterest Curated Board",
+      "savesCount": 3120,
+      "desc": "Kemeja satin sutra sintetis berkilau redup (matte sheen) warna hitam malam yang mewah, dipadukan celana bahan pinggang tinggi lipit ganda dan sepatu pantofel.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Midnight Black",
+          "hex": "#0C0D0E"
+        },
+        {
+          "name": "Gunmetal Shimmer",
+          "hex": "#2B2D42"
+        },
+        {
+          "name": "Oxblood",
+          "hex": "#4A0E17"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Matte Satin Midnight Shirt",
+          "store": "Pinterest Curation",
+          "price": "Rp 199.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "High-Rise Pleated Dinner Trousers",
+          "store": "Pinterest Curation",
+          "price": "Rp 200.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-sporty-01",
+      "itemId": "pinterest-sporty-01",
+      "title": "Retro Tennis Quarter-Zip Pullover & Sweat Shorts",
+      "category": "sporty",
+      "event_type": "santai",
+      "style": "Club Athleisure Aesthetic",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=tennis+quarter+zip+pullover+athleisure",
+      "product_link": "https://www.pinterest.com/search/pins/?q=tennis+quarter+zip+pullover+athleisure",
+      "image": "https://images.unsplash.com/photo-1483721074573-455b55225c56?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1483721074573-455b55225c56?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[3/4]",
+      "priceTotal": 269000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 269.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.9,
+      "location": "Pinterest Curated Board",
+      "savesCount": 2670,
+      "desc": "Pullover ritsleting seperempat warna putih gading dengan lis kerah navy retro dan celana pendek terry katun empuk untuk gaya sporty berkelas.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Ivory White",
+          "hex": "#F4F3EE"
+        },
+        {
+          "name": "Tennis Green",
+          "hex": "#1E4D2B"
+        },
+        {
+          "name": "Court Navy",
+          "hex": "#1B2A4A"
+        }
+      ],
+      "items": [
+        {
+          "category": "Atasan",
+          "name": "Club Tennis Quarter-Zip Fleece",
+          "store": "Pinterest Curation",
+          "price": "Rp 159.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "French Terry Athletic Shorts",
+          "store": "Pinterest Curation",
+          "price": "Rp 110.000"
+        }
+      ]
+    },
+    {
+      "id": "pinterest-sporty-02",
+      "itemId": "pinterest-sporty-02",
+      "title": "Matte Nylon Track Jacket & Tapered Performance Pants",
+      "category": "sporty",
+      "event_type": "santai",
+      "style": "Minimal Active Athleisure",
+      "gender": "unisex",
+      "store": "Pinterest",
+      "source_store": "Pinterest",
+      "storeUrl": "https://www.pinterest.com/search/pins/?q=matte+nylon+track+jacket+athleisure",
+      "product_link": "https://www.pinterest.com/search/pins/?q=matte+nylon+track+jacket+athleisure",
+      "image": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=800&q=80",
+      "photo_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=800&q=80",
+      "aspect": "aspect-[4/5]",
+      "priceTotal": 319000,
+      "priceDisplay": "Inspirasi Pinterest (~ Rp 319.000)",
+      "currency": "IDR",
+      "originalPrice": null,
+      "discountPercent": null,
+      "rating": 4.8,
+      "location": "Pinterest Curated Board",
+      "savesCount": 1890,
+      "desc": "Jaket track berbahan nilon matte antiair warna hijau lumut gelap berpotongan ergonomis dengan celana lari bertali peregang yang dinamis.",
+      "source": "pinterest",
+      "is3D": false,
+      "isPremium": false,
+      "colors": [
+        {
+          "name": "Forest Moss",
+          "hex": "#2E4033"
+        },
+        {
+          "name": "Pitch Black",
+          "hex": "#151515"
+        },
+        {
+          "name": "Reflective Silver",
+          "hex": "#D1D5DB"
+        }
+      ],
+      "items": [
+        {
+          "category": "Outerwear",
+          "name": "Matte Nylon Ergonomic Track Jacket",
+          "store": "Pinterest Curation",
+          "price": "Rp 179.000"
+        },
+        {
+          "category": "Bawahan",
+          "name": "Tapered Active Runner Pants",
+          "store": "Pinterest Curation",
+          "price": "Rp 140.000"
         }
       ]
     },
@@ -10498,6 +14589,5 @@
       ],
       "style": "Everyday Casual"
     }
-  ],
-  "has3DProducts": true
+  ]
 }

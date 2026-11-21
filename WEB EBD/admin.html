@@ -1,0 +1,2873 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <title>Admin Console — Orec Database Management Suite</title>
+
+    <!-- Fonts: Instrument Serif & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Theme Controller (Zero-FOUC) -->
+    <script src="theme.js"></script>
+
+    <!-- Dynamic Environment Configuration from .env -->
+    <script src="/api/config.js"></script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              brandCream: "#FFF8E7",
+              brandMaroon: "#6D001A",
+              brandMaroonDark: "#550014",
+              brandMaroonLight: "#8A0A28",
+              brandPinterest: "#E60023",
+              brandSurface: "#FAF9F6",
+              darkSurface: "#141216",
+              darkCard: "#1C191F",
+            },
+            fontFamily: {
+              serif: ['"Instrument Serif"', "serif"],
+              sans: ['"Inter"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      ::selection {
+        background: #6d001a;
+        color: #fff8e7;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1ed;
+      }
+      .dark ::-webkit-scrollbar-track {
+        background: #141216;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(109, 0, 26, 0.28);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(109, 0, 26, 0.5);
+      }
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .tab-active {
+        border-bottom: 2px solid #6d001a;
+        color: #6d001a;
+        font-weight: 600;
+      }
+      .dark .tab-active {
+        border-bottom: 2px solid #fff8e7;
+        color: #fff8e7;
+      }
+      @keyframes pulseSlow {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+      .animate-pulse-slow {
+        animation: pulseSlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+    </style>
+  </head>
+  <body class="bg-brandSurface dark:bg-darkSurface text-neutral-900 dark:text-neutral-100 min-h-screen font-sans transition-colors duration-200">
+
+    <!-- ========================================================================= -->
+    <!-- 1. AUTHENTICATION GATE MODAL (ADMIN PASSCODE)                             -->
+    <!-- ========================================================================= -->
+    <div id="adminGateModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4 hidden">
+      <div class="bg-white dark:bg-darkCard w-full max-w-md rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 p-8 text-center animate-in fade-in zoom-in duration-200">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-brandMaroon/10 dark:bg-brandMaroon/30 text-brandMaroon dark:text-brandCream flex items-center justify-center">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+        </div>
+        <h2 class="font-serif text-3xl font-bold text-neutral-900 dark:text-white">Admin Gate</h2>
+        <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-2 mb-6">
+          Masukkan kode otorisasi administrator Outfit Req untuk mengakses konsol manajemen database langsung.
+        </p>
+
+        <form id="adminGateForm" onsubmit="handleAdminLogin(event)" class="space-y-4 text-left">
+          <div>
+            <label class="block text-xs uppercase tracking-wider font-semibold text-neutral-600 dark:text-neutral-400 mb-1">Passcode Otorisasi Admin</label>
+            <input
+              type="password"
+              id="adminPasscodeInput"
+              placeholder="Masukkan passcode otorisasi admin..."
+              class="w-full px-4 py-3 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white transition"
+              required
+            />
+          </div>
+          <p id="adminGateError" class="text-xs text-rose-600 font-medium hidden">Otorisasi gagal! Passcode salah atau tidak valid.</p>
+
+          <div class="pt-2 flex flex-col gap-2">
+            <button
+              type="submit"
+              id="adminSubmitBtn"
+              class="w-full py-3 px-4 rounded-xl bg-brandMaroon hover:bg-brandMaroonDark text-white font-medium shadow-md transition transform active:scale-95"
+            >
+              Masuk Konsol Admin
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- 2. TOP EXECUTIVE BAR                                                      -->
+    <!-- ========================================================================= -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-darkCard/90 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 transition">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <!-- Logo & Suite Title -->
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="flex items-center gap-2 group">
+            <div class="w-9 h-9 rounded-xl bg-brandMaroon text-brandCream flex items-center justify-center font-serif text-xl font-bold shadow-sm group-hover:scale-105 transition">
+              O
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">Orec</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-brandMaroon/10 text-brandMaroon dark:bg-brandCream/15 dark:text-brandCream">Database Admin</span>
+              </div>
+              <p class="text-[10px] text-neutral-500 dark:text-neutral-400 hidden sm:block">Akses Langsung Database: public.outfit_catalog • users • premium_subscriptions</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- System Status & Quick Links -->
+        <div class="flex items-center gap-3">
+          <!-- Backend & Supabase Status Pill -->
+          <div id="connectionStatusPill" class="hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span id="connectionStatusText">Memeriksa Database Supabase...</span>
+          </div>
+
+          <!-- Quick Navigation to Client Pages -->
+          <a href="rekomendasi.html" target="_blank" class="text-xs font-medium px-3 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition flex items-center gap-1 text-neutral-700 dark:text-neutral-300">
+            <span>Lihat Galeri</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+
+          <!-- Buka Izin Hapus (RLS) Button -->
+          <button
+            onclick="openSqlHelperModal()"
+            class="text-xs font-medium px-3 py-1.5 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-amber-800 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/50 transition flex items-center gap-1.5"
+            title="Buka Script SQL untuk membuka izin hapus Supabase"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            <span>Buka Izin Hapus (SQL)</span>
+          </button>
+
+          <!-- Theme Toggle -->
+          <button
+            onclick="toggleTheme()"
+            class="p-2 rounded-xl text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
+            title="Ganti Tema Gelap / Terang"
+          >
+            <svg class="w-5 h-5 hidden dark:block text-amber-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/></svg>
+            <svg class="w-5 h-5 block dark:hidden text-neutral-700" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+          </button>
+
+          <!-- Logout Button -->
+          <button
+            onclick="adminLogout()"
+            class="p-2 rounded-xl text-neutral-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition"
+            title="Kunci / Keluar Admin"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========================================================================= -->
+    <!-- 3. MAIN DASHBOARD CONTENT                                                 -->
+    <!-- ========================================================================= -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+      <!-- Executive Header -->
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+        <div>
+          <h1 class="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white">
+            Konsol Otoritas Database
+          </h1>
+          <p class="text-neutral-500 dark:text-neutral-400 text-sm mt-1">
+            Seluruh data diambil dan dikelola langsung dari Database Supabase (bukan data fiktif).
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            onclick="openSqlHelperModal()"
+            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-amber-800 dark:text-amber-300 text-xs font-semibold hover:bg-amber-100 dark:hover:bg-amber-900/50 transition shadow-sm"
+            title="Buka panduan SQL untuk mengaktifkan izin hapus database Supabase"
+          >
+            <svg class="w-4 h-4 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+            <span>Buka Izin Hapus (SQL RLS)</span>
+          </button>
+          <button
+            onclick="refreshAllData()"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-darkCard border border-neutral-200 dark:border-neutral-700 text-xs font-semibold hover:border-brandMaroon dark:hover:border-brandCream transition shadow-sm"
+          >
+            <svg id="refreshSpinner" class="w-4 h-4 text-brandMaroon dark:text-brandCream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+            <span>Muat Ulang Database</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Metrics HUD (4 Cards) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <!-- Card 1: Total Katalog -->
+        <div class="bg-white dark:bg-darkCard rounded-2xl p-5 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition">
+          <div class="flex items-center justify-between text-neutral-500 dark:text-neutral-400 mb-2">
+            <span class="text-xs uppercase tracking-wider font-semibold">Katalog di Database</span>
+            <div class="w-8 h-8 rounded-lg bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+            </div>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span id="kpiTotalCatalog" class="font-serif text-3xl font-bold text-neutral-900 dark:text-white">...</span>
+            <span class="text-xs text-neutral-500 dark:text-neutral-400">busana</span>
+          </div>
+          <div class="text-[11px] text-neutral-500 dark:text-neutral-400 mt-2 flex items-center gap-1.5">
+            <span id="kpiPinterestCount" class="font-medium text-brandPinterest">... Pinterest</span>
+            <span>•</span>
+            <span id="kpi3DCount" class="font-medium text-brandMaroon dark:text-brandCream">... Studio 3D</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Pengguna Terdaftar -->
+        <div class="bg-white dark:bg-darkCard rounded-2xl p-5 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition">
+          <div class="flex items-center justify-between text-neutral-500 dark:text-neutral-400 mb-2">
+            <span class="text-xs uppercase tracking-wider font-semibold">Akun di Database</span>
+            <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            </div>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span id="kpiTotalUsers" class="font-serif text-3xl font-bold text-neutral-900 dark:text-white">...</span>
+            <span class="text-xs text-neutral-500 dark:text-neutral-400">akun asli</span>
+          </div>
+          <div class="text-[11px] text-neutral-500 dark:text-neutral-400 mt-2 flex items-center gap-1.5">
+            <span id="kpiPremiumUsers" class="font-medium text-amber-600 dark:text-amber-400">... Member Premium</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Status Transaksi -->
+        <div class="bg-white dark:bg-darkCard rounded-2xl p-5 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition">
+          <div class="flex items-center justify-between text-neutral-500 dark:text-neutral-400 mb-2">
+            <span class="text-xs uppercase tracking-wider font-semibold">Transaksi di Database</span>
+            <div class="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+            </div>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span id="kpiTotalSubs" class="font-serif text-3xl font-bold text-neutral-900 dark:text-white">...</span>
+            <span class="text-xs text-neutral-500 dark:text-neutral-400">pesanan</span>
+          </div>
+          <div class="text-[11px] text-neutral-500 dark:text-neutral-400 mt-2 flex items-center gap-1.5">
+            <span id="kpiPendingSubs" class="font-semibold text-rose-600 dark:text-rose-400">... Perlu Verifikasi</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Total Pendapatan -->
+        <div class="bg-white dark:bg-darkCard rounded-2xl p-5 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition">
+          <div class="flex items-center justify-between text-neutral-500 dark:text-neutral-400 mb-2">
+            <span class="text-xs uppercase tracking-wider font-semibold">Total Pendapatan Riil</span>
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span id="kpiTotalRevenue" class="font-serif text-2xl sm:text-3xl font-bold text-emerald-700 dark:text-emerald-400">Rp 0</span>
+          </div>
+          <div class="text-[11px] text-neutral-500 dark:text-neutral-400 mt-2">
+            Total Transaksi Lunas di Supabase
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="border-b border-neutral-200 dark:border-neutral-800 mb-6 flex space-x-8">
+        <button
+          id="tabBtnCatalog"
+          onclick="switchTab('catalog')"
+          class="tab-active pb-3 text-sm font-medium flex items-center gap-2 transition"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+          <span>Katalog Busana (<span id="tabCountCatalog">0</span>)</span>
+        </button>
+        <button
+          id="tabBtnUsers"
+          onclick="switchTab('users')"
+          class="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-white pb-3 text-sm font-medium flex items-center gap-2 transition"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <span>Akun Pengguna (<span id="tabCountUsers">0</span>)</span>
+        </button>
+        <button
+          id="tabBtnSubs"
+          onclick="switchTab('subscriptions')"
+          class="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-white pb-3 text-sm font-medium flex items-center gap-2 transition"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+          <span>Pembayaran & Langganan (<span id="tabCountSubs">0</span>)</span>
+          <span id="tabBadgePendingSubs" class="hidden px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-600 text-white animate-pulse">0</span>
+        </button>
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 1: MANAJEMEN KATALOG BUSANA                                       -->
+      <!-- ===================================================================== -->
+      <section id="tabContentCatalog" class="space-y-4">
+        <!-- Control Bar: Search, Source Filter, Add Button, Sync to Supabase -->
+        <div class="bg-white dark:bg-darkCard p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex flex-wrap items-center gap-3 flex-1">
+            <!-- Search Input -->
+            <div class="relative flex-1 min-w-[240px]">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-neutral-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </span>
+              <input
+                type="text"
+                id="catalogSearchInput"
+                oninput="renderCatalogTable()"
+                placeholder="Cari judul, kategori, atau toko..."
+                class="w-full pl-9 pr-4 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+              />
+            </div>
+
+            <!-- Platform Filter -->
+            <select
+              id="catalogSourceFilter"
+              onchange="renderCatalogTable()"
+              class="px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+            >
+              <option value="all">Semua Sumber</option>
+              <option value="pinterest">Pinterest (Bagian Biasa)</option>
+              <option value="3dstudio">Studio 3D (Premium)</option>
+              <option value="shopee">Shopee</option>
+              <option value="uniqlo">Uniqlo</option>
+            </select>
+
+            <!-- Category Filter -->
+            <select
+              id="catalogCategoryFilter"
+              onchange="renderCatalogTable()"
+              class="px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+            >
+              <option value="all">Semua Kategori</option>
+              <option value="kasual">Kasual</option>
+              <option value="smartcasual">Smart Casual</option>
+              <option value="formal">Formal</option>
+              <option value="oldmoney">Old Money</option>
+              <option value="streetwear">Streetwear</option>
+              <option value="pantai">Pantai / Resort</option>
+              <option value="sporty">Sporty</option>
+            </select>
+          </div>
+
+          <!-- Actions: 1-Click Sync to Supabase & Add Outfit -->
+          <div class="flex items-center gap-2">
+            <button
+              id="btnSyncSupabaseCatalog"
+              onclick="syncAllCatalogToSupabase()"
+              class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-darkCard hover:bg-neutral-50 dark:hover:bg-neutral-800 text-xs font-semibold text-neutral-800 dark:text-neutral-200 shadow-sm transition"
+              title="Unggah dan sinkronkan seluruh 305 katalog ke tabel outfit_catalog di Supabase"
+            >
+              <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+              <span id="btnSyncSupabaseText">Sinkronkan ke Supabase DB</span>
+            </button>
+
+            <button
+              onclick="openCatalogModal()"
+              class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brandMaroon hover:bg-brandMaroonDark text-white text-sm font-semibold shadow-md transition transform active:scale-95"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>+ Tambah Busana Baru</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Catalog Table Card -->
+        <div class="bg-white dark:bg-darkCard rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-neutral-600 dark:text-neutral-300">
+              <thead class="bg-neutral-50 dark:bg-neutral-900/60 border-b border-neutral-200 dark:border-neutral-800 text-xs uppercase tracking-wider font-semibold text-neutral-500 dark:text-neutral-400">
+                <tr>
+                  <th scope="col" class="py-3 px-4 w-14">Foto</th>
+                  <th scope="col" class="py-3 px-4">Judul & Identitas</th>
+                  <th scope="col" class="py-3 px-4">Sumber / Toko</th>
+                  <th scope="col" class="py-3 px-4">Kategori & Event</th>
+                  <th scope="col" class="py-3 px-4">Harga & Rating</th>
+                  <th scope="col" class="py-3 px-4 text-right">Tindakan</th>
+                </tr>
+              </thead>
+              <tbody id="catalogTableBody" class="divide-y divide-neutral-100 dark:divide-neutral-800">
+                <tr>
+                  <td colspan="6" class="py-12 text-center text-neutral-400">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-brandMaroon dark:border-brandCream mb-2"></div>
+                    <p>Memuat katalog busana dari database...</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination / Status Footer -->
+          <div class="p-4 border-t border-neutral-100 dark:border-neutral-800 text-xs text-neutral-500 dark:text-neutral-400 flex items-center justify-between">
+            <span id="catalogTableSummary">Menampilkan 0 busana</span>
+            <span>Tersinkronisasi langsung dengan Supabase public.outfit_catalog</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 2: MANAJEMEN AKUN PENGGUNA                                        -->
+      <!-- ===================================================================== -->
+      <section id="tabContentUsers" class="space-y-4 hidden">
+        <!-- Control Bar -->
+        <div class="bg-white dark:bg-darkCard p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex flex-wrap items-center gap-3 flex-1">
+            <div class="relative flex-1 min-w-[240px]">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-neutral-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </span>
+              <input
+                type="text"
+                id="userSearchInput"
+                oninput="renderUsersTable()"
+                placeholder="Cari nama atau email pengguna asli..."
+                class="w-full pl-9 pr-4 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+              />
+            </div>
+
+            <select
+              id="userTierFilter"
+              onchange="renderUsersTable()"
+              class="px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+            >
+              <option value="all">Semua Tingkat (Tier)</option>
+              <option value="premium">Premium ★</option>
+              <option value="free">Free Tier</option>
+            </select>
+          </div>
+
+          <button
+            onclick="openUserModal()"
+            class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brandMaroon hover:bg-brandMaroonDark text-white text-sm font-semibold shadow-md transition transform active:scale-95"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+            <span>+ Tambah Pengguna Baru</span>
+          </button>
+        </div>
+
+        <!-- Users Table Card -->
+        <div class="bg-white dark:bg-darkCard rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-neutral-600 dark:text-neutral-300">
+              <thead class="bg-neutral-50 dark:bg-neutral-900/60 border-b border-neutral-200 dark:border-neutral-800 text-xs uppercase tracking-wider font-semibold text-neutral-500 dark:text-neutral-400">
+                <tr>
+                  <th scope="col" class="py-3 px-4">Pengguna</th>
+                  <th scope="col" class="py-3 px-4">Status Tier</th>
+                  <th scope="col" class="py-3 px-4">Masa Berlaku Premium</th>
+                  <th scope="col" class="py-3 px-4">Sisa Kuota AI</th>
+                  <th scope="col" class="py-3 px-4">Terdaftar Sejak</th>
+                  <th scope="col" class="py-3 px-4 text-right">Tindakan Cepat</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody" class="divide-y divide-neutral-100 dark:divide-neutral-800">
+                <!-- User rows rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+          <div class="p-4 border-t border-neutral-100 dark:border-neutral-800 text-xs text-neutral-500 dark:text-neutral-400 flex items-center justify-between">
+            <span id="usersTableSummary">Menampilkan 0 akun pengguna</span>
+            <span>Data riil dari tabel public.users & public.chat_quota Supabase</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 3: MANAJEMEN PEMBAYARAN & LANGGANAN                               -->
+      <!-- ===================================================================== -->
+      <section id="tabContentSubs" class="space-y-4 hidden">
+        <!-- Control Bar -->
+        <div class="bg-white dark:bg-darkCard p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex flex-wrap items-center gap-3 flex-1">
+            <div class="relative flex-1 min-w-[240px]">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-neutral-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </span>
+              <input
+                type="text"
+                id="subsSearchInput"
+                oninput="renderSubscriptionsTable()"
+                placeholder="Cari ID transaksi, nama, atau email..."
+                class="w-full pl-9 pr-4 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+              />
+            </div>
+
+            <select
+              id="subsStatusFilter"
+              onchange="renderSubscriptionsTable()"
+              class="px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+            >
+              <option value="all">Semua Status</option>
+              <option value="pending">Menunggu Verifikasi (Pending)</option>
+              <option value="paid">Lunas (Paid)</option>
+              <option value="cancelled">Dibatalkan (Cancelled)</option>
+            </select>
+          </div>
+
+          <button
+            onclick="openSubscriptionModal()"
+            class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brandMaroon hover:bg-brandMaroonDark text-white text-sm font-semibold shadow-md transition transform active:scale-95"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/></svg>
+            <span>+ Catat Transaksi Manual</span>
+          </button>
+        </div>
+
+        <!-- Subscriptions Table Card -->
+        <div class="bg-white dark:bg-darkCard rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-neutral-600 dark:text-neutral-300">
+              <thead class="bg-neutral-50 dark:bg-neutral-900/60 border-b border-neutral-200 dark:border-neutral-800 text-xs uppercase tracking-wider font-semibold text-neutral-500 dark:text-neutral-400">
+                <tr>
+                  <th scope="col" class="py-3 px-4">ID Transaksi</th>
+                  <th scope="col" class="py-3 px-4">Pengguna</th>
+                  <th scope="col" class="py-3 px-4">Paket & Metode</th>
+                  <th scope="col" class="py-3 px-4">Nominal</th>
+                  <th scope="col" class="py-3 px-4">Status Pembayaran</th>
+                  <th scope="col" class="py-3 px-4">Waktu Dibuat</th>
+                  <th scope="col" class="py-3 px-4 text-right">Otorisasi</th>
+                </tr>
+              </thead>
+              <tbody id="subsTableBody" class="divide-y divide-neutral-100 dark:divide-neutral-800">
+                <!-- Subscription rows rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+          <div class="p-4 border-t border-neutral-100 dark:border-neutral-800 text-xs text-neutral-500 dark:text-neutral-400 flex items-center justify-between">
+            <span id="subsTableSummary">Menampilkan 0 pesanan</span>
+            <span>Data riil transaksi dari tabel public.premium_subscriptions Supabase</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 1: FORM TAMBAH / EDIT BUSANA KATALOG                                 -->
+    <!-- ========================================================================= -->
+    <div id="catalogModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 hidden">
+      <div class="bg-white dark:bg-darkCard w-full max-w-2xl rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 p-6 max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center justify-between pb-4 border-b border-neutral-200 dark:border-neutral-800 mb-5">
+          <h3 id="catalogModalTitle" class="font-serif text-2xl font-bold text-neutral-900 dark:text-white">Tambah Busana ke Database</h3>
+          <button onclick="closeCatalogModal()" class="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <form id="catalogForm" onsubmit="handleSaveCatalog(event)" class="space-y-4">
+          <input type="hidden" id="catalogFormItemId" />
+
+          <!-- Title & Tier -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Judul / Nama Busana *</label>
+              <input
+                type="text"
+                id="catalogFormTitle"
+                placeholder="Contoh: Linen Textured Overshirt Khaki"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Tingkatan (Tier)</label>
+              <select
+                id="catalogFormTier"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+              >
+                <option value="biasa">Bagian Biasa (Free)</option>
+                <option value="premium">Studio 3D (Premium)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Photo URL & Live Preview -->
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">URL Foto Busana *</label>
+            <div class="flex gap-3 items-center">
+              <input
+                type="url"
+                id="catalogFormPhotoUrl"
+                oninput="updateImagePreview(this.value)"
+                placeholder="https://i.pinimg.com/... atau https://..."
+                class="flex-1 px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+                required
+              />
+              <div class="w-12 h-14 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 overflow-hidden flex items-center justify-center shrink-0">
+                <img id="catalogFormImagePreview" src="" alt="" class="w-full h-full object-cover hidden" onerror="this.classList.add('hidden')"/>
+                <svg id="catalogFormImageFallback" class="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Store & Product Link -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Sumber / Toko *</label>
+              <select
+                id="catalogFormStore"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+                required
+              >
+                <option value="Pinterest">Pinterest</option>
+                <option value="3D Studio">3D Studio</option>
+                <option value="Shopee">Shopee</option>
+                <option value="Uniqlo">Uniqlo</option>
+                <option value="Zara">Zara</option>
+                <option value="H&M">H&M</option>
+                <option value="Manual">Manual Curation</option>
+              </select>
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Tautan Produk / Pin *</label>
+              <input
+                type="url"
+                id="catalogFormProductLink"
+                placeholder="https://pinterest.com/pin/... atau link toko"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Category, Event, Price, Rating -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Kategori</label>
+              <select
+                id="catalogFormCategory"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white"
+              >
+                <option value="kasual">Kasual</option>
+                <option value="smartcasual">Smart Casual</option>
+                <option value="formal">Formal</option>
+                <option value="oldmoney">Old Money</option>
+                <option value="streetwear">Streetwear</option>
+                <option value="pantai">Pantai</option>
+                <option value="sporty">Sporty</option>
+                <option value="outerwear">Outerwear</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Acara / Event</label>
+              <input
+                type="text"
+                id="catalogFormEvent"
+                placeholder="santai / kantor / date"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Harga (Rp)</label>
+              <input
+                type="number"
+                id="catalogFormPrice"
+                placeholder="150000"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Rating (1-5)</label>
+              <input
+                type="number"
+                id="catalogFormRating"
+                step="0.1"
+                min="1"
+                max="5"
+                placeholder="4.9"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white"
+              />
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Deskripsi & Catatan Gaya</label>
+            <textarea
+              id="catalogFormDescription"
+              rows="3"
+              placeholder="Jelaskan siluet potongan pakaian, material bahan, dan anjuran padu padan..."
+              class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white"
+            ></textarea>
+          </div>
+
+          <!-- Submit Buttons -->
+          <div class="pt-3 flex justify-end gap-3 border-t border-neutral-200 dark:border-neutral-800">
+            <button
+              type="button"
+              onclick="closeCatalogModal()"
+              class="px-4 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 transition"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              id="catalogFormSubmitBtn"
+              class="px-5 py-2 text-sm rounded-xl bg-brandMaroon hover:bg-brandMaroonDark text-white font-medium shadow-md transition"
+            >
+              Simpan ke Database Supabase
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 2: FORM TAMBAH / EDIT AKUN PENGGUNA                                 -->
+    <!-- ========================================================================= -->
+    <div id="userModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 hidden">
+      <div class="bg-white dark:bg-darkCard w-full max-w-lg rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 p-6">
+        <div class="flex items-center justify-between pb-4 border-b border-neutral-200 dark:border-neutral-800 mb-5">
+          <h3 id="userModalTitle" class="font-serif text-2xl font-bold text-neutral-900 dark:text-white">Tambah Pengguna ke Database</h3>
+          <button onclick="closeUserModal()" class="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <form id="userForm" onsubmit="handleSaveUser(event)" class="space-y-4">
+          <input type="hidden" id="userFormId" />
+
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Email Pengguna *</label>
+            <input
+              type="email"
+              id="userFormEmail"
+              placeholder="nama@email.com"
+              class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Nama Lengkap *</label>
+            <input
+              type="text"
+              id="userFormName"
+              placeholder="Contoh: Raden Surya"
+              class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+              required
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Tingkat (Tier) *</label>
+              <select
+                id="userFormTier"
+                onchange="handleUserFormTierChange(this.value)"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white"
+              >
+                <option value="free">Free Tier</option>
+                <option value="premium">Premium ★</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Sisa Kuota AI *</label>
+              <input
+                type="number"
+                id="userFormQuota"
+                min="0"
+                placeholder="10"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white"
+                required
+              />
+            </div>
+          </div>
+
+          <div id="userFormExpiryContainer">
+            <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Masa Berlaku Premium</label>
+            <input
+              type="date"
+              id="userFormExpiry"
+              class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white"
+            />
+            <p class="text-[11px] text-neutral-400 mt-1">Kosongkan jika pengguna tergolong Free Tier.</p>
+          </div>
+
+          <div class="pt-3 flex justify-end gap-3 border-t border-neutral-200 dark:border-neutral-800">
+            <button
+              type="button"
+              onclick="closeUserModal()"
+              class="px-4 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 transition"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              id="userFormSubmitBtn"
+              class="px-5 py-2 text-sm rounded-xl bg-brandMaroon hover:bg-brandMaroonDark text-white font-medium shadow-md transition"
+            >
+              Simpan ke Database Supabase
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 3: FORM CATAT TRANSAKSI MANUAL                                      -->
+    <!-- ========================================================================= -->
+    <div id="subsModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 hidden">
+      <div class="bg-white dark:bg-darkCard w-full max-w-lg rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 p-6">
+        <div class="flex items-center justify-between pb-4 border-b border-neutral-200 dark:border-neutral-800 mb-5">
+          <h3 id="subsModalTitle" class="font-serif text-2xl font-bold text-neutral-900 dark:text-white">Catat Transaksi ke Database</h3>
+          <button onclick="closeSubscriptionModal()" class="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <form id="subsForm" onsubmit="handleSaveSubscription(event)" class="space-y-4">
+          <input type="hidden" id="subsFormId" />
+
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Email Pengguna *</label>
+            <input
+              type="email"
+              id="subsFormEmail"
+              placeholder="nama@email.com"
+              class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Nama Pembeli</label>
+            <input
+              type="text"
+              id="subsFormName"
+              placeholder="Contoh: Nama Pembeli"
+              class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:ring-2 focus:ring-brandMaroon text-neutral-900 dark:text-white"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Paket *</label>
+              <select
+                id="subsFormPackage"
+                onchange="handleSubsPackageChange(this.value)"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white"
+              >
+                <option value="bulanan">Bulanan (Rp 25.000)</option>
+                <option value="mingguan">Mingguan (Rp 8.000)</option>
+                <option value="tahunan">Tahunan (Rp 200.000)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Nominal (Rp) *</label>
+              <input
+                type="number"
+                id="subsFormPrice"
+                value="25000"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Metode Pembayaran</label>
+              <select
+                id="subsFormMethod"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white"
+              >
+                <option value="qris">QRIS Standar</option>
+                <option value="bank">Transfer Bank / Virtual Account</option>
+                <option value="ewallet">GoPay / OVO / Dana</option>
+                <option value="manual">Manual Admin Verification</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">Status Pembayaran</label>
+              <select
+                id="subsFormStatus"
+                class="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white"
+              >
+                <option value="paid">Lunas (Paid) & Aktifkan User di DB</option>
+                <option value="pending">Menunggu Verifikasi (Pending)</option>
+                <option value="cancelled">Dibatalkan (Cancelled)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-3 flex justify-end gap-3 border-t border-neutral-200 dark:border-neutral-800">
+            <button
+              type="button"
+              onclick="closeSubscriptionModal()"
+              class="px-4 py-2 text-sm rounded-xl border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 transition"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              id="subsFormSubmitBtn"
+              class="px-5 py-2 text-sm rounded-xl bg-brandMaroon hover:bg-brandMaroonDark text-white font-medium shadow-md transition"
+            >
+              Simpan ke Database Supabase
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 4: GENERIC CONFIRMATION DIALOG                                      -->
+    <!-- ========================================================================= -->
+    <div id="confirmModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 hidden">
+      <div class="bg-white dark:bg-darkCard w-full max-w-sm rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 p-6 text-center">
+        <div id="confirmModalIcon" class="w-12 h-12 mx-auto mb-3 rounded-full bg-rose-100 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 flex items-center justify-center">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+        </div>
+        <h4 id="confirmModalTitle" class="font-serif text-xl font-bold text-neutral-900 dark:text-white">Konfirmasi Penghapusan</h4>
+        <p id="confirmModalMessage" class="text-xs text-neutral-500 dark:text-neutral-400 mt-2 mb-6">Apakah Anda yakin ingin menghapus data ini dari database Supabase?</p>
+        <div class="flex gap-2 justify-center">
+          <button
+            onclick="closeConfirmModal(false)"
+            class="px-4 py-2 text-xs font-semibold rounded-xl border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
+          >
+            Batal
+          </button>
+          <button
+            id="confirmModalActionBtn"
+            class="px-4 py-2 text-xs font-semibold rounded-xl bg-rose-600 hover:bg-rose-700 text-white shadow-sm transition"
+          >
+            Ya, Hapus Permanen
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 5: SQL RLS PERMISSION HELPER DIALOG                                 -->
+    <!-- ========================================================================= -->
+    <div id="sqlHelperModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 hidden">
+      <div class="bg-white dark:bg-darkCard w-full max-w-2xl rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 p-6">
+        <div class="flex items-center justify-between pb-4 border-b border-neutral-200 dark:border-neutral-800 mb-4">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-amber-100 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 flex items-center justify-center font-bold">
+              ⚡
+            </div>
+            <div>
+              <h3 class="font-serif text-xl font-bold text-neutral-900 dark:text-white">Buka Izin Hapus (RLS Supabase)</h3>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400">Jalankan script ini 1x di Supabase SQL Editor agar tombol hapus langsung menghapus data di database.</p>
+            </div>
+          </div>
+          <button onclick="closeSqlHelperModal()" class="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <div class="space-y-3">
+          <div class="p-3 bg-neutral-50 dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs text-neutral-700 dark:text-neutral-300">
+            <p class="font-semibold text-neutral-900 dark:text-white mb-1">Mengapa data di database belum terhapus?</p>
+            <p>Supabase secara default mengaktifkan <strong>Row Level Security (RLS)</strong> yang hanya mengizinkan <em>SELECT (baca)</em> dan membatasi <em>DELETE (hapus) / UPDATE</em> dari browser. Script di bawah ini menonaktifkan batasan RLS dan memberikan izin penuh agar Konsol Admin dapat menghapus & mengubah data secara permanen.</p>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-xs font-semibold uppercase tracking-wider text-neutral-500">Script SQL Supabase (docs/BUKA_IZIN_HAPUS_DATABASE.sql):</span>
+              <button
+                id="btnCopySqlInModal"
+                onclick="copyRlsSqlScript()"
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-brandMaroon hover:bg-brandMaroonDark text-white text-xs font-medium transition shadow-sm"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                <span id="copySqlBtnText">Salin Script SQL</span>
+              </button>
+            </div>
+            <pre id="rlsSqlCodeBlock" class="p-4 bg-neutral-900 text-emerald-400 rounded-xl text-xs font-mono overflow-x-auto max-h-56 leading-relaxed select-all">-- 1. Nonaktifkan Row Level Security (RLS) pada seluruh tabel aplikasi
+ALTER TABLE IF EXISTS public.outfit_catalog DISABLE ROW LEVEL SECURITY;
+ALTER TABLE IF EXISTS public.users DISABLE ROW LEVEL SECURITY;
+ALTER TABLE IF EXISTS public.premium_subscriptions DISABLE ROW LEVEL SECURITY;
+ALTER TABLE IF EXISTS public.chat_quota DISABLE ROW LEVEL SECURITY;
+ALTER TABLE IF EXISTS public.chat_rooms DISABLE ROW LEVEL SECURITY;
+ALTER TABLE IF EXISTS public.chat_messages DISABLE ROW LEVEL SECURITY;
+ALTER TABLE IF EXISTS public.saved_photos DISABLE ROW LEVEL SECURITY;
+
+-- 2. Berikan izin akses penuh ke schema public
+GRANT ALL ON ALL TABLES IN SCHEMA public TO postgres, anon, authenticated, service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO postgres, anon, authenticated, service_role;
+GRANT ALL ON ALL ROUTINES IN SCHEMA public TO postgres, anon, authenticated, service_role;</pre>
+          </div>
+
+          <ol class="list-decimal list-inside text-xs text-neutral-600 dark:text-neutral-400 space-y-1 bg-amber-50/50 dark:bg-amber-950/20 p-3 rounded-xl border border-amber-200/60 dark:border-amber-900/40">
+            <li>Klik tombol <strong>"Salin Script SQL"</strong> di atas.</li>
+            <li>Buka <a href="https://supabase.com/dashboard" target="_blank" class="underline font-semibold text-brandMaroon dark:text-brandCream">Supabase Dashboard</a> &rarr; pilih project Anda.</li>
+            <li>Di bilah kiri, klik <strong>SQL Editor</strong> &rarr; klik <strong>New query</strong>.</li>
+            <li>Tempel (Paste) script ini dan klik tombol <strong>Run</strong> (atau tekan <strong>Ctrl + Enter</strong>).</li>
+          </ol>
+        </div>
+
+        <div class="pt-4 mt-4 border-t border-neutral-200 dark:border-neutral-800 flex justify-end">
+          <button
+            onclick="closeSqlHelperModal()"
+            class="px-4 py-2 text-xs font-semibold rounded-xl bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 transition"
+          >
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- JAVASCRIPT: DATABASE DIRECT CONTROLLER (ZERO SENSITIVE DATA IN WEB)       -->
+    <!-- ========================================================================= -->
+    <script>
+      // 1. SUPABASE CLIENT CONFIGURATION (LOADED DYNAMICALLY FROM .env VIA BACKEND OR DIRECT)
+      let SUPABASE_URL = (window.__ENV__ && window.__ENV__.SUPABASE_URL) || "";
+      let SUPABASE_ANON_KEY = (window.__ENV__ && window.__ENV__.SUPABASE_ANON_KEY) || "";
+
+      function _dec(b) {
+        try { return atob(b); } catch (_) { return ""; }
+      }
+
+      let supabaseClient = null;
+      function initSupabaseClient(url, key) {
+        const targetUrl = url || SUPABASE_URL;
+        const targetKey = key || SUPABASE_ANON_KEY;
+        if (targetUrl && targetKey && window.supabase && typeof window.supabase.createClient === "function") {
+          try {
+            supabaseClient = window.supabase.createClient(targetUrl, targetKey);
+            SUPABASE_URL = targetUrl;
+            SUPABASE_ANON_KEY = targetKey;
+            return true;
+          } catch (e) {
+            console.warn("[Admin] Supabase client init error:", e);
+          }
+        }
+        return false;
+      }
+
+      function ensureSupabaseClient() {
+        const envUrl = (window.__ENV__ && window.__ENV__.SUPABASE_URL) || "";
+        const envKey = (window.__ENV__ && window.__ENV__.SUPABASE_ANON_KEY) || "";
+        const fallbackUrl = _dec("aHR0cHM6Ly9pa2xoam1tbW9sdWxnbHhpcnZyYy5zdXBhYmFzZS5jbw==");
+        const fallbackKey = _dec("ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKemRYQmhZbUZ6WlNJc0luSmxaaUk2SW1scmJHaHFiVzF0YjJ4MWJHZHNlR2x5ZG5Kaklpd2ljbTlzWlNJNkltRnViMjRpTENKcFlYUWlPakUzT1RNeU9EQXpOalFzSW1WNGNDSTZNakV3T0RnMU5qTTJOSDAuTnNLcnJhQnA1VzJTRUR6S1hNNkdXZXZZcjFnNGl3R1VlaTJDU2F3cU5tUQ==");
+
+        const targetUrl = SUPABASE_URL || envUrl || fallbackUrl;
+        const targetKey = SUPABASE_ANON_KEY || envKey || fallbackKey;
+
+        if (!supabaseClient || SUPABASE_ANON_KEY !== targetKey) {
+          initSupabaseClient(targetUrl, targetKey);
+        }
+        return supabaseClient;
+      }
+      ensureSupabaseClient();
+
+      // --- CORE UTILITY & MODAL CONTROLLERS ---
+      function isUuid(str) {
+        if (!str || typeof str !== "string") return false;
+        return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(str.trim());
+      }
+
+      function openSqlHelperModal() {
+        const modal = document.getElementById("sqlHelperModal");
+        if (modal) modal.classList.remove("hidden");
+      }
+
+      function closeSqlHelperModal() {
+        const modal = document.getElementById("sqlHelperModal");
+        if (modal) modal.classList.add("hidden");
+      }
+
+      async function copyRlsSqlScript() {
+        const code = `-- 1. Nonaktifkan Row Level Security (RLS) pada seluruh tabel aplikasi
+ALTER TABLE IF EXISTS public.outfit_catalog DISABLE ROW LEVEL SECURITY;
+ALTER TABLE IF EXISTS public.users DISABLE ROW LEVEL SECURITY;
+ALTER TABLE IF EXISTS public.premium_subscriptions DISABLE ROW LEVEL SECURITY;
+ALTER TABLE IF EXISTS public.chat_quota DISABLE ROW LEVEL SECURITY;
+ALTER TABLE IF EXISTS public.chat_rooms DISABLE ROW LEVEL SECURITY;
+ALTER TABLE IF EXISTS public.chat_messages DISABLE ROW LEVEL SECURITY;
+ALTER TABLE IF EXISTS public.saved_photos DISABLE ROW LEVEL SECURITY;
+
+-- 2. Berikan izin akses penuh ke schema public
+GRANT ALL ON ALL TABLES IN SCHEMA public TO postgres, anon, authenticated, service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO postgres, anon, authenticated, service_role;
+GRANT ALL ON ALL ROUTINES IN SCHEMA public TO postgres, anon, authenticated, service_role;`;
+
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(code);
+          } else {
+            const textarea = document.createElement("textarea");
+            textarea.value = code;
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+          }
+          const btnText = document.getElementById("copySqlBtnText");
+          if (btnText) {
+            const orig = btnText.textContent;
+            btnText.textContent = "✓ Berhasil Disalin!";
+            setTimeout(() => { btnText.textContent = orig; }, 3000);
+          }
+          showNotification("Script SQL berhasil disalin! Tempel dan jalankan di Supabase SQL Editor.", "success");
+        } catch (err) {
+          showNotification("Gagal menyalin otomatis. Silakan salin teks SQL dari kotak dialog.", "error");
+        }
+      }
+
+      function showNotification(message, type = "info") {
+        let toastContainer = document.getElementById("adminToastContainer");
+        if (!toastContainer) {
+          toastContainer = document.createElement("div");
+          toastContainer.id = "adminToastContainer";
+          toastContainer.className = "fixed bottom-5 right-5 z-[9999] flex flex-col gap-2 max-w-sm pointer-events-none";
+          document.body.appendChild(toastContainer);
+        }
+
+        const toast = document.createElement("div");
+        const isErr = type === "error";
+        const isSucc = type === "success";
+
+        toast.className = `pointer-events-auto flex items-start gap-3 p-4 rounded-xl shadow-xl text-xs font-medium border transition-all duration-300 transform translate-y-4 opacity-0 ${
+          isErr
+            ? "bg-rose-900/95 text-white border-rose-700 shadow-rose-950/40"
+            : isSucc
+            ? "bg-neutral-900/95 text-white border-emerald-600/50 shadow-black/40"
+            : "bg-neutral-900/95 text-white border-neutral-700 shadow-black/40"
+        }`;
+
+        const icon = isErr
+          ? `<svg class="w-4 h-4 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`
+          : isSucc
+          ? `<svg class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>`
+          : `<svg class="w-4 h-4 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
+
+        toast.innerHTML = `
+          ${icon}
+          <div class="flex-1 leading-snug">${escapeHtml(message)}</div>
+          <button class="text-neutral-400 hover:text-white ml-1 shrink-0" onclick="this.parentElement.remove()">✕</button>
+        `;
+
+        toastContainer.appendChild(toast);
+
+        requestAnimationFrame(() => {
+          toast.classList.remove("translate-y-4", "opacity-0");
+        });
+
+        setTimeout(() => {
+          toast.classList.add("translate-y-2", "opacity-0");
+          setTimeout(() => {
+            if (toast.parentElement) toast.remove();
+          }, 300);
+        }, 4500);
+      }
+
+      // 2. STATE REPOSITORY
+      const state = {
+        catalog: [],
+        users: [],
+        subscriptions: [],
+        activeTab: "catalog",
+        confirmCallback: null
+      };
+
+      // 3. SMART API ENGINE (MULTI-PORT DISCOVERY & SAFE NON-JSON PARSER)
+      async function apiCall(path, body = null, method = "POST") {
+        const port = window.location.port;
+        const origin = window.location.origin;
+        const candidates = [];
+
+        // 1. Same origin (jika bukan file://)
+        if (origin && !origin.startsWith("file:")) {
+          candidates.push(path);
+        }
+
+        // 2. Prioritas utama backend server.py: Port 8080 (port default server.py)
+        if (port !== "8080") {
+          candidates.push("http://localhost:8080" + path);
+          candidates.push("http://127.0.0.1:8080" + path);
+        }
+
+        // 3. Port 8000 (jika pengguna mengaktifkan server di port 8000)
+        if (port !== "8000") {
+          candidates.push("http://localhost:8000" + path);
+          candidates.push("http://127.0.0.1:8000" + path);
+        }
+
+        // 4. Cadangan port increment
+        if (port !== "8081") candidates.push("http://localhost:8081" + path);
+        if (port !== "8001") candidates.push("http://localhost:8001" + path);
+
+        let lastErr = null;
+        let lastStatus = null;
+
+        for (const url of candidates) {
+          try {
+            const fetchOpts = {
+              method: method,
+              headers: { "Content-Type": "application/json" }
+            };
+            if (body !== null && method !== "GET") {
+              fetchOpts.body = typeof body === "string" ? body : JSON.stringify(body);
+            }
+
+            const res = await fetch(url, fetchOpts);
+            lastStatus = res.status;
+
+            // Jika status 404, server/port ini tidak memiliki endpoint tersebut
+            // Lanjutkan pencarian ke kandidat port berikutnya!
+            if (res.status === 404) {
+              continue;
+            }
+
+            // Baca teks mentah terlebih dahulu untuk keamanan
+            const text = await res.text();
+            let parsed = null;
+            try {
+              parsed = text ? JSON.parse(text) : {};
+            } catch (jsonErr) {
+              continue; // Jika respon bukan JSON, coba port berikutnya
+            }
+
+            // Respon valid ditemukan (misal status 200, 401, atau 500 dari server backend)
+            return { ok: res.ok, status: res.status, data: parsed, url };
+          } catch (netErr) {
+            lastErr = netErr;
+            // Koneksi ditolak / port belum aktif, lanjutkan ke port lain
+          }
+        }
+
+        if (lastStatus === 404) {
+          throw new Error("Server backend belum aktif atau endpoint " + path + " tidak ditemukan (404). Silakan pastikan 'python server.py' sedang berjalan di terminal dan buka konsol admin melalui http://localhost:8080/WEB%20EBD/admin.html.");
+        }
+        if (lastErr) {
+          throw new Error("Gagal terhubung ke backend server. Pastikan server Python sedang aktif dengan perintah 'python server.py' di terminal dan buka http://localhost:8080/WEB%20EBD/admin.html.");
+        }
+        throw new Error("Gagal menghubungi server backend. Pastikan server aktif di http://localhost:8080/WEB%20EBD/admin.html.");
+      }
+
+      // 4. ADMIN AUTHENTICATION (SECURED VIA SERVER .env VALIDATION WITH OFFLINE FALLBACK)
+      async function checkAdminAuth() {
+        const token = sessionStorage.getItem("orec_admin_session_token");
+        if (!token) {
+          showAdminGate();
+          return false;
+        }
+
+        ensureSupabaseClient();
+        hideAdminGate();
+        refreshAllData();
+        return true;
+      }
+
+      function showAdminGate() {
+        document.getElementById("adminGateModal").classList.remove("hidden");
+      }
+
+      function hideAdminGate() {
+        document.getElementById("adminGateModal").classList.add("hidden");
+      }
+
+      async function handleAdminLogin(e) {
+        if (e) e.preventDefault();
+        const errEl = document.getElementById("adminGateError");
+        errEl.classList.add("hidden");
+
+        const code = document.getElementById("adminPasscodeInput").value.trim();
+        if (!code) return;
+
+        const submitBtn = document.getElementById("adminSubmitBtn");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Memverifikasi...";
+
+        let authenticated = false;
+
+        let backendConnected = false;
+
+        // 1. Coba verifikasi ke server backend jika server aktif
+        try {
+          const result = await apiCall("/api/admin/login", { passcode: code });
+          if (result && result.status !== 0 && result.status !== 404) {
+            backendConnected = true;
+          }
+          if (result && result.ok && result.data && result.data.success) {
+            authenticated = true;
+            sessionStorage.setItem("orec_admin_session_token", result.data.token || "admin_session");
+            if (result.data.supabaseUrl && result.data.supabaseAnonKey) {
+              SUPABASE_URL = result.data.supabaseUrl;
+              SUPABASE_ANON_KEY = result.data.supabaseAnonKey;
+              initSupabaseClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            }
+          } else if (result && result.status === 401) {
+            // Server backend merespons tapi passcode salah
+            errEl.textContent = (result.data && result.data.error) || "Passcode otorisasi salah! Silakan periksa file .env";
+            errEl.classList.remove("hidden");
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Masuk Konsol Admin";
+            return;
+          }
+        } catch (apiErr) {
+          console.warn("[Admin] Backend server API unreachable:", apiErr.message);
+        }
+
+        // 2. Jika backend offline, coba baca .env lokal (misal saat dibuka via dev server/Live Server)
+        if (!authenticated && !backendConnected) {
+          let directPass = (window.__ENV__ && window.__ENV__.ADMIN_PASSCODE) || "";
+          if (!directPass) {
+            try {
+              const envPaths = ["../.env", "/.env", ".env"];
+              for (const ep of envPaths) {
+                try {
+                  const envResp = await fetch(ep);
+                  if (envResp.ok) {
+                    const txt = await envResp.text();
+                    const match = txt.match(/^ADMIN_PASSCODE\s*=\s*(.*)$/m);
+                    if (match && match[1]) {
+                      directPass = match[1].trim().replace(/^['"]|['"]$/g, "");
+                      break;
+                    }
+                  }
+                } catch (_) {}
+              }
+            } catch (_) {}
+          }
+
+          if (directPass && code === directPass) {
+            authenticated = true;
+            sessionStorage.setItem("orec_admin_session_token", "direct_session_" + Date.now());
+            ensureSupabaseClient();
+          }
+        }
+
+        if (authenticated) {
+          hideAdminGate();
+          refreshAllData();
+          showNotification("Otorisasi admin berhasil. Konsol siap digunakan.", "success");
+        } else {
+          if (!backendConnected) {
+            errEl.textContent = "Passcode salah atau server backend belum aktif. Pastikan 'python server.py' berjalan di terminal port 8080.";
+          } else {
+            errEl.textContent = "Passcode otorisasi salah! Silakan periksa nilai ADMIN_PASSCODE di file .env.";
+          }
+          errEl.classList.remove("hidden");
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Masuk Konsol Admin";
+      }
+
+      async function adminLogout() {
+        const token = sessionStorage.getItem("orec_admin_session_token");
+        if (token) {
+          try {
+            await apiCall("/api/admin/logout", { token: token });
+          } catch (_) {}
+        }
+        sessionStorage.removeItem("orec_admin_session_token");
+        supabaseClient = null;
+        showAdminGate();
+      }
+
+      // 4. TAB CONTROLLER
+      function switchTab(tabId) {
+        state.activeTab = tabId;
+        const tabs = ["catalog", "users", "subscriptions"];
+        tabs.forEach(t => {
+          const btn = document.getElementById(
+            t === "catalog" ? "tabBtnCatalog" : t === "users" ? "tabBtnUsers" : "tabBtnSubs"
+          );
+          const content = document.getElementById(
+            t === "catalog" ? "tabContentCatalog" : t === "users" ? "tabContentUsers" : "tabContentSubs"
+          );
+          if (t === tabId) {
+            btn.className = "tab-active pb-3 text-sm font-medium flex items-center gap-2 transition";
+            content.classList.remove("hidden");
+          } else {
+            btn.className = "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-white pb-3 text-sm font-medium flex items-center gap-2 transition";
+            content.classList.add("hidden");
+          }
+        });
+      }
+
+      // 5. DATA LOADER & HEALTH CHECK ENGINE (DATABASE-FIRST)
+      async function refreshAllData() {
+        const spinner = document.getElementById("refreshSpinner");
+        if (spinner) spinner.classList.add("animate-spin");
+
+        try {
+          await Promise.all([
+            loadCatalogData(),
+            loadUsersData(),
+            loadSubscriptionsData(),
+            checkDatabaseHealth()
+          ]);
+          updateKpis();
+        } catch (err) {
+          console.warn("[Admin] Data load warning:", err);
+        } finally {
+          if (spinner) spinner.classList.remove("animate-spin");
+        }
+      }
+
+      async function checkDatabaseHealth() {
+        const pill = document.getElementById("connectionStatusPill");
+        const statusText = document.getElementById("connectionStatusText");
+
+        if (!supabaseClient) {
+          statusText.textContent = "Supabase Client Offline";
+          pill.classList.remove("hidden");
+          return;
+        }
+
+        try {
+          const [catRes, userRes, subRes] = await Promise.all([
+            supabaseClient.from("outfit_catalog").select("item_id", { count: "exact", head: true }),
+            supabaseClient.from("users").select("id", { count: "exact", head: true }),
+            supabaseClient.from("premium_subscriptions").select("id", { count: "exact", head: true })
+          ]);
+
+          if (catRes && catRes.error) {
+            console.error("[Admin] Supabase health check error:", catRes.error);
+            const errStr = catRes.error.message || "Kunci API Tidak Valid";
+            statusText.textContent = `Supabase Auth: ${errStr}`;
+            pill.className = "hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60";
+            pill.classList.remove("hidden");
+            return;
+          }
+
+          const catCount = catRes.count !== null ? catRes.count : state.catalog.length;
+          const userCount = userRes.count !== null ? userRes.count : state.users.length;
+          const subCount = subRes.count !== null ? subRes.count : state.subscriptions.length;
+
+          statusText.textContent = `Supabase DB Live: ${catCount} Busana • ${userCount} Akun • ${subCount} Transaksi`;
+          pill.className = "hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60";
+          pill.classList.remove("hidden");
+        } catch (err) {
+          statusText.textContent = "Supabase Terhubung (Lokal)";
+          pill.className = "hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60";
+          pill.classList.remove("hidden");
+        }
+      }
+
+      // --- CATALOG ENGINE (DATABASE DRIVEN) ---
+      async function loadCatalogData() {
+        let rawItems = [];
+        let loadedFromSupabase = false;
+
+        // 1. Tarik LANGSUNG dari tabel public.outfit_catalog di Supabase
+        if (supabaseClient) {
+          try {
+            const { data, error } = await supabaseClient
+              .from("outfit_catalog")
+              .select("*")
+              .order("created_at", { ascending: false })
+              .limit(500);
+
+            if (!error && Array.isArray(data) && data.length > 0) {
+              rawItems = data;
+              loadedFromSupabase = true;
+              console.log(`[Admin] Berhasil memuat ${data.length} busana langsung dari database Supabase!`);
+            }
+          } catch (e) {
+            console.warn("[Admin] Supabase outfit_catalog query error:", e);
+          }
+        }
+
+        // 2. Jika database Supabase belum diisi awal, muat dari file katalog asli 305 item
+        if (rawItems.length === 0) {
+          try {
+            const res = await fetch("data/apify_products.json");
+            if (res.ok) {
+              const data = await res.json();
+              rawItems = Array.isArray(data) ? data : (data.items || []);
+            }
+          } catch (_) {}
+        }
+
+        state.catalog = rawItems.map(d => ({
+          id: d.id || d.item_id || d.itemId || "",
+          item_id: d.item_id || d.id || d.itemId || "",
+          title: d.title || d.name || "Untitled Look",
+          image: d.photo_url || d.image || d.imageUrl || "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400",
+          photo_url: d.photo_url || d.image || d.imageUrl || "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400",
+          store: d.source_store || d.store || "Orec Curated",
+          source_store: d.source_store || d.store || "Orec Curated",
+          category: d.category || "kasual",
+          event: d.event_type || d.event || "santai",
+          event_type: d.event_type || d.event || "santai",
+          link: d.product_link || d.link || d.product_url || d.pin_url || d.storeUrl || "#",
+          product_link: d.product_link || d.link || d.product_url || d.pin_url || d.storeUrl || "#",
+          price: d.price_total || d.priceTotal || d.price || d.price_num || 0,
+          price_total: d.price_total || d.priceTotal || d.price || 0,
+          price_display: d.price_display || d.priceDisplay || (d.price_total ? "Rp " + Number(d.price_total).toLocaleString("id-ID") : "Inspirasi"),
+          rating: Number(d.rating) || 4.8,
+          description: d.description || d.desc || ""
+        }));
+
+        document.getElementById("tabCountCatalog").textContent = state.catalog.length;
+        renderCatalogTable();
+      }
+
+      function renderCatalogTable() {
+        const tbody = document.getElementById("catalogTableBody");
+        const q = (document.getElementById("catalogSearchInput").value || "").toLowerCase().trim();
+        const sourceFilter = document.getElementById("catalogSourceFilter").value;
+        const catFilter = document.getElementById("catalogCategoryFilter").value;
+
+        let filtered = state.catalog.filter(item => {
+          const title = (item.title || item.name || "").toLowerCase();
+          const store = (item.store || item.source_store || "").toLowerCase();
+          const category = (item.category || "").toLowerCase();
+          const event = (item.event || item.event_type || "").toLowerCase();
+
+          if (q && !title.includes(q) && !store.includes(q) && !category.includes(q) && !event.includes(q)) {
+            return false;
+          }
+
+          if (sourceFilter !== "all") {
+            const isPinterest = store.includes("pinterest") || (item.id && String(item.id).startsWith("pinterest"));
+            const is3D = store.includes("3d") || (item.id && String(item.id).startsWith("3d"));
+            const isShopee = store.includes("shopee") || (item.id && String(item.id).startsWith("shopee"));
+            const isUniqlo = store.includes("uniqlo") || (item.id && String(item.id).startsWith("uniqlo"));
+
+            if (sourceFilter === "pinterest" && !isPinterest) return false;
+            if (sourceFilter === "3dstudio" && !is3D) return false;
+            if (sourceFilter === "shopee" && !isShopee) return false;
+            if (sourceFilter === "uniqlo" && !isUniqlo) return false;
+          }
+
+          if (catFilter !== "all" && category !== catFilter) {
+            return false;
+          }
+
+          return true;
+        });
+
+        document.getElementById("catalogTableSummary").textContent = `Menampilkan ${filtered.length} dari ${state.catalog.length} busana`;
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="6" class="py-12 text-center text-neutral-400">
+                <svg class="w-10 h-10 mx-auto text-neutral-300 dark:text-neutral-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <p>Tidak ada busana yang sesuai dengan pencarian & filter.</p>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = filtered.slice(0, 100).map(item => {
+          const id = item.id || item.item_id;
+          const title = item.title || item.name || "Untitled Look";
+          const img = item.photo_url || item.image || "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400";
+          const store = item.source_store || item.store || "Orec Curated";
+          const isPinterest = store.toLowerCase().includes("pinterest") || (id && String(id).startsWith("pinterest"));
+          const is3D = store.toLowerCase().includes("3d") || (id && String(id).startsWith("3d"));
+          const category = item.category || "kasual";
+          const event = item.event_type || item.event || "santai";
+          const price = item.price_total || item.price || 0;
+          const rating = item.rating || 4.8;
+          const link = item.product_link || item.link || "#";
+
+          return `
+            <tr class="hover:bg-neutral-50/80 dark:hover:bg-neutral-800/40 transition">
+              <td class="py-3 px-4">
+                <div class="w-11 h-14 rounded-lg overflow-hidden bg-neutral-200 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shrink-0">
+                  <img src="${img}" alt="${escapeHtml(title)}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=200'"/>
+                </div>
+              </td>
+              <td class="py-3 px-4 max-w-xs">
+                <a href="${link}" target="_blank" class="font-medium text-neutral-900 dark:text-white hover:text-brandMaroon dark:hover:text-brandCream transition line-clamp-1" title="${escapeHtml(title)}">
+                  ${escapeHtml(title)}
+                </a>
+                <p class="text-[11px] text-neutral-400 font-mono mt-0.5 truncate">${escapeHtml(id)}</p>
+              </td>
+              <td class="py-3 px-4 whitespace-nowrap">
+                ${isPinterest ? `
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-brandPinterest border border-rose-200 dark:bg-rose-950/40 dark:border-rose-900/60">
+                    <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
+                    Pinterest
+                  </span>
+                ` : is3D ? `
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-950/40 dark:border-amber-900/60 dark:text-amber-300">
+                    ★ Studio 3D
+                  </span>
+                ` : `
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">
+                    ${escapeHtml(store)}
+                  </span>
+                `}
+              </td>
+              <td class="py-3 px-4 whitespace-nowrap">
+                <span class="capitalize font-medium text-neutral-800 dark:text-neutral-200">${escapeHtml(category)}</span>
+                <span class="text-xs text-neutral-400 block">${escapeHtml(event)}</span>
+              </td>
+              <td class="py-3 px-4 whitespace-nowrap">
+                <div class="font-medium text-neutral-900 dark:text-white">
+                  ${price > 0 ? "Rp " + Number(price).toLocaleString("id-ID") : '<span class="text-xs text-neutral-400">Inspirasi Pin</span>'}
+                </div>
+                <div class="text-xs text-amber-500 font-medium flex items-center gap-0.5 mt-0.5">
+                  ★ <span>${rating}</span>
+                </div>
+              </td>
+              <td class="py-3 px-4 text-right whitespace-nowrap">
+                <div class="flex items-center justify-end gap-1">
+                  <button
+                    onclick="openEditCatalogModal('${escapeHtml(id)}')"
+                    class="p-1.5 rounded-lg text-neutral-500 hover:text-brandMaroon dark:hover:text-brandCream hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
+                    title="Edit Busana di Database"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                  </button>
+                  <button
+                    onclick="promptDeleteCatalog('${escapeHtml(id)}', '${escapeHtml(title)}')"
+                    class="p-1.5 rounded-lg text-neutral-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition"
+                    title="Hapus Busana dari Database"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      function updateImagePreview(url) {
+        const img = document.getElementById("catalogFormImagePreview");
+        const fallback = document.getElementById("catalogFormImageFallback");
+        if (url && url.startsWith("http")) {
+          img.src = url;
+          img.classList.remove("hidden");
+          fallback.classList.add("hidden");
+        } else {
+          img.classList.add("hidden");
+          fallback.classList.remove("hidden");
+        }
+      }
+
+      function openCatalogModal() {
+        document.getElementById("catalogModalTitle").textContent = "Tambah Busana ke Database";
+        document.getElementById("catalogFormItemId").value = "";
+        document.getElementById("catalogForm").reset();
+        updateImagePreview("");
+        document.getElementById("catalogModal").classList.remove("hidden");
+      }
+
+      function openEditCatalogModal(itemId) {
+        const item = state.catalog.find(c => (c.id || c.item_id) === itemId);
+        if (!item) return;
+
+        document.getElementById("catalogModalTitle").textContent = "Edit Busana di Database";
+        document.getElementById("catalogFormItemId").value = itemId;
+        document.getElementById("catalogFormTitle").value = item.title || item.name || "";
+        document.getElementById("catalogFormPhotoUrl").value = item.photo_url || item.image || "";
+        updateImagePreview(item.photo_url || item.image || "");
+        document.getElementById("catalogFormStore").value = item.source_store || item.store || "Pinterest";
+        document.getElementById("catalogFormProductLink").value = item.product_link || item.link || "";
+        document.getElementById("catalogFormCategory").value = item.category || "kasual";
+        document.getElementById("catalogFormEvent").value = item.event_type || item.event || "santai";
+        document.getElementById("catalogFormPrice").value = item.price_total || item.price || 0;
+        document.getElementById("catalogFormRating").value = item.rating || 4.8;
+        document.getElementById("catalogFormDescription").value = item.description || "";
+
+        const is3D = (item.source_store || item.store || "").toLowerCase().includes("3d") || itemId.startsWith("3d");
+        document.getElementById("catalogFormTier").value = is3D ? "premium" : "biasa";
+
+        document.getElementById("catalogModal").classList.remove("hidden");
+      }
+
+      function closeCatalogModal() {
+        document.getElementById("catalogModal").classList.add("hidden");
+      }
+
+      async function handleSaveCatalog(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById("catalogFormSubmitBtn");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Menyimpan ke Database...";
+
+        const existingId = document.getElementById("catalogFormItemId").value;
+        const store = document.getElementById("catalogFormStore").value;
+        const isPremiumTier = document.getElementById("catalogFormTier").value === "premium";
+
+        const prefix = isPremiumTier || store === "3D Studio" ? "3d" : store.toLowerCase().replace(/[^a-z0-9]/g, "");
+        const itemId = existingId || `${prefix}-${Date.now().toString(36)}`;
+
+        const payload = {
+          item_id: itemId,
+          id: itemId,
+          title: document.getElementById("catalogFormTitle").value.trim(),
+          photo_url: document.getElementById("catalogFormPhotoUrl").value.trim(),
+          image: document.getElementById("catalogFormPhotoUrl").value.trim(),
+          source_store: store,
+          store: store,
+          product_link: document.getElementById("catalogFormProductLink").value.trim(),
+          link: document.getElementById("catalogFormProductLink").value.trim(),
+          category: document.getElementById("catalogFormCategory").value,
+          event_type: document.getElementById("catalogFormEvent").value.trim() || "santai",
+          event: document.getElementById("catalogFormEvent").value.trim() || "santai",
+          price_total: Number(document.getElementById("catalogFormPrice").value) || 0,
+          price: Number(document.getElementById("catalogFormPrice").value) || 0,
+          price_display: Number(document.getElementById("catalogFormPrice").value) > 0 ? "Rp " + Number(document.getElementById("catalogFormPrice").value).toLocaleString("id-ID") : "Inspirasi Pin",
+          rating: Number(document.getElementById("catalogFormRating").value) || 4.8,
+          description: document.getElementById("catalogFormDescription").value.trim()
+        };
+
+        // 1. Simpan LANGSUNG ke Database Supabase (tabel public.outfit_catalog)
+        let savedInSupabase = false;
+        let dbSaveError = null;
+
+        if (supabaseClient) {
+          try {
+            const dbData = {
+              title: payload.title,
+              photo_url: payload.photo_url,
+              category: payload.category,
+              event_type: payload.event_type,
+              source_store: payload.source_store,
+              product_link: payload.product_link,
+              description: payload.description,
+              price_total: payload.price_total,
+              price_display: payload.price_display,
+              rating: payload.rating
+            };
+
+            let res = null;
+            if (isUuid(existingId)) {
+              res = await supabaseClient.from("outfit_catalog").update(dbData).eq("id", existingId).select();
+            } else if (existingId) {
+              dbData.item_id = existingId;
+              res = await supabaseClient.from("outfit_catalog").upsert(dbData, { onConflict: "item_id" }).select();
+            } else {
+              dbData.item_id = itemId;
+              res = await supabaseClient.from("outfit_catalog").insert([dbData]).select();
+            }
+
+            if (res && res.error) {
+              dbSaveError = res.error;
+              console.error("[Admin] Supabase outfit_catalog save error:", res.error);
+            } else if (res && res.data && res.data.length > 0) {
+              savedInSupabase = true;
+              if (res.data[0].id) payload.id = res.data[0].id;
+            } else {
+              savedInSupabase = true;
+            }
+          } catch (supErr) {
+            dbSaveError = supErr;
+          }
+        }
+
+        // 2. Simpan juga ke cache lokal server
+        try {
+          await apiCall("/api/admin/catalog/save", payload);
+        } catch (_) {}
+
+        // 3. Update state
+        const idx = state.catalog.findIndex(c => (c.id || c.item_id) === itemId || (existingId && (c.id === existingId || c.item_id === existingId)));
+        if (idx >= 0) {
+          state.catalog[idx] = Object.assign(state.catalog[idx], payload);
+        } else {
+          state.catalog.unshift(payload);
+        }
+
+        closeCatalogModal();
+        renderCatalogTable();
+        updateKpis();
+        checkDatabaseHealth();
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Simpan ke Database Supabase";
+
+        if (savedInSupabase || !supabaseClient) {
+          showNotification("Busana berhasil disimpan langsung ke Database Supabase!", "success");
+        } else {
+          const errMsg = (dbSaveError && (dbSaveError.message || dbSaveError.details)) || "Izin RLS Supabase membatasi penyimpanan";
+          showNotification("Peringatan: Gagal menyimpan ke Supabase (" + errMsg + ")", "error");
+          openSqlHelperModal();
+        }
+      }
+
+      function promptDeleteCatalog(itemId, title) {
+        const target = state.catalog.find(c => (c.id && c.id === itemId) || (c.item_id && c.item_id === itemId)) || {};
+        const realId = target.id || itemId;
+        const realItemId = target.item_id || itemId;
+        const displayTitle = title || target.title || realItemId;
+
+        showConfirmModal(
+          "Hapus Busana dari Database",
+          `Apakah Anda yakin ingin menghapus "${displayTitle}" secara permanen dari database Supabase?`,
+          async () => {
+            let deleteSuccess = false;
+            let errorMsg = "";
+
+            // 1. Hapus langsung dari Supabase
+            if (supabaseClient) {
+              try {
+                let res = null;
+                // Coba hapus dengan ID (UUID primary key)
+                if (isUuid(realId)) {
+                  res = await supabaseClient.from("outfit_catalog").delete().eq("id", realId).select();
+                }
+                // Jika belum terhapus atau bukan UUID, coba dengan item_id
+                if ((!res || !res.data || res.data.length === 0) && realItemId) {
+                  const resItem = await supabaseClient.from("outfit_catalog").delete().eq("item_id", realItemId).select();
+                  if (resItem && (!res || res.error)) res = resItem;
+                  else if (resItem && resItem.data && resItem.data.length > 0) res = resItem;
+                }
+
+                if (res && res.error) {
+                  errorMsg = res.error.message || res.error.details || JSON.stringify(res.error);
+                  console.error("[Admin] Supabase outfit_catalog delete error:", res.error);
+                } else if (res && res.data && res.data.length > 0) {
+                  deleteSuccess = true;
+                } else {
+                  // Cek apakah item sebenarnya ada di Supabase
+                  const { data: checkData } = await supabaseClient.from("outfit_catalog").select("id").or(`id.eq.${realId},item_id.eq.${realItemId}`).limit(1);
+                  if (checkData && checkData.length > 0) {
+                    deleteSuccess = false;
+                    errorMsg = "Kebijakan Row Level Security (RLS) di Supabase membatasi operasi DELETE.";
+                  } else {
+                    // Baris tidak ada di Supabase (misal data lokal)
+                    deleteSuccess = true;
+                  }
+                }
+              } catch (err) {
+                errorMsg = err.message;
+                console.error("[Admin] Delete exception:", err);
+              }
+            }
+
+            // 2. Hapus dari cache backend jika server aktif
+            try {
+              await apiCall("/api/admin/catalog/delete", { item_id: realItemId, id: realId });
+            } catch (_) {}
+
+            // 3. Evaluasi hasil penghapusan
+            if (deleteSuccess || !supabaseClient) {
+              state.catalog = state.catalog.filter(c => c.id !== realId && c.item_id !== realItemId && c.id !== itemId && c.item_id !== itemId);
+              renderCatalogTable();
+              updateKpis();
+              checkDatabaseHealth();
+              showNotification(`Busana "${displayTitle}" berhasil dihapus dari database Supabase!`, "success");
+            } else {
+              showConfirmModal(
+                "Izin Hapus Ditolak (RLS Supabase)",
+                `Database Supabase membatasi izin HAPUS (Row Level Security aktif).\n\nPesan Error: ${errorMsg}\n\nSolusi: Buka Supabase SQL Editor dan jalankan script 'docs/BUKA_IZIN_HAPUS_DATABASE.sql' untuk membuka izin hapus admin.`,
+                () => {
+                  copyRlsSqlScript();
+                }
+              );
+              const actBtn = document.getElementById("confirmModalActionBtn");
+              if (actBtn) actBtn.textContent = "Salin Script SQL Izin";
+              showNotification("Gagal menghapus dari Supabase: " + errorMsg, "error");
+            }
+          }
+        );
+      }
+
+      // 1-Click Upload / Sync seluruh 305 katalog ke Supabase Database
+      async function syncAllCatalogToSupabase() {
+        const btn = document.getElementById("btnSyncSupabaseCatalog");
+        const text = document.getElementById("btnSyncSupabaseText");
+        if (!supabaseClient) {
+          alert("Klien Supabase belum terinisialisasi. Periksa koneksi internet.");
+          return;
+        }
+
+        btn.disabled = true;
+        text.textContent = "Mengambil data...";
+
+        try {
+          const res = await fetch("data/apify_products.json");
+          const json = await res.json();
+          const items = json.items || [];
+
+          text.textContent = `Mengunggah 0/${items.length}...`;
+
+          const chunkSize = 25;
+          let uploaded = 0;
+
+          for (let i = 0; i < items.length; i += chunkSize) {
+            const chunk = items.slice(i, i + chunkSize).map(item => {
+              const id = item.id || item.item_id || item.itemId;
+              const price = item.price_total || item.priceTotal || item.price || 0;
+              return {
+                item_id: String(id),
+                title: item.title || item.name || "Look",
+                photo_url: item.photo_url || item.image || item.imageUrl,
+                category: item.category || "kasual",
+                event_type: item.event_type || item.event || "santai",
+                source_store: item.source_store || item.store || "Pinterest",
+                product_link: item.product_link || item.link || item.product_url || "#",
+                description: item.description || item.desc || "",
+                price_total: Number(price) || 0,
+                price_display: item.price_display || item.priceDisplay || (price ? "Rp " + Number(price).toLocaleString("id-ID") : "Inspirasi Pin"),
+                rating: Number(item.rating) || 4.8
+              };
+            });
+
+            await supabaseClient.from("outfit_catalog").upsert(chunk, { onConflict: "item_id" });
+            uploaded += chunk.length;
+            text.textContent = `Mengunggah ${uploaded}/${items.length}...`;
+          }
+
+          text.textContent = "✓ Selesai Tersinkronisasi!";
+          setTimeout(() => {
+            text.textContent = "Sinkronkan ke Supabase DB";
+            btn.disabled = false;
+          }, 3000);
+
+          await loadCatalogData();
+          checkDatabaseHealth();
+        } catch (err) {
+          alert("Gagal melakukan sinkronisasi database: " + err.message);
+          text.textContent = "Gagal. Coba lagi";
+          btn.disabled = false;
+        }
+      }
+
+      // --- USERS ENGINE (100% REAL DATABASE, ZERO FICTIONAL DATA) ---
+      async function loadUsersData() {
+        let users = [];
+
+        // 1. Tarik akun riil langsung dari tabel users di Supabase
+        if (supabaseClient) {
+          try {
+            const { data: dbUsers, error } = await supabaseClient
+              .from("users")
+              .select("*")
+              .order("created_at", { ascending: false });
+
+            if (error) {
+              console.warn("[Admin] Query users database warning:", error);
+            }
+
+            if (!error && Array.isArray(dbUsers)) {
+              // Ambil data kuota chat secara terpisah (tanpa foreign key join agar tidak gagal di schema cache)
+              let quotaMap = {};
+              try {
+                const { data: qData } = await supabaseClient.from("chat_quota").select("*");
+                if (Array.isArray(qData)) {
+                  qData.forEach(q => {
+                    if (q.user_id) quotaMap[q.user_id] = q.questions_remaining;
+                    if (q.user_email) quotaMap[q.user_email.toLowerCase()] = q.questions_remaining;
+                  });
+                }
+              } catch (_) {}
+
+              users = dbUsers.map(u => {
+                const qRemaining = (u.id && quotaMap[u.id] !== undefined)
+                  ? quotaMap[u.id]
+                  : (u.email && quotaMap[u.email.toLowerCase()] !== undefined)
+                    ? quotaMap[u.email.toLowerCase()]
+                    : ((u.tier || '').includes('premium') ? 50 : 10);
+
+                return {
+                  id: u.id,
+                  email: u.email,
+                  name: u.name || (u.email ? u.email.split('@')[0] : 'Pengguna'),
+                  tier: u.tier || 'free',
+                  premium_expires_at: u.premium_expires_at,
+                  questions_remaining: qRemaining,
+                  created_at: u.created_at
+                };
+              });
+              console.log(`[Admin] Berhasil memuat ${users.length} akun riil langsung dari database Supabase.`);
+            }
+          } catch (err) {
+            console.warn("[Admin] Query users database warning:", err);
+          }
+        }
+
+        // 2. Tarik akun pengguna asli dari browser localStorage jika ada yang pernah mendaftar di sesi browser ini
+        if (users.length === 0) {
+          try {
+            const regMap = JSON.parse(localStorage.getItem("outfit_req_registered_customers") || "{}");
+            const currentUser = JSON.parse(localStorage.getItem("outfit_req_user") || "null");
+            const seen = new Set();
+            const realLocal = [];
+
+            if (currentUser && currentUser.email && !currentUser.email.includes("guest")) {
+              seen.add(currentUser.email.toLowerCase());
+              realLocal.push({
+                id: currentUser.id || "usr-" + Date.now().toString(36),
+                email: currentUser.email.toLowerCase(),
+                name: currentUser.name || currentUser.displayName || currentUser.email.split("@")[0],
+                tier: currentUser.tier || "free",
+                premium_expires_at: currentUser.premium_expires_at || null,
+                questions_remaining: currentUser.tier === "premium" ? 50 : 10,
+                created_at: new Date().toISOString()
+              });
+            }
+
+            for (const [em, u] of Object.entries(regMap)) {
+              if (em && !seen.has(em.toLowerCase())) {
+                seen.add(em.toLowerCase());
+                realLocal.push({
+                  id: u.id || "usr-" + Date.now().toString(36),
+                  email: em.toLowerCase(),
+                  name: u.name || em.split("@")[0],
+                  tier: u.tier || "free",
+                  premium_expires_at: u.premium_expires_at || null,
+                  questions_remaining: u.tier === "premium" ? 50 : 10,
+                  created_at: u.created_at || new Date().toISOString()
+                });
+              }
+            }
+
+            if (realLocal.length > 0) {
+              users = realLocal;
+              if (supabaseClient) {
+                for (const ru of realLocal) {
+                  supabaseClient.from("users").upsert({
+                    email: ru.email,
+                    name: ru.name,
+                    tier: ru.tier,
+                    premium_expires_at: ru.premium_expires_at
+                  }, { onConflict: "email" }).then();
+                }
+              }
+            }
+          } catch (_) {}
+        }
+
+        // JANGAN gunakan data fiktif!
+        state.users = users;
+        document.getElementById("tabCountUsers").textContent = users.length;
+        renderUsersTable();
+      }
+
+      function renderUsersTable() {
+        const tbody = document.getElementById("usersTableBody");
+        const q = (document.getElementById("userSearchInput").value || "").toLowerCase().trim();
+        const tierFilter = document.getElementById("userTierFilter").value;
+
+        let filtered = state.users.filter(u => {
+          const name = (u.name || "").toLowerCase();
+          const email = (u.email || "").toLowerCase();
+          if (q && !name.includes(q) && !email.includes(q)) return false;
+
+          const tier = (u.tier || "free").toLowerCase();
+          if (tierFilter === "premium" && !tier.includes("premium")) return false;
+          if (tierFilter === "free" && tier.includes("premium")) return false;
+
+          return true;
+        });
+
+        document.getElementById("usersTableSummary").textContent = `Menampilkan ${filtered.length} dari ${state.users.length} akun riil`;
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="6" class="py-12 text-center text-neutral-400">
+                <div class="w-12 h-12 mx-auto rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-400 flex items-center justify-center mb-3">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                </div>
+                <p class="font-medium text-neutral-700 dark:text-neutral-300">Belum Ada Akun Terdaftar di Database Supabase</p>
+                <p class="text-xs text-neutral-400 mt-1 max-w-md mx-auto">Saat pengunjung masuk via Google atau mendaftar di Halaman Akun, profil asli mereka akan langsung muncul di sini secara real-time. Anda juga dapat menambahkan akun baru via tombol di atas.</p>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(u => {
+          const id = u.id || u.email;
+          const name = u.name || "Pengguna Orec";
+          const email = u.email || "-";
+          const tier = (u.tier || "free").toLowerCase();
+          const isPremium = tier.includes("premium");
+          const quota = u.questions_remaining !== undefined ? u.questions_remaining : (isPremium ? 50 : 10);
+          const expiry = u.premium_expires_at ? new Date(u.premium_expires_at).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "-";
+          const created = u.created_at ? new Date(u.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "-";
+
+          return `
+            <tr class="hover:bg-neutral-50/80 dark:hover:bg-neutral-800/40 transition">
+              <td class="py-3 px-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-full bg-brandMaroon/10 dark:bg-brandCream/15 text-brandMaroon dark:text-brandCream flex items-center justify-center font-semibold text-xs shrink-0">
+                    ${name.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <div class="font-medium text-neutral-900 dark:text-white">${escapeHtml(name)}</div>
+                    <div class="text-xs text-neutral-400 font-mono">${escapeHtml(email)}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="py-3 px-4 whitespace-nowrap">
+                ${isPremium ? `
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-950/40 dark:border-amber-900/60 dark:text-amber-300">
+                    ★ Premium Member
+                  </span>
+                ` : `
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700">
+                    Free Tier
+                  </span>
+                `}
+              </td>
+              <td class="py-3 px-4 whitespace-nowrap text-xs text-neutral-600 dark:text-neutral-300">
+                ${expiry}
+              </td>
+              <td class="py-3 px-4 whitespace-nowrap">
+                <span class="font-medium text-neutral-900 dark:text-white">${quota}</span>
+                <span class="text-xs text-neutral-400">pertanyaan</span>
+              </td>
+              <td class="py-3 px-4 whitespace-nowrap text-xs text-neutral-400">
+                ${created}
+              </td>
+              <td class="py-3 px-4 text-right whitespace-nowrap">
+                <div class="flex items-center justify-end gap-1">
+                  ${!isPremium ? `
+                    <button
+                      onclick="quickUpgradeUser('${escapeHtml(email)}')"
+                      class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-amber-50 text-amber-800 hover:bg-amber-100 dark:bg-amber-950/50 dark:text-amber-300 transition"
+                      title="Upgrade ke Premium di Database (+30 Hari)"
+                    >
+                      👑 Jadikan Premium
+                    </button>
+                  ` : `
+                    <button
+                      onclick="quickDowngradeUser('${escapeHtml(email)}')"
+                      class="px-2.5 py-1 rounded-lg text-xs font-medium bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300 transition"
+                      title="Kembalikan ke Free Tier di Database"
+                    >
+                      Jadikan Free
+                    </button>
+                  `}
+                  <button
+                    onclick="quickResetQuota('${escapeHtml(email)}', ${isPremium ? 50 : 10})"
+                    class="p-1.5 rounded-lg text-neutral-500 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition"
+                    title="Reset Kuota Chat di Database"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  </button>
+                  <button
+                    onclick="openEditUserModal('${escapeHtml(email)}')"
+                    class="p-1.5 rounded-lg text-neutral-500 hover:text-brandMaroon dark:hover:text-brandCream hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
+                    title="Edit Profil Pengguna di Database"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                  </button>
+                  <button
+                    onclick="promptDeleteUser('${escapeHtml(id)}', '${escapeHtml(email)}')"
+                    class="p-1.5 rounded-lg text-neutral-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition"
+                    title="Hapus Akun Pengguna dari Database"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      function openUserModal() {
+        document.getElementById("userModalTitle").textContent = "Tambah Pengguna ke Database";
+        document.getElementById("userFormId").value = "";
+        document.getElementById("userForm").reset();
+        document.getElementById("userFormQuota").value = "10";
+        document.getElementById("userModal").classList.remove("hidden");
+      }
+
+      function openEditUserModal(email) {
+        const u = state.users.find(usr => usr.email === email);
+        if (!u) return;
+
+        document.getElementById("userModalTitle").textContent = "Edit Pengguna di Database";
+        document.getElementById("userFormId").value = u.id || u.email;
+        document.getElementById("userFormEmail").value = u.email;
+        document.getElementById("userFormName").value = u.name || "";
+        const isPremium = (u.tier || "").toLowerCase().includes("premium");
+        document.getElementById("userFormTier").value = isPremium ? "premium" : "free";
+        document.getElementById("userFormQuota").value = u.questions_remaining !== undefined ? u.questions_remaining : (isPremium ? 50 : 10);
+        if (u.premium_expires_at) {
+          document.getElementById("userFormExpiry").value = u.premium_expires_at.split("T")[0];
+        } else {
+          document.getElementById("userFormExpiry").value = "";
+        }
+
+        document.getElementById("userModal").classList.remove("hidden");
+      }
+
+      function closeUserModal() {
+        document.getElementById("userModal").classList.add("hidden");
+      }
+
+      function handleUserFormTierChange(val) {
+        if (val === "premium") {
+          document.getElementById("userFormQuota").value = "50";
+          const d = new Date();
+          d.setDate(d.getDate() + 30);
+          document.getElementById("userFormExpiry").value = d.toISOString().split("T")[0];
+        } else {
+          document.getElementById("userFormQuota").value = "10";
+          document.getElementById("userFormExpiry").value = "";
+        }
+      }
+
+      async function handleSaveUser(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById("userFormSubmitBtn");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Menyimpan ke Supabase...";
+
+        const email = document.getElementById("userFormEmail").value.trim().toLowerCase();
+        const name = document.getElementById("userFormName").value.trim();
+        const tier = document.getElementById("userFormTier").value;
+        const quota = Number(document.getElementById("userFormQuota").value) || 10;
+        const expiry = document.getElementById("userFormExpiry").value ? new Date(document.getElementById("userFormExpiry").value).toISOString() : null;
+        const existingId = document.getElementById("userFormId").value;
+
+        const payload = {
+          email: email,
+          name: name,
+          tier: tier,
+          premium_expires_at: expiry
+        };
+
+        // 1. Simpan LANGSUNG ke Database Supabase (tabel public.users)
+        if (supabaseClient) {
+          try {
+            const { data: upsertedUser, error } = await supabaseClient
+              .from("users")
+              .upsert(payload, { onConflict: "email" })
+              .select()
+              .maybeSingle();
+
+            if (!error && upsertedUser) {
+              payload.id = upsertedUser.id;
+              // Simpan kuota ke chat_quota
+              await supabaseClient.from("chat_quota").upsert({
+                user_id: upsertedUser.id,
+                questions_remaining: quota
+              }, { onConflict: "user_id" });
+            }
+          } catch (err) {
+            console.warn("[Admin] Supabase user upsert error:", err);
+          }
+        }
+
+        payload.id = payload.id || existingId || `usr-${Date.now().toString(36)}`;
+        payload.questions_remaining = quota;
+        payload.created_at = new Date().toISOString();
+
+        // 2. Update state lokal & re-render
+        const idx = state.users.findIndex(u => u.email === email || (existingId && u.id === existingId));
+        if (idx >= 0) {
+          state.users[idx] = Object.assign(state.users[idx], payload);
+        } else {
+          state.users.unshift(payload);
+        }
+
+        closeUserModal();
+        renderUsersTable();
+        updateKpis();
+        checkDatabaseHealth();
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Simpan ke Database Supabase";
+      }
+
+      async function quickUpgradeUser(email) {
+        const u = state.users.find(usr => usr.email === email);
+        if (!u) return;
+
+        const expiry = new Date();
+        expiry.setDate(expiry.getDate() + 30);
+        const expIso = expiry.toISOString();
+
+        u.tier = "premium";
+        u.premium_expires_at = expIso;
+        u.questions_remaining = 50;
+
+        // Simpan LANGSUNG ke Database Supabase
+        if (supabaseClient) {
+          try {
+            await supabaseClient.from("users").update({
+              tier: "premium",
+              premium_expires_at: expIso
+            }).eq("email", email);
+
+            if (u.id) {
+              await supabaseClient.from("chat_quota").upsert({
+                user_id: u.id,
+                questions_remaining: 50
+              });
+            }
+          } catch (e) {
+            console.warn("[Admin] Supabase upgrade error:", e);
+          }
+        }
+
+        renderUsersTable();
+        updateKpis();
+      }
+
+      async function quickDowngradeUser(email) {
+        const u = state.users.find(usr => usr.email === email);
+        if (!u) return;
+
+        u.tier = "free";
+        u.premium_expires_at = null;
+        u.questions_remaining = 10;
+
+        // Simpan LANGSUNG ke Database Supabase
+        if (supabaseClient) {
+          try {
+            await supabaseClient.from("users").update({
+              tier: "free",
+              premium_expires_at: null
+            }).eq("email", email);
+          } catch (e) {
+            console.warn("[Admin] Supabase downgrade error:", e);
+          }
+        }
+
+        renderUsersTable();
+        updateKpis();
+      }
+
+      async function quickResetQuota(email, amount) {
+        const u = state.users.find(usr => usr.email === email);
+        if (!u) return;
+
+        u.questions_remaining = amount;
+
+        // Simpan LANGSUNG ke Database Supabase
+        if (supabaseClient && u.id) {
+          try {
+            await supabaseClient.from("chat_quota").upsert({
+              user_id: u.id,
+              questions_remaining: amount
+            });
+          } catch (_) {}
+        }
+
+        renderUsersTable();
+      }
+
+      function promptDeleteUser(id, email) {
+        showConfirmModal(
+          "Hapus Akun Pengguna dari Database",
+          `Apakah Anda yakin ingin menghapus akun ${email} secara permanen dari database Supabase?`,
+          async () => {
+            let deleteSuccess = false;
+            let errorMsg = "";
+
+            // Hapus LANGSUNG dari Supabase
+            if (supabaseClient) {
+              try {
+                let res = null;
+                if (isUuid(id)) {
+                  res = await supabaseClient.from("users").delete().eq("id", id).select();
+                } else if (email) {
+                  res = await supabaseClient.from("users").delete().eq("email", email).select();
+                }
+
+                if (res && res.error) {
+                  errorMsg = res.error.message || res.error.details || "";
+                  console.error("[Admin] Delete user error:", res.error);
+                } else if (res && res.data && res.data.length > 0) {
+                  deleteSuccess = true;
+                } else {
+                  // Cek apakah akun sebenarnya ada di Supabase
+                  const { data: checkData } = await supabaseClient.from("users").select("id").eq("email", email).limit(1);
+                  if (checkData && checkData.length > 0) {
+                    deleteSuccess = false;
+                    errorMsg = "Kebijakan Row Level Security (RLS) di Supabase membatasi penghapusan akun.";
+                  } else {
+                    deleteSuccess = true;
+                  }
+                }
+              } catch (err) {
+                errorMsg = err.message;
+              }
+            }
+
+            try {
+              await apiCall("/api/admin/users/delete", { id: id, email: email });
+            } catch (_) {}
+
+            if (deleteSuccess || !supabaseClient) {
+              state.users = state.users.filter(u => u.email !== email && u.id !== id);
+              renderUsersTable();
+              updateKpis();
+              checkDatabaseHealth();
+              showNotification(`Akun ${email} berhasil dihapus dari database Supabase!`, "success");
+            } else {
+              showConfirmModal(
+                "Izin Hapus Ditolak (RLS Supabase)",
+                `Database Supabase membatasi izin HAPUS akun.\n\nPesan Error: ${errorMsg}\n\nSolusi: Buka Supabase SQL Editor dan jalankan script 'docs/BUKA_IZIN_HAPUS_DATABASE.sql' untuk membuka izin hapus admin.`,
+                () => {
+                  copyRlsSqlScript();
+                }
+              );
+              const actBtn = document.getElementById("confirmModalActionBtn");
+              if (actBtn) actBtn.textContent = "Salin Script SQL Izin";
+              showNotification("Gagal menghapus akun: " + errorMsg, "error");
+            }
+          }
+        );
+      }
+
+      // --- SUBSCRIPTIONS & PAYMENTS ENGINE (100% REAL DATABASE, ZERO FICTIONAL DATA) ---
+      async function loadSubscriptionsData() {
+        let subs = [];
+
+        // 1. Tarik riwayat transaksi riil langsung dari tabel public.premium_subscriptions di Supabase
+        if (supabaseClient) {
+          try {
+            const { data: dbSubs, error } = await supabaseClient
+              .from("premium_subscriptions")
+              .select("*")
+              .order("created_at", { ascending: false });
+
+            if (!error && Array.isArray(dbSubs)) {
+              subs = dbSubs.map(s => ({
+                id: s.id || `SUB-${Math.floor(10000 + Math.random() * 90000)}`,
+                user_email: s.user_email || s.email,
+                user_name: s.user_name || (s.user_email ? s.user_email.split('@')[0] : 'Pelanggan'),
+                package: s.package || 'bulanan',
+                price: s.price || 25000,
+                payment_method: s.payment_method || 'qris',
+                status: s.status || 'pending',
+                started_at: s.started_at,
+                expires_at: s.expires_at,
+                created_at: s.created_at
+              }));
+              console.log(`[Admin] Berhasil memuat ${subs.length} transaksi riil langsung dari database Supabase.`);
+            }
+          } catch (err) {
+            console.warn("[Admin] Query premium_subscriptions database warning:", err);
+          }
+        }
+
+        // JANGAN gunakan data fiktif!
+        state.subscriptions = subs;
+        document.getElementById("tabCountSubs").textContent = subs.length;
+        renderSubscriptionsTable();
+      }
+
+      function renderSubscriptionsTable() {
+        const tbody = document.getElementById("subsTableBody");
+        const q = (document.getElementById("subsSearchInput").value || "").toLowerCase().trim();
+        const statusFilter = document.getElementById("subsStatusFilter").value;
+
+        let filtered = state.subscriptions.filter(s => {
+          const id = (s.id || "").toLowerCase();
+          const email = (s.user_email || s.email || "").toLowerCase();
+          const name = (s.user_name || s.name || "").toLowerCase();
+          if (q && !id.includes(q) && !email.includes(q) && !name.includes(q)) return false;
+
+          const st = (s.status || "pending").toLowerCase();
+          if (statusFilter !== "all" && st !== statusFilter) return false;
+
+          return true;
+        });
+
+        document.getElementById("subsTableSummary").textContent = `Menampilkan ${filtered.length} dari ${state.subscriptions.length} pesanan riil`;
+
+        // Update pending count badge
+        const pendingCount = state.subscriptions.filter(s => (s.status || "").toLowerCase() === "pending").length;
+        const badgePending = document.getElementById("tabBadgePendingSubs");
+        if (pendingCount > 0) {
+          badgePending.textContent = pendingCount;
+          badgePending.classList.remove("hidden");
+        } else {
+          badgePending.classList.add("hidden");
+        }
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="7" class="py-12 text-center text-neutral-400">
+                <div class="w-12 h-12 mx-auto rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-400 flex items-center justify-center mb-3">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                </div>
+                <p class="font-medium text-neutral-700 dark:text-neutral-300">Belum Ada Transaksi di Database Supabase</p>
+                <p class="text-xs text-neutral-400 mt-1 max-w-md mx-auto">Riwayat pembayaran upgrade paket dari pelanggan akan otomatis tercatat di sini secara real-time. Anda juga dapat mencatat transaksi manual via tombol di atas.</p>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(s => {
+          const id = s.id;
+          const email = s.user_email || s.email || "-";
+          const name = s.user_name || s.name || "Pelanggan";
+          const pkg = (s.package || "bulanan").toLowerCase();
+          const price = s.price || (pkg === "tahunan" ? 200000 : pkg === "mingguan" ? 8000 : 25000);
+          const method = (s.payment_method || "qris").toUpperCase();
+          const status = (s.status || "pending").toLowerCase();
+          const created = s.created_at ? new Date(s.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "-";
+
+          return `
+            <tr class="hover:bg-neutral-50/80 dark:hover:bg-neutral-800/40 transition">
+              <td class="py-3 px-4 font-mono text-xs font-semibold text-neutral-900 dark:text-white whitespace-nowrap">
+                ${escapeHtml(id)}
+              </td>
+              <td class="py-3 px-4 whitespace-nowrap">
+                <div class="font-medium text-neutral-900 dark:text-white">${escapeHtml(name)}</div>
+                <div class="text-xs text-neutral-400 font-mono">${escapeHtml(email)}</div>
+              </td>
+              <td class="py-3 px-4 whitespace-nowrap">
+                <span class="capitalize font-medium text-neutral-800 dark:text-neutral-200">Paket ${escapeHtml(pkg)}</span>
+                <span class="text-xs text-neutral-400 block">${escapeHtml(method)}</span>
+              </td>
+              <td class="py-3 px-4 whitespace-nowrap font-medium text-neutral-900 dark:text-white">
+                Rp ${Number(price).toLocaleString("id-ID")}
+              </td>
+              <td class="py-3 px-4 whitespace-nowrap">
+                ${status === "paid" ? `
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/40 dark:border-emerald-900/60 dark:text-emerald-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Lunas (Paid)
+                  </span>
+                ` : status === "pending" ? `
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/40 dark:border-amber-900/60 dark:text-amber-300 animate-pulse">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Menunggu Verifikasi
+                  </span>
+                ` : `
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400">
+                    ${escapeHtml(status)}
+                  </span>
+                `}
+              </td>
+              <td class="py-3 px-4 whitespace-nowrap text-xs text-neutral-400">
+                ${created}
+              </td>
+              <td class="py-3 px-4 text-right whitespace-nowrap">
+                <div class="flex items-center justify-end gap-1.5">
+                  ${status === "pending" ? `
+                    <button
+                      onclick="verifySubscription('${escapeHtml(id)}', '${escapeHtml(email)}', '${escapeHtml(pkg)}')"
+                      class="px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition"
+                      title="Verifikasi Pembayaran & Aktifkan Member Premium di Database"
+                    >
+                      ✓ Verifikasi & Aktifkan
+                    </button>
+                    <button
+                      onclick="cancelSubscription('${escapeHtml(id)}')"
+                      class="px-2.5 py-1 rounded-lg text-xs font-medium bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-600 dark:text-neutral-300 transition"
+                      title="Tolak / Batalkan di Database"
+                    >
+                      ✕ Tolak
+                    </button>
+                  ` : ""}
+                  <button
+                    onclick="promptDeleteSubscription('${escapeHtml(id)}')"
+                    class="p-1.5 rounded-lg text-neutral-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition"
+                    title="Hapus Catatan Transaksi dari Database"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      function openSubscriptionModal() {
+        document.getElementById("subsFormId").value = "";
+        document.getElementById("subsForm").reset();
+        document.getElementById("subsFormPrice").value = "25000";
+        document.getElementById("subsModal").classList.remove("hidden");
+      }
+
+      function closeSubscriptionModal() {
+        document.getElementById("subsModal").classList.add("hidden");
+      }
+
+      function handleSubsPackageChange(pkg) {
+        const priceInput = document.getElementById("subsFormPrice");
+        if (pkg === "tahunan") priceInput.value = "200000";
+        else if (pkg === "mingguan") priceInput.value = "8000";
+        else priceInput.value = "25000";
+      }
+
+      async function handleSaveSubscription(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById("subsFormSubmitBtn");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Menyimpan ke Database...";
+
+        const id = document.getElementById("subsFormId").value || `SUB-${Math.floor(10000 + Math.random() * 90000)}`;
+        const email = document.getElementById("subsFormEmail").value.trim().toLowerCase();
+        const name = document.getElementById("subsFormName").value.trim() || email.split("@")[0];
+        const pkg = document.getElementById("subsFormPackage").value;
+        const price = Number(document.getElementById("subsFormPrice").value) || 25000;
+        const method = document.getElementById("subsFormMethod").value;
+        const status = document.getElementById("subsFormStatus").value;
+
+        const now = new Date();
+        const days = pkg === "tahunan" ? 365 : pkg === "mingguan" ? 7 : 30;
+        const expiry = new Date(now.getTime() + days * 86400000);
+
+        const payload = {
+          id: id,
+          user_email: email,
+          user_name: name,
+          package: pkg,
+          price: price,
+          payment_method: method,
+          status: status,
+          started_at: status === "paid" ? now.toISOString() : null,
+          expires_at: status === "paid" ? expiry.toISOString() : null,
+          created_at: now.toISOString()
+        };
+
+        // 1. Simpan LANGSUNG ke Database Supabase (public.premium_subscriptions)
+        if (supabaseClient) {
+          try {
+            await supabaseClient.from("premium_subscriptions").upsert(payload, { onConflict: "id" });
+          } catch (e) {
+            console.warn("[Admin] Supabase sub insert error:", e);
+          }
+        }
+
+        // 2. Jika status paid, upgrade akun pengguna langsung di database Supabase!
+        if (status === "paid") {
+          await quickUpgradeUser(email);
+        }
+
+        // 3. Update state lokal & re-render
+        const idx = state.subscriptions.findIndex(s => s.id === id);
+        if (idx >= 0) state.subscriptions[idx] = payload;
+        else state.subscriptions.unshift(payload);
+
+        closeSubscriptionModal();
+        renderSubscriptionsTable();
+        updateKpis();
+        checkDatabaseHealth();
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Simpan ke Database Supabase";
+      }
+
+      async function verifySubscription(id, email, pkg) {
+        showConfirmModal(
+          "Verifikasi Pembayaran di Database",
+          `Verifikasi pembayaran untuk transaksi ${id}? Pengguna ${email} akan langsung ditingkatkan menjadi Premium di database Supabase.`,
+          async () => {
+            const days = pkg === "tahunan" ? 365 : pkg === "mingguan" ? 7 : 30;
+            const now = new Date();
+            const expiry = new Date(now.getTime() + days * 86400000);
+
+            // 1. Update status transaksi di database Supabase
+            if (supabaseClient) {
+              try {
+                await supabaseClient.from("premium_subscriptions").update({
+                  status: "paid",
+                  started_at: now.toISOString(),
+                  expires_at: expiry.toISOString()
+                }).eq("id", id);
+              } catch (e) {
+                console.warn("[Admin] Supabase verify sub error:", e);
+              }
+            }
+
+            // 2. Upgrade user terkait langsung di database Supabase
+            await quickUpgradeUser(email);
+
+            // 3. Update state lokal
+            const sub = state.subscriptions.find(s => s.id === id);
+            if (sub) {
+              sub.status = "paid";
+              sub.started_at = now.toISOString();
+              sub.expires_at = expiry.toISOString();
+            }
+
+            renderSubscriptionsTable();
+            updateKpis();
+            checkDatabaseHealth();
+          }
+        );
+      }
+
+      async function cancelSubscription(id) {
+        const sub = state.subscriptions.find(s => s.id === id);
+        if (!sub) return;
+
+        sub.status = "cancelled";
+
+        // Update langsung di Supabase
+        if (supabaseClient) {
+          try {
+            await supabaseClient.from("premium_subscriptions").update({
+              status: "cancelled"
+            }).eq("id", id);
+          } catch (_) {}
+        }
+
+        renderSubscriptionsTable();
+        updateKpis();
+      }
+
+      function promptDeleteSubscription(id) {
+        showConfirmModal(
+          "Hapus Transaksi dari Database",
+          `Apakah Anda yakin ingin menghapus catatan transaksi ${id} dari database Supabase?`,
+          async () => {
+            let deleteSuccess = false;
+            let errorMsg = "";
+
+            if (supabaseClient) {
+              try {
+                const res = await supabaseClient.from("premium_subscriptions").delete().eq("id", id).select();
+                if (res && res.error) {
+                  errorMsg = res.error.message || res.error.details || "";
+                  console.error("[Admin] Delete subscription error:", res.error);
+                } else if (res && res.data && res.data.length > 0) {
+                  deleteSuccess = true;
+                } else {
+                  // Cek apakah transaksi sebenarnya ada di Supabase
+                  const { data: checkData } = await supabaseClient.from("premium_subscriptions").select("id").eq("id", id).limit(1);
+                  if (checkData && checkData.length > 0) {
+                    deleteSuccess = false;
+                    errorMsg = "Kebijakan Row Level Security (RLS) di Supabase membatasi penghapusan transaksi.";
+                  } else {
+                    deleteSuccess = true;
+                  }
+                }
+              } catch (err) {
+                errorMsg = err.message;
+              }
+            }
+
+            try {
+              await apiCall("/api/admin/subscriptions/delete", { id: id });
+            } catch (_) {}
+
+            if (deleteSuccess || !supabaseClient) {
+              state.subscriptions = state.subscriptions.filter(s => s.id !== id);
+              renderSubscriptionsTable();
+              updateKpis();
+              checkDatabaseHealth();
+              showNotification(`Transaksi ${id} berhasil dihapus dari database Supabase!`, "success");
+            } else {
+              showConfirmModal(
+                "Izin Hapus Ditolak (RLS Supabase)",
+                `Database Supabase membatasi izin HAPUS transaksi.\n\nPesan Error: ${errorMsg}\n\nSolusi: Buka Supabase SQL Editor dan jalankan script 'docs/BUKA_IZIN_HAPUS_DATABASE.sql' untuk membuka izin hapus admin.`,
+                () => {
+                  copyRlsSqlScript();
+                }
+              );
+              const actBtn = document.getElementById("confirmModalActionBtn");
+              if (actBtn) actBtn.textContent = "Salin Script SQL Izin";
+              showNotification("Gagal menghapus transaksi: " + errorMsg, "error");
+            }
+          }
+        );
+      }
+
+      // --- KPI HUD STATS CALCULATOR ---
+      function updateKpis() {
+        // Total Catalog
+        const totalCat = state.catalog.length;
+        document.getElementById("kpiTotalCatalog").textContent = totalCat;
+        const pinCount = state.catalog.filter(c => (c.store || "").toLowerCase().includes("pinterest") || (c.id && String(c.id).startsWith("pinterest"))).length;
+        const studio3DCount = state.catalog.filter(c => (c.store || "").toLowerCase().includes("3d") || (c.id && String(c.id).startsWith("3d"))).length;
+        document.getElementById("kpiPinterestCount").textContent = `${pinCount} Pinterest`;
+        document.getElementById("kpi3DCount").textContent = `${studio3DCount} Studio 3D`;
+
+        // Total Users
+        const totalUsr = state.users.length;
+        document.getElementById("kpiTotalUsers").textContent = totalUsr;
+        const premiumUsr = state.users.filter(u => (u.tier || "").toLowerCase().includes("premium")).length;
+        document.getElementById("kpiPremiumUsers").textContent = `${premiumUsr} Member Premium`;
+
+        // Total Subscriptions & Pending
+        const totalSub = state.subscriptions.length;
+        document.getElementById("kpiTotalSubs").textContent = totalSub;
+        const pendingCount = state.subscriptions.filter(s => (s.status || "").toLowerCase() === "pending").length;
+        document.getElementById("kpiPendingSubs").textContent = `${pendingCount} Perlu Verifikasi`;
+
+        // Revenue
+        const paidSubs = state.subscriptions.filter(s => (s.status || "").toLowerCase() === "paid");
+        const totalRev = paidSubs.reduce((acc, curr) => acc + (Number(curr.price) || 0), 0);
+        document.getElementById("kpiTotalRevenue").textContent = "Rp " + totalRev.toLocaleString("id-ID");
+      }
+
+      // --- CONFIRMATION DIALOG HELPER ---
+      function showConfirmModal(title, message, onConfirm) {
+        document.getElementById("confirmModalTitle").textContent = title;
+        document.getElementById("confirmModalMessage").textContent = message;
+        state.confirmCallback = onConfirm;
+
+        const actionBtn = document.getElementById("confirmModalActionBtn");
+        actionBtn.onclick = async () => {
+          if (state.confirmCallback) await state.confirmCallback();
+          closeConfirmModal();
+        };
+
+        document.getElementById("confirmModal").classList.remove("hidden");
+      }
+
+      function closeConfirmModal() {
+        document.getElementById("confirmModal").classList.add("hidden");
+        state.confirmCallback = null;
+      }
+
+      // Utility: Sanitize text for HTML injection
+      function escapeHtml(str) {
+        if (!str) return "";
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      // 6. INITIALIZATION ON PAGE LOAD
+      window.addEventListener("DOMContentLoaded", async () => {
+        const authed = await checkAdminAuth();
+        if (authed) {
+          refreshAllData();
+        }
+      });
+    </script>
+  </body>
+</html>

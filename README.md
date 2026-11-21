@@ -71,5 +71,15 @@ EBD/
    - **Memasukkan Produk ke Database Supabase (`outfit_catalog`)**:
      File **[`docs/supabase_outfit_catalog_seed.sql`](docs/supabase_outfit_catalog_seed.sql)** berisi 215 produk resmi dari Uniqlo dan Shopee yang siap dijalankan di menu **SQL Editor** pada Supabase Dashboard Anda.
    - Halaman **[Galeri Rekomendasi (rekomendasi.html)](WEB%20EBD/rekomendasi.html)** secara cerdas akan langsung memuat data dari tabel database Supabase secara real-time (dengan fallback ke cache lokal jika offline). Tersedia tab filter langsung untuk **Shopee Live** dan **Uniqlo Official**.
-3. **Atau Buka Langsung File HTML**:
+3. **Sinkronisasi Database Pinterest (Bagian Biasa / Reguler Non-Premium)**:
+   - **Sinkronisasi & Pembaruan Katalog Pinterest**:
+     ```bash
+     python sync_pinterest_outfits.py
+     # Atau sinkronisasi dari public Pinterest board RSS:
+     python sync_pinterest_outfits.py --rss=https://www.pinterest.com/username/boardname.rss
+     ```
+   - **Memasukkan Katalog Pinterest ke Supabase (`outfit_catalog`)**:
+     File **[`docs/supabase_pinterest_catalog_seed.sql`](docs/supabase_pinterest_catalog_seed.sql)** berisi kumpulan inspirasi busana Pinterest (22+ item kurasi editorial lintas 11 kategori gaya) yang siap dijalankan di menu **SQL Editor** pada Supabase Dashboard.
+   - Halaman **[Galeri Rekomendasi (rekomendasi.html)](WEB%20EBD/rekomendasi.html)** kini dilengkapi filter chip khusus **`Pinterest ★`** dengan tautan langsung ke ide pin di Pinterest serta proteksi tier non-premium.
+4. **Atau Buka Langsung File HTML**:
    Anda juga dapat langsung mengeklik dua kali file **`index.html`** di folder utama atau di dalam folder **`WEB EBD/index.html`**.

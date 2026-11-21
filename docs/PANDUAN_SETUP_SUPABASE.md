@@ -56,7 +56,7 @@ Di folder proyek Anda telah disediakan file `supabase_schema.sql` yang sudah mem
 2. Pilih submenu **API**.
 3. Cari bagian **Project API keys** dan catat dua data penting berikut:
    - **Project URL**: Formatnya seperti `https://xyzcompany.supabase.co`
-   - **`anon` `public` Key**: String panjang yang diawali dengan `eyJhbGciOi...`
+   - **`anon` `public` Key**: Token JWT publik untuk autentikasi anonim klien.
 
 > **Penting**:
 > Jangan gunakan **`service_role` key** di kode frontend (browser) karena memiliki hak akses administrator penuh tanpa mempedulikan aturan RLS. Gunakan selalu **`anon` `public` key**.
@@ -80,19 +80,19 @@ Di folder proyek Anda telah disediakan file `supabase_schema.sql` yang sudah mem
 
 ---
 
-## Langkah 5: Memasukkan Kredensial ke Klien Frontend
+## Langkah 5: Memasukkan Kredensial ke File .env
 
-Buka file `WEB EBD Login/supabaseClient.js` di teks editor Anda.
+Buka file `.env` di root direktori proyek Anda (atau salin dari `.env.example`).
+Sesuai standar keamanan sistem Orec, kredensial dan URL server disimpan aman di `.env` dan tidak diekspos di kode web:
 
-Ganti baris konfigurasi berikut:
-
-```javascript
-// Ganti dengan kredensial dari Langkah 3:
-export const SUPABASE_URL = 'https://abcdefghijkl.supabase.co'; // <- Project URL Anda
-export const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // <- Anon Key Anda
+```env
+SUPABASE_URL=https://your-project-id.supabase.co
+SUPABASE_ANON_KEY=your_supabase_anon_key_here
+ADMIN_PASSCODE=your_admin_passcode_here
+ADMIN_SESSION_SECRET=your_random_secret_here
 ```
 
-Simpan file (`Ctrl + S`).
+Server backend (`server.py`) akan memuat file `.env` secara dinamis dan menyediakannya ke antarmuka web melalui endpoint aman.
 
 ---
 

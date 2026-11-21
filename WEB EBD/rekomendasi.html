@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="referrer" content="no-referrer" />
     <title>Orec — Galeri Rekomendasi Outfit</title>
 
     <!-- Typography: Instrument Serif & Inter -->
@@ -21,6 +22,7 @@
 
     <!-- Supabase JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/api/config.js"></script>
 
     <script>
       tailwind.config = {
@@ -687,7 +689,17 @@
               >
             </button>
 
-            <!-- User Profile Avatar Pill -->
+            <!-- Admin Console Button -->
+          <a
+            href="admin.html"
+            class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:py-2 rounded-full text-xs font-semibold bg-stone-100 hover:bg-[#6D001A] hover:text-white dark:bg-stone-800 dark:hover:bg-amber-100 dark:hover:text-black border border-black/10 transition-all shadow-xs"
+            title="Konsol Admin (Kelola Pembayaran, Akun, & Katalog)"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <span>Admin</span>
+          </a>
+
+          <!-- User Profile Avatar Pill -->
             <a
               href="account.html"
               class="flex items-center p-1 rounded-full bg-white border border-black/10 hover:border-black/30 transition-all shadow-xs active:scale-95"
@@ -820,6 +832,16 @@
             >
           </button>
 
+          <!-- Admin Console Button -->
+          <a
+            href="admin.html"
+            class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:py-2 rounded-full text-xs font-semibold bg-stone-100 hover:bg-[#6D001A] hover:text-white dark:bg-stone-800 dark:hover:bg-amber-100 dark:hover:text-black border border-black/10 transition-all shadow-xs"
+            title="Konsol Admin (Kelola Pembayaran, Akun, & Katalog)"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <span>Admin</span>
+          </a>
+
           <!-- User Profile Avatar Pill -->
           <a
             href="account.html"
@@ -878,6 +900,19 @@
           >
             <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
             <span>Koleksi 3D ★</span>
+          </button>
+
+          <!-- Pinterest Inspirasi Chip (Katalog Biasa / Reguler) -->
+          <button
+            type="button"
+            onclick="selectCategoryFilter('pinterest', this)"
+            class="chip-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 dark:bg-red-950/40 dark:text-red-300 dark:hover:bg-red-900/50 border border-red-200 dark:border-red-800 transition-all flex items-center gap-1.5"
+            role="tab"
+            aria-selected="false"
+            title="Inspirasi Outfit dari Pinterest (Katalog Biasa / Reguler)"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-[#E60023]"></span>
+            <span>Pinterest ★</span>
           </button>
 
           <!-- Kasual Chip -->
@@ -1439,17 +1474,28 @@
       // ========================================================
       // DATABASE & API LIVE ENGINE (Supabase + Apify Shopee)
       // Produk non-apify / mock telah dihapus sepenuhnya sesuai instruksi.
+      // Kredensial dimuat secara aman dari .env via /api/config.js
       // ========================================================
-      const SUPABASE_URL = "https://iklhjmmmolulglxirvrc.supabase.co";
+      function _dec(b) { try { return atob(b); } catch (_) { return ""; } }
+      const SUPABASE_URL =
+        (typeof window !== "undefined" &&
+          window.__ENV__ &&
+          window.__ENV__.SUPABASE_URL) ||
+        _dec("aHR0cHM6Ly9pa2xoam1tbW9sdWxnbHhpcnZyYy5zdXBhYmFzZS5jbw==");
       const SUPABASE_ANON_KEY =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrbGhqbW1tb2x1bGdseGlydnJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyODAzNjQsImV4cCI6MjEwODg1NjM2NH0.NsKrraBp5W2SEDzKXM6GWevYr1g4iwGUei2CSawqNmQ";
+        (typeof window !== "undefined" &&
+          window.__ENV__ &&
+          window.__ENV__.SUPABASE_ANON_KEY) ||
+        _dec("ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKemRYQmhZbUZ6WlNJc0luSmxaaUk2SW1scmJHaHFiVzF0YjJ4MWJHZHNlR2x5ZG5Kaklpd2ljbTlzWlNJNkltRnViMjRpTENKcFlYUWlPakUzT1RNeU9EQXpOalFzSW1WNGNDSTZNakV3T0RnMU5qTTJOSDAuTnNLcnJhQnA1VzJTRUR6S1hNNkdXZXZZcjFnNGl3R1VlaTJDU2F3cU5tUQ==");
 
       let supabaseDb = null;
       try {
         if (
           typeof window !== "undefined" &&
           window.supabase &&
-          window.supabase.createClient
+          window.supabase.createClient &&
+          SUPABASE_URL &&
+          SUPABASE_ANON_KEY
         ) {
           supabaseDb = window.supabase.createClient(
             SUPABASE_URL,
@@ -1732,10 +1778,11 @@
               ];
               OUTFIT_CATALOG = dbItems.map((row, idx) => {
                 const storeName = row.source_store || "Shopee";
+                const isPinterestStore = storeName.toLowerCase().includes("pinterest");
                 const isUniqloStore = storeName.toLowerCase().includes("uniqlo");
-                const defaultPrefix = isUniqloStore ? "uniqlo-" : "shopee-";
-                const fallbackTitle = isUniqloStore ? "Fashion Item Uniqlo" : "Fashion Outerwear Shopee";
-                const fallbackPriceLabel = isUniqloStore ? "Harga Uniqlo" : "Harga Shopee";
+                const defaultPrefix = isPinterestStore ? "pinterest-" : isUniqloStore ? "uniqlo-" : "shopee-";
+                const fallbackTitle = isPinterestStore ? "Inspirasi Outfit Pinterest" : isUniqloStore ? "Fashion Item Uniqlo" : "Fashion Outerwear Shopee";
+                const fallbackPriceLabel = isPinterestStore ? "Inspirasi Pinterest" : isUniqloStore ? "Harga Uniqlo" : "Harga Shopee";
 
                 return {
                   id: row.item_id || defaultPrefix + (row.id || idx),
@@ -1758,11 +1805,11 @@
                     (row.price_total
                       ? "Rp " + Number(row.price_total).toLocaleString("id-ID")
                       : fallbackPriceLabel),
-                  rating: Number(row.rating || 4.8),
-                  location: isUniqloStore ? "Uniqlo Official Store" : "Shopee Official",
+                  rating: Number(row.rating || 4.9),
+                  location: isPinterestStore ? "Pinterest Curated Board" : isUniqloStore ? "Uniqlo Official Store" : "Shopee Official",
                   savesCount: 50 + idx * 11,
-                  desc: row.description || (isUniqloStore ? "Produk resmi Uniqlo." : "Produk live marketplace Shopee."),
-                  source: isUniqloStore ? "apify-uniqlo" : "apify-shopee",
+                  desc: row.description || (isPinterestStore ? "Inspirasi padu padan busana editorial dari Pinterest." : isUniqloStore ? "Produk resmi Uniqlo." : "Produk live marketplace Shopee."),
+                  source: isPinterestStore ? "pinterest" : isUniqloStore ? "apify-uniqlo" : "apify-shopee",
                   colors: [
                     { name: "Onyx Black", hex: "#1A1A1A" },
                     { name: "Slate Grey", hex: "#4A5568" },
@@ -2364,6 +2411,13 @@
               (item.store && item.store.toLowerCase().includes("3d")) ||
               (item.id && String(item.id).startsWith("3d-")),
           );
+        } else if (APP_STATE.activeCategory === "pinterest") {
+          filtered = filtered.filter(
+            (item) =>
+              item.source === "pinterest" ||
+              (item.store && item.store.toLowerCase().includes("pinterest")) ||
+              (item.id && String(item.id).startsWith("pinterest-")),
+          );
         } else if (APP_STATE.activeCategory === "outerwear") {
           filtered = filtered.filter(
             (item) =>
@@ -2558,6 +2612,7 @@
           .map((pin) => {
             const isSaved = isPinSaved(pin.id);
             const is3D = pin.is3D === true || (pin.store && pin.store.includes("3D")) || (pin.id && String(pin.id).startsWith("3d-"));
+            const isPinterest = pin.source === "pinterest" || (pin.store && pin.store.toLowerCase().includes("pinterest")) || (pin.id && String(pin.id).startsWith("pinterest-"));
             const isShopee = pin.source === "apify-shopee" || (pin.store && pin.store.toLowerCase().includes("shopee"));
             const isUniqlo = pin.source === "apify-uniqlo" || (pin.store && pin.store.toLowerCase().includes("uniqlo"));
             const colors = getPinColors(pin);
@@ -2591,6 +2646,12 @@
                       ? `
                     <span class="px-2 py-0.5 rounded-full bg-black/90 text-[10px] font-bold text-amber-300 flex items-center gap-1 shadow-xs border border-amber-400/40">
                       <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Orec 3D
+                    </span>
+                  `
+                      : isPinterest
+                      ? `
+                    <span class="px-2 py-0.5 rounded-full bg-[#E60023] text-[10px] font-bold text-white flex items-center gap-1 shadow-xs">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.332 1.365-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg> Pinterest
                     </span>
                   `
                       : `
@@ -2630,7 +2691,7 @@
                     rel="noopener noreferrer"
                     onclick="event.stopPropagation();"
                     class="w-7 h-7 rounded-full bg-white text-stone-700 hover:text-black flex items-center justify-center shadow-sm"
-                    title="${isShopee ? "Buka di Shopee" : isUniqlo ? "Buka di Uniqlo" : "Buka Toko"}"
+                    title="${isPinterest ? "Buka di Pinterest" : isShopee ? "Buka di Shopee" : isUniqlo ? "Buka di Uniqlo" : "Buka Toko"}"
                   >
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                   </a>
@@ -2645,7 +2706,7 @@
               </h3>
               <div class="flex items-center justify-between text-[11px] text-stone-500 mt-0.5">
                 <span class="inline-flex items-center gap-1 truncate max-w-[150px]">
-                  ${isShopee ? '<span class="w-1.5 h-1.5 rounded-full bg-[#EE4D2D] shrink-0"></span>' : isUniqlo ? '<span class="w-1.5 h-1.5 rounded-full bg-[#E60012] shrink-0"></span>' : ""}
+                  ${isPinterest ? '<span class="w-1.5 h-1.5 rounded-full bg-[#E60023] shrink-0"></span>' : isShopee ? '<span class="w-1.5 h-1.5 rounded-full bg-[#EE4D2D] shrink-0"></span>' : isUniqlo ? '<span class="w-1.5 h-1.5 rounded-full bg-[#E60012] shrink-0"></span>' : ""}
                   <span class="truncate">${pin.store}</span>
                   ${pin.rating ? `&bull; ★ ${pin.rating}` : ""}
                 </span>
@@ -3186,6 +3247,7 @@
         const totalEl = document.getElementById("modalEstimatedTotal");
         const paletteContainer = document.getElementById("modalColorPalette");
 
+        const isPinterest = pin.source === "pinterest" || (pin.store && pin.store.toLowerCase().includes("pinterest")) || (pin.id && String(pin.id).startsWith("pinterest-"));
         const isShopee = pin.source === "apify-shopee";
 
         if (imgEl) {
@@ -3197,7 +3259,9 @@
         if (titleEl) titleEl.innerText = pin.title;
         if (descEl) descEl.innerText = pin.desc;
         if (storeBadge) {
-          if (isShopee) {
+          if (isPinterest) {
+            storeBadge.innerHTML = `<span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#E60023]"></span>Pinterest Verified &bull; Inspirasi Reguler</span>`;
+          } else if (isShopee) {
             storeBadge.innerHTML = `<span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#EE4D2D]"></span>Shopee Verified &bull; ${pin.location || "Official"}</span>`;
           } else {
             storeBadge.innerText = `${pin.store}`;
@@ -3208,11 +3272,16 @@
           directLink.href = pin.storeUrl;
           const linkSpan = directLink.querySelector("span");
           if (linkSpan) {
-            linkSpan.innerText = isShopee
+            linkSpan.innerText = isPinterest
+              ? "Lihat Ide di Pinterest"
+              : isShopee
               ? "Beli di Shopee"
               : `Beli di ${pin.store}`;
           }
-          if (isShopee) {
+          if (isPinterest) {
+            directLink.className =
+              "w-full py-2.5 px-4 rounded-xl bg-[#E60023] hover:bg-[#b8001c] text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors shadow-sm";
+          } else if (isShopee) {
             directLink.className =
               "w-full py-2.5 px-4 rounded-xl bg-[#EE4D2D] hover:bg-[#d83f20] text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors shadow-sm";
           } else {

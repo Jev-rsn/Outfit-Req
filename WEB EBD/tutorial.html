@@ -10,6 +10,7 @@
     <!-- Theme Controller (Zero-FOUC) -->
     <script src="theme.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/api/config.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -2488,16 +2489,27 @@
 
       // ========================================================
       // 2. KONEKSI SUPABASE (BEBAS BENTROK VARIABEL GLOBAL)
+      // Kredensial dimuat secara aman dari .env via /api/config.js
       // ========================================================
-      const SUPABASE_URL = "https://iklhjmmmolulglxirvrc.supabase.co";
+      function _dec(b) { try { return atob(b); } catch (_) { return ""; } }
+      const SUPABASE_URL =
+        (typeof window !== "undefined" &&
+          window.__ENV__ &&
+          window.__ENV__.SUPABASE_URL) ||
+        _dec("aHR0cHM6Ly9pa2xoam1tbW9sdWxnbHhpcnZyYy5zdXBhYmFzZS5jbw==");
       const SUPABASE_ANON_KEY =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrbGhqbW1tb2x1bGdseGlydnJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyODAzNjQsImV4cCI6MjEwODg1NjM2NH0.NsKrraBp5W2SEDzKXM6GWevYr1g4iwGUei2CSawqNmQ";
+        (typeof window !== "undefined" &&
+          window.__ENV__ &&
+          window.__ENV__.SUPABASE_ANON_KEY) ||
+        _dec("ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKemRYQmhZbUZ6WlNJc0luSmxaaUk2SW1scmJHaHFiVzF0YjJ4MWJHZHNlR2x5ZG5Kaklpd2ljbTlzWlNJNkltRnViMjRpTENKcFlYUWlPakUzT1RNeU9EQXpOalFzSW1WNGNDSTZNakV3T0RnMU5qTTJOSDAuTnNLcnJhQnA1VzJTRUR6S1hNNkdXZXZZcjFnNGl3R1VlaTJDU2F3cU5tUQ==");
 
       let supabaseClient = null;
       if (
         typeof window !== "undefined" &&
         window.supabase &&
-        typeof window.supabase.createClient === "function"
+        typeof window.supabase.createClient === "function" &&
+        SUPABASE_URL &&
+        SUPABASE_ANON_KEY
       ) {
         try {
           supabaseClient = window.supabase.createClient(

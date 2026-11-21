@@ -14,8 +14,20 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CATALOG_PATH = os.path.join(BASE_DIR, "Premium 3D", "products_catalog.json")
 APIFY_JSON_PATH = os.path.join(BASE_DIR, "WEB EBD", "data", "apify_products.json")
 
-SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://iklhjmmmolulglxirvrc.supabase.co")
-SUPABASE_KEY = os.environ.get("SUPABASE_ANON_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrbGhqbW1tb2x1bGdseGlydnJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyODAzNjQsImV4cCI6MjEwODg1NjM2NH0.NsKrraBp5W2SEDzKXM6GWevYr1g4iwGUei2CSawqNmQ")
+# Muat kredensial secara aman dari .env jika ada
+ENV_FILE = os.path.join(BASE_DIR, ".env")
+if os.path.exists(ENV_FILE):
+    with open(ENV_FILE, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1)
+                k, v = k.strip(), v.strip().strip('"').strip("'")
+                if not os.environ.get(k):
+                    os.environ[k] = v
+
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
+SUPABASE_KEY = os.environ.get("SUPABASE_ANON_KEY", "")
 
 with open(CATALOG_PATH, "r", encoding="utf-8") as f:
     cat_3d = json.load(f)

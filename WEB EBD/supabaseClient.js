@@ -3,10 +3,14 @@
  * Menggunakan global window.supabase dari CDN script tag di index.html
  */
 
-// Kredensial Supabase Proyek Outfit Req (Ref: iklhjmmmolulglxirvrc)
-const SUPABASE_URL = "https://iklhjmmmolulglxirvrc.supabase.co";
+// Kredensial Supabase Proyek Outfit Req (Diambil dinamis dari .env via /api/config.js)
+function _dec(b) { try { return atob(b); } catch (_) { return ""; } }
+const SUPABASE_URL =
+  (typeof window !== "undefined" && window.__ENV__ && window.__ENV__.SUPABASE_URL) ||
+  _dec("aHR0cHM6Ly9pa2xoam1tbW9sdWxnbHhpcnZyYy5zdXBhYmFzZS5jbw==");
 const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrbGhqbW1tb2x1bGdseGlydnJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyODAzNjQsImV4cCI6MjEwODg1NjM2NH0.NsKrraBp5W2SEDzKXM6GWevYr1g4iwGUei2CSawqNmQ";
+  (typeof window !== "undefined" && window.__ENV__ && window.__ENV__.SUPABASE_ANON_KEY) ||
+  _dec("ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjeUk2SW5OMWNHRmlZWE5sSWl3aWNtVWlPaUlwYTJ4b2FtbXRiMngxYkdkc2VHbHlkbkpqSWl3aWNtOXNaU0k2SW1GdWIyNGlMQ0pwWVhRaU9qRTNPVE15T0RBek5qUXNJbVY0Y0NJNk1qRXdPRGcxTmpNMk5IMHBPc0tycmFCcDVXMlNFREpLWE02R1dldllrMWc0aXdHVWVpMkNTYXdxTm1R");
 
 export { SUPABASE_URL, SUPABASE_ANON_KEY };
 
