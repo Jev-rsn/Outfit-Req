@@ -11,18 +11,14 @@ import webbrowser
 import json
 import urllib.request
 import urllib.error
-
-import http.server
-import socketserver
-import os
-import sys
-import webbrowser
-import json
-import urllib.request
-import urllib.error
+import urllib.parse
 import secrets
 import hmac
 import time
+import hashlib
+import base64
+import uuid
+from datetime import datetime, timezone, timedelta
 
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
@@ -45,6 +41,113 @@ def load_env_file(env_path, override=True):
         print(f"[Warning] Error reading .env: {e}")
 
 load_env_file(os.path.join(DIRECTORY, '.env'))
+
+# DOKU Payment Gateway Helpers (HMAC-SHA256 Signature & DB Sync)
+def generate_doku_signature(client_id, request_id, timestamp, target_path, body_bytes, secret_key):
+    digest = base64.b64encode(hashlib.sha256(body_bytes).digest()).decode('utf-8')
+    raw_component = f"Client-Id:{client_id}\nRequest-Id:{request_id}\nRequest-Timestamp:{timestamp}\nRequest-Target:{target_path}\nDigest:{digest}"
+    hmac_hash = hmac.new(secret_key.encode('utf-8'), raw_component.encode('utf-8'), hashlib.sha256).digest()
+    signature = "HMACSHA256=" + base64.b64encode(hmac_hash).decode('utf-8')
+    return signature, digest
+
+def sync_doku_subscription_to_database(sub_record, user_email, duration_days=30):
+    sub_file = os.path.join(DIRECTORY, 'WEB EBD', 'data', 'admin_subscriptions.json')
+    usr_file = os.path.join(DIRECTORY, 'WEB EBD', 'data', 'registered_users.json')
+    try:
+        with open(sub_file, 'r', encoding='utf-8') as f:
+            subs = json.load(f)
+    except Exception:
+        subs = []
+
+    sub_ref = sub_record.get('payment_gateway_ref') or sub_record.get('id')
+    existing_idx = next((i for i, s in enumerate(subs) if s.get('payment_gateway_ref') == sub_ref or s.get('id') == sub_record.get('id')), None)
+    if existing_idx is not None:
+        subs[existing_idx].update(sub_record)
+    else:
+        subs.insert(0, sub_record)
+
+    try:
+        with open(sub_file, 'w', encoding='utf-8') as f:
+            json.dump(subs, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        print(f"[Subscription Sync] Error writing local subscriptions: {e}")
+
+    # Otomatis update status tier pengguna ke premium jika statusnya paid
+    if user_email and sub_record.get('status') == 'paid':
+        try:
+            with open(usr_file, 'r', encoding='utf-8') as f:
+                users = json.load(f)
+            found = False
+            for u in users:
+                if u.get('email', '').strip().lower() == user_email.strip().lower():
+                    u['tier'] = 'premium'
+                    u['premium_expires_at'] = sub_record.get('expires_at')
+                    found = True
+                    break
+            if not found:
+                users.append({
+                    'id': str(uuid.uuid4()),
+                    'name': sub_record.get('user_name') or 'Member Orec',
+                    'email': user_email.strip().lower(),
+                    'tier': 'premium',
+                    'premium_expires_at': sub_record.get('expires_at'),
+                    'created_at': sub_record.get('started_at')
+                })
+            with open(usr_file, 'w', encoding='utf-8') as f:
+                json.dump(users, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            print(f"[User Sync] Error updating local users: {e}")
+
+    # Sinkronisasi ke Supabase Cloud DB jika credentials tersedia
+    supa_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+    supa_key = os.environ.get('SUPABASE_SERVICE_ROLE_KEY') or os.environ.get('SUPABASE_ANON_KEY')
+    if supa_url and supa_key and 'your-project' not in supa_url:
+        supa_headers = {
+            'apikey': supa_key,
+            'Authorization': f'Bearer {supa_key}',
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+        }
+        try:
+            db_sub = {
+                'package': sub_record.get('package', 'bulanan'),
+                'price': int(sub_record.get('price', 25000)),
+                'payment_method': 'doku',
+                'payment_gateway_ref': sub_record.get('payment_gateway_ref', ''),
+                'status': sub_record.get('status', 'pending'),
+                'started_at': sub_record.get('started_at'),
+                'expires_at': sub_record.get('expires_at'),
+                'auto_renew': False,
+                'user_email': user_email,
+                'user_name': sub_record.get('user_name', '')
+            }
+            req = urllib.request.Request(
+                f"{supa_url}/rest/v1/premium_subscriptions",
+                data=json.dumps(db_sub).encode('utf-8'),
+                headers=supa_headers,
+                method='POST'
+            )
+            with urllib.request.urlopen(req, timeout=5):
+                pass
+        except Exception as e:
+            print(f"[Supabase DB Sync] Notice premium_subscriptions: {e}")
+
+        if user_email and sub_record.get('status') == 'paid':
+            try:
+                db_u = {
+                    'tier': 'premium',
+                    'premium_expires_at': sub_record.get('expires_at')
+                }
+                req = urllib.request.Request(
+                    f"{supa_url}/rest/v1/users?email=ilike.{urllib.parse.quote(user_email)}",
+                    data=json.dumps(db_u).encode('utf-8'),
+                    headers=supa_headers,
+                    method='PATCH'
+                )
+                with urllib.request.urlopen(req, timeout=5):
+                    pass
+            except Exception as e:
+                print(f"[Supabase DB Sync] Notice users patch: {e}")
 
 # Admin active in-memory session tokens (token -> expiry timestamp)
 ADMIN_SESSIONS = {}
@@ -195,6 +298,24 @@ class UnifiedHandler(http.server.SimpleHTTPRequestHandler):
                 }
             })
 
+        # DOKU PAYMENT STATUS INQUIRY
+        if clean_path == '/api/payment/doku/status':
+            params = urllib.parse.parse_qs(self.path.split('?')[1]) if '?' in self.path else {}
+            invoice = (params.get('invoice') or [''])[0]
+            if not invoice:
+                return self.send_json({'success': False, 'error': 'Parameter invoice diperlukan'}, 400)
+            sub_file = os.path.join(DIRECTORY, 'WEB EBD', 'data', 'admin_subscriptions.json')
+            try:
+                with open(sub_file, 'r', encoding='utf-8') as f:
+                    subs = json.load(f)
+                target = next((s for s in subs if s.get('payment_gateway_ref') == invoice or s.get('id') == invoice), None)
+                if target:
+                    return self.send_json({'success': True, 'subscription': target})
+                else:
+                    return self.send_json({'success': False, 'message': 'Invoice belum ditemukan'}, 404)
+            except Exception as e:
+                return self.send_json({'success': False, 'error': str(e)}, 500)
+
         super().do_GET()
 
     def do_POST(self):
@@ -205,6 +326,67 @@ class UnifiedHandler(http.server.SimpleHTTPRequestHandler):
             body = json.loads(post_data.decode('utf-8'))
         except Exception:
             body = {}
+
+        # -----------------------------------------------------------------
+        # USER AUTHENTICATION & PASSWORD RESET API
+        # -----------------------------------------------------------------
+        if clean_path == '/api/auth/reset-password':
+            email = str(body.get('email') or '').strip().lower()
+            new_password = str(body.get('newPassword') or '').strip()
+
+            if not email or len(new_password) < 6:
+                return self.send_json({
+                    'success': False,
+                    'error': 'Alamat email wajib diisi dan kata sandi baru minimal 6 karakter.'
+                }, 400)
+
+            # Update di data lokal registered_users.json jika ada
+            usr_file = os.path.join(DIRECTORY, 'WEB EBD', 'data', 'registered_users.json')
+            try:
+                with open(usr_file, 'r', encoding='utf-8') as f:
+                    users = json.load(f)
+            except Exception:
+                users = []
+
+            user_found = False
+            for u in users:
+                if u.get('email', '').strip().lower() == email:
+                    u['password_updated_at'] = datetime.now(timezone.utc).isoformat()
+                    user_found = True
+                    break
+
+            if user_found:
+                try:
+                    with open(usr_file, 'w', encoding='utf-8') as f:
+                        json.dump(users, f, indent=2, ensure_ascii=False)
+                except Exception as e:
+                    print(f"[Reset Password] Error saving users file: {e}")
+
+            # Trigger Supabase recover endpoint jika dikonfigurasi
+            supa_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+            supa_anon = os.environ.get('SUPABASE_ANON_KEY', '')
+            if supa_url and supa_anon and 'your-project' not in supa_url:
+                try:
+                    req_payload = {'email': email}
+                    req = urllib.request.Request(
+                        f"{supa_url}/auth/v1/recover",
+                        data=json.dumps(req_payload).encode('utf-8'),
+                        headers={
+                            'apikey': supa_anon,
+                            'Authorization': f"Bearer {supa_anon}",
+                            'Content-Type': 'application/json'
+                        },
+                        method='POST'
+                    )
+                    with urllib.request.urlopen(req, timeout=5) as _:
+                        pass
+                except Exception as e:
+                    print(f"[Supabase Recover API] Notice: {e}")
+
+            return self.send_json({
+                'success': True,
+                'message': f'Kata sandi untuk {email} berhasil diatur ulang!'
+            })
 
         # -----------------------------------------------------------------
         # ADMIN AUTHENTICATION (SECURED VIA .env - NEVER EXPOSED TO WEB)
@@ -487,6 +669,197 @@ class UnifiedHandler(http.server.SimpleHTTPRequestHandler):
                 return self.send_json({'success': False, 'error': str(e)}, 500)
 
         # -----------------------------------------------------------------
+        # DOKU PAYMENT GATEWAY ENDPOINTS (CHECKOUT, WEBHOOK, VERIFY)
+        # -----------------------------------------------------------------
+        if clean_path == '/api/payment/doku/checkout':
+            load_env_file(os.path.join(DIRECTORY, '.env'), override=True)
+            client_id = os.environ.get('DOKU_CLIENT_ID', '').strip()
+            secret_key = os.environ.get('DOKU_SECRET_KEY', '').strip()
+            is_prod = os.environ.get('DOKU_IS_PRODUCTION', 'false').lower() == 'true'
+
+            if not client_id or not secret_key:
+                return self.send_json({
+                    'success': False,
+                    'error': 'DOKU_CLIENT_ID dan DOKU_SECRET_KEY belum dikonfigurasi di file .env'
+                }, 500)
+
+            pkg = str(body.get('package') or 'bulanan').lower()
+            default_price = 8000 if 'minggu' in pkg else (200000 if 'tahun' in pkg else 25000)
+            amount = int(body.get('price') or default_price)
+            user_info = body.get('user') or {}
+            user_name = str(user_info.get('name') or 'Pelanggan Outfit Req').strip()
+            user_email = str(user_info.get('email') or 'user@outfitreq.com').strip()
+            user_id = str(user_info.get('id') or f"CUST-{secrets.token_hex(4)}")
+
+            invoice_number = f"OREC-{int(time.time())}-{secrets.token_hex(2).upper()}"
+            base_url = 'https://api.doku.com' if is_prod else 'https://api-sandbox.doku.com'
+            target_path = '/checkout/v1/payment'
+            req_url = base_url + target_path
+
+            host_header = self.headers.get('Host') or f"localhost:{START_PORT}"
+            scheme = 'https' if self.headers.get('X-Forwarded-Proto') == 'https' else 'http'
+            callback_url = body.get('callbackUrl') or f"{scheme}://{host_header}/WEB%20EBD/account.html?doku_status=success&invoice={invoice_number}"
+
+            doku_payload = {
+                'order': {
+                    'amount': amount,
+                    'invoice_number': invoice_number,
+                    'currency': 'IDR',
+                    'callback_url': callback_url,
+                    'auto_redirect': True,
+                    'line_items': [
+                        {
+                            'name': f"Langganan Outfit Req Premium ({pkg.capitalize()})",
+                            'price': amount,
+                            'quantity': 1
+                        }
+                    ]
+                },
+                'payment': {
+                    'payment_due_date': 60
+                },
+                'customer': {
+                    'id': user_id,
+                    'name': user_name,
+                    'email': user_email
+                }
+            }
+
+            body_bytes = json.dumps(doku_payload, separators=(',', ':')).encode('utf-8')
+            req_id = str(uuid.uuid4())
+            req_time = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+            signature, _ = generate_doku_signature(client_id, req_id, req_time, target_path, body_bytes, secret_key)
+
+            req_headers = {
+                'Client-Id': client_id,
+                'Request-Id': req_id,
+                'Request-Timestamp': req_time,
+                'Signature': signature,
+                'Content-Type': 'application/json'
+            }
+
+            try:
+                doku_req = urllib.request.Request(req_url, data=body_bytes, headers=req_headers, method='POST')
+                with urllib.request.urlopen(doku_req, timeout=15) as doku_resp:
+                    resp_data = json.loads(doku_resp.read().decode('utf-8'))
+                    payment_url = resp_data.get('response', {}).get('payment', {}).get('url')
+
+                    # Simpan data transaksi pending ke database lokal & cloud
+                    days = 7 if 'minggu' in pkg else (365 if 'tahun' in pkg else 30)
+                    now_iso = datetime.now(timezone.utc).isoformat()
+                    sub_record = {
+                        'id': f"SUB-{secrets.token_hex(4).upper()}",
+                        'package': pkg,
+                        'price': amount,
+                        'payment_method': 'doku',
+                        'payment_gateway_ref': invoice_number,
+                        'status': 'pending',
+                        'payment_url': payment_url,
+                        'user_email': user_email,
+                        'user_name': user_name,
+                        'started_at': now_iso,
+                        'created_at': now_iso
+                    }
+                    sync_doku_subscription_to_database(sub_record, user_email, days)
+
+                    return self.send_json({
+                        'success': True,
+                        'paymentUrl': payment_url,
+                        'invoiceNumber': invoice_number,
+                        'amount': amount,
+                        'package': pkg
+                    })
+            except urllib.error.HTTPError as he:
+                err_text = he.read().decode('utf-8')
+                print(f"[DOKU API Error] {he.code}: {err_text}")
+                return self.send_json({
+                    'success': False,
+                    'error': f"Gagal membuat pesanan pembayaran DOKU: HTTP {he.code}",
+                    'detail': err_text
+                }, 502)
+            except Exception as e:
+                print(f"[DOKU Request Exception] {e}")
+                return self.send_json({'success': False, 'error': str(e)}, 500)
+
+        if clean_path in ('/api/payment/doku/webhook', '/api/payment/doku/notification'):
+            # Tangkap callback webhook notifikasi resmi dari DOKU
+            invoice_num = (body.get('order') or {}).get('invoice_number') or (body.get('transaction') or {}).get('invoice_number') or ''
+            trx_status = str((body.get('transaction') or {}).get('status') or (body.get('order') or {}).get('status') or '').upper()
+
+            print(f"[DOKU Webhook] Diterima notifikasi untuk invoice: {invoice_num}, status: {trx_status}")
+
+            if trx_status == 'SUCCESS' and invoice_num:
+                sub_file = os.path.join(DIRECTORY, 'WEB EBD', 'data', 'admin_subscriptions.json')
+                try:
+                    with open(sub_file, 'r', encoding='utf-8') as f:
+                        subs = json.load(f)
+                except Exception:
+                    subs = []
+
+                sub = next((s for s in subs if s.get('payment_gateway_ref') == invoice_num), None)
+                pkg = sub.get('package', 'bulanan') if sub else 'bulanan'
+                days = 7 if 'minggu' in pkg else (365 if 'tahun' in pkg else 30)
+                now_dt = datetime.now(timezone.utc)
+                expiry_dt = now_dt + timedelta(days=days)
+
+                updated_sub = {
+                    'status': 'paid',
+                    'started_at': now_dt.isoformat(),
+                    'expires_at': expiry_dt.isoformat(),
+                    'payment_gateway_ref': invoice_num
+                }
+                if sub:
+                    updated_sub.update(sub)
+                    updated_sub['status'] = 'paid'
+                    updated_sub['started_at'] = now_dt.isoformat()
+                    updated_sub['expires_at'] = expiry_dt.isoformat()
+                else:
+                    updated_sub = {
+                        'id': f"SUB-{secrets.token_hex(4).upper()}",
+                        'package': pkg,
+                        'price': int((body.get('order') or {}).get('amount') or 25000),
+                        'payment_method': 'doku',
+                        'payment_gateway_ref': invoice_num,
+                        'status': 'paid',
+                        'user_email': (body.get('customer') or {}).get('email', ''),
+                        'user_name': (body.get('customer') or {}).get('name', ''),
+                        'started_at': now_dt.isoformat(),
+                        'expires_at': expiry_dt.isoformat(),
+                        'created_at': now_dt.isoformat()
+                    }
+                sync_doku_subscription_to_database(updated_sub, updated_sub.get('user_email'), days)
+
+            return self.send_json({'status': 'OK', 'message': 'Notification received'}, 200)
+
+        if clean_path == '/api/payment/doku/verify':
+            invoice_num = str(body.get('invoiceNumber') or '').strip()
+            force_approve = bool(body.get('forceApprove', False))
+
+            sub_file = os.path.join(DIRECTORY, 'WEB EBD', 'data', 'admin_subscriptions.json')
+            try:
+                with open(sub_file, 'r', encoding='utf-8') as f:
+                    subs = json.load(f)
+            except Exception:
+                subs = []
+
+            target_sub = next((s for s in subs if s.get('payment_gateway_ref') == invoice_num or s.get('id') == invoice_num), None)
+
+            if force_approve and target_sub:
+                pkg = target_sub.get('package', 'bulanan')
+                days = 7 if 'minggu' in pkg else (365 if 'tahun' in pkg else 30)
+                now_dt = datetime.now(timezone.utc)
+                target_sub['status'] = 'paid'
+                target_sub['started_at'] = now_dt.isoformat()
+                target_sub['expires_at'] = (now_dt + timedelta(days=days)).isoformat()
+                sync_doku_subscription_to_database(target_sub, target_sub.get('user_email'), days)
+
+            return self.send_json({
+                'success': True,
+                'status': target_sub.get('status') if target_sub else 'unknown',
+                'subscription': target_sub
+            })
+
+        # -----------------------------------------------------------------
         # AI CURATION API
         # -----------------------------------------------------------------
         if clean_path == '/api/ai/curate':
@@ -640,6 +1013,8 @@ if __name__ == '__main__':
     print(f" -> Admin Console:      http://localhost:{active_port}/WEB%20EBD/admin.html", flush=True)
     print(f" -> Panduan & Tutorial: http://localhost:{active_port}/WEB%20EBD/tutorial.html", flush=True)
     print(f" -> Masuk (Login 3D):   http://localhost:{active_port}/WEB%20EBD/login.html", flush=True)
+    print(f" -> DOKU Checkout API:  http://localhost:{active_port}/api/payment/doku/checkout", flush=True)
+    print(f" -> DOKU Webhook API:   http://localhost:{active_port}/api/payment/doku/webhook", flush=True)
     print(f" -> AI Curate API:      http://localhost:{active_port}/api/ai/curate", flush=True)
     print(" [Apify Sync] Jalankan: python sync_apify_products.py", flush=True)
     print(" [Pinterest Sync] Jalankan: python sync_pinterest_outfits.py", flush=True)

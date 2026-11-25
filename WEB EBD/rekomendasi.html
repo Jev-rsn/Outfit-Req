@@ -881,38 +881,13 @@
         >
           <button
             type="button"
+            data-category="all"
             onclick="selectCategoryFilter('all', this)"
             class="chip-pill active shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold bg-stone-900 text-white shadow-xs transition-all"
             role="tab"
             aria-selected="true"
           >
             Semua
-          </button>
-
-          <!-- Koleksi Produk 3D Studio Chip -->
-          <button
-            type="button"
-            onclick="selectCategoryFilter('3d', this)"
-            class="chip-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold text-amber-950 bg-amber-400/25 hover:bg-amber-400/40 border border-amber-500/30 transition-all flex items-center gap-1.5"
-            role="tab"
-            aria-selected="false"
-            title="Katalog produk resmi Studio 3D (Siap Coba di Manekin)"
-          >
-            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-            <span>Koleksi 3D ★</span>
-          </button>
-
-          <!-- Pinterest Inspirasi Chip (Katalog Biasa / Reguler) -->
-          <button
-            type="button"
-            onclick="selectCategoryFilter('pinterest', this)"
-            class="chip-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 dark:bg-red-950/40 dark:text-red-300 dark:hover:bg-red-900/50 border border-red-200 dark:border-red-800 transition-all flex items-center gap-1.5"
-            role="tab"
-            aria-selected="false"
-            title="Inspirasi Outfit dari Pinterest (Katalog Biasa / Reguler)"
-          >
-            <span class="w-1.5 h-1.5 rounded-full bg-[#E60023]"></span>
-            <span>Pinterest ★</span>
           </button>
 
           <!-- Kasual Chip -->
@@ -1058,8 +1033,16 @@
           </button>
         </div>
 
-        <!-- Minimal Sort Dropdown -->
+        <!-- Minimal Sort Dropdown + Premium Filter Badge -->
         <div class="shrink-0 flex items-center gap-2">
+          <span
+            id="filterPremiumBadge"
+            onclick="openPremiumLockedModal({ title: 'Filter Rekomendasi Khusus Premium', desc: 'Fitur filter kategori, acara, pencarian, dan pengurutan outfit hanya tersedia untuk akun Premium. Akun biasa menampilkan galeri foto outfit secara langsung tanpa informasi tambahan.' })"
+            class="hidden cursor-pointer inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300/70 hover:bg-amber-200 transition-colors"
+            title="Filter hanya tersedia untuk akun Premium"
+          >
+            <span>🔒 Filter Premium</span>
+          </span>
           <select
             id="sortSelect"
             onchange="applySortFilter()"
@@ -1225,6 +1208,30 @@
           class="w-full md:w-1/2 p-4 sm:p-6 md:p-8 flex flex-col justify-between overflow-y-auto transition-colors duration-500"
           style="-webkit-overflow-scrolling: touch"
         >
+          <!-- Regular / Free Tier Notice (Photo Only, No Additional Info) -->
+          <div id="modalRegularNotice" class="hidden flex-1 flex flex-col items-center justify-center text-center py-6 px-2">
+            <div class="w-12 h-12 rounded-2xl bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-200 flex items-center justify-center mb-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-stone-600 dark:text-stone-300 bg-stone-100 dark:bg-stone-800 px-3 py-1 rounded-full">
+              Mode Reguler &bull; Hanya Foto
+            </span>
+            <h3 class="font-serif text-xl sm:text-2xl text-stone-900 dark:text-white mt-3">
+              Informasi Tambahan Khusus Premium
+            </h3>
+            <p class="text-xs text-stone-500 dark:text-stone-400 mt-2 max-w-xs leading-relaxed">
+              Pada akun biasa, rekomendasi hanya menampilkan foto outfit tanpa informasi tambahan. Upgrade ke Premium untuk membuka filter kategori, detail busana, palet warna, estimasi harga, tautan toko, dan Studio 3D.
+            </p>
+            <a
+              href="account.html#paket-premium"
+              class="mt-5 w-full max-w-xs py-3 px-4 rounded-xl bg-[#6D001A] hover:bg-black text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition-all"
+            >
+              <span>Upgrade ke Premium Sekarang</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <div id="modalPremiumDetailsWrap" class="flex flex-col justify-between flex-1">
           <div>
             <!-- Header: Store / Source & Save Button -->
             <div
@@ -1340,6 +1347,7 @@
               </svg>
             </a>
           </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1371,11 +1379,11 @@
           Fitur Khusus Akun Premium
         </span>
 
-        <h3 class="font-serif text-2xl font-normal text-stone-900 dark:text-white mt-3">
+        <h3 id="lockedModalTitle" class="font-serif text-2xl font-normal text-stone-900 dark:text-white mt-3">
           Visualisasi Model Tubuh 3D (Gunakan)
         </h3>
 
-        <p class="text-xs text-stone-600 dark:text-stone-300 mt-2 leading-relaxed">
+        <p id="lockedModalDesc" class="text-xs text-stone-600 dark:text-stone-300 mt-2 leading-relaxed">
           Fitur <b>Gunakan</b> memungkinkan pengguna Premium mencoba pakaian rekomendasi langsung pada manekin tubuh 3D ultra-realistis yang ukurannya (TB, BB, LD, LP, Bahu) mengikuti postur tubuh Anda secara presisi dengan rotasi 360°.
         </p>
 
@@ -1520,8 +1528,96 @@
         isSavedBoardView: false,
         user: null,
         currentViewingPin: null,
+        activeModalPin: null,
         isLoading: true,
       };
+
+      function isUserPremium() {
+        if (APP_STATE.user) {
+          const t = String(APP_STATE.user.tier || "").toLowerCase().trim();
+          if (t.includes("premium") || APP_STATE.user.isPremium === true) {
+            return true;
+          }
+        }
+        try {
+          const userRaw = localStorage.getItem("outfit_req_user");
+          if (userRaw) {
+            const u = JSON.parse(userRaw);
+            const tier = String(u.tier || "").toLowerCase().trim();
+            if (tier.includes("premium") || u.isPremium === true) return true;
+          }
+        } catch (e) {}
+        return false;
+      }
+      window.isUserPremium = isUserPremium;
+
+      function openPremiumLockedModal(options = {}) {
+        const lockedModal = document.getElementById("modalPremiumLocked");
+        const titleEl = document.getElementById("lockedModalTitle");
+        const descEl = document.getElementById("lockedModalDesc");
+        const previewBox = document.getElementById("lockedPreviewBox");
+        const imgEl = document.getElementById("lockedPreviewImg");
+        const previewTitleEl = document.getElementById("lockedPreviewTitle");
+
+        if (titleEl) {
+          titleEl.textContent =
+            options.title || "Visualisasi Model Tubuh 3D (Gunakan)";
+        }
+        if (descEl) {
+          descEl.innerHTML =
+            options.desc ||
+            "Fitur <b>Gunakan</b> memungkinkan pengguna Premium mencoba pakaian rekomendasi langsung pada manekin tubuh 3D ultra-realistis yang ukurannya (TB, BB, LD, LP, Bahu) mengikuti postur tubuh Anda secara presisi dengan rotasi 360°.";
+        }
+        if (previewBox) {
+          if (options.hidePreview) {
+            previewBox.classList.add("hidden");
+          } else {
+            previewBox.classList.remove("hidden");
+            if (imgEl && options.previewImg) imgEl.src = options.previewImg;
+            if (previewTitleEl) {
+              previewTitleEl.textContent =
+                options.previewTitle || "Kemeja Pilihan";
+            }
+          }
+        }
+        if (lockedModal) lockedModal.classList.remove("hidden");
+      }
+      window.openPremiumLockedModal = openPremiumLockedModal;
+
+      function updateFilterBarPremiumUI() {
+        const premium = isUserPremium();
+        const badge = document.getElementById("filterPremiumBadge");
+        const sortSelect = document.getElementById("sortSelect");
+        const searchInput = document.getElementById("pinterestSearchInput");
+
+        if (badge) {
+          badge.classList.toggle("hidden", premium);
+        }
+        if (sortSelect) {
+          sortSelect.classList.toggle("opacity-60", !premium);
+          sortSelect.title = premium
+            ? "Urutkan rekomendasi"
+            : "Fitur urutkan khusus akun Premium";
+          if (!premium) sortSelect.value = "featured";
+        }
+        if (searchInput) {
+          searchInput.placeholder = premium
+            ? "Cari ide outfit, brand, warna..."
+            : "🔒 Pencarian & filter khusus Premium...";
+        }
+        document.querySelectorAll("#chipsCarousel .chip-pill").forEach((btn) => {
+          const isAll = btn.getAttribute("data-category") === "all";
+          if (isAll) return;
+          btn.classList.toggle("opacity-65", !premium);
+          if (!premium) {
+            btn.setAttribute(
+              "title",
+              "Fitur filter kategori khusus akun Premium",
+            );
+          }
+        });
+      }
+      window.updateFilterBarPremiumUI = updateFilterBarPremiumUI;
 
       // Cek dan sinkronkan status langganan Premium dari database Supabase
       async function syncUserPremiumFromDatabase(overrideEmail) {
@@ -2401,24 +2497,19 @@
         const statusText = document.getElementById("feedStatusText");
         if (!container) return;
 
+        const isPremium = isUserPremium();
+        updateFilterBarPremiumUI();
+
+        if (!isPremium) {
+          APP_STATE.activeCategory = "all";
+          APP_STATE.activeEvent = null;
+          APP_STATE.searchQuery = "";
+          APP_STATE.sortOption = "featured";
+        }
+
         let filtered = [...OUTFIT_CATALOG];
 
-        if (APP_STATE.activeCategory === "3d") {
-          filtered = filtered.filter(
-            (item) =>
-              item.is3D === true ||
-              (item.source && item.source.includes("3d")) ||
-              (item.store && item.store.toLowerCase().includes("3d")) ||
-              (item.id && String(item.id).startsWith("3d-")),
-          );
-        } else if (APP_STATE.activeCategory === "pinterest") {
-          filtered = filtered.filter(
-            (item) =>
-              item.source === "pinterest" ||
-              (item.store && item.store.toLowerCase().includes("pinterest")) ||
-              (item.id && String(item.id).startsWith("pinterest-")),
-          );
-        } else if (APP_STATE.activeCategory === "outerwear") {
+        if (APP_STATE.activeCategory === "outerwear") {
           filtered = filtered.filter(
             (item) =>
               item.category === "outerwear" ||
@@ -2554,7 +2645,6 @@
         if (statusText) {
           const statusLabels = {
             all: "Menampilkan seluruh inspirasi outfit",
-            "3d": "Koleksi Eksklusif: Visualisasi Manekin 3D Realistis",
             smartcasual: "Tema Outfit: Smart Casual & Semi-Formal",
             outerwear: "Tema Outfit: Outerwear, Jaket & Luaran",
             kasual: "Tema Outfit: Kasual Santai Sehari-hari",
@@ -2610,6 +2700,21 @@
         // Generate Clean Cards
         container.innerHTML = itemsToRender
           .map((pin) => {
+            if (!isPremium) {
+              return `
+          <div class="pin-card group cursor-pointer" onclick="openPinDetailModal('${pin.id}')">
+            <div class="pin-image-wrapper ${pin.aspect}" style="background-color: #ece8e0;">
+              <img 
+                src="${pin.image}" 
+                alt="Foto Outfit" 
+                loading="lazy" 
+                onerror="this.onerror=null; this.src='${pin.thumb_b64 || pin.localFallback || "images/card1.jpg"}';"
+              />
+            </div>
+          </div>
+        `;
+            }
+
             const isSaved = isPinSaved(pin.id);
             const is3D = pin.is3D === true || (pin.store && pin.store.includes("3D")) || (pin.id && String(pin.id).startsWith("3d-"));
             const isPinterest = pin.source === "pinterest" || (pin.store && pin.store.toLowerCase().includes("pinterest")) || (pin.id && String(pin.id).startsWith("pinterest-"));
@@ -2734,23 +2839,13 @@
       function handleGunakan3D(pinId) {
         const pin = (pinId ? findPinById(pinId) : APP_STATE.activeModalPin) || {};
 
-        let isPremium = false;
-        try {
-          const userRaw = localStorage.getItem("outfit_req_user");
-          if (userRaw) {
-            const u = JSON.parse(userRaw);
-            const tier = (u.tier || "").toString().toLowerCase().trim();
-            isPremium = tier.includes("premium") || u.isPremium === true;
-          }
-        } catch (e) {}
-
-        if (!isPremium) {
-          const lockedModal = document.getElementById("modalPremiumLocked");
-          const imgEl = document.getElementById("lockedPreviewImg");
-          const titleEl = document.getElementById("lockedPreviewTitle");
-          if (imgEl && pin.image) imgEl.src = pin.image;
-          if (titleEl && pin.title) titleEl.innerText = pin.title;
-          if (lockedModal) lockedModal.classList.remove("hidden");
+        if (!isUserPremium()) {
+          openPremiumLockedModal({
+            title: "Visualisasi Model Tubuh 3D (Gunakan)",
+            desc: "Fitur <b>Gunakan</b> memungkinkan pengguna Premium mencoba pakaian rekomendasi langsung pada manekin tubuh 3D ultra-realistis yang ukurannya (TB, BB, LD, LP, Bahu) mengikuti postur tubuh Anda secara presisi dengan rotasi 360°.",
+            previewImg: pin.image,
+            previewTitle: pin.title || "Outfit Pilihan",
+          });
           return;
         }
 
@@ -2802,29 +2897,16 @@
       window.handleGunakan3D = handleGunakan3D;
 
       function handleStudio3DNav(e) {
-        let isPremium = false;
-        try {
-          const userRaw = localStorage.getItem("outfit_req_user");
-          if (userRaw) {
-            const u = JSON.parse(userRaw);
-            const tier = (u.tier || "").toString().toLowerCase().trim();
-            isPremium = tier.includes("premium") || u.isPremium === true;
-          }
-        } catch (err) {}
-
-        if (!isPremium) {
+        if (!isUserPremium()) {
           if (e) {
             e.preventDefault();
             e.stopPropagation();
           }
-          const lockedModal = document.getElementById("modalPremiumLocked");
-          if (lockedModal) {
-            const previewTitle = document.getElementById("lockedPreviewTitle");
-            if (previewTitle) previewTitle.textContent = "Studio 3D Manekin Digital";
-            lockedModal.classList.remove("hidden");
-          } else {
-            window.location.href = "account.html#paket-premium";
-          }
+          openPremiumLockedModal({
+            title: "Studio 3D Manekin Digital",
+            desc: "Fitur <b>Studio 3D</b> memungkinkan pengguna Premium mencoba pakaian secara interaktif pada manekin tubuh 3D sesuai ukuran tubuh Anda.",
+            previewTitle: "Studio 3D Manekin Digital",
+          });
           return false;
         }
       }
@@ -3080,9 +3162,36 @@
 
         if (emptyEl) emptyEl.classList.add("hidden");
 
+        const isPremium = isUserPremium();
         container.innerHTML = APP_STATE.savedPins
           .map(
             (item) => {
+              if (!isPremium) {
+                return `
+        <div class="pin-card group cursor-pointer" onclick="openPinDetailModal('${item.id}')">
+          <div class="pin-image-wrapper aspect-[3/4]" style="background-color: #ece8e0;">
+            <img 
+              src="${item.image}" 
+              alt="Foto Outfit" 
+              loading="lazy" 
+              onerror="this.src='images/card1.jpg'"
+            />
+            <div class="pin-hover-overlay">
+              <div class="flex justify-end items-center w-full">
+                <button 
+                  type="button" 
+                  onclick="event.stopPropagation(); togglePinSave('${item.id}')"
+                  class="px-3 py-1 rounded-full bg-stone-900 text-white text-[11px] font-semibold hover:bg-black"
+                >
+                  Hapus
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+              }
+
               const itemTier = String(item.user_tier || (APP_STATE.user?.tier || "free")).toLowerCase();
               const isItemPremium = itemTier === "premium";
               const colors = getPinColors(item);
@@ -3233,9 +3342,39 @@
         const pin = findPinById(pinId);
         if (!pin) return;
         APP_STATE.currentViewingPin = pin;
+        APP_STATE.activeModalPin = pin;
 
         const modal = document.getElementById("pinDetailModal");
         const imgEl = document.getElementById("modalPinImage");
+        
+        const regularNotice = document.getElementById("modalRegularNotice");
+        const premiumDetailsWrap = document.getElementById("modalPremiumDetailsWrap");
+
+        if (imgEl) {
+          imgEl.src = pin.image;
+          imgEl.onerror = () => {
+            imgEl.src = pin.localFallback || "images/card1.jpg";
+          };
+        }
+
+        if (!isUserPremium()) {
+          if (regularNotice) regularNotice.classList.remove("hidden");
+          if (premiumDetailsWrap) premiumDetailsWrap.classList.add("hidden");
+          const imgContainer = document.getElementById("modalImageContainer");
+          if (imgContainer) {
+            imgContainer.style.backgroundColor = "#F5F2EA";
+            imgContainer.style.backgroundImage = "none";
+          }
+          if (modal) {
+            modal.classList.remove("hidden");
+            document.body.style.overflow = "hidden";
+          }
+          return;
+        }
+
+        if (regularNotice) regularNotice.classList.add("hidden");
+        if (premiumDetailsWrap) premiumDetailsWrap.classList.remove("hidden");
+
         const titleEl = document.getElementById("modalPinTitle");
         const descEl = document.getElementById("modalPinDesc");
         const storeBadge = document.getElementById("modalStoreBadge");
@@ -3404,8 +3543,20 @@
         if (saveText) saveText.innerText = isSaved ? "Tersimpan" : "Simpan";
       }
 
-      // 8. FILTRATION & SEARCH
+      // 8. FILTRATION & SEARCH (PREMIUM FEATURE)
+      function showFilterPremiumModal() {
+        openPremiumLockedModal({
+          title: "Filter Rekomendasi Khusus Premium",
+          desc: "Fitur <b>Filter</b> (kategori, tema acara, pencarian, dan pengurutan) di halaman Rekomendasi merupakan fitur khusus akun Premium. Pada akun biasa/reguler, hanya ditampilkan foto outfit tanpa informasi tambahan.",
+          hidePreview: true,
+        });
+      }
+
       function selectCategoryFilter(category, btnEl) {
+        if (category !== "all" && !isUserPremium()) {
+          showFilterPremiumModal();
+          return;
+        }
         APP_STATE.activeCategory = category;
         APP_STATE.activeEvent = null;
         updateActiveChipUI(btnEl);
@@ -3413,6 +3564,10 @@
       }
 
       function selectEventFilter(eventType, btnEl) {
+        if (!isUserPremium()) {
+          showFilterPremiumModal();
+          return;
+        }
         APP_STATE.activeEvent = eventType;
         APP_STATE.activeCategory = "all";
         updateActiveChipUI(btnEl);
@@ -3448,6 +3603,13 @@
         if (!input) return;
 
         input.addEventListener("input", (e) => {
+          if (!isUserPremium()) {
+            e.target.value = "";
+            APP_STATE.searchQuery = "";
+            if (clearBtn) clearBtn.classList.add("hidden");
+            showFilterPremiumModal();
+            return;
+          }
           APP_STATE.searchQuery = e.target.value;
           if (clearBtn) clearBtn.classList.toggle("hidden", !e.target.value);
           renderFeed();
@@ -3467,6 +3629,12 @@
 
       function applySortFilter() {
         const sortSelect = document.getElementById("sortSelect");
+        if (!isUserPremium()) {
+          if (sortSelect) sortSelect.value = "featured";
+          APP_STATE.sortOption = "featured";
+          showFilterPremiumModal();
+          return;
+        }
         if (sortSelect) APP_STATE.sortOption = sortSelect.value;
         renderFeed();
       }

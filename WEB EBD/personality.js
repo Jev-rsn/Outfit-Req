@@ -26,7 +26,7 @@
     _dec("aHR0cHM6Ly9pa2xoam1tbW9sdWxnbHhpcnZyYy5zdXBhYmFzZS5jbw==");
   const SUPABASE_ANON_KEY =
     (typeof window !== "undefined" && window.__ENV__ && window.__ENV__.SUPABASE_ANON_KEY) ||
-    _dec("ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjeUk2SW5OMWNHRmlZWE5sSWl3aWNtVWlPaUlwYTJ4b2FtbXRiMngxYkdkc2VHbHlkbkpqSWl3aWNtOXNaU0k2SW1GdWIyNGlMQ0pwWVhRaU9qRTNPVE15T0RBek5qUXNJbVY0Y0NJNk1qRXdPRGcxTmpNMk5IMHBPc0tycmFCcDVXMlNFREpLWE02R1dldllrMWc0aXdHVWVpMkNTYXdxTm1R");
+    _dec("ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKemRYQmhZbUZ6WlNJc0luSmxaaUk2SW1scmJHaHFiVzF0YjJ4MWJHZHNlR2x5ZG5Kaklpd2ljbTlzWlNJNkltRnViMjRpTENKcFlYUWlPakUzT1RNeU9EQXpOalFzSW1WNGNDSTZNakV3T0RnMU5qTTJOSDAuTnNLcnJhQnA1VzJTRUR6S1hNNkdXZXZZcjFnNGl3R1VlaTJDU2F3cU5tUQ==");
 
   let supabaseClient = null;
   try {
@@ -656,39 +656,16 @@
     const categoryBadge = outfit.category ? `<span class="text-[9px] px-2 py-0.5 rounded-full bg-stone-100 dark:bg-white/10 uppercase tracking-wider font-semibold text-stone-600 dark:text-stone-300">${escapeHtml(outfit.category)}</span>` : "";
 
     return `
-      <div class="relative bg-white dark:bg-[#201A1E] border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between group">
-        <div class="relative w-full aspect-[4/3] bg-stone-100 dark:bg-stone-900 overflow-hidden">
+      <div class="relative bg-white dark:bg-[#201A1E] border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden shadow-xs group">
+        <div class="relative w-full aspect-[3/4] bg-stone-100 dark:bg-stone-900 overflow-hidden">
           <img
             src="${photoSrc}"
-            alt="${escapeHtml(outfit.title)}"
+            alt="Foto Rekomendasi Outfit"
             loading="lazy"
             referrerpolicy="no-referrer"
             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-102"
-            onerror="if (!this.dataset.fallbackApplied) { this.dataset.fallbackApplied = 'true'; if ('${b64Fallback}') { this.src = '${b64Fallback}'; } else { this.style.display = 'none'; this.nextElementSibling.classList.remove('hidden'); } }"
+            onerror="if (!this.dataset.fallbackApplied) { this.dataset.fallbackApplied = 'true'; if ('${b64Fallback}') { this.src = '${b64Fallback}'; } else { this.style.display = 'none'; } }"
           />
-          <div class="hidden absolute inset-0 bg-[#6D001A]/10 dark:bg-white/5 flex flex-col items-center justify-center p-3 text-center">
-            <span class="text-xs font-serif font-bold text-[#6D001A] dark:text-[#E05377]">${escapeHtml(outfit.sourceStore || "Orec Studio")}</span>
-            <span class="text-[10px] text-stone-500 mt-1 line-clamp-1">${escapeHtml(outfit.title)}</span>
-          </div>
-          ${gunakanBtnHtml}
-        </div>
-
-        <div class="p-3 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between gap-1 mb-1">
-              ${categoryBadge}
-              ${bookmarkBtnHtml}
-            </div>
-            <h4 class="font-bold text-xs text-stone-900 dark:text-white line-clamp-1" title="${escapeHtml(outfit.title)}">
-              ${escapeHtml(outfit.title)}
-            </h4>
-            <p class="text-xs font-semibold text-stone-900 dark:text-stone-100 mt-0.5">
-              ${priceText}
-            </p>
-            ${outfit.description ? `<p class="text-[11px] text-stone-500 dark:text-stone-400 mt-1 line-clamp-2">${escapeHtml(outfit.description)}</p>` : ""}
-          </div>
-
-          ${productLinkHtml}
         </div>
       </div>
     `;

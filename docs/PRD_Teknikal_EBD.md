@@ -22,7 +22,7 @@ Build berurutan per **Fase** (lihat bagian 8). Setiap fitur punya **Acceptance C
 | Database | PostgreSQL (mis. via Supabase) | Relasional cocok untuk user/quota/transaksi; Supabase sekalian kasih Auth + Storage |
 | Auth | Supabase Auth / NextAuth.js (Google OAuth) | Login Gmail autoconnect sesuai requirement |
 | Storage foto | Supabase Storage / S3-compatible | Untuk foto outfit & foto tersimpan user |
-| Payment gateway | Midtrans atau Xendit | Support Bank, E-Wallet, QRIS sekaligus (sesuai FR-12) — **provider belum ditentukan, perlu dikonfirmasi sebelum implementasi fase 2** |
+| Payment gateway | DOKU (DOKU Checkout / Jokul) | Support Virtual Account Bank, E-Wallet, QRIS, & Kartu sekaligus (sesuai FR-12) — **Telah dikonfirmasi menggunakan DOKU** |
 | Visualisasi body 360° | Placeholder fase awal: image carousel statis; eksplorasi lanjut: Three.js / model 3D | Metode final (avatar 3D vs virtual try-on) belum ditentukan |
 | Hosting | Vercel (frontend) + Supabase/Render (backend-db) | Deploy cepat, cocok untuk iterasi vibe coding |
 
@@ -122,7 +122,7 @@ Komponen global: `Navbar` (2 menu utama + ikon profil), `PremiumAdModal` (muncul
 | package | enum: `mingguan`, `bulanan`, `tahunan` | |
 | price | int | 8000 / 25000 / 200000 (Rupiah) |
 | payment_method | enum: `bank`, `ewallet`, `qris` | |
-| payment_gateway_ref | string | referensi dari payment gateway, **provider belum ditentukan** |
+| payment_gateway_ref | string | ID transaksi / invoice ID resmi dari DOKU (misal: `INV-...` atau `payment_id`) |
 | status | enum: `pending`, `paid`, `expired` | |
 | started_at | timestamp | |
 | expires_at | timestamp | dihitung dari `started_at` + durasi paket |
@@ -259,7 +259,7 @@ PRD bisnis sudah final secara ruang lingkup, tapi beberapa parameter teknis di b
 | Daftar lengkap golongan & acara (saat ini baru contoh: ke-pantai, ke-mall / Ngonser, Pengajian, dll) | Fase 1 (katalog) & Fase 3 (penyesuaian acara) |
 | Izin penggunaan foto produk dari toko online | Fase 1 (katalog) |
 | Reset kuota 3 chat tamu — per sesi/device atau tidak pernah | Fase 1 (quota logic) |
-| Penyedia payment gateway | Fase 2 (upgrade Premium) |
+| Penyedia payment gateway | Selesai / Terkonfirmasi (**DOKU Payment Gateway**) |
 | Metode visualisasi body (avatar 3D vs virtual try-on) | Fase 3 (tombol Gunakan) |
 
 ---

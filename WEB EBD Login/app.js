@@ -8,6 +8,8 @@ import {
   signUpUser, 
   resendVerificationEmail,
   resetPasswordForEmail, 
+  updateUserPassword,
+  directResetPassword,
   isSupabaseConfigured,
   getSupabaseClient,
   getCustomerPremiumStatus
@@ -42,11 +44,15 @@ class App {
 
     // Auth views
     this.forgotView = document.getElementById('forgot-view');
+    this.resetPasswordView = document.getElementById('reset-password-view');
     this.createView = document.getElementById('create-view');
     this.verifyView = document.getElementById('verify-view');
     this.verifiedSuccessView = document.getElementById('verified-success-view');
     this.verifiedCustomerData = null;
     this.pendingRegistration = null;
+    this.pendingResetEmail = null;
+    this.isRecoverySession = false;
+    this.currentRecoverySession = null;
 
     // Double Slider references
     this.doubleSliderContainer = document.getElementById('doubleSliderContainer');
@@ -101,100 +107,230 @@ class App {
       this._bindForms();
       this._bindAuthViews();
 
-      // Deteksi jika halaman dibuka dari tautan verifikasi email
-      const isFromEmailLink = window.location.hash.includes('access_token') || 
-                              window.location.hash.includes('type=signup') || 
-                              window.location.search.includes('verified=true') ||
-                              window.location.search.includes('token');
-
-      const client = getSupabaseClient();
-      if (client && isFromEmailLink) {
-        // Otomatis zoom ke formulir tanpa perlu klik showroom
-        setTimeout(() => {
-          this._triggerZoomIn();
-        }, 350);
-
-        const handleEmailVerifiedSession = async (user) => {
-          if (!user) return;
-          console.log('[OutfitReq] Akun berhasil terverifikasi via link email:', user);
-          let customerName = user.user_metadata?.full_name;
-          if (!customerName) {
-            try {
-              const regMap = JSON.parse(localStorage.getItem('outfit_req_registered_customers') || '{}');
-              const found = regMap[user.email?.toLowerCase()];
-              if (found && found.name) customerName = found.name;
-            } catch (e) {}
-          }
-          if (!customerName && user.email) {
-            const raw = user.email.split('@')[0];
-            customerName = raw.charAt(0).toUpperCase() + raw.slice(1);
-          }
-          if (!customerName) customerName = 'Customer';
-
-          let activeTier = 'free';
-          let activeExpiry = null;
-          try {
-            if (user.email) {
-              const premCheck = await getCustomerPremiumStatus(user.email);
-              if (premCheck.isPremium) {
-                activeTier = 'premium';
-                activeExpiry = premCheck.expiresAt;
-                console.log('[OutfitReq] Verified user terdeteksi Premium aktif:', activeExpiry);
-              }
-            }
-          } catch (e) {}
-
-          const cleanUname = customerName.toLowerCase().replace(/[^a-z0-9_]/g, '') || (user.email ? user.email.split('@')[0].toLowerCase().replace(/[^a-z0-9_]/g, '') : 'customer');
-          const userData = {
-            id: user.id || 'usr_' + Date.now(),
-            name: customerName,
-            username: '@' + cleanUname,
-            email: user.email,
-            tier: activeTier,
-            premiumExpiresAt: activeExpiry,
-            isLoggedIn: true,
-            verifiedAt: user.email_confirmed_at || new Date().toISOString()
-          };
-          this.verifiedCustomerData = userData;
-
-          try {
-            localStorage.removeItem('outfit_req_logged_out');
-            localStorage.setItem('outfit_req_user', JSON.stringify(userData));
-          } catch (e) {}
-
-          // Update info di kartu Akun Telah Terverifikasi
-          const nameEl = document.getElementById('verifiedSuccessName');
-          const emailEl = document.getElementById('verifiedSuccessEmail');
-          const avatarEl = document.getElementById('verifiedSuccessAvatar');
-          if (nameEl) nameEl.textContent = customerName;
-          if (emailEl) emailEl.textContent = user.email;
-          if (avatarEl) avatarEl.textContent = customerName.charAt(0).toUpperCase();
-
-          // Sembunyikan form login & tampilkan tampilan Akun Telah Terverifikasi
-          this._showVerifiedSuccessCard();
-
-          // Bersihkan token dari URL hash agar rapi
-          if (window.location.hash && (window.location.hash.includes('access_token') || window.location.hash.includes('type='))) {
-            window.history.replaceState(null, document.title, window.location.pathname + window.location.search);
-          }
-        };
-
-        // 1. Cek sesi saat ini dari getSession()
-        client.auth.getSession().then(({ data: { session } }) => {
-          if (session?.user) {
-            handleEmailVerifiedSession(session.user);
-          }
-        }).catch(() => {});
-
-        // 2. Auth state change listener
-        client.auth.onAuthStateChange((event, session) => {
-          if ((event === 'SIGNED_IN' || event === 'USER_UPDATED') && session?.user) {
-            handleEmailVerifiedSession(session.user);
-          }
-        });
-      }
+      // Inisialisasi dan sinkronisasi alur autentikasi email (Recovery & Verification)
+      this._initAuthRedirectFlow();
     } catch (e) {
       console.warn('Event binding error', e);
+    }
+  }
+
+  // ─── Supabase Auth Link & Recovery Synchronizer ──────────
+  async _initAuthRedirectFlow() {
+    const client = getSupabaseClient();
+    if (!client) return;
+
+    const urlSearch = new URLSearchParams(window.location.search);
+    const hashRaw = window.location.hash.startsWith('#') ? window.location.hash.slice(1) : window.location.hash;
+    const urlHash = new URLSearchParams(hashRaw);
+
+    const code = urlSearch.get('code');
+    const tokenHash = urlSearch.get('token_hash') || urlSearch.get('token');
+    const typeSearch = urlSearch.get('type');
+    const typeHash = urlHash.get('type');
+    const accessToken = urlHash.get('access_token');
+    const refreshToken = urlHash.get('refresh_token');
+
+    const isRecovery = typeSearch === 'recovery' || 
+                       typeHash === 'recovery' || 
+                       window.location.hash.includes('type=recovery') || 
+                       window.location.search.includes('type=recovery');
+
+    const isFromEmailLink = isRecovery || 
+                            !!code || 
+                            !!tokenHash || 
+                            !!accessToken || 
+                            window.location.hash.includes('access_token') || 
+                            window.location.hash.includes('type=signup') || 
+                            window.location.search.includes('verified=true') ||
+                            window.location.search.includes('token');
+
+    if (isRecovery) {
+      this.isRecoverySession = true;
+    }
+
+    // 1. Tangani PKCE code jika dikirimkan oleh Supabase di URL query (?code=...)
+    if (code) {
+      try {
+        console.log('[OutfitReq] Menukar PKCE code dengan sesi Supabase...');
+        const { data, error } = await client.auth.exchangeCodeForSession(code);
+        if (!error && data?.session) {
+          console.log('[OutfitReq] Sesi PKCE berhasil dibuat:', data.session.user?.email);
+          this.currentRecoverySession = data.session;
+          if (isRecovery) {
+            this.isRecoverySession = true;
+            this._openPasswordResetView(data.session.user);
+          }
+        } else if (error) {
+          console.warn('[OutfitReq] exchangeCodeForSession notice:', error.message);
+        }
+      } catch (err) {
+        console.warn('[OutfitReq] exchangeCodeForSession exception:', err);
+      }
+    }
+
+    // 2. Verifikasi token_hash OTP jika dikirimkan (?token_hash=...)
+    if (tokenHash && isRecovery) {
+      try {
+        console.log('[OutfitReq] Memverifikasi token_hash recovery Supabase...');
+        const { data, error } = await client.auth.verifyOtp({
+          token_hash: tokenHash,
+          type: 'recovery'
+        });
+        if (!error && data?.session) {
+          console.log('[OutfitReq] Sesi token_hash recovery berhasil:', data.session.user?.email);
+          this.currentRecoverySession = data.session;
+          this.isRecoverySession = true;
+          this._openPasswordResetView(data.session.user);
+        }
+      } catch (err) {
+        console.warn('[OutfitReq] verifyOtp exception:', err);
+      }
+    }
+
+    // 3. Set sesi dari Hash Token jika dikirimkan (#access_token=...&refresh_token=...)
+    if (accessToken && refreshToken) {
+      try {
+        console.log('[OutfitReq] Mengatur sesi Supabase dari hash token...');
+        const { data, error } = await client.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken
+        });
+        if (!error && data?.session) {
+          console.log('[OutfitReq] Sesi hash berhasil disetel:', data.session.user?.email);
+          this.currentRecoverySession = data.session;
+          if (isRecovery) {
+            this.isRecoverySession = true;
+            this._openPasswordResetView(data.session.user);
+          }
+        }
+      } catch (err) {
+        console.warn('[OutfitReq] setSession exception:', err);
+      }
+    }
+
+    // 4. Periksa apakah sudah ada sesi recovery aktif di Supabase
+    try {
+      const { data: sData } = await client.auth.getSession();
+      if (sData?.session) {
+        if (isRecovery) {
+          this.currentRecoverySession = sData.session;
+          this.isRecoverySession = true;
+          this._openPasswordResetView(sData.session.user);
+        }
+      }
+    } catch (_) {}
+
+    // 5. Daftarkan listener onAuthStateChange global untuk PASSWORD_RECOVERY & SIGNED_IN
+    client.auth.onAuthStateChange(async (event, session) => {
+      console.log('[OutfitReq] AuthStateChange Event:', event, session?.user?.email);
+      if (event === 'PASSWORD_RECOVERY') {
+        this.isRecoverySession = true;
+        this.currentRecoverySession = session;
+        this._openPasswordResetView(session?.user);
+      } else if (event === 'SIGNED_IN') {
+        if (isRecovery || this.isRecoverySession) {
+          this.isRecoverySession = true;
+          this.currentRecoverySession = session;
+          this._openPasswordResetView(session?.user);
+        } else if (session?.user && isFromEmailLink) {
+          this._handleEmailVerifiedSession(session.user);
+        }
+      } else if (event === 'USER_UPDATED' && !this.isRecoverySession && session?.user && isFromEmailLink) {
+        this._handleEmailVerifiedSession(session.user);
+      }
+    });
+
+    // 6. Jika dibuka dari tautan recovery, pastikan form reset password terbuka otomatis
+    if (isRecovery) {
+      setTimeout(() => {
+        this._openPasswordResetView(this.currentRecoverySession?.user);
+      }, 350);
+    } else if (isFromEmailLink) {
+      setTimeout(() => {
+        this._triggerZoomIn();
+      }, 350);
+    }
+  }
+
+  _openPasswordResetView(user) {
+    this._triggerZoomIn();
+    if (this.resetPasswordView) {
+      this._showAuthView(this.resetPasswordView);
+      if (this.loginCard) this.loginCard.classList.remove('visible');
+      if (this.forgotView) this._hideAuthView(this.forgotView);
+      if (this.createView) this._hideAuthView(this.createView);
+      if (this.verifyView) this._hideAuthView(this.verifyView);
+      if (this.verifiedSuccessView) this._hideAuthView(this.verifiedSuccessView);
+    }
+    const emailVal = user?.email || this.pendingResetEmail;
+    if (emailVal) {
+      const subTitle = document.getElementById('resetPasswordSubtitle');
+      if (subTitle) subTitle.textContent = `Masukkan kata sandi baru untuk akun ${emailVal}.`;
+      this.pendingResetEmail = emailVal;
+    }
+  }
+
+  async _handleEmailVerifiedSession(user) {
+    if (!user) return;
+    console.log('[OutfitReq] Akun berhasil terverifikasi via link email:', user);
+    let customerName = user.user_metadata?.full_name;
+    if (!customerName) {
+      try {
+        const regMap = JSON.parse(localStorage.getItem('outfit_req_registered_customers') || '{}');
+        const found = regMap[user.email?.toLowerCase()];
+        if (found && found.name) customerName = found.name;
+      } catch (e) {}
+    }
+    if (!customerName && user.email) {
+      const raw = user.email.split('@')[0];
+      customerName = raw.charAt(0).toUpperCase() + raw.slice(1);
+    }
+    if (!customerName) customerName = 'Customer';
+
+    let activeTier = 'free';
+    let activeExpiry = null;
+    try {
+      if (user.email) {
+        const premCheck = await getCustomerPremiumStatus(user.email);
+        if (premCheck.isPremium) {
+          activeTier = 'premium';
+          activeExpiry = premCheck.expiresAt;
+        }
+      }
+    } catch (e) {}
+
+    const cleanUname = customerName.toLowerCase().replace(/[^a-z0-9_]/g, '') || (user.email ? user.email.split('@')[0].toLowerCase().replace(/[^a-z0-9_]/g, '') : 'customer');
+    const userData = {
+      id: user.id || 'usr_' + Date.now(),
+      name: customerName,
+      username: '@' + cleanUname,
+      email: user.email,
+      tier: activeTier,
+      premiumExpiresAt: activeExpiry,
+      isLoggedIn: true,
+      verifiedAt: user.email_confirmed_at || new Date().toISOString()
+    };
+    this.verifiedCustomerData = userData;
+
+    try {
+      localStorage.removeItem('outfit_req_logged_out');
+      localStorage.setItem('outfit_req_user', JSON.stringify(userData));
+    } catch (e) {}
+
+    // Update info di kartu Akun Telah Terverifikasi
+    const nameEl = document.getElementById('verifiedSuccessName');
+    const emailEl = document.getElementById('verifiedSuccessEmail');
+    const avatarEl = document.getElementById('verifiedSuccessAvatar');
+    if (nameEl) nameEl.textContent = customerName;
+    if (emailEl) emailEl.textContent = user.email;
+    if (avatarEl) avatarEl.textContent = customerName.charAt(0).toUpperCase();
+
+    // Sembunyikan form login & tampilkan tampilan Akun Telah Terverifikasi
+    this._showVerifiedSuccessCard();
+
+    // Bersihkan token dari URL hash agar rapi
+    if (window.location.hash && (window.location.hash.includes('access_token') || window.location.hash.includes('type='))) {
+      window.history.replaceState(null, document.title, window.location.pathname + window.location.search);
     }
   }
 
@@ -443,6 +579,7 @@ class App {
 
     // Hide auth views
     this._hideAuthView(this.forgotView);
+    if (this.resetPasswordView) this._hideAuthView(this.resetPasswordView);
     if (this.createView) this._hideAuthView(this.createView);
     this._hideAuthView(this.verifyView);
     if (this.verifiedSuccessView) this._hideAuthView(this.verifiedSuccessView);
@@ -576,6 +713,7 @@ class App {
     this.backdrop.classList.add('visible');
     this.loginCard.classList.remove('visible');
     this._hideAuthView(this.forgotView);
+    if (this.resetPasswordView) this._hideAuthView(this.resetPasswordView);
     if (this.createView) this._hideAuthView(this.createView);
     this._hideAuthView(this.verifyView);
     if (this.verifiedSuccessView) {
@@ -599,6 +737,16 @@ class App {
     if (forgotBack) {
       forgotBack.addEventListener('click', () => {
         this._hideAuthView(this.forgotView);
+        this.loginCard.classList.add('visible');
+        this._activateSignInSlider();
+      });
+    }
+
+    // Tombol Kembali dari halaman Atur Kata Sandi Baru
+    const resetPasswordBack = document.getElementById('resetPasswordBack');
+    if (resetPasswordBack) {
+      resetPasswordBack.addEventListener('click', () => {
+        if (this.resetPasswordView) this._hideAuthView(this.resetPasswordView);
         this.loginCard.classList.add('visible');
         this._activateSignInSlider();
       });
@@ -937,18 +1085,174 @@ class App {
       this._showButtonLoading(btn);
 
       try {
-        await resetPasswordForEmail(email.value.trim());
+        const emailVal = email.value.trim();
+        this.pendingResetEmail = emailVal;
+        await resetPasswordForEmail(emailVal);
         this._hideButtonLoading(btn);
         feedback.className = 'form-feedback success';
-        feedback.textContent = 'Tautan reset sandi telah dikirim! Silakan periksa inbox email Anda.';
+        feedback.textContent = `Tautan pemulihan kata sandi telah dikirim ke email ${emailVal}! Silakan periksa kotak masuk atau spam email Anda untuk membuat kata sandi baru.`;
         feedback.style.display = 'block';
+
+        const subTitle = document.getElementById('resetPasswordSubtitle');
+        if (subTitle) subTitle.textContent = `Masukkan kata sandi baru untuk akun ${emailVal}.`;
       } catch (err) {
         this._hideButtonLoading(btn);
         feedback.className = 'form-feedback error';
-        feedback.textContent = err.message || 'Gagal mengirim email reset sandi.';
+        const msg = (err.message || '').toLowerCase();
+        if (msg.includes('rate') || msg.includes('security')) {
+          feedback.textContent = 'Batas pengiriman email keamanan tercapai. Mohon tunggu 60 detik sebelum meminta tautan kembali ke email Anda.';
+        } else {
+          feedback.textContent = err.message || 'Gagal mengirim email pemulihan. Pastikan alamat email terdaftar.';
+        }
         feedback.style.display = 'block';
       }
     });
+
+    // Reset Password Form Submit
+    const resetPasswordForm = document.getElementById('resetPasswordForm');
+    if (resetPasswordForm) {
+      resetPasswordForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const newPass = document.getElementById('resetNewPassword');
+        const confPass = document.getElementById('resetConfirmPassword');
+        const newPassErr = document.getElementById('resetNewPasswordError');
+        const confPassErr = document.getElementById('resetConfirmPasswordError');
+        const feedback = document.getElementById('resetPasswordFeedback');
+
+        let hasError = false;
+        if (!newPass.value || newPass.value.length < 6) {
+          newPassErr.textContent = 'Kata sandi minimal 6 karakter';
+          newPass.classList.add('error');
+          hasError = true;
+        } else {
+          newPassErr.textContent = '';
+          newPass.classList.remove('error');
+        }
+
+        if (confPass.value !== newPass.value) {
+          confPassErr.textContent = 'Konfirmasi kata sandi tidak cocok';
+          confPass.classList.add('error');
+          hasError = true;
+        } else {
+          confPassErr.textContent = '';
+          confPass.classList.remove('error');
+        }
+
+        if (hasError) return;
+
+        const btn = resetPasswordForm.querySelector('.submit-btn');
+        this._showButtonLoading(btn);
+
+        try {
+          const client = getSupabaseClient();
+          const targetEmail = this.pendingResetEmail || 
+                              this.currentRecoverySession?.user?.email || 
+                              (document.getElementById('forgotEmail')?.value || '').trim();
+
+          // 1. Dapatkan sesi recovery Supabase
+          let session = this.currentRecoverySession;
+          if (!session && client) {
+            const { data: sData } = await client.auth.getSession();
+            session = sData?.session;
+          }
+
+          // 2. Jika sesi belum terbentuk, coba tukar code / token hash jika masih ada di URL
+          if (!session && client) {
+            const searchParams = new URLSearchParams(window.location.search);
+            const code = searchParams.get('code');
+            if (code) {
+              try {
+                const { data: cData } = await client.auth.exchangeCodeForSession(code);
+                session = cData?.session;
+              } catch (_) {}
+            }
+            const tokenHash = searchParams.get('token_hash') || searchParams.get('token');
+            if (!session && tokenHash) {
+              try {
+                const { data: tData } = await client.auth.verifyOtp({ token_hash: tokenHash, type: 'recovery' });
+                session = tData?.session;
+              } catch (_) {}
+            }
+          }
+
+          if (!session && client && window.location.hash) {
+            const hParams = new URLSearchParams(window.location.hash.startsWith('#') ? window.location.hash.slice(1) : window.location.hash);
+            const aToken = hParams.get('access_token');
+            const rToken = hParams.get('refresh_token');
+            if (aToken && rToken) {
+              try {
+                const { data: hData } = await client.auth.setSession({ access_token: aToken, refresh_token: rToken });
+                session = hData?.session;
+              } catch (_) {}
+            }
+          }
+
+          // 3. Perbarui kata sandi langsung ke Supabase Auth
+          console.log('[OutfitReq] Mengirim pembaruan kata sandi ke Supabase...');
+          await updateUserPassword(newPass.value);
+
+          this._hideButtonLoading(btn);
+          feedback.className = 'form-feedback success';
+          feedback.textContent = 'Kata sandi akun Anda berhasil diperbarui! Mengalihkan ke formulir masuk...';
+          feedback.style.display = 'block';
+
+          // Update cache registered customers jika ada
+          try {
+            const finalEmail = targetEmail || session?.user?.email;
+            if (finalEmail) {
+              const regKey = 'outfit_req_registered_customers';
+              const raw = localStorage.getItem(regKey);
+              if (raw) {
+                const map = JSON.parse(raw);
+                if (map[finalEmail.toLowerCase()]) {
+                  map[finalEmail.toLowerCase()].password = newPass.value;
+                  localStorage.setItem(regKey, JSON.stringify(map));
+                }
+              }
+            }
+          } catch (_) {}
+
+          // Bersihkan parameter dari URL setelah berhasil digunakan
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, document.title, window.location.pathname);
+          }
+
+          setTimeout(() => {
+            if (this.resetPasswordView) this._hideAuthView(this.resetPasswordView);
+            this.loginCard.classList.add('visible');
+            this._activateSignInSlider();
+
+            const loginEmailInput = document.getElementById('email');
+            const loginPasswordInput = document.getElementById('password');
+            if (loginEmailInput && (targetEmail || session?.user?.email)) {
+              loginEmailInput.value = targetEmail || session.user.email;
+            }
+            if (loginPasswordInput) {
+              loginPasswordInput.value = newPass.value;
+              loginPasswordInput.focus();
+            }
+
+            const loginFeedback = document.getElementById('formFeedback');
+            if (loginFeedback) {
+              loginFeedback.className = 'form-feedback success';
+              loginFeedback.textContent = 'Kata sandi berhasil diperbarui via verifikasi email. Silakan masuk.';
+              loginFeedback.style.display = 'block';
+            }
+          }, 1500);
+
+        } catch (err) {
+          this._hideButtonLoading(btn);
+          feedback.className = 'form-feedback error';
+          const errMsg = err.message || '';
+          if (errMsg.includes('Auth session missing') || errMsg.includes('session missing') || errMsg.includes('AuthSessionMissingError')) {
+            feedback.textContent = 'Sesi pemulihan telah kedaluwarsa atau tautan tidak valid. Silakan klik menu "Lupa kata sandi?" kembali untuk meminta tautan baru ke email Anda.';
+          } else {
+            feedback.textContent = errMsg || 'Gagal memperbarui kata sandi. Pastikan Anda membuka tautan dari email resmi Anda.';
+          }
+          feedback.style.display = 'block';
+        }
+      });
+    }
 
     // Create form submit
     document.getElementById('createForm').addEventListener('submit', async (e) => {
@@ -1163,6 +1467,31 @@ class App {
         createPasswordToggle.querySelector('.eye-open').style.display = isPassword ? 'none' : 'block';
         createPasswordToggle.querySelector('.eye-closed').style.display = isPassword ? 'block' : 'none';
         createPasswordToggle.setAttribute('aria-label', isPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi');
+      });
+    }
+
+    // Password toggles for Reset Password Form
+    const resetNewPass = document.getElementById('resetNewPassword');
+    const resetNewPassToggle = document.getElementById('resetNewPasswordToggle');
+    if (resetNewPassToggle && resetNewPass) {
+      resetNewPassToggle.addEventListener('click', () => {
+        const isPassword = resetNewPass.type === 'password';
+        resetNewPass.type = isPassword ? 'text' : 'password';
+        resetNewPassToggle.querySelector('.eye-open').style.display = isPassword ? 'none' : 'block';
+        resetNewPassToggle.querySelector('.eye-closed').style.display = isPassword ? 'block' : 'none';
+        resetNewPassToggle.setAttribute('aria-label', isPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi');
+      });
+    }
+
+    const resetConfPass = document.getElementById('resetConfirmPassword');
+    const resetConfPassToggle = document.getElementById('resetConfirmPasswordToggle');
+    if (resetConfPassToggle && resetConfPass) {
+      resetConfPassToggle.addEventListener('click', () => {
+        const isPassword = resetConfPass.type === 'password';
+        resetConfPass.type = isPassword ? 'text' : 'password';
+        resetConfPassToggle.querySelector('.eye-open').style.display = isPassword ? 'none' : 'block';
+        resetConfPassToggle.querySelector('.eye-closed').style.display = isPassword ? 'block' : 'none';
+        resetConfPassToggle.setAttribute('aria-label', isPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi');
       });
     }
 
